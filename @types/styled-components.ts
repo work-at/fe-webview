@@ -1,5 +1,4 @@
-// @ts-ignore
-import { theme } from "../src/index.tsx";
+import { theme } from "../src/index";
 
 type StyledTheme = typeof theme;
 

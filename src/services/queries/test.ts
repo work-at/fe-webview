@@ -10,7 +10,9 @@ type Data = Array<string>;
 type TestQueryKey = readonly [typeof QUERY_NAME.GET_TEST, string];
 
 export const useTestQuery = (params: string) => {
-  const testQueryFunction: QueryFunction<Data> = async ({ queryKey }) => {
+  // TODO: any 제거
+  // const testQueryFunction: QueryFunction<Data> = async ({ queryKey }) => {
+  const testQueryFunction: QueryFunction<any> = async ({ queryKey }) => {
     const [, params] = queryKey as TestQueryKey;
 
     // return await requestGetTest(params, getAccessToken());
