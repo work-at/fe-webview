@@ -1,14 +1,7 @@
 import React from "react";
 import { addDecorator } from "@storybook/react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-  ${normalize}
-
-  * {
-    box-sizing: border-box;
-  }
-`;
+import { theme, GlobalStyle } from '../src/index'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
