@@ -1,0 +1,4 @@
+export const QUERY_NAME = {
+  GET_TEST: "GET_TEST",
+  GET_INFINITE_TEST: "GET_TEST",
+};
