@@ -5,4 +5,9 @@ export type WorkersCriteria = {
   y: number;
 };
 
+export type WorkersCommand = {
+  x: number;
+  y: number;
+};
+
 export type WorkersInfo = Worker[];

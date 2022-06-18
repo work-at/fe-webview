@@ -1,4 +1,4 @@
-type Job = 'frontend-developer' | 'frontend-developer' | 'designer' | 'project-manager';
+type Job = 'frontend-developer' | 'backend-developer' | 'designer' | 'project-manager';
 
 export type Worker = {
   id: string;
