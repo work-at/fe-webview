@@ -1,7 +1,9 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
+
 import { addDecorator } from "@storybook/react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { theme, GlobalStyle } from '../src/index'
+import { theme, GlobalStyle } from "../src/index";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,8 +16,10 @@ export const parameters = {
 };
 
 addDecorator((Story) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Story />
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Story />
+    </ThemeProvider>
+  </BrowserRouter>
 ));
