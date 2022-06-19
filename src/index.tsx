@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
-import normalize from "styled-normalize";
+import reset from "styled-reset";
 
 import App from "@/App";
 
@@ -17,7 +17,7 @@ export const theme = {
 };
 
 export const GlobalStyle = createGlobalStyle`
-  ${normalize}
+  ${reset}
 
   * {
     box-sizing: border-box;
