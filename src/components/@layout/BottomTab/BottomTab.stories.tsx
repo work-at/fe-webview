@@ -4,7 +4,7 @@ import { userEvent, within } from "@storybook/testing-library";
 import BottomTab from "./BottomTab";
 
 export default {
-  title: "components/BottomTab",
+  title: "Components/Layout/BottomTab",
   component: BottomTab,
 } as ComponentMeta<typeof BottomTab>;
 
