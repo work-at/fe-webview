@@ -1,4 +1,4 @@
-import { theme } from "../src/index";
+import { theme } from "../src/AppStyle";
 
 type StyledTheme = typeof theme;
 
