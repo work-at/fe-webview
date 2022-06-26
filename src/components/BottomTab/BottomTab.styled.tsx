@@ -4,9 +4,8 @@ export const Container = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 70px;
+  height: 83px;
   background-color: white;
-  border-top: 1px solid gray;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -16,7 +15,7 @@ export const Item = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
+  width: 100%;
   height: 100%;
 `;
 
@@ -25,7 +24,7 @@ export const Button = styled.button<{ isActive: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: fit-content;
+  width: 100%;
   height: 100%;
   padding: 0;
   background-color: transparent;
@@ -33,23 +32,23 @@ export const Button = styled.button<{ isActive: boolean }>`
   cursor: pointer;
 
   span {
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 12px;
     line-height: 18px;
 
-    color: ${({ isActive }) => (isActive ? "blue" : "gray")};
+    color: ${({ isActive }) => (isActive ? "#0000FF" : "#606161")};
   }
 
   .icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    margin-bottom: 8px;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 7px;
 
     svg > path {
-      fill: ${({ isActive }) => (isActive ? "blue" : "gray")};
+      fill: ${({ isActive }) => (isActive ? "#0000FF" : "#606161")};
     }
   }
 `;
