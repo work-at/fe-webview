@@ -1,12 +1,14 @@
-import { Z_INDEX } from "@/constants/zIndex";
 import { Meta, Story } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
-
 import { useState } from "react";
+
 import { BottomDrawer, BottomDrawerProps } from "./BottomDrawer";
 
+import { wait } from "@/components/testUtil";
+import { Z_INDEX } from "@/constants/zIndex";
+
 export default {
-  title: "Components/Shared/BottomDrawer",
+  title: "Components/Layout/BottomDrawer",
   component: BottomDrawer,
 } as Meta;
 
@@ -34,6 +36,8 @@ Basic.play = async ({ canvasElement }: any) => {
   const canvas = within(canvasElement);
   const toggleButton = await canvas.findByText(/Toggle BottomDrawer/i);
   await userEvent.click(toggleButton);
+
+  await wait(2);
 
   const closeButton = await canvas.findByText(/닫기/i);
   await userEvent.click(closeButton);
