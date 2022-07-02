@@ -1,4 +1,4 @@
-export const paths = {
+export const PATH = {
   full: "/",
   fragments: "/",
   ACCOMMODATION: {
@@ -17,4 +17,4 @@ export const paths = {
     full: "/my-page",
     fragments: "my-page",
   },
-};
+} as const;
