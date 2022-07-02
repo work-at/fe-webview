@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import NotFound from "./components/@layout/NotFound";
 import { paths } from "./constants/paths";
@@ -10,11 +10,19 @@ const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
 const MyPage = lazy(() => import("@/pages/MyPage"));
 
 const BottomNavigationLayout = () => {
-  return <Outlet />;
+  return (
+    <Suspense fallback={<div>로딩중</div>}>
+      <Outlet />
+    </Suspense>
+  );
 };
 
 const DetailLayout = () => {
-  return <Outlet />;
+  return (
+    <Suspense fallback={<div>로딩중</div>}>
+      <Outlet />
+    </Suspense>
+  );
 };
 
 const App = () => (
