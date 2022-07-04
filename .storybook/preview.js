@@ -2,7 +2,8 @@ import React from "react";
 import { addDecorator } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 
-import { theme, GlobalStyle } from "../src/AppStyle";
+import { GlobalStyle } from "../src/styles/GlobalStyles";
+import { theme } from '../src/styles/theme';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
