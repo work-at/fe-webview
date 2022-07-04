@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./assets/styles/theme";
+import { theme } from "./styles/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import App from "@/App";
-import { GlobalStyle } from "./assets/styles/GlobalStyles";
+import { GlobalStyle } from "./styles/GlobalStyles";
 
 const container = document.getElementById("root");
 
