@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import * as S from "./ModalContainer.styled";
 
@@ -65,14 +65,14 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
     };
   }, [closeOnClickOverlay, onClose]);
 
+  const handleClickDimmed = useCallback((e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    if (e.target === e.currentTarget && closeOnClickOverlay && onClose) {
+      onClose(e);
+    }
+  }, [closeOnClickOverlay]);
 
   return (
-    <S.Container ref={modalRef} isOpen={isOpen} onClick={(e) => {
-      if (e.target === e.currentTarget && closeOnClickOverlay && onClose) {
-        onClose(e);
-      }
-    }}
-      tabIndex={-1}>
+    <S.Container ref={modalRef} isOpen={isOpen} onClick={handleClickDimmed} tabIndex={-1}>
       <S.Dialog isOpen={isOpen}>
         <S.Header>
           <S.CloseButton onClick={onClose}>닫기</S.CloseButton>
