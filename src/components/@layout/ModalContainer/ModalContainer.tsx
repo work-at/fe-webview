@@ -27,7 +27,7 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
 
       scheduledAnimationFrame = true;
 
-      if (key === 'Escape' && closeOnClickOverlay && onClose) {
+      if (key === 'Escape' && onClose) {
         onClose();
         scheduledAnimationFrame = false;
       }
