@@ -1,7 +1,4 @@
-import { theme } from "../src/AppStyle";
-
-type StyledTheme = typeof theme;
+import { theme } from "../src/styles/theme";
 
 declare module "styled-components" {
-  export interface DefaultTheme extends StyledTheme {}
 }
