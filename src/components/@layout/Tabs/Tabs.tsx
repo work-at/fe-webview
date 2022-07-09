@@ -25,7 +25,6 @@ const Tabs = ({ items, onSelect }: TabsProps) => {
 
       setSelectedItemIndex(newSelectedItemIndex);
       onSelect(id);
-      console.log(newSelectedItemIndex);
     },
     [items]
   );
@@ -33,13 +32,16 @@ const Tabs = ({ items, onSelect }: TabsProps) => {
   return (
     <S.TabWrap>
       <S.TabList role="tablist">
-        {items.map((item) => (
-          <S.TabItem itemCount={items.length} selectedItemIndex={selectedItemIndex}>
+        {items.map((item, index) => (
+          <S.TabItem key={index} itemCount={items.length}>
             <S.TabLink onClick={() => {handleTabItemSelect(item.id)}}>
-              <S.TabText>{item.label}</S.TabText>
+              <S.TabText isSelected={index === selectedItemIndex}>{item.label}</S.TabText>
             </S.TabLink>
           </S.TabItem>
         ))}
+        <S.TabIndicatorWrapper itemCount={items.length} selectedItemIndex={selectedItemIndex}>
+          <S.TabIndicator />
+        </S.TabIndicatorWrapper>
       </S.TabList>
     </S.TabWrap>
   );
