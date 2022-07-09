@@ -1,7 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { MutationFunction, QueryFunction, useMutation, useQuery } from "react-query";
+import { MutationFunction, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN, API_URL, QUERY_NAME } from "@/constants";
+import axiosRetry from 'axios-retry';
+import { ACCESS_TOKEN, API_URL } from "@/constants";
+
 import * as DTO from "./auth.dto";
 
 export const requestPostLogin: MutationFunction<AxiosResponse<DTO.LoginResponse>, DTO.LoginRequest> = async (auth: DTO.LoginRequest) => {
@@ -49,6 +51,7 @@ export const useSignUpMutation = () => {
 };
 
 export const requestValidateNickname = async (nickname: string) => {
+  axiosRetry(axios, { retries: 3 });
   return await axios.get<DTO.ValidateNicknameRequest, DTO.ValidateNicknameResponse>(API_URL.PATH(`user/validation?nickname=${nickname}`));
 };
 

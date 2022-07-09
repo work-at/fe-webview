@@ -40,8 +40,17 @@ const SignUpPage = () => {
   const handleNextStep = async (e: any) => {
     e.preventDefault();
     // TODO: 추후에 API 고쳐지면 수정
-    // const { data: isValidate } = await requestValidateNickname(nickname);
-    // if (nickname && isValidate) {
+    // try {
+    //   const { data: isDuplicate } = await requestValidateNickname(encodeURIComponent(nickname));
+    //   if (!isDuplicate) {
+    //     setError('nickname', { type: "duplicate", message: '중복됩니다.' })
+    //     return;
+    //   }
+    // } catch {
+    //   setError('nickname', { type: "duplicate", message: '중복됩니다.' })
+    //   return;
+    // }
+
     if (nickname) {
       setStep(POSITION_WORKING_YEAR_STEP);
       return;
