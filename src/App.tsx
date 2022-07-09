@@ -4,6 +4,8 @@ import NotFound from "./components/@layout/NotFound";
 import { PATH } from "./constants/paths";
 import RootRoute from "./routes/RootRoute";
 
+const LoginPage = lazy(() => import("@/pages/LoginPage"));
+const SignUpPage = lazy(() => import("@/pages/SignUpPage"));
 const AccommodationPage = lazy(() => import("@/pages/AccommodationPage"));
 const MapPage = lazy(() => import("@/pages/MapPage"));
 const CommunityPage = lazy(() => import("@/pages/CommunityPage"));
@@ -30,6 +32,8 @@ const App = () => (
     <Routes>
       {/* 어플리케이션 루트 경로 */}
       <Route path={PATH.full} element={<RootRoute />} />
+      <Route path={PATH.LOGIN.fragments} element={<LoginPage />} />
+      <Route path={PATH.SIGN_UP.fragments} element={<SignUpPage />} />
       <Route element={<BottomNavigationLayout />}>
         {/* 숙소 페이지 */}
         <Route path={PATH.ACCOMMODATION.fragments} element={<AccommodationPage />} />
