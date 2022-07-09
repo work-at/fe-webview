@@ -1,4 +1,4 @@
-import { theme } from "@/AppStyle";
+import { theme } from "@/assets/styles/theme";
 import { Z_INDEX } from "@/constants/zIndex";
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ export const Container = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
 
   background-color: tomato;
-  /* background-color: ${theme.color.white}; */
+  background-color: ${theme.colors.white};
 
   transition: transform 1s;
 
