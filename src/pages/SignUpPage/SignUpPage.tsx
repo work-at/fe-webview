@@ -1,6 +1,7 @@
 import { ACCESS_TOKEN } from "@/constants";
-import { requestValidateNickname, useSignUpMutation } from "@/domains/auth/auth.api";
-import { LoginResponse, POSITION, PositionType, SignUpRequest, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.dto";
+import { useSignUpMutation } from "@/domains/auth/auth.api";
+import { LoginResponse, SignUpRequest } from "@/domains/auth/auth.dto";
+import { POSITION, PositionType, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.text";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
