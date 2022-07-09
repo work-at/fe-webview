@@ -9,19 +9,16 @@ export type ButtonProps = {
   /** 그림자 활성화 여부 (활성화 - >true / 비활성화 -> false) */
   shadow: boolean;
   /** 버튼 안의 내용 */
-  label: string;
+  children: React.ReactNode;
 };
 
-
-export const Button = ({ size, bgColor, shadow, label }: ButtonProps) => {
+export const Button = ({ size, bgColor, shadow, children }: ButtonProps) => {
   return (
     <S.Button
       size={size} 
       bgColor={bgColor}
       shadow={shadow}
-    >{label}
+    >{children}
     </S.Button>
   );
 };
-
-export default Button;
