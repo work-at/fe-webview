@@ -3,14 +3,9 @@ import { useState } from "react";
 import { Button, ButtonProps } from "./Button";
 
 export default {
-  title: "Components/Button",
+  title: "Components/Layout/Button",
   component: Button,
-  args: {
-    // label: { type: "text" },
-    
-  },
 } as Meta;
-
 
 // 기본 포맷을 정해두고 bind로 제어 
 const Template: Story<ButtonProps> = (args) => {
@@ -33,22 +28,22 @@ export const Small = Template.bind({});
 Small.args = {
   size: 'sm',
   bgColor: 'black',
-  label: '작은버튼',
   shadow : true,
+  children : '작은버튼'
 };
 
 export const Middle = Template.bind({});
 Middle.args = {
   size: 'md',
   bgColor: 'blue',
-  label: '중간버튼',
   shadow : true,
+  children : '중간버튼'
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'lg',
   bgColor: 'white',
-  label: '큰버튼',
   shadow : true,
+  children : '큰버튼'
 };
