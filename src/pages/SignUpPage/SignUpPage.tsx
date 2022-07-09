@@ -64,7 +64,7 @@ const SignUpPage = () => {
     try {
       const { data } = await signUp(formData);
       if (data.accessToken) {
-        localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+        sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
         navigate('/map')
         return;
       }
