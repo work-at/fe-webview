@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN } from "@/constants";
 import { requestValidateNickname, useSignUpMutation } from "@/domains/auth/auth.api";
 import { LoginResponse, POSITION, PositionType, SignUpRequest, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.dto";
 import { useEffect, useState } from "react";
@@ -11,7 +12,7 @@ const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
   const { state } = useLocation();
   const navigate = useNavigate();
-  const mutation = useSignUpMutation();
+  const { mutateAsync: signUp } = useSignUpMutation();
 
   const { setValue, getValues, register, watch, formState: { errors }, setError, clearErrors, handleSubmit } = useForm<SignUpRequest>({
     defaultValues: {
@@ -59,8 +60,19 @@ const SignUpPage = () => {
     setError('nickname', { type: "required", message: '입력해주세요.' })
   }
 
-  const handleSignUp = handleSubmit((data) => {
-    mutation.mutate(data);
+  const handleSignUp = handleSubmit(async (formData) => {
+    try {
+      const { data } = await signUp(formData);
+      if (data.accessToken) {
+        localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+        navigate('/map')
+        return;
+      }
+
+      navigate('/login')
+    } catch {
+      alert('회원가입 도중 에러가 발생했습니다.')
+    }
   })
 
   if (step === NICKNAME_STEP) {

@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { MutationFunction, useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import axiosRetry from 'axios-retry';
-import { ACCESS_TOKEN, API_URL } from "@/constants";
+import { API_URL } from "@/constants";
 
 import * as DTO from "./auth.dto";
 
@@ -25,18 +24,8 @@ export const requestPostSignUp: MutationFunction<AxiosResponse<DTO.SignUpRespons
 };
 
 export const useSignUpMutation = () => {
-  const navigate = useNavigate();
   return useMutation<AxiosResponse<DTO.SignUpResponse>, AxiosError<{ message: string }>, DTO.SignUpRequest>({
     mutationFn: requestPostSignUp,
-    onSuccess: ({ data }) => {
-      if (data.accessToken) {
-        localStorage.setItem(ACCESS_TOKEN, data.accessToken);
-        navigate('/map')
-        return;
-      }
-
-      navigate('/login')
-    }
   });
 };
 
