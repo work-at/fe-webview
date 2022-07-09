@@ -1,6 +1,6 @@
 import { useLoginMutation } from "@/domains/auth/auth.api";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CLIENT_ID = '7052acd04b3385c80fac9bb40d8b5a32';
 const CALLBACK_URL = (base: string) => {
@@ -24,20 +24,37 @@ const parseCallBack = (url: string) => {
 const LoginPage = () => {
   const [originUrl, setOriginUrl] = useState('');
   const { search } = useLocation();
-  const mutation = useLoginMutation();
+  const navigate = useNavigate();
+  const { mutateAsync: login } = useLoginMutation();
+
 
   useEffect(() => {
     const { origin } = window.location;
     setOriginUrl(origin);
   }, []);
 
+  const handleLogin = useCallback(async (code: string) => {
+    try {
+      if (code) {
+        const { data } = await login({ code });
+        if (data.code === 'WORK01') {
+          navigate('/map')
+        }
+
+        if (data.code === 'WORK02') {
+          navigate('/sign-up', { state: data })
+        }
+      }
+
+    } catch (error) {
+      alert("로그인 도중 에러가 발생했습니다.")
+    }
+  }, [login, originUrl])
+
   useEffect(() => {
     const { code } = parseCallBack(search) as { code: string };
-
-    if (code) {
-      mutation.mutate({ code })
-    }
-  }, [originUrl])
+    handleLogin(code);
+  }, [])
 
   return <div><a href={CALLBACK_URL(originUrl)}>login</a></div>;
 };

@@ -13,18 +13,8 @@ export const requestPostLogin: MutationFunction<AxiosResponse<DTO.LoginResponse>
 };
 
 export const useLoginMutation = () => {
-  const navigate = useNavigate();
   return useMutation<AxiosResponse<DTO.LoginResponse>, AxiosError<{ message: string }>, DTO.LoginRequest>({
     mutationFn: requestPostLogin,
-    onSuccess: ({ data }) => {
-      if (data.code === 'WORK01') {
-        navigate('/map')
-      }
-
-      if (data.code === 'WORK02') {
-        navigate('/sign-up', { state: data })
-      }
-    }
   });
 };
 
