@@ -2,7 +2,7 @@ import { ACCESS_TOKEN } from "@/constants";
 import { useSignUpMutation } from "@/domains/auth/auth.api";
 import { LoginResponse, SignUpRequest } from "@/domains/auth/auth.dto";
 import { POSITION, PositionType, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.text";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const SignUpPage = () => {
     }
   }, [nickname]);
 
-  const handleNextStep = async (e: any) => {
+  const handleNextStep = useCallback(async (e: any) => {
     e.preventDefault();
     // TODO: 추후에 API 고쳐지면 수정
     // try {
@@ -59,7 +59,7 @@ const SignUpPage = () => {
     }
 
     setError('nickname', { type: "required", message: '입력해주세요.' })
-  }
+  }, [nickname]);
 
   const handleSignUp = handleSubmit(async (formData) => {
     try {
@@ -74,7 +74,7 @@ const SignUpPage = () => {
     } catch {
       alert('회원가입 도중 에러가 발생했습니다.')
     }
-  })
+  });
 
   if (step === NICKNAME_STEP) {
     return (
