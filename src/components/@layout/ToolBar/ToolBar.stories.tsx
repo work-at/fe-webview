@@ -6,12 +6,8 @@ export default {
   component: ToolBar,
 } as Meta;
 
-
 const Template: Story = (args) => {
-
-  return (
-    <ToolBar {...args} />
-  );
+  return <ToolBar {...args} />;
 };
 
 export const Basic = Template.bind({});

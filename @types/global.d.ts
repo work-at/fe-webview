@@ -5,7 +5,7 @@ declare module "*.svg" {
   // const content: (props: SVGProps<SVGElement>) => ReactElement;
   export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   const src: string;
-	export default src;
+  export default src;
 }
 
 declare module "*.gif" {

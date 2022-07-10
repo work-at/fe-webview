@@ -35,7 +35,11 @@ const Tabs = ({ items, onSelect }: TabsProps) => {
       <S.TabList role="tablist">
         {items.map((item) => (
           <S.TabItem itemCount={items.length} selectedItemIndex={selectedItemIndex}>
-            <S.TabLink onClick={() => {handleTabItemSelect(item.id)}}>
+            <S.TabLink
+              onClick={() => {
+                handleTabItemSelect(item.id);
+              }}
+            >
               <S.TabText>{item.label}</S.TabText>
             </S.TabLink>
           </S.TabItem>

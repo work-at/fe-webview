@@ -14,7 +14,7 @@ export const TabList = styled.ul`
   height: 100%;
 `;
 
-export const TabItem = styled.li<{ itemCount: number, selectedItemIndex: number }>`
+export const TabItem = styled.li<{ itemCount: number; selectedItemIndex: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +28,4 @@ export const TabLink = styled.button`
   transition: transform 0.5s;
 `;
 
-export const TabText = styled.span`
-
-`;
+export const TabText = styled.span``;
