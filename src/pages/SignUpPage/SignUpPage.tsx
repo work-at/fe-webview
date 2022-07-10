@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN } from "@/constants";
-import { useSignUpMutation } from "@/domains/auth/auth.api";
+import { usePositionListQuery, useSignUpMutation, useWorkingYearListQuery } from "@/domains/auth/auth.api";
 import { LoginResponse, SignUpRequest } from "@/domains/auth/auth.dto";
 import { POSITION, PositionType, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.text";
 import { useCallback, useEffect, useState } from "react";
@@ -14,6 +14,9 @@ const SignUpPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { mutateAsync: signUp } = useSignUpMutation();
+
+  const { data: positionList } = usePositionListQuery();
+  const { data: workingYearList } = useWorkingYearListQuery();
 
   const { setValue, getValues, register, watch, formState: { errors }, setError, clearErrors, handleSubmit } = useForm<SignUpRequest>({
     defaultValues: {
@@ -100,18 +103,18 @@ const SignUpPage = () => {
       <form onSubmit={handleSignUp}>
         <select {...register('position', { required: '선택해주세요' })} value={POSITION[getValues('position') ?? '']}>
           <option hidden disabled selected value="">직무 선택</option>
-          {Object.keys(POSITION).map((item) => (
-            <option value={item} key={item}>
-              {POSITION[item as PositionType]}
+          {positionList?.data.response.map(({ name, content }) => (
+            <option value={name} key={name}>
+              {content}
             </option>
           ))}
         </select>
         <div>{errors.position?.message}</div>
         <select {...register('workingYear', { required: '선택해주세요' })} value={WORKING_YEAR[getValues('workingYear') ?? '']}>
           <option hidden disabled selected value="">경력 선택</option>
-          {Object.keys(WORKING_YEAR).map((item) => (
-            <option value={item} key={item}>
-              {WORKING_YEAR[item as WorkingYearType]}
+          {workingYearList?.data.response.map(({ name, content }) => (
+            <option value={name} key={name}>
+              {content}
             </option>
           ))}
         </select>

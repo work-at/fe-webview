@@ -31,15 +31,19 @@ export type ValidateNicknameRequest = {
 export type ValidateNicknameResponse = { data: boolean };
 
 export type PositionListResponse = {
-  response: {
-    name: PositionType;
-    content: PositionValueType;
-  }[]
+  data: {
+    response: {
+      name: PositionType;
+      content: PositionValueType;
+    }[]
+  }
 }
 
 export type WorkingYearListResponse = {
-  response: {
-    name: WorkingYearType;
-    content: WorkingYearValueType;
-  }[]
+  data: {
+    response: {
+      name: WorkingYearType;
+      content: WorkingYearValueType;
+    }[]
+  }
 }
