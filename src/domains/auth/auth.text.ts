@@ -1,19 +1,13 @@
-import { KeyOf } from "type-util";
+import { KeyOf, ValueOf } from "type-util";
 
 export const POSITION = {
   IT_ENGINEER: '개발',
   DESIGNER: '디자이너',
   IT_PRODUCT_MANAGER: '기획',
   MARKETING: '마케팅',
-  MERCHANDISER: '소상공인',
-  BUSINESS_MANAGER: '사무직',
-  HUMAN_RESOURCE: "인사관리",
-  SUPPLY_MANAGER: '유통/물류',
-  SALES: '세일즈',
-  ACCOUNTANT: '회계사',
-  TRADE: '트레이더',
-  FINANCE: '금융',
-  OTHERS: '기타',
+  OFFICE_WORKER: '사무직',
+  PROFESSIONAL: "전문직",
+  FREELANCER: '프리랜서',
 } as const
 
 export const WORKING_YEAR = {
@@ -24,4 +18,6 @@ export const WORKING_YEAR = {
 } as const
 
 export type PositionType = KeyOf<typeof POSITION>;
+export type PositionValueType = ValueOf<typeof POSITION>;
 export type WorkingYearType = KeyOf<typeof WORKING_YEAR>;
+export type WorkingYearValueType = ValueOf<typeof WORKING_YEAR>;

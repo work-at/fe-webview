@@ -1,4 +1,4 @@
-import { PositionType, WorkingYearType } from "./auth.text";
+import { PositionType, PositionValueType, WorkingYearType, WorkingYearValueType } from "./auth.text";
 
 export type LoginRequest = {
   code: string;
@@ -29,3 +29,17 @@ export type ValidateNicknameRequest = {
 }
 
 export type ValidateNicknameResponse = { data: boolean };
+
+export type PositionListResponse = {
+  response: {
+    name: PositionType;
+    content: PositionValueType;
+  }[]
+}
+
+export type WorkingYearListResponse = {
+  response: {
+    name: WorkingYearType;
+    content: WorkingYearValueType;
+  }[]
+}

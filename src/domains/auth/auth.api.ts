@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { MutationFunction, useMutation } from "react-query";
+import { MutationFunction, QueryFunction, useMutation, useQuery } from "react-query";
 import axiosRetry from 'axios-retry';
-import { API_URL } from "@/constants";
+import { API_URL, QUERY_NAME } from "@/constants";
 
 import * as DTO from "./auth.dto";
 
@@ -46,3 +46,19 @@ export const requestValidateNickname = async (nickname: string) => {
 // export const useValidateNicknameQuery = (nicnkname: DTO.ValidateNicknameRequest) => {
 //   return useQuery<DTO.ValidateNicknameResponse, AxiosError<{ message: string }>>([QUERY_NAME.GET_TEST, nicnkname], requestValidateNickname);
 // };
+
+export const requestPositionList: QueryFunction<DTO.PositionListResponse> = async () => {
+  return await axios.get<unknown, DTO.PositionListResponse>(API_URL.PATH(`user/job-department`));
+};
+
+export const usePositionListQuery = () => {
+  return useQuery<DTO.PositionListResponse, AxiosError<{ message: string }>>([QUERY_NAME.GET_POSITION_LIST], requestPositionList);
+};
+
+export const requestWorkingYearList: QueryFunction<DTO.WorkingYearListResponse> = async () => {
+  return await axios.get<unknown, DTO.WorkingYearListResponse>(API_URL.PATH(`user/job-duration`));
+};
+
+export const useWorkingYearListQuery = () => {
+  return useQuery<DTO.WorkingYearListResponse, AxiosError<{ message: string }>>([QUERY_NAME.GET_WORKING_YEAR_LIST], requestWorkingYearList);
+};
