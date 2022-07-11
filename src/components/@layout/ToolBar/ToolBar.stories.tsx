@@ -1,18 +1,12 @@
 import { Meta, Story } from "@storybook/react";
-import { ToolBar } from "./ToolBar";
+import ToolBar from "./ToolBar";
 
 export default {
-  title: "Components/Layout/ToolBar",
+  title: "components/Layout/ToolBar",
   component: ToolBar,
-} as Meta;
+} as Meta<typeof ToolBar>;
 
-
-const Template: Story = (args) => {
-
-  return (
-    <ToolBar {...args} />
-  );
-};
+export const Template: Story<typeof ToolBar> = () => <ToolBar />;
 
 export const Basic = Template.bind({});
 

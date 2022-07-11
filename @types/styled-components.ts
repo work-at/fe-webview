@@ -1,4 +1,3 @@
-import { theme } from "../src/styles/theme";
+import { theme } from "@/assets/styles/theme";
 
-declare module "styled-components" {
-}
+declare module "styled-components" {}

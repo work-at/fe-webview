@@ -5,6 +5,9 @@ import reset from "styled-reset";
 export const GlobalStyle = createGlobalStyle`
 	${reset}
 	
+	// 폰트import
+	@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 	* {
 		margin:0;
 		padding:0;
@@ -66,9 +69,9 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	body, input, textarea, select, button, table {
-		font-family: AppleGothicNeoSD, 'Apple SD Gothic Neo', 맑은고딕, 'Malgun Gothic', arial, sans-serif;
+		font-family: Pretendard, AppleGothicNeoSD, 'Apple SD Gothic Neo', 맑은고딕, 'Malgun Gothic', arial, sans-serif;
 		font-size:13px; 
-		font-weight:400; 
+		font-weight:500; 
 		line-height:18px;
 		color:#606060;
 	}

@@ -1,9 +1,7 @@
 declare module "*.svg" {
   import { ReactElement, SVGProps } from "react";
 
-  // eslint-disable-next-line no-unused-vars
-  // const content: (props: SVGProps<SVGElement>) => ReactElement;
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  const content: (props: SVGProps<SVGElement>) => ReactElement;
   const src: string;
 	export default src;
 }
