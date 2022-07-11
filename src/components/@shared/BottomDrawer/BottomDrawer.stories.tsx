@@ -8,7 +8,7 @@ import { wait } from "@/components/testUtil";
 import { Z_INDEX } from "@/constants/zIndex";
 
 export default {
-  title: "Components/Layout/BottomDrawer",
+  title: "Components/Shared/BottomDrawer",
   component: BottomDrawer,
 } as Meta;
 

@@ -8,8 +8,8 @@ export const Button = styled.button<ButtonProps>`
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  color: ${({ theme }) => theme.colors.white};
-  background: ${({ theme }) => theme.colors.black100};
+  color: ${theme.colors.white};
+  background: ${theme.colors.black100};
   font-weight: bold;
 
   ${(props) =>

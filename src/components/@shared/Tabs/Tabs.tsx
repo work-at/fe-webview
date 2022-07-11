@@ -30,14 +30,20 @@ const Tabs = ({ items, onSelect }: TabsProps) => {
   );
 
   return (
-    <S.Container>
-      {items.map((item) => (
-        <S.TabItem itemCount={items.length} onClick={() => handleTabItemSelect(item.id)}>
-          {item.label}
-        </S.TabItem>
-      ))}
-      <S.TabIndicator itemCount={items.length} selectedItemIndex={selectedItemIndex} />
-    </S.Container>
+    <S.TabWrap>
+      <S.TabList role="tablist">
+        {items.map((item, index) => (
+          <S.TabItem key={index} itemCount={items.length}>
+            <S.TabLink onClick={() => {handleTabItemSelect(item.id)}}>
+              <S.TabText isSelected={index === selectedItemIndex}>{item.label}</S.TabText>
+            </S.TabLink>
+          </S.TabItem>
+        ))}
+        <S.TabIndicatorWrapper itemCount={items.length} selectedItemIndex={selectedItemIndex}>
+          <S.TabIndicator />
+        </S.TabIndicatorWrapper>
+      </S.TabList>
+    </S.TabWrap>
   );
 };
 

@@ -6,7 +6,7 @@ export const Tag = styled.div`
   display: block;
   border-radius: 20px;
   box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.15);
-  background: ${({ theme }) => theme.colors.white};
+  background: ${theme.colors.white};
   margin-top: 10px;
   &:first-child {
     margin-top: 0;
@@ -25,7 +25,7 @@ export const TagTxt = styled.span`
   font-size: 17px;
   line-height: 20px;
   padding: 9px 22px 9px 53px;
-  color: ${({ theme }) => theme.colors.black100};
+  color: ${theme.colors.black100};
 `;
 
 export const TagNum = styled.span`
