@@ -3,7 +3,7 @@ import { useState } from "react";
 import ListCard, { ListCardProps } from "./ListCard";
 
 export default {
-  title: "Components/Layout/ListCard",
+  title: "Components/Shared/ListCard",
   component: ListCard,
 } as Meta;
 
