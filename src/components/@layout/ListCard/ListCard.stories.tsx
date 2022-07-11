@@ -28,10 +28,10 @@ const Template: Story<ListCardProps> = () => (
         year: "2",
         act: ["퇴근후함께놀아요", "스타트업함께해요", "디자인같이해요"],
       },
-    ]} 
+    ]}
   />
 );
-  
+
 export const Basic = Template.bind({});
 
 Basic.play = async ({ canvasElement }: any) => {};
