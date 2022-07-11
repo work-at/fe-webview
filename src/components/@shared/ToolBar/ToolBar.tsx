@@ -9,7 +9,7 @@ interface ToolBarIconProps {
   icon: React.ReactElement;
 }
 
-const ToolBarMenu = ({ /*handleRoute,*/ text, /*isActive,*/ icon }: ToolBarIconProps) => {
+export const ToolBarMenu = ({ /*handleRoute,*/ text, /*isActive,*/ icon }: ToolBarIconProps) => {
   return (
     <S.ListItem>
       <S.ListButton type="button" /*onClick={handleRoute} isActive={isActive}*/>

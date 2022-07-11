@@ -6,7 +6,7 @@ export const ToolBar = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${theme.colors.white};
   height: 83px;
   z-index: 99;
 `;
