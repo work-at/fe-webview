@@ -36,7 +36,7 @@ export const UserInfo = styled.div`
 `;
 
 export const NickName = styled.p`
-  color: ${theme.colors.black100};;
+  color: ${theme.colors.black100};
   font-size: 20px;
   line-height: 24px;
   font-weight: bold;
@@ -57,7 +57,7 @@ export const InfoList = styled.li`
   float: left;
   padding: 0 10px;
   font-size: 12px;
-  color: ${theme.colors.black100};;
+  color: ${theme.colors.black100};
 
   &:before {
     content: "";
