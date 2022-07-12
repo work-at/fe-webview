@@ -1,5 +1,3 @@
-export const PAGE_URL = {};
-
 export const API_URL = {
   PATH: (params: string) => `http://34.64.168.189:8080/api/v1/${params}`,
   GET_TEST: (params: string) => `/${params}`,
