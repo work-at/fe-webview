@@ -3,7 +3,7 @@ import { addDecorator } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "../src/assets/styles/GlobalStyles";
-import { theme } from '../src/assets/styles/theme';
+import { theme } from "../src/assets/styles/theme";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

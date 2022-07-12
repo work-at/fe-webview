@@ -34,7 +34,7 @@ export const Dialog = styled.div<{ isOpen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   min-height: 12.5rem;
   max-height: 70%;
   min-width: 12.5rem;

@@ -6,7 +6,7 @@ export default {
   component: ToolBar,
 } as Meta;
 
-const Template: Story = () => (<ToolBar />);
+const Template: Story = () => <ToolBar />;
 
 export const Basic = Template.bind({});
 

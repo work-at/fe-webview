@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import NotFound from "./components/@layout/NotFound";
 import { PATH } from "./constants/paths";
 import RootRoute from "./routes/RootRoute";
 
@@ -49,7 +48,7 @@ const App = () => (
         {/* 숙소 상세 */}
         {/* 워케이셔너 상세 */}
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<div>경로를 찾을 수 없습니다.</div>} />
     </Routes>
   </BrowserRouter>
 );
