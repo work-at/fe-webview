@@ -8,7 +8,7 @@ export default {
   component: Tabs,
 } as Meta;
 
-const Template: Story<TabsProps> = () => (
+const Template: Story<TabsProps<"1" | "2" | "3">> = () => (
   <Tabs
     items={[
       {

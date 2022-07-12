@@ -1,22 +1,22 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
 import * as S from "./Tabs.styled";
 
-export type TabItem = {
-  id: string;
+export type TabItem<TabId extends string> = {
+  id: TabId;
   label: string;
 };
 
-export type TabsProps = {
-  items: TabItem[];
+export type TabsProps<T extends string> = {
+  items: Array<TabItem<T>>;
   /** 탭 아이템이 선택되었을 때 동작하는 핸들러 */
-  onSelect: (id: string) => void;
+  onSelect: (id: T) => void;
 };
 
-const Tabs = ({ items, onSelect }: TabsProps) => {
+const Tabs = <T extends string>({ items, onSelect }: TabsProps<T>) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
   const handleTabItemSelect = useCallback(
-    (id: string) => {
+    (id: T) => {
       const newSelectedItemIndex = items.findIndex((item) => item.id === id);
 
       if (newSelectedItemIndex === undefined) {
