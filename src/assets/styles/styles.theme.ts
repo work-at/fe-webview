@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components';
+import { DefaultTheme } from "styled-components";
 
 const colors = {};
 const fontSize = {};
@@ -6,7 +6,7 @@ const fontSize = {};
 export type ColorsTypes = typeof colors;
 export type FontSizeTypes = typeof fontSize;
 
-export const theme : DefaultTheme = {
+export const theme: DefaultTheme = {
   colors,
   fontSize,
 };
