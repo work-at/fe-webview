@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "../src/assets/styles/GlobalStyles";
 import { theme } from "../src/assets/styles/theme";
+import { BrowserRouter } from "react-router-dom";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
