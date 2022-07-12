@@ -22,9 +22,20 @@ export const ListItem = styled.li`
   width: calc(100% / 4);
 `;
 
-export const ListButton = styled.button`
+export const ListButton = styled.button<{ isActive: boolean }>`
   display: block;
   width: 100%;
+
+  path {
+    transition: fill 0.5s;
+    fill: ${({ isActive }) => (isActive ? theme.colors.mainColor : "initial")};
+  }
+
+  span {
+    transition: color 0.5s, font-weight 0.5s;
+    color: ${({ isActive }) => (isActive ? theme.colors.mainColor : "initial")};
+    font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
+  }
 `;
 
 export const MenuIcon = styled.i`
