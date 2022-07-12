@@ -1,15 +1,34 @@
 import { Meta, Story } from "@storybook/react";
-import { within } from "@storybook/testing-library";
-
-import Button, { ButtonProps } from "./Button";
+import { useState } from "react";
+import { Button, ButtonProps } from "./Button";
 
 export default {
   title: "Components/Shared/Button",
   component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = () => <Button>버튼</Button>;
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
-export const Basic = Template.bind({});
+export const Small = Template.bind({});
+Small.args = {
+  size: "sm",
+  bgColor: "black",
+  shadow: true,
+  children: "작은버튼",
+};
 
-Basic.play = async ({ canvasElement }: any) => {};
+export const Middle = Template.bind({});
+Middle.args = {
+  size: "md",
+  bgColor: "blue",
+  shadow: true,
+  children: "중간버튼",
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  size: "lg",
+  bgColor: "white",
+  shadow: true,
+  children: "큰버튼",
+};

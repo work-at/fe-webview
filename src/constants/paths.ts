@@ -6,8 +6,8 @@ export const PATH = {
     fragments: "login",
   },
   SIGN_UP: {
-    full: '/sign-up',
-    fragments: 'sign-up',
+    full: "/sign-up",
+    fragments: "sign-up",
   },
   ACCOMMODATION: {
     full: "/accommodation",

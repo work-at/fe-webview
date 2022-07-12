@@ -2,7 +2,9 @@ import React from "react";
 import { addDecorator } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 
-import { theme, GlobalStyle } from "../src/AppStyle";
+import { GlobalStyle } from "../src/assets/styles/GlobalStyles";
+import { theme } from "../src/assets/styles/theme";
+import { BrowserRouter } from "react-router-dom";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -15,8 +17,10 @@ export const parameters = {
 };
 
 addDecorator((Story) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Story />
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Story />
+    </ThemeProvider>
+  </BrowserRouter>
 ));

@@ -15,8 +15,8 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    $ModalContainer?.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = 'hidden';
+    $ModalContainer?.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "hidden";
 
     const handleModalCloseWithEscHandler = ({ key }: KeyboardEvent) => {
       let scheduledAnimationFrame = false;
@@ -27,49 +27,52 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
 
       scheduledAnimationFrame = true;
 
-      if (key === 'Escape' && onClose) {
+      if (key === "Escape" && onClose) {
         onClose();
         scheduledAnimationFrame = false;
       }
     };
 
-    document.addEventListener('keyup', handleModalCloseWithEscHandler);
+    document.addEventListener("keyup", handleModalCloseWithEscHandler);
 
     const handleFocusTrap = (e: KeyboardEvent) => {
       const focusableNodeList = modalRef.current?.querySelectorAll<HTMLElement>(
-        'input, button, textarea, select, [href] [tabindex]',
+        "input, button, textarea, select, [href] [tabindex]"
       );
 
       if (focusableNodeList) {
         const firstFocusableNode = focusableNodeList[0];
         const lastFocusableNode = focusableNodeList[focusableNodeList.length - 1];
 
-        if (e.target === firstFocusableNode && e.shiftKey && e.key === 'Tab') {
+        if (e.target === firstFocusableNode && e.shiftKey && e.key === "Tab") {
           e.preventDefault();
           lastFocusableNode.focus();
         }
-        if (e.target === lastFocusableNode && !e.shiftKey && e.key === 'Tab') {
+        if (e.target === lastFocusableNode && !e.shiftKey && e.key === "Tab") {
           e.preventDefault();
           firstFocusableNode.focus();
         }
       }
     };
 
-    document.addEventListener('keydown', handleFocusTrap);
+    document.addEventListener("keydown", handleFocusTrap);
 
     return () => {
-      $ModalContainer?.removeAttribute('aria-hidden');
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('keyup', handleModalCloseWithEscHandler);
-      document.removeEventListener('keydown', handleFocusTrap);
+      $ModalContainer?.removeAttribute("aria-hidden");
+      document.body.style.overflow = "unset";
+      document.removeEventListener("keyup", handleModalCloseWithEscHandler);
+      document.removeEventListener("keydown", handleFocusTrap);
     };
   }, [closeOnClickOverlay, onClose]);
 
-  const handleClickDimmed = useCallback((e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-    if (e.target === e.currentTarget && closeOnClickOverlay && onClose) {
-      onClose(e);
-    }
-  }, [closeOnClickOverlay]);
+  const handleClickDimmed = useCallback(
+    (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+      if (e.target === e.currentTarget && closeOnClickOverlay && onClose) {
+        onClose(e);
+      }
+    },
+    [closeOnClickOverlay]
+  );
 
   return (
     <S.Container ref={modalRef} isOpen={isOpen} onClick={handleClickDimmed} tabIndex={-1}>
