@@ -16,7 +16,7 @@ const Card = ({ nickname, job, year, acts, imageUrl }: CardProps) => {
     <S.CardWrap>
       <S.CardTop>
         <S.UserThumb>
-          <img src={imageUrl} alt="" />
+          <img src={imageUrl} alt={`${nickname} 이미지`} />
         </S.UserThumb>
         <S.UserInfo>
           <S.NickName>{nickname}</S.NickName>
