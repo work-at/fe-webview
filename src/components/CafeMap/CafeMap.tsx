@@ -7,7 +7,7 @@ import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
 
 import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
 import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
-import ListCard from "../@shared/ListCard/ListCard";
+import ListCard from "../@shared/CardList/CardList";
 
 type CafeMapProps = {
   userCoordinates: Coordinates;
