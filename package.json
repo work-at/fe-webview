@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
   "scripts": {
     "type-check": "tsc --build ./tsconfig.json",
     "start": "webpack serve --config ./webpack/webpack.dev.js",
     "build-dev": "yarn type-check && webpack --config ./webpack/webpack.dev.js",
     "build-prod": "yarn type-check && webpack --config ./webpack/webpack.prod.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "axios": "^0.26.0",
     "axios-retry": "^3.3.1",
+    "eslint-plugin-storybook": "^0.6.1",
     "react": "^18.2.0-next-f7b44539c-20220610",
     "react-dom": "^18.2.0-next-f7b44539c-20220610",
     "react-hook-form": "^7.33.1",
@@ -53,7 +62,9 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.0",
     "kakao.maps.d.ts": "^0.1.32",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.5.1",
     "ts-loader": "^9.2.6",
     "webpack": "^5.66.0",

@@ -8,7 +8,7 @@ import * as DTO from "./auth.dto";
 export const requestPostLogin: MutationFunction<AxiosResponse<DTO.LoginResponse>, DTO.LoginRequest> = async (
   auth: DTO.LoginRequest
 ) => {
-  return await axios.post<DTO.LoginRequest, AxiosResponse<DTO.LoginResponse>>(API_URL.PATH(`auth/token/kakao`), auth);
+  return await axios.post<DTO.LoginRequest, AxiosResponse<DTO.LoginResponse>>(API_URL.PATH("auth/token/kakao"), auth);
 };
 
 export const useLoginMutation = () => {
@@ -20,7 +20,7 @@ export const useLoginMutation = () => {
 export const requestPostSignUp: MutationFunction<AxiosResponse<DTO.SignUpResponse>, DTO.SignUpRequest> = async (
   auth: DTO.SignUpRequest
 ) => {
-  return await axios.post<DTO.SignUpRequest, AxiosResponse<DTO.SignUpResponse>>(API_URL.PATH(`signup`), auth);
+  return await axios.post<DTO.SignUpRequest, AxiosResponse<DTO.SignUpResponse>>(API_URL.PATH("signup"), auth);
 };
 
 export const useSignUpMutation = () => {
@@ -50,7 +50,7 @@ export const requestValidateNickname = async (nickname: string) => {
 // };
 
 export const requestPositionList: QueryFunction<DTO.PositionListResponse> = async () => {
-  return await axios.get<unknown, DTO.PositionListResponse>(API_URL.PATH(`user/job-department`));
+  return await axios.get<unknown, DTO.PositionListResponse>(API_URL.PATH("user/job-department"));
 };
 
 export const usePositionListQuery = () => {
@@ -61,7 +61,7 @@ export const usePositionListQuery = () => {
 };
 
 export const requestWorkingYearList: QueryFunction<DTO.WorkingYearListResponse> = async () => {
-  return await axios.get<unknown, DTO.WorkingYearListResponse>(API_URL.PATH(`user/job-duration`));
+  return await axios.get<unknown, DTO.WorkingYearListResponse>(API_URL.PATH("user/job-duration"));
 };
 
 export const useWorkingYearListQuery = () => {
