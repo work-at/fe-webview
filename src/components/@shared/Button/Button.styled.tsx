@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 import { ButtonProps } from "./Button";
 
-export const Button = styled.button<ButtonProps>`
+type StyledButtonProps = Omit<ButtonProps, "children">;
+
+export const Button = styled.button<StyledButtonProps>`
   display: inline-block;
   text-align: center;
   vertical-align: middle;

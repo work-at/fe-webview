@@ -13,7 +13,13 @@ if (!container) throw new Error("Failed to find the root element");
 
 const root = createRoot(container);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 
 root.render(
   <QueryClientProvider client={queryClient}>

@@ -1,6 +1,14 @@
 export const PATH = {
   full: "/",
   fragments: "/",
+  LOGIN: {
+    full: "/login",
+    fragments: "login",
+  },
+  SIGN_UP: {
+    full: "/sign-up",
+    fragments: "sign-up",
+  },
   ACCOMMODATION: {
     full: "/accommodation",
     fragments: "accommodation",
