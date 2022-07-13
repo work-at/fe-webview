@@ -1,3 +1,1 @@
-export { default } from "./Tabs";
-
-export { TabItem } from "./Tabs";
+export { default, TabItem } from "./Tabs";
