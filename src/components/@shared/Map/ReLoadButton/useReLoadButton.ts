@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const useReLoadButton = () => {
-  const [lastReloadTimestamp, setLastReloadTimeStamp] = useState(new Date().getTime());
-  const lastReloadTimestampRef = useRef(lastReloadTimestamp - 1);
+  const [lastReloadTimeStamp, setLastReloadTimeStamp] = useState(new Date().getTime());
+  const lastReloadTimeStampRef = useRef(lastReloadTimeStamp - 1);
 
   const updateReloadTime = useCallback(() => {
     const currentTimestamp = new Date().getTime();
@@ -10,11 +10,11 @@ const useReLoadButton = () => {
   }, []);
 
   useEffect(() => {
-    lastReloadTimestampRef.current = lastReloadTimestamp;
-  }, [lastReloadTimestamp]);
+    lastReloadTimeStampRef.current = lastReloadTimeStamp;
+  }, [lastReloadTimeStamp]);
 
   return {
-    isReloaded: lastReloadTimestampRef.current !== lastReloadTimestamp,
+    isReloaded: lastReloadTimeStampRef.current !== lastReloadTimeStamp,
     updateReloadTime,
   };
 };
