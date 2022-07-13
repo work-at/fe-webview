@@ -4,11 +4,12 @@ import axiosRetry from "axios-retry";
 import { API_URL, QUERY_NAME } from "@/constants";
 
 import * as DTO from "./auth.dto";
+import { baseInstance } from "@/services";
 
 export const requestPostLogin: MutationFunction<AxiosResponse<DTO.LoginResponse>, DTO.LoginRequest> = async (
   auth: DTO.LoginRequest
 ) => {
-  return await axios.post<DTO.LoginRequest, AxiosResponse<DTO.LoginResponse>>(API_URL.PATH("auth/token/kakao"), auth);
+  return await baseInstance().post<DTO.LoginRequest, AxiosResponse<DTO.LoginResponse>>(API_URL.POST_LOIGN, auth);
 };
 
 export const useLoginMutation = () => {
@@ -20,7 +21,7 @@ export const useLoginMutation = () => {
 export const requestPostSignUp: MutationFunction<AxiosResponse<DTO.SignUpResponse>, DTO.SignUpRequest> = async (
   auth: DTO.SignUpRequest
 ) => {
-  return await axios.post<DTO.SignUpRequest, AxiosResponse<DTO.SignUpResponse>>(API_URL.PATH("signup"), auth);
+  return await baseInstance().post<DTO.SignUpRequest, AxiosResponse<DTO.SignUpResponse>>(API_URL.POST_SIGNUP, auth);
 };
 
 export const useSignUpMutation = () => {
@@ -31,8 +32,8 @@ export const useSignUpMutation = () => {
 
 export const requestValidateNickname = async (nickname: string) => {
   axiosRetry(axios, { retries: 3 });
-  return await axios.get<DTO.ValidateNicknameRequest, DTO.ValidateNicknameResponse>(
-    API_URL.PATH(`user/validation?nickname=${nickname}`)
+  return await baseInstance().get<DTO.ValidateNicknameRequest, DTO.ValidateNicknameResponse>(
+    API_URL.GET_VALIDATE_NICKNAME(nickname)
   );
 };
 
@@ -42,7 +43,7 @@ export const requestValidateNickname = async (nickname: string) => {
 // export const requestValidateNickname: QueryFunction<DTO.ValidateNicknameResponse> = async ({ queryKey }) => {
 //   const [, { nickname }] = queryKey as NicknameValidateQueryKey;
 
-//   return await axios.get<DTO.ValidateNicknameRequest, DTO.ValidateNicknameResponse>(API_URL.PATH(`user/validation?nickname=${nickname}`));
+//   return await baseInstance().get<DTO.ValidateNicknameRequest, DTO.ValidateNicknameResponse>(API_URL.PATH(`user/validation?nickname=${nickname}`));
 // };
 
 // export const useValidateNicknameQuery = (nicnkname: DTO.ValidateNicknameRequest) => {
@@ -50,7 +51,7 @@ export const requestValidateNickname = async (nickname: string) => {
 // };
 
 export const requestPositionList: QueryFunction<DTO.PositionListResponse> = async () => {
-  return await axios.get<unknown, DTO.PositionListResponse>(API_URL.PATH("user/job-department"));
+  return await baseInstance().get<unknown, DTO.PositionListResponse>(API_URL.GET_POSITION_LIST);
 };
 
 export const usePositionListQuery = () => {
@@ -61,7 +62,7 @@ export const usePositionListQuery = () => {
 };
 
 export const requestWorkingYearList: QueryFunction<DTO.WorkingYearListResponse> = async () => {
-  return await axios.get<unknown, DTO.WorkingYearListResponse>(API_URL.PATH("user/job-duration"));
+  return await baseInstance().get<unknown, DTO.WorkingYearListResponse>(API_URL.GET_WORKING_YEAR_LIST);
 };
 
 export const useWorkingYearListQuery = () => {
