@@ -2,33 +2,35 @@ import * as S from "./Card.styled";
 
 export type CardItem = {
   id: number;
-  nickname: string;
+  title: string;
   imageUrl: string;
-  job: string;
-  year: string;
-  acts: string[];
+  leftSubTitle: string;
+  rightSubTitle: string;
+  tags: string[];
 };
 
-type CardProps = CardItem;
+type CardProps = CardItem & {
+  className?: string;
+};
 
-const Card = ({ nickname, job, year, acts, imageUrl }: CardProps) => {
+const Card = ({ title, leftSubTitle, rightSubTitle, tags, imageUrl, className }: CardProps) => {
   return (
-    <S.CardWrap>
+    <S.CardWrap className={className}>
       <S.CardTop>
         <S.UserThumb>
-          <img src={imageUrl} alt={`${nickname} 이미지`} />
+          <img src={imageUrl} alt={`${title} 이미지`} />
         </S.UserThumb>
         <S.UserInfo>
-          <S.NickName>{nickname}</S.NickName>
+          <S.NickName>{title}</S.NickName>
           <S.UserEtc>
-            <S.InfoList>{job}</S.InfoList>
-            <S.InfoList>{year}년차</S.InfoList>
+            <S.InfoList>{leftSubTitle}</S.InfoList>
+            <S.InfoList>{rightSubTitle}</S.InfoList>
           </S.UserEtc>
         </S.UserInfo>
       </S.CardTop>
       <S.CardBottom>
-        {acts.map((act, index) => (
-          <S.TagList key={index}>{act}</S.TagList>
+        {tags.map((tag, index) => (
+          <S.TagList key={index}>{tag}</S.TagList>
         ))}
       </S.CardBottom>
     </S.CardWrap>
