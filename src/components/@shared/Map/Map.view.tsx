@@ -48,13 +48,11 @@ const MapView = ({
       {pins.map((pin) => (
         <Pin
           key={pin.id}
-          id={pin.id}
           lat={pin.coordinates.lat}
           lng={pin.coordinates.lng}
           image={selectedPinId === pin.id ? selectedPinImage : pinImage}
           size={selectedPinId === pin.id ? selectedPinSize : pinSize}
-          onClick={onPinSelect}
-          isSelected={selectedPinId === pin.id}
+          onClick={() => onPinSelect(pin.id)}
         />
       ))}
       <UserPositionPin lat={userCoordinates.lat} lng={userCoordinates.lng} />
