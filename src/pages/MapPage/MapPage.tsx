@@ -13,7 +13,7 @@ import NavigationToolBar from "@/components/NavigationToolBar/NavigationToolBar"
 
 type MapTabId = "cafe" | "diner" | "worker";
 
-const TAB_ITEMS: Array<TabItem<MapTabId>> = [
+const TAB_ITEMS: TabItem<MapTabId>[] = [
   { id: "cafe", label: "카페" },
   {
     id: "diner",
@@ -56,7 +56,7 @@ const MapPage = () => {
         <S.Address>{userAddress?.address}</S.Address>
       </S.Header>
       {/* TODO : 리액트 컴포넌트 제네릭 적용하기 */}
-      <Tabs items={TAB_ITEMS} onSelect={handleTabIdChange as any} />
+      <Tabs items={TAB_ITEMS} onSelect={handleTabIdChange} />
       {selectedTabId === "cafe" && <CafeMap userCoordinates={userCoordinates} />}
       {selectedTabId === "diner" && <DinerMap userCoordinates={userCoordinates} />}
       {selectedTabId === "worker" && <WorkerMap userCoordinates={userCoordinates} />}
