@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { Z_INDEX } from "@/constants/zIndex";
 
 export const ToolBar = styled.div`
   position: fixed;
@@ -8,7 +9,7 @@ export const ToolBar = styled.div`
   bottom: 0;
   background: ${theme.colors.white};
   height: 83px;
-  z-index: 99;
+  z-index: ${Z_INDEX.HIGH};
 `;
 
 export const MenuList = styled.ul`

@@ -1,50 +1,38 @@
-import { Map as KakaoMap, MapMarker as KakaoMapMarker, useInjectKakaoMapApi } from "react-kakao-maps-sdk";
-import Pin, { PinItem } from "./Pin";
+import { memo } from "react";
 
-/** 내 위치와 다른 핀들의 위치를 렌더링 한다. */
-export type MapProps = {
-  pins: PinItem[];
-  userPosition: {
-    x: number;
-    y: number;
-  };
-  className?: string;
-};
+import MapView, { MapViewProps } from "./Map.view";
+import useMap from "./useMap";
 
-const API_KEY = process.env.KAKAO_MAP_API_KEY;
+export interface MapProps
+  extends Pick<
+    MapViewProps,
+    "pins" | "userCoordinates" | "pinImage" | "pinSize" | "selectedPinImage" | "selectedPinSize" | "zIndex"
+  > {}
 
-const Map = ({ pins, userPosition, className }: MapProps) => {
-  const { error, loading } = useInjectKakaoMapApi({
-    appkey: API_KEY!,
+const Map = ({ pins, userCoordinates, ...rest }: MapProps) => {
+  const { isMapLoadFailed, isMapLoading, centerCoordinates, selectPin, selectedPinId } = useMap({
+    pins,
+    userCoordinates,
   });
 
-  if (loading) {
+  if (isMapLoading) {
     return <div>지도 로딩중</div>;
   }
 
-  if (error) {
+  if (isMapLoadFailed) {
     return <div>지도 정보를 불러오는데 실패하였습니다</div>;
   }
 
   return (
-    <KakaoMap
-      center={{ lat: userPosition.x, lng: userPosition.y }}
-      style={{
-        width: "100%",
-        height: "450px",
-      }}
-      className={className}
-    >
-      {pins.map((pin) => (
-        <KakaoMapMarker key={pin.id} position={{ lat: pin.x, lng: pin.y }}>
-          <Pin name={pin.name} />
-        </KakaoMapMarker>
-      ))}
-      <KakaoMapMarker position={{ lat: userPosition.x, lng: userPosition.y }}>
-        <Pin name="내 위치" />
-      </KakaoMapMarker>
-    </KakaoMap>
+    <MapView
+      pins={pins}
+      userCoordinates={userCoordinates}
+      centerCoordinates={centerCoordinates}
+      selectedPinId={selectedPinId}
+      onPinSelect={selectPin}
+      {...rest}
+    />
   );
 };
 
-export default Map;
+export default memo(Map);

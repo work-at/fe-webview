@@ -12,8 +12,6 @@ export const Container = styled.div<{ isOpen: boolean }>`
 
   display: flex;
   flex-direction: column;
-
-  background-color: tomato;
   background-color: ${theme.colors.white};
 
   transition: transform 1s;
