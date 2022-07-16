@@ -11,11 +11,12 @@ export type CardItem = {
 
 type CardProps = CardItem & {
   className?: string;
+  onClick?: () => void;
 };
 
-const Card = ({ title, leftSubTitle, rightSubTitle, tags, imageUrl, className }: CardProps) => {
+const Card = ({ title, leftSubTitle, rightSubTitle, tags, imageUrl, className, onClick }: CardProps) => {
   return (
-    <S.CardWrap className={className}>
+    <S.CardWrap className={className} isClickable={!!onClick} onClick={onClick}>
       <S.CardTop>
         <S.UserThumb>
           <img src={imageUrl} alt={`${title} 이미지`} />

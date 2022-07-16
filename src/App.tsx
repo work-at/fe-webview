@@ -1,6 +1,9 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { PATH } from "./constants/paths";
+import CafeDetailPage from "./pages/CafeDetailPage";
+import DinerDetailPage from "./pages/DinerDetailPage";
+import WorkerDetailPage from "./pages/WorkerDetailPage";
 import RootRoute from "./routes/RootRoute";
 
 const LoginPage = lazy(() => import("@/pages/LoginPage"));
@@ -44,6 +47,17 @@ const App = () => (
         <Route path={PATH.MY_PAGE.fragments} element={<MyPage />} />
       </Route>
       <Route element={<DetailLayout />}>
+        <Route path={PATH.MAP.CAFE.full}>
+          <Route path=":cafeId" element={<CafeDetailPage />} />
+        </Route>
+        <Route path={PATH.MAP.DINER.full}>
+          <Route path=":dinerId" element={<DinerDetailPage />} />
+        </Route>
+
+        <Route path={PATH.MAP.WORKER.full}>
+          <Route path=":workerId" element={<WorkerDetailPage />} />
+        </Route>
+
         {/* 카페 상세 */}
         {/* 숙소 상세 */}
         {/* 워케이셔너 상세 */}

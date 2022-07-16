@@ -6,9 +6,11 @@ import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
 
 import WORKER_PIN_PNG from "@/assets/images/worker-pin.png";
 import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import * as S from "./WorkerMap.styled";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "@/constants";
 
 type WorkerMapProps = {
   userCoordinates: Coordinates;
@@ -17,6 +19,7 @@ type WorkerMapProps = {
 const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
   const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
+  const navigate = useNavigate();
   const {
     data: workerPins,
     isLoading,
@@ -41,6 +44,10 @@ const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
       enabled: !!selectedCardId,
     }
   );
+
+  const handleSelectedCardClick = useCallback((id: number) => {
+    navigate(`${PATH.MAP.WORKER.full}/${id}`);
+  }, []);
 
   return (
     <>
@@ -80,6 +87,7 @@ const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
           leftSubTitle={worker.job}
           rightSubTitle={`${worker.yearOfService}년차`}
           tags={worker.tags}
+          onClick={() => handleSelectedCardClick(worker.id)}
         />
       )}
       <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>

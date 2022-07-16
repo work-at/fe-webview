@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Z_INDEX } from "@/constants/zIndex";
 import { useCafePinsQuery, useCafeQuery } from "@/domains/cafe";
 import { Coordinates } from "@/domains/map.type";
@@ -9,6 +9,8 @@ import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
 import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
 
 import * as S from "./CafeMap.styled";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "@/constants";
 
 type CafeMapProps = {
   userCoordinates: Coordinates;
@@ -19,6 +21,7 @@ const CafeMap = ({ userCoordinates }: CafeMapProps) => {
   // TODO : 페이징 처리 방식 생각하기
   const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
+  const navigate = useNavigate();
 
   const {
     data: cafePins,
@@ -44,6 +47,10 @@ const CafeMap = ({ userCoordinates }: CafeMapProps) => {
       enabled: !!selectedCardId,
     }
   );
+
+  const handleSelectedCardClick = useCallback((id: number) => {
+    navigate(`${PATH.MAP.CAFE.full}/${id}`);
+  }, []);
 
   return (
     <>
@@ -83,6 +90,7 @@ const CafeMap = ({ userCoordinates }: CafeMapProps) => {
           leftSubTitle={cafe.region}
           rightSubTitle="카페"
           tags={cafe.tags}
+          onClick={() => handleSelectedCardClick(cafe.id)}
         />
       )}
       <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>

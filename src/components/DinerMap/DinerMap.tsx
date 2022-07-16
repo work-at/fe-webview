@@ -6,9 +6,11 @@ import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
 
 import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
 import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import * as S from "./DinerMap.styled";
+import { PATH } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 type DinerMapProps = {
   userCoordinates: Coordinates;
@@ -17,6 +19,7 @@ type DinerMapProps = {
 const DinerMap = ({ userCoordinates }: DinerMapProps) => {
   const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
+  const navigate = useNavigate();
 
   const {
     data: dinerPins,
@@ -42,6 +45,10 @@ const DinerMap = ({ userCoordinates }: DinerMapProps) => {
       enabled: !!selectedCardId,
     }
   );
+
+  const handleSelectedCardClick = useCallback((id: number) => {
+    navigate(`${PATH.MAP.DINER.full}/${id}`);
+  }, []);
 
   return (
     <>
@@ -81,6 +88,7 @@ const DinerMap = ({ userCoordinates }: DinerMapProps) => {
           leftSubTitle={diner.region}
           rightSubTitle="음식점"
           tags={diner.tags}
+          onClick={() => handleSelectedCardClick(diner.id)}
         />
       )}
       <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>
