@@ -27,7 +27,7 @@ const TAB_ITEMS: Array<TabItem<MapTabId>> = [
 
 const MapPage = () => {
   const { data: userCoordinates } = useCoordinatesService({
-    refetchInterval: 1000,
+    refetchInterval: 5000,
   });
 
   const [selectedTabId, setSelectedTabId] = useState<MapTabId>("cafe");
