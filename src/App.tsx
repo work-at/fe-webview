@@ -2,7 +2,10 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { PATH } from "./constants/paths";
 import CafeDetailPage from "./pages/CafeDetailPage";
+import CafeReviewPage from "./pages/CafeReviewPage";
 import DinerDetailPage from "./pages/DinerDetailPage";
+import DinerReviewPage from "./pages/DinerReviewPage";
+import WorkChatPage from "./pages/WorkChatPage";
 import WorkerDetailPage from "./pages/WorkerDetailPage";
 import RootRoute from "./routes/RootRoute";
 
@@ -21,12 +24,13 @@ const BottomNavigationLayout = () => {
   );
 };
 
+// TODO : 레이아웃 용 컴포넌트는 따로 빼기
 const DetailLayout = () => {
-  return (
-    <Suspense fallback={<div>로딩중</div>}>
-      <Outlet />
-    </Suspense>
-  );
+  return <Outlet />;
+};
+
+const ChatLayout = () => {
+  return <Outlet />;
 };
 
 const App = () => (
@@ -47,20 +51,30 @@ const App = () => (
         <Route path={PATH.MY_PAGE.fragments} element={<MyPage />} />
       </Route>
       <Route element={<DetailLayout />}>
-        <Route path={PATH.MAP.CAFE.full}>
+        <Route path={PATH.CAFE.full}>
+          <Route path={PATH.CAFE.CAFE_REVIEW.fragments}>
+            <Route path=":cafeId" element={<CafeReviewPage />} />
+          </Route>
           <Route path=":cafeId" element={<CafeDetailPage />} />
         </Route>
-        <Route path={PATH.MAP.DINER.full}>
+        <Route path={PATH.DINER.full}>
+          <Route path={PATH.DINER.DINER_REVIEW.fragments}>
+            <Route path=":dinerId" element={<DinerReviewPage />} />
+          </Route>
           <Route path=":dinerId" element={<DinerDetailPage />} />
         </Route>
 
-        <Route path={PATH.MAP.WORKER.full}>
+        <Route path={PATH.WORKER.full}>
           <Route path=":workerId" element={<WorkerDetailPage />} />
         </Route>
-
         {/* 카페 상세 */}
         {/* 숙소 상세 */}
         {/* 워케이셔너 상세 */}
+      </Route>
+      <Route element={<ChatLayout />}>
+        <Route path={PATH.WORK_CHAT.full}>
+          <Route path=":workerId" element={<WorkChatPage />} />
+        </Route>
       </Route>
       <Route path="*" element={<div>경로를 찾을 수 없습니다.</div>} />
     </Routes>
