@@ -6,6 +6,7 @@ import * as Action from "./cafe.action";
 import * as Mapper from "./cafe.mapper";
 
 import { QUERY_NAME } from "@/constants";
+import { Cafe } from "./cafe.type";
 
 type CafePinsQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_PINS, Action.CafePinsCriteria];
 
@@ -67,6 +68,46 @@ export const useCafePinsQuery = (
   return useQuery<Action.CafePinsInfo, AxiosError<string>, Action.CafePinsInfo, CafePinsQueryKey>(
     [QUERY_NAME.GET_CAFE_PINS, criteria],
     requestGetCafePins,
+    options
+  );
+};
+
+const DUMMY_CAFE_PIN: Cafe = {
+  id: 1,
+  name: "포메인제주",
+  region: "제주",
+  tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+};
+
+type CafeQueryKey = readonly [typeof QUERY_NAME.GET_CAFE, Action.CafeCriteria];
+
+export const requestGetCafe: QueryFunction<Action.CafeInfo, CafeQueryKey> = async ({ queryKey }) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_CAFE_PIN;
+};
+
+export const useCafeQuery = (
+  criteria: Action.CafeCriteria,
+  options: UseQueryOptions<Action.CafeInfo, AxiosError<string>, Action.CafeInfo, CafeQueryKey>
+) => {
+  return useQuery<Action.CafeInfo, AxiosError<string>, Action.CafeInfo, CafeQueryKey>(
+    [QUERY_NAME.GET_CAFE, criteria],
+    requestGetCafe,
     options
   );
 };

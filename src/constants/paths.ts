@@ -16,6 +16,18 @@ export const PATH = {
   MAP: {
     full: "/map",
     fragments: "map",
+    CAFE: {
+      full: "/map/cafe",
+      fragments: "cafe",
+    },
+    DINER: {
+      full: "/map/diner",
+      fragments: "diner",
+    },
+    WORKER: {
+      full: "/map/worker",
+      fragments: "worker",
+    },
   },
   COMMUNITY: {
     full: "/community",

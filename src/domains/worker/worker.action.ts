@@ -1,4 +1,4 @@
-import { WorkerPin } from "./worker.type";
+import { Worker, WorkerPin } from "./worker.type";
 
 export type WorkerPinsCriteria = {
   lat: number;
@@ -6,4 +6,10 @@ export type WorkerPinsCriteria = {
   page: number;
 };
 
+export type WorkerCriteria = {
+  id: number;
+};
+
 export type WorkerPinsInfo = WorkerPin[];
+
+export type WorkerInfo = Worker;

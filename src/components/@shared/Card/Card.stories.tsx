@@ -14,10 +14,10 @@ Basic.story = {
   args: {
     id: 1,
     imageUrl: UserImg1,
-    nickname: "나는스벅아아좋아",
-    job: "개발",
-    year: "8",
-    acts: ["주니어모여라", "개발같이해요", "열정맨"],
+    title: "나는스벅아아좋아",
+    leftSubTitle: "개발",
+    rightSubTitle: "8년차",
+    tags: ["주니어모여라", "개발같이해요", "열정맨"],
   },
 };
 

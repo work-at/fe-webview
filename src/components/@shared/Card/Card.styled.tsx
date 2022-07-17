@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 
-export const CardWrap = styled.div`
+export const CardWrap = styled.div<{ isClickable: boolean }>`
   padding: 14px 20px;
   background: ${theme.colors.white};
   border-radius: 18px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   margin-top: 15px;
+
+  cursor: ${({ isClickable }) => (isClickable ? "pointer" : "auto")};
+
   &:first-child {
     margin-top: 18px;
   }

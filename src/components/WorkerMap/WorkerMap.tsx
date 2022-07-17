@@ -1,19 +1,25 @@
 import { Z_INDEX } from "@/constants/zIndex";
 import { Coordinates } from "@/domains/map.type";
-import { useWorkerPinsQuery } from "@/domains/worker";
+import { useWorkerPinsQuery, useWorkerQuery } from "@/domains/worker";
 import Map from "../@shared/Map";
-import ReLoadButton from "../@shared/Map/ReLoadButton";
 import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
 
 import WORKER_PIN_PNG from "@/assets/images/worker-pin.png";
 import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
+import { useCallback, useState } from "react";
+
+import * as S from "./WorkerMap.styled";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "@/constants";
 
 type WorkerMapProps = {
   userCoordinates: Coordinates;
 };
 
 const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
+  const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
+  const navigate = useNavigate();
   const {
     data: workerPins,
     isLoading,
@@ -29,6 +35,19 @@ const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
       keepPreviousData: true,
     }
   );
+
+  const { data: worker } = useWorkerQuery(
+    {
+      id: selectedCardId ?? 0,
+    },
+    {
+      enabled: !!selectedCardId,
+    }
+  );
+
+  const handleSelectedCardClick = useCallback((id: number) => {
+    navigate(`${PATH.MAP.WORKER.full}/${id}`);
+  }, []);
 
   return (
     <>
@@ -56,13 +75,22 @@ const WorkerMap = ({ userCoordinates }: WorkerMapProps) => {
           width: 35,
           height: 35,
         }}
+        onPinSelect={setSelectedCardId}
       />
-      <ReLoadButton
-        style={{ position: "fixed", bottom: "10px", right: "10px", zIndex: Z_INDEX.HIGH }}
-        onClick={updateReloadTime}
-      >
-        현 지도에서 검색
-      </ReLoadButton>
+      {selectedCardId && worker && (
+        <S.WorkerCard
+          id={worker.id}
+          title={worker.name}
+          imageUrl={
+            "https://images.unsplash.com/photo-1475823678248-624fc6f85785?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGtvcmVhbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+          }
+          leftSubTitle={worker.job}
+          rightSubTitle={`${worker.yearOfService}년차`}
+          tags={worker.tags}
+          onClick={() => handleSelectedCardClick(worker.id)}
+        />
+      )}
+      <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>
     </>
   );
 };

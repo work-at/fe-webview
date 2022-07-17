@@ -1,36 +1,20 @@
 import * as S from "./CardList.styled";
 import { CardItem } from "../Card";
+import Card from "../Card/Card";
 
 type CardListProps = {
   items: CardItem[];
+  className?: string;
   onCardClick: (id: number) => void;
 };
 
-const CardList = ({ items, onCardClick }: CardListProps) => {
+const CardList = ({ items, className, onCardClick }: CardListProps) => {
   return (
-    <>
+    <div className={className}>
       {items.map((item) => (
-        <S.CardWrap key={item.id} onClick={() => onCardClick(item.id)} isClickable={!!onCardClick}>
-          <S.CardTop>
-            <S.UserThumb>
-              <img src={item.imageUrl} alt="" />
-            </S.UserThumb>
-            <S.UserInfo>
-              <S.NickName>{item.nickname}</S.NickName>
-              <S.UserEtc>
-                <S.InfoList>{item.job}</S.InfoList>
-                <S.InfoList>{item.year}년차</S.InfoList>
-              </S.UserEtc>
-            </S.UserInfo>
-          </S.CardTop>
-          <S.CardBottom>
-            {item.acts.map((act, index) => (
-              <S.TagList key={index}>{act}</S.TagList>
-            ))}
-          </S.CardBottom>
-        </S.CardWrap>
+        <Card {...item} onClick={() => onCardClick(item.id)} />
       ))}
-    </>
+    </div>
   );
 };
 

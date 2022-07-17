@@ -1,19 +1,31 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 import MapView, { MapViewProps } from "./Map.view";
 import useMap from "./useMap";
 
-export interface MapProps
+interface MapProps
   extends Pick<
     MapViewProps,
-    "pins" | "userCoordinates" | "pinImage" | "pinSize" | "selectedPinImage" | "selectedPinSize" | "zIndex"
+    | "pins"
+    | "userCoordinates"
+    | "pinImage"
+    | "pinSize"
+    | "selectedPinImage"
+    | "selectedPinSize"
+    | "zIndex"
+    | "onPinSelect"
   > {}
 
-const Map = ({ pins, userCoordinates, ...rest }: MapProps) => {
+const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
   const { isMapLoadFailed, isMapLoading, centerCoordinates, selectPin, selectedPinId } = useMap({
     pins,
     userCoordinates,
   });
+
+  const handlePinSelect = useCallback((id: number) => {
+    onPinSelect(id);
+    selectPin(id);
+  }, []);
 
   if (isMapLoading) {
     return <div>지도 로딩중</div>;
@@ -29,7 +41,7 @@ const Map = ({ pins, userCoordinates, ...rest }: MapProps) => {
       userCoordinates={userCoordinates}
       centerCoordinates={centerCoordinates}
       selectedPinId={selectedPinId}
-      onPinSelect={selectPin}
+      onPinSelect={handlePinSelect}
       {...rest}
     />
   );

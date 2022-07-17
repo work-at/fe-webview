@@ -1,36 +1,38 @@
+import Map from "./Map";
 import { Z_INDEX } from "@/constants/zIndex";
-import { Meta, Story } from "@storybook/react";
-
-import Map, { MapProps } from "./Map";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
 import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
 
 export default {
   title: "Components/Shared/Map",
   component: Map,
-} as Meta;
+} as ComponentMeta<typeof Map>;
 
-const Template: Story<MapProps> = () => (
+const Template: ComponentStory<typeof Map> = (args) => (
   <div style={{ width: "360px", height: "360px" }}>
-    <Map
-      pins={[]}
-      userCoordinates={{ lat: 37.5881066, lng: 126.9948464 }}
-      zIndex={Z_INDEX.MIDDLE}
-      pinImage={CAFE_DINER_PIN_PNG}
-      selectedPinImage={SELECTED_CAFE_DINER_PIN_PNG}
-      pinSize={{
-        width: 26,
-        height: 36,
-      }}
-      selectedPinSize={{
-        width: 42,
-        height: 60,
-      }}
-    />
+    <Map {...args} />
   </div>
 );
 
 export const Basic = Template.bind({});
+Basic.story = {
+  args: {
+    pins: [],
+    userCoordinates: { lat: 37.5881066, lng: 126.9948464 },
+    zIndex: Z_INDEX.MIDDLE,
+    pinImage: CAFE_DINER_PIN_PNG,
+    selectedPinImage: SELECTED_CAFE_DINER_PIN_PNG,
+    pinSize: {
+      width: 26,
+      height: 36,
+    },
+    selectedPinSize: {
+      width: 42,
+      height: 60,
+    },
+  },
+};
 
 Basic.play = async ({ canvasElement }: any) => {
   // 핀 정보가 넘어가면 핀을 지도상에 렌더링한다.

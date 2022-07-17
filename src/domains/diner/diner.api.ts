@@ -6,6 +6,7 @@ import * as Action from "./diner.action";
 import * as Mapper from "./diner.mapper";
 
 import { QUERY_NAME } from "@/constants";
+import { Diner } from "./diner.type";
 
 type DinerPinsQueryKey = readonly [typeof QUERY_NAME.GET_DINER_PINS, Action.DinerPinsCriteria];
 
@@ -67,6 +68,46 @@ export const useDinerPinsQuery = (
   return useQuery<Action.DinerPinsInfo, AxiosError<string>, Action.DinerPinsInfo, DinerPinsQueryKey>(
     [QUERY_NAME.GET_DINER_PINS, criteria],
     requestGetDinerPins,
+    options
+  );
+};
+
+const DUMMY_DINER_DATA: Diner = {
+  id: 1,
+  name: "음식점 상호",
+  region: "서울",
+  tags: ["좌석이편해요", "와이파이빵빵해요"],
+};
+
+type DinerQueryKey = readonly [typeof QUERY_NAME.GET_DINER, Action.DinerCriteria];
+
+export const requestGetDiner: QueryFunction<Action.DinerInfo, DinerQueryKey> = async ({ queryKey }) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>(`/Diners`, {
+  //     params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const Diners = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
+  //
+  //   return Diners;
+  return DUMMY_DINER_DATA;
+};
+
+export const useDinerQuery = (
+  criteria: Action.DinerCriteria,
+  options: UseQueryOptions<Action.DinerInfo, AxiosError<string>, Action.DinerInfo, DinerQueryKey>
+) => {
+  return useQuery<Action.DinerInfo, AxiosError<string>, Action.DinerInfo, DinerQueryKey>(
+    [QUERY_NAME.GET_DINER, criteria],
+    requestGetDiner,
     options
   );
 };

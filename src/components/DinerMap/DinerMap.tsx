@@ -1,19 +1,26 @@
 import { Z_INDEX } from "@/constants/zIndex";
-import { useDinerPinsQuery } from "@/domains/diner";
+import { useDinerPinsQuery, useDinerQuery } from "@/domains/diner";
 import { Coordinates } from "@/domains/map.type";
 import Map from "../@shared/Map";
-import ReLoadButton from "../@shared/Map/ReLoadButton";
 import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
 
 import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
 import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
+import { useCallback, useState } from "react";
+
+import * as S from "./DinerMap.styled";
+import { PATH } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 type DinerMapProps = {
   userCoordinates: Coordinates;
 };
 
 const DinerMap = ({ userCoordinates }: DinerMapProps) => {
+  const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
+  const navigate = useNavigate();
+
   const {
     data: dinerPins,
     isLoading,
@@ -29,6 +36,19 @@ const DinerMap = ({ userCoordinates }: DinerMapProps) => {
       keepPreviousData: true,
     }
   );
+
+  const { data: diner } = useDinerQuery(
+    {
+      id: selectedCardId ?? 0,
+    },
+    {
+      enabled: !!selectedCardId,
+    }
+  );
+
+  const handleSelectedCardClick = useCallback((id: number) => {
+    navigate(`${PATH.MAP.DINER.full}/${id}`);
+  }, []);
 
   return (
     <>
@@ -56,13 +76,22 @@ const DinerMap = ({ userCoordinates }: DinerMapProps) => {
           width: 42,
           height: 60,
         }}
+        onPinSelect={setSelectedCardId}
       />
-      <ReLoadButton
-        style={{ position: "fixed", bottom: "10px", right: "10px", zIndex: Z_INDEX.HIGH }}
-        onClick={updateReloadTime}
-      >
-        현 지도에서 검색
-      </ReLoadButton>
+      {selectedCardId && diner && (
+        <S.DinerCard
+          id={diner.id}
+          title={diner.name}
+          imageUrl={
+            "https://images.unsplash.com/photo-1605972023865-471b1488b6a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGtvcmVhbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+          }
+          leftSubTitle={diner.region}
+          rightSubTitle="음식점"
+          tags={diner.tags}
+          onClick={() => handleSelectedCardClick(diner.id)}
+        />
+      )}
+      <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>
     </>
   );
 };
