@@ -75,6 +75,8 @@ export const useDinerPinsQuery = (
 const DUMMY_DINER_DATA: Diner = {
   id: 1,
   name: "음식점 상호",
+  imageUrl:
+    "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   region: "서울",
   tags: ["좌석이편해요", "와이파이빵빵해요"],
 };
@@ -108,6 +110,54 @@ export const useDinerQuery = (
   return useQuery<Action.DinerInfo, AxiosError<string>, Action.DinerInfo, DinerQueryKey>(
     [QUERY_NAME.GET_DINER, criteria],
     requestGetDiner,
+    options
+  );
+};
+
+type DinerDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.DinerDetailCriteria];
+
+const DUMMY_DINER_DETAIL: Action.DinerDetailInfo = {
+  imageUrl: "imageUrl",
+  name: "이름",
+  address: "주소",
+  kakaoLink: "https://map.kakao.com",
+  phoneNumber: "010-0000-0000",
+  reviewPoints: [],
+  coordinates: {
+    lat: 127,
+    lng: 38,
+  },
+};
+
+export const requestGetDinerDetail: QueryFunction<Action.DinerDetailInfo, DinerDetailQueryKey> = async ({
+  queryKey,
+}) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_DINER_DETAIL;
+};
+
+export const useDinerDetailQuery = (
+  criteria: Action.DinerDetailCriteria,
+  options: UseQueryOptions<Action.DinerDetailInfo, AxiosError<string>, Action.DinerDetailInfo, DinerDetailQueryKey>
+) => {
+  return useQuery<Action.DinerDetailInfo, AxiosError<string>, Action.DinerDetailInfo, DinerDetailQueryKey>(
+    [QUERY_NAME.GET_CAFE_DETAIL, criteria],
+    requestGetDinerDetail,
     options
   );
 };
