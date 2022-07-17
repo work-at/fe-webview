@@ -49,5 +49,9 @@ module.exports = {
     },
     modules: ["node_modules"],
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv({
+      systemvars: true,
+    }),
+  ],
 };
