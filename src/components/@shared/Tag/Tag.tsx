@@ -12,7 +12,7 @@ export const Tag = ({ IconType, children, Reviews }: TagProps) => {
   return (
     <S.Tag>
       <S.TagIcon>
-        <Icon icon={IconType} size={25} />
+        <Icon icon={IconType} size={30} />
       </S.TagIcon>
       <S.TagTxt>{children}</S.TagTxt>
       <S.TagNum>{Reviews}</S.TagNum>
