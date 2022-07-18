@@ -1,5 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import { useState } from "react";
+import { Icon } from "@/assets/Icon";
 import { Button, ButtonProps } from "./Button";
 
 export default {
@@ -7,28 +8,19 @@ export default {
   component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
-
-export const Small = Template.bind({});
-Small.args = {
-  size: "sm",
-  bgColor: "black",
-  shadow: true,
-  children: "작은버튼",
+const Template: Story<ButtonProps> = () => {
+  return (
+    <>
+      <Button size="lg" bgColor="black">
+        버튼 텍스트
+      </Button>
+      <Button size="sm" bgColor="white" shadow radius>
+        <Icon icon={"BtnList"} size={14} /> 아이콘 + 텍스트
+      </Button>
+    </>
+  );
 };
 
-export const Middle = Template.bind({});
-Middle.args = {
-  size: "md",
-  bgColor: "blue",
-  shadow: true,
-  children: "중간버튼",
-};
+export const Basic = Template.bind({});
 
-export const Large = Template.bind({});
-Large.args = {
-  size: "lg",
-  bgColor: "white",
-  shadow: true,
-  children: "큰버튼",
-};
+Basic.play = async ({ canvasElement }: any) => {};
