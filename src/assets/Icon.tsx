@@ -17,6 +17,8 @@ export const Icon = ({ icon, size }: IconProps): ReactElement => {
       style={{
         width: widthPx,
         height: "auto",
+        display: "inline-block",
+        verticalAlign: "middle",
       }}
     />
   );
