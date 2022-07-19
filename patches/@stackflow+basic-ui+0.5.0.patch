@@ -1,0 +1,344 @@
+diff --git a/node_modules/@stackflow/basic-ui/dist/index.css b/node_modules/@stackflow/basic-ui/dist/index.css
+index ecb20a2..aba3e33 100644
+--- a/node_modules/@stackflow/basic-ui/dist/index.css
++++ b/node_modules/@stackflow/basic-ui/dist/index.css
+@@ -1,2 +1,337 @@
+-._1bdme0i0{width:100%}._1bdme0i1{height:100%}._1bdme0i2{top:0}._1bdme0i3{left:0}._1bdme0i4{position:absolute}._1bdme0i5{position:relative}._1bdme0i7{display:flex}._1bdme0i8{align-items:center}._1bdme0i9{justify-content:center}._1bdme0ia{overflow:hidden}._1bdme0ib{white-space:nowrap}._1bdme0ic{text-align:center}._1bdme0id{cursor:pointer;-webkit-tap-highlight-color:transparent}._1bdme0ie{box-sizing:border-box}._1bdme0if{appearance:none;border:0;padding:0;background:none}.h2yk8c5,:root[data-stackflow-basic-ui-theme=android]{--stackflow-basic-ui-backgroundColor: #fff;--stackflow-basic-ui-dimBackgroundColor: rgba(0, 0, 0, .15);--stackflow-basic-ui-appBar-height: 3.5rem;--stackflow-basic-ui-appBar-borderColor: rgba(0, 0, 0, .07);--stackflow-basic-ui-appBar-borderSize: 1px;--stackflow-basic-ui-appBar-iconColor: #212124;--stackflow-basic-ui-appBar-textColor: #212124}.h2yk8c6,:root[data-stackflow-basic-ui-theme=cupertino]{--stackflow-basic-ui-backgroundColor: #fff;--stackflow-basic-ui-dimBackgroundColor: rgba(0, 0, 0, .15);--stackflow-basic-ui-appBar-height: 2.75rem;--stackflow-basic-ui-appBar-borderColor: rgba(0, 0, 0, .12);--stackflow-basic-ui-appBar-borderSize: .5px;--stackflow-basic-ui-appBar-iconColor: #212124;--stackflow-basic-ui-appBar-textColor: #212124}.h2yk8ca{transform:translate(100%)}.h2yk8cb{background-color:var(--stackflow-basic-ui-dimBackgroundColor)}.h2yk8cc{background-color:var(--stackflow-basic-ui-backgroundColor)}.h2yk8cd{transition:transform var(--h2yk8c0),opacity var(--h2yk8c0)}.h2yk8ch{display:none}.h2yk8cm{opacity:0;z-index:var(--h2yk8c1)}.h2yk8c5 .h2yk8cm,:root[data-stackflow-basic-ui-theme=android] .h2yk8cm{height:10rem;background:linear-gradient(var(--stackflow-basic-ui-dimBackgroundColor),rgba(0,0,0,0))}.h2yk8c7 .h2yk8cm,.h2yk8c8 .h2yk8cm{opacity:1}.h2yk8c9 .h2yk8cm,.h2yk8ca .h2yk8cm{opacity:0}.h2yk8cn{overflow-y:scroll;-webkit-overflow-scrolling:touch;z-index:var(--h2yk8c2)}.h2yk8cn::-webkit-scrollbar{display:none}.h2yk8c6 .h2yk8cn,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8cn{transform:translate(100%)}.h2yk8c6.h2yk8c7 .h2yk8cn,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c7 .h2yk8cn{transform:translate(0)}.h2yk8c6.h2yk8c8 .h2yk8cn,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c8 .h2yk8cn{transform:translate(0)}.h2yk8c5 .h2yk8cn,:root[data-stackflow-basic-ui-theme=android] .h2yk8cn{opacity:0;transform:translateY(10rem)}.h2yk8c5.h2yk8c7 .h2yk8cn,:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 .h2yk8cn{opacity:1;transform:translateY(0)}.h2yk8c5.h2yk8c8 .h2yk8cn,:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 .h2yk8cn{opacity:1;transform:translateY(0)}.h2yk8co{padding-top:calc(var(--stackflow-basic-ui-appBar-height) + constant(safe-area-inset-top));padding-top:calc(var(--stackflow-basic-ui-appBar-height) + env(safe-area-inset-top))}.h2yk8c6.h2yk8c7 .h2yk8cp,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c7 .h2yk8cp{transform:translate(-5rem)}.h2yk8c6.h2yk8c8 .h2yk8cp,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c8 .h2yk8cp{transform:translate(-5rem)}.h2yk8c5.h2yk8c7 .h2yk8cp,:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 .h2yk8cp{transform:translateY(-2rem)}.h2yk8c5.h2yk8c8 .h2yk8cp,:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 .h2yk8cp{transform:translateY(-2rem)}.h2yk8cq{width:1.25rem}.h2yk8cr{top:var(--stackflow-basic-ui-appBar-height);height:calc(100% - var(--stackflow-basic-ui-appBar-height))}._10fgb9q0{height:var(--stackflow-basic-ui-appBar-height);padding-top:constant(safe-area-inset-top);padding-top:env(safe-area-inset-top);z-index:var(--h2yk8c3)}.h2yk8c6 ._10fgb9q0,:root[data-stackflow-basic-ui-theme=cupertino] ._10fgb9q0{position:absolute}.h2yk8c6.h2yk8c9 ._10fgb9q0,:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c9 ._10fgb9q0{transform:translate(100%)}.h2yk8c5 ._10fgb9q0,:root[data-stackflow-basic-ui-theme=android] ._10fgb9q0{opacity:0;transform:translateY(10rem);transition:transform var(--h2yk8c0),opacity var(--h2yk8c0)}.h2yk8c5.h2yk8c7 ._10fgb9q0,:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 ._10fgb9q0{opacity:1;transform:translateY(0)}.h2yk8c5.h2yk8c8 ._10fgb9q0,:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 ._10fgb9q0{opacity:1;transform:translateY(0)}._10fgb9q1{box-shadow:inset 0 calc(var(--stackflow-basic-ui-appBar-borderSize) * -1) 0 var(--stackflow-basic-ui-appBar-borderColor)}.h2yk8c5.h2yk8c7 ._10fgb9q2,:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 ._10fgb9q2{transform:translateY(-2rem)}.h2yk8c5.h2yk8c8 ._10fgb9q2,:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 ._10fgb9q2{transform:translateY(-2rem)}._10fgb9q3{padding:0 .5rem}._10fgb9q3:empty{display:none}._10fgb9q4{color:var(--stackflow-basic-ui-appBar-iconColor);transition:opacity .3s;width:2.25rem;height:2.75rem}._10fgb9q4:active{opacity:.2;transition:opacity 0s}._10fgb9q6{flex:1}._10fgb9q7{width:var(--h2yk8c4);color:var(--stackflow-basic-ui-appBar-textColor)}.h2yk8c5 ._10fgb9q7,:root[data-stackflow-basic-ui-theme=android] ._10fgb9q7{width:100%;justify-content:flex-start;padding-left:1rem;font-size:1.1875rem;line-height:1.5;font-weight:700;box-sizing:border-box}.h2yk8c6 ._10fgb9q7,:root[data-stackflow-basic-ui-theme=cupertino] ._10fgb9q7{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-family:-apple-system,BlinkMacSystemFont;font-weight:600;font-size:1rem;left:50%;transform:translate(-50%);height:var(--stackflow-basic-ui-appBar-height);top:constant(safe-area-inset-top);top:env(safe-area-inset-top)}.h2yk8c5 ._10fgb9q8,:root[data-stackflow-basic-ui-theme=android] ._10fgb9q8{padding-left:.375rem}._10fgb9q9{text-overflow:ellipsis;font-size:inherit;font-weight:inherit}._10fgb9qa{padding:0 .5rem;margin-left:auto}._10fgb9qa:empty{display:none}.h2yk8c5 ._10fgb9qa,:root[data-stackflow-basic-ui-theme=android] ._10fgb9qa{padding:0 .5rem 0 0}
++._1bdme0i0 {
++  width: 100%
++}
++
++._1bdme0i1 {
++  height: 100%
++}
++
++._1bdme0i2 {
++  top: 0
++}
++
++._1bdme0i3 {
++  left: 0
++}
++
++._1bdme0i4 {
++  position: absolute
++}
++
++._1bdme0i5 {
++  position: relative
++}
++
++._1bdme0i7 {
++  display: flex
++}
++
++._1bdme0i8 {
++  align-items: center
++}
++
++._1bdme0i9 {
++  justify-content: center
++}
++
++._1bdme0ia {
++  overflow: hidden
++}
++
++._1bdme0ib {
++  white-space: nowrap
++}
++
++._1bdme0ic {
++  text-align: center
++}
++
++._1bdme0id {
++  cursor: pointer;
++  -webkit-tap-highlight-color: transparent
++}
++
++._1bdme0ie {
++  box-sizing: border-box
++}
++
++._1bdme0if {
++  appearance: none;
++  border: 0;
++  padding: 0;
++  background: none
++}
++
++.h2yk8c5,
++:root[data-stackflow-basic-ui-theme=android] {
++  --stackflow-basic-ui-backgroundColor: #fff;
++  --stackflow-basic-ui-dimBackgroundColor: rgba(0, 0, 0, .15);
++  --stackflow-basic-ui-appBar-height: 3.438rem;
++  --stackflow-basic-ui-appBar-borderColor: rgba(0, 0, 0, .07);
++  --stackflow-basic-ui-appBar-borderSize: 1px;
++  --stackflow-basic-ui-appBar-iconColor: #212124;
++  --stackflow-basic-ui-appBar-textColor: #212124
++}
++
++.h2yk8c6,
++:root[data-stackflow-basic-ui-theme=cupertino] {
++  --stackflow-basic-ui-backgroundColor: #fff;
++  --stackflow-basic-ui-dimBackgroundColor: rgba(0, 0, 0, .15);
++  --stackflow-basic-ui-appBar-height: 2.75rem;
++  --stackflow-basic-ui-appBar-borderColor: rgba(0, 0, 0, .12);
++  --stackflow-basic-ui-appBar-borderSize: .5px;
++  --stackflow-basic-ui-appBar-iconColor: #212124;
++  --stackflow-basic-ui-appBar-textColor: #212124
++}
++
++.h2yk8ca {
++  transform: translate(100%)
++}
++
++.h2yk8cb {
++  background-color: var(--stackflow-basic-ui-dimBackgroundColor)
++}
++
++.h2yk8cc {
++  background-color: var(--stackflow-basic-ui-backgroundColor)
++}
++
++.h2yk8cd {
++  transition: transform var(--h2yk8c0), opacity var(--h2yk8c0)
++}
++
++.h2yk8ch {
++  display: none
++}
++
++.h2yk8cm {
++  opacity: 0;
++  z-index: var(--h2yk8c1)
++}
++
++.h2yk8c5 .h2yk8cm,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8cm {
++  height: 10rem;
++  background: linear-gradient(var(--stackflow-basic-ui-dimBackgroundColor), rgba(0, 0, 0, 0))
++}
++
++.h2yk8c7 .h2yk8cm,
++.h2yk8c8 .h2yk8cm {
++  opacity: 1
++}
++
++.h2yk8c9 .h2yk8cm,
++.h2yk8ca .h2yk8cm {
++  opacity: 0
++}
++
++.h2yk8cn {
++  overflow-y: scroll;
++  -webkit-overflow-scrolling: touch;
++  z-index: var(--h2yk8c2)
++}
++
++.h2yk8cn::-webkit-scrollbar {
++  display: none
++}
++
++.h2yk8c6 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8cn {
++  transform: translate(100%)
++}
++
++.h2yk8c6.h2yk8c7 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c7 .h2yk8cn {
++  transform: translate(0)
++}
++
++.h2yk8c6.h2yk8c8 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c8 .h2yk8cn {
++  transform: translate(0)
++}
++
++.h2yk8c5 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8cn {
++  opacity: 0;
++  transform: translateY(10rem)
++}
++
++.h2yk8c5.h2yk8c7 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 .h2yk8cn {
++  opacity: 1;
++  transform: translateY(0)
++}
++
++.h2yk8c5.h2yk8c8 .h2yk8cn,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 .h2yk8cn {
++  opacity: 1;
++  transform: translateY(0)
++}
++
++.h2yk8co {
++  padding-top: calc(var(--stackflow-basic-ui-appBar-height) + constant(safe-area-inset-top));
++  padding-top: calc(var(--stackflow-basic-ui-appBar-height) + env(safe-area-inset-top))
++}
++
++.h2yk8c6.h2yk8c7 .h2yk8cp,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c7 .h2yk8cp {
++  transform: translate(-5rem)
++}
++
++.h2yk8c6.h2yk8c8 .h2yk8cp,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c8 .h2yk8cp {
++  transform: translate(-5rem)
++}
++
++.h2yk8c5.h2yk8c7 .h2yk8cp,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 .h2yk8cp {
++  transform: translateY(-2rem)
++}
++
++.h2yk8c5.h2yk8c8 .h2yk8cp,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 .h2yk8cp {
++  transform: translateY(-2rem)
++}
++
++.h2yk8cq {
++  width: 1.25rem
++}
++
++.h2yk8cr {
++  top: var(--stackflow-basic-ui-appBar-height);
++  height: calc(100% - var(--stackflow-basic-ui-appBar-height))
++}
++
++._10fgb9q0 {
++  height: var(--stackflow-basic-ui-appBar-height);
++  padding-top: constant(safe-area-inset-top);
++  padding-top: env(safe-area-inset-top);
++  z-index: var(--h2yk8c3)
++}
++
++.h2yk8c6 ._10fgb9q0,
++:root[data-stackflow-basic-ui-theme=cupertino] ._10fgb9q0 {
++  position: absolute
++}
++
++.h2yk8c6.h2yk8c9 ._10fgb9q0,
++:root[data-stackflow-basic-ui-theme=cupertino] .h2yk8c9 ._10fgb9q0 {
++  transform: translate(100%)
++}
++
++.h2yk8c5 ._10fgb9q0,
++:root[data-stackflow-basic-ui-theme=android] ._10fgb9q0 {
++  opacity: 0;
++  transform: translateY(10rem);
++  transition: transform var(--h2yk8c0), opacity var(--h2yk8c0)
++}
++
++.h2yk8c5.h2yk8c7 ._10fgb9q0,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 ._10fgb9q0 {
++  opacity: 1;
++  transform: translateY(0)
++}
++
++.h2yk8c5.h2yk8c8 ._10fgb9q0,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 ._10fgb9q0 {
++  opacity: 1;
++  transform: translateY(0)
++}
++
++._10fgb9q1 {
++  box-shadow: inset 0 calc(var(--stackflow-basic-ui-appBar-borderSize) * -1) 0 var(--stackflow-basic-ui-appBar-borderColor)
++}
++
++.h2yk8c5.h2yk8c7 ._10fgb9q2,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c7 ._10fgb9q2 {
++  transform: translateY(-2rem)
++}
++
++.h2yk8c5.h2yk8c8 ._10fgb9q2,
++:root[data-stackflow-basic-ui-theme=android] .h2yk8c8 ._10fgb9q2 {
++  transform: translateY(-2rem)
++}
++
++._10fgb9q3 {
++  padding: 0 .5rem
++}
++
++._10fgb9q3:empty {
++  display: none
++}
++
++._10fgb9q4 {
++  color: var(--stackflow-basic-ui-appBar-iconColor);
++  transition: opacity .3s;
++  width: 2.25rem;
++  height: 2.75rem
++}
++
++._10fgb9q4:active {
++  opacity: .2;
++  transition: opacity 0s
++}
++
++._10fgb9q6 {
++  flex: 1
++}
++
++._10fgb9q7 {
++  width: var(--h2yk8c4);
++  color: var(--stackflow-basic-ui-appBar-textColor)
++}
++
++.h2yk8c5 ._10fgb9q7,
++:root[data-stackflow-basic-ui-theme=android] ._10fgb9q7 {
++  width: 100%;
++  justify-content: flex-start;
++  padding-left: 1rem;
++  font-size: 1.1875rem;
++  line-height: 1.5;
++  font-weight: 700;
++  box-sizing: border-box
++}
++
++.h2yk8c6 ._10fgb9q7,
++:root[data-stackflow-basic-ui-theme=cupertino] ._10fgb9q7 {
++  position: absolute;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  text-align: center;
++  font-family: -apple-system, BlinkMacSystemFont;
++  font-weight: 600;
++  font-size: 1rem;
++  left: 50%;
++  transform: translate(-50%);
++  height: var(--stackflow-basic-ui-appBar-height);
++  top: constant(safe-area-inset-top);
++  top: env(safe-area-inset-top)
++}
++
++.h2yk8c5 ._10fgb9q8,
++:root[data-stackflow-basic-ui-theme=android] ._10fgb9q8 {
++  padding-left: .375rem
++}
++
++._10fgb9q9 {
++  text-overflow: ellipsis;
++  font-size: inherit;
++  font-weight: inherit
++}
++
++._10fgb9qa {
++  padding: 0 .5rem;
++  margin-left: auto
++}
++
++._10fgb9qa:empty {
++  display: none
++}
++
++.h2yk8c5 ._10fgb9qa,
++:root[data-stackflow-basic-ui-theme=android] ._10fgb9qa {
++  padding: 0 .5rem 0 0
++}
++
+ /*# sourceMappingURL=index.css.map */
+\ No newline at end of file
