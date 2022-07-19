@@ -8,16 +8,9 @@ export interface UseMapProps {
   pins: PinItem[];
 }
 
-const API_KEY = process.env.KAKAO_MAP_API_KEY;
-
 const useMap = ({ userCoordinates, pins }: UseMapProps) => {
   const [centerCoordinates, setCenterCoordinates] = useState(userCoordinates);
   const [selectedPinId, setSelectedPinId] = useState<number | undefined>();
-
-  const { error, loading } = useInjectKakaoMapApi({
-    appkey: API_KEY!,
-    retries: 5,
-  });
 
   const selectPin = useCallback(
     (id: number) => {
@@ -36,8 +29,6 @@ const useMap = ({ userCoordinates, pins }: UseMapProps) => {
   return {
     centerCoordinates,
     selectedPinId,
-    isMapLoadFailed: error,
-    isMapLoading: loading,
     selectPin,
   };
 };

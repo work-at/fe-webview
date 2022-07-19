@@ -75,6 +75,8 @@ export const useWorkerPinsQuery = (
 const DUMMY_WORKER_DATA: Worker = {
   id: 1,
   name: "홍길동",
+  imageUrl:
+    "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   job: "개발",
   yearOfService: 4,
   tags: ["개발같이해요", "직무토크하실분", "퇴근후함께놀아요"],
@@ -109,6 +111,51 @@ export const useWorkerQuery = (
   return useQuery<Action.WorkerInfo, AxiosError<string>, Action.WorkerInfo, WorkerQueryKey>(
     [QUERY_NAME.GET_WORKER, criteria],
     requestGetWorker,
+    options
+  );
+};
+
+type WorkerDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.WorkerDetailCriteria];
+
+const DUMMY_WORKER_DETAIL: Action.WorkerDetailInfo = {
+  imageUrl: "imageUrl",
+  name: "이름",
+  job: "개발",
+  desiredActivities: [],
+  story:
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias fugit, explicabo corporis velit nostrum dicta voluptas omnis tenetur corrupti commodi repudiandae id ullam atque cum cumque voluptates nihil eos tempore?",
+  yearOfService: 3,
+};
+
+export const requestGetWorkerDetail: QueryFunction<Action.WorkerDetailInfo, WorkerDetailQueryKey> = async ({
+  queryKey,
+}) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetWorkerPinsRequest, DTO.GetWorkerPinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_WorkerPinsCriteria_GetWorkerPinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetWorkerPinsResponse_WorkerPinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_WORKER_DETAIL;
+};
+
+export const useWorkerDetailQuery = (
+  criteria: Action.WorkerDetailCriteria,
+  options: UseQueryOptions<Action.WorkerDetailInfo, AxiosError<string>, Action.WorkerDetailInfo, WorkerDetailQueryKey>
+) => {
+  return useQuery<Action.WorkerDetailInfo, AxiosError<string>, Action.WorkerDetailInfo, WorkerDetailQueryKey>(
+    [QUERY_NAME.GET_CAFE_DETAIL, criteria],
+    requestGetWorkerDetail,
     options
   );
 };

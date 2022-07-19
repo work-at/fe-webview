@@ -72,8 +72,10 @@ export const useCafePinsQuery = (
   );
 };
 
-const DUMMY_CAFE_PIN: Cafe = {
+const DUMMY_CAFE: Cafe = {
   id: 1,
+  imageUrl:
+    "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   name: "포메인제주",
   region: "제주",
   tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
@@ -98,7 +100,7 @@ export const requestGetCafe: QueryFunction<Action.CafeInfo, CafeQueryKey> = asyn
   //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
   //
   //   return cafes;
-  return DUMMY_CAFE_PIN;
+  return DUMMY_CAFE;
 };
 
 export const useCafeQuery = (
@@ -108,6 +110,53 @@ export const useCafeQuery = (
   return useQuery<Action.CafeInfo, AxiosError<string>, Action.CafeInfo, CafeQueryKey>(
     [QUERY_NAME.GET_CAFE, criteria],
     requestGetCafe,
+    options
+  );
+};
+
+type CafeDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.CafeDetailCriteria];
+
+const DUMMY_CAFE_DETAIL: Action.CafeDetailInfo = {
+  imageUrl: "imageUrl",
+  name: "이름",
+  address: "주소",
+  kakaoLink: "https://map.kakao.com",
+  phoneNumber: "010-0000-0000",
+  reviewPoints: [],
+  coordinates: {
+    lat: 127,
+    lng: 38,
+  },
+};
+
+export const requestGetCafeDetail: QueryFunction<Action.CafeDetailInfo, CafeDetailQueryKey> = async ({ queryKey }) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_CAFE_DETAIL;
+};
+
+// TODO : Suspense 가 true 인 경우 무조건 true 가 나오도록 설정하기. isLoading 제거하ㄱ
+export const useCafeDetailQuery = (
+  criteria: Action.CafeDetailCriteria,
+  options: UseQueryOptions<Action.CafeDetailInfo, AxiosError<string>, Action.CafeDetailInfo, CafeDetailQueryKey>
+) => {
+  return useQuery<Action.CafeDetailInfo, AxiosError<string>, Action.CafeDetailInfo, CafeDetailQueryKey>(
+    [QUERY_NAME.GET_CAFE_DETAIL, criteria],
+    requestGetCafeDetail,
     options
   );
 };

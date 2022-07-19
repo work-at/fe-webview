@@ -17,7 +17,7 @@ interface MapProps
   > {}
 
 const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
-  const { isMapLoadFailed, isMapLoading, centerCoordinates, selectPin, selectedPinId } = useMap({
+  const { centerCoordinates, selectedPinId, selectPin } = useMap({
     pins,
     userCoordinates,
   });
@@ -26,14 +26,6 @@ const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
     onPinSelect(id);
     selectPin(id);
   }, []);
-
-  if (isMapLoading) {
-    return <div>지도 로딩중</div>;
-  }
-
-  if (isMapLoadFailed) {
-    return <div>지도 정보를 불러오는데 실패하였습니다</div>;
-  }
 
   return (
     <MapView
@@ -47,4 +39,4 @@ const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
   );
 };
 
-export default memo(Map);
+export default Map;

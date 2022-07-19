@@ -1,4 +1,4 @@
-import { Cafe, CafePin } from "./cafe.type";
+import { Cafe, CafeDetail, CafePin } from "./cafe.type";
 
 export type CafePinsCriteria = {
   lat: number;
@@ -10,6 +10,12 @@ export type CafeCriteria = {
   id: number;
 };
 
+export type CafeDetailCriteria = {
+  id: number;
+};
+
 export type CafePinsInfo = CafePin[];
 
 export type CafeInfo = Cafe;
+
+export type CafeDetailInfo = CafeDetail;

@@ -16,18 +16,32 @@ export const PATH = {
   MAP: {
     full: "/map",
     fragments: "map",
-    CAFE: {
-      full: "/map/cafe",
-      fragments: "cafe",
+  },
+  CAFE: {
+    full: "/cafe",
+    fragments: "cafe",
+
+    CAFE_REVIEW: {
+      full: "/cafe/review",
+      fragments: "review",
     },
-    DINER: {
-      full: "/map/diner",
-      fragments: "diner",
+  },
+  DINER: {
+    full: "/diner",
+    fragments: "diner",
+
+    DINER_REVIEW: {
+      full: "/diner/review",
+      fragments: "review",
     },
-    WORKER: {
-      full: "/map/worker",
-      fragments: "worker",
-    },
+  },
+  WORKER: {
+    full: "/worker",
+    fragments: "worker",
+  },
+  WORK_CHAT: {
+    full: "/work-chat",
+    fragments: "work-chat",
   },
   COMMUNITY: {
     full: "/community",
