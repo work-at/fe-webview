@@ -1,14 +1,12 @@
-import Page from "../page";
 import * as S from "./MapPage.styled";
 import { useCoordinatesService } from "@/services/useCoordinates/useCoordinates";
 import { useUserAddressQuery } from "@/domains/user";
-import NavigationToolBar from "@/components/NavigationToolBar/NavigationToolBar";
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import MapManager from "@/components/MapManager";
 
 const MapPage = () => {
   const { data: userCoordinates } = useCoordinatesService({
     refetchInterval: 5000,
-    keepPreviousData: true,
   });
 
   const { data: userAddress } = useUserAddressQuery(
@@ -26,13 +24,12 @@ const MapPage = () => {
   }
 
   return (
-    <Page title="Workat_지도">
+    <StackLayout appBar={{ title: "Workat_지도" }} navigationPath="map">
       <S.Header>
         <S.Address>{userAddress?.address}</S.Address>
       </S.Header>
       <MapManager userCoordinates={userCoordinates} />
-      <NavigationToolBar />
-    </Page>
+    </StackLayout>
   );
 };
 

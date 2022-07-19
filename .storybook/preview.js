@@ -4,7 +4,6 @@ import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "../src/assets/styles/GlobalStyles";
 import { theme } from "../src/assets/styles/theme";
-import { BrowserRouter } from "react-router-dom";
 
 export const parameters = {
   layout: 'fullscreen',
@@ -18,10 +17,8 @@ export const parameters = {
 };
 
 addDecorator((Story) => (
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Story />
-    </ThemeProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Story />
+  </ThemeProvider>
 ));

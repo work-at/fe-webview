@@ -1,11 +1,13 @@
-import { PATH } from "@/constants";
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useWorkerDetailQuery } from "@/domains/worker";
+import { useActivityParams } from "@stackflow/react";
+import { useFlow } from "@/stack";
 import { Suspense, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { PATH } from "@/constants";
 
 const WorkerDetailPage = () => {
-  const { workerId } = useParams<{ workerId: string }>();
-  const navigate = useNavigate();
+  const { workerId } = useActivityParams<{ workerId: string }>();
+  const { push } = useFlow();
 
   if (Number.isNaN(Number(workerId))) {
     throw new Error("잘못된 cafeId 입니다.");
@@ -22,13 +24,14 @@ const WorkerDetailPage = () => {
   );
 
   const handleReviewButtonClick = useCallback(() => {
-    navigate(`${PATH.WORK_CHAT.full}/${workerId}`);
+    push(PATH.WORK_CHAT.stack, { workerId });
   }, []);
 
   return (
-    <div>
-      워케이셔너 아이디 : {workerId} <button onClick={handleReviewButtonClick}>click</button>
-    </div>
+    <StackLayout>
+      워케이셔너 아이디 : {workerId}
+      <button onClick={handleReviewButtonClick}>click</button>
+    </StackLayout>
   );
 };
 

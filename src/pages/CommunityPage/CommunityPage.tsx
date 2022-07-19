@@ -1,5 +1,16 @@
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { useFlow } from "@/stack";
+
 const CommunityPage = () => {
-  return <div>CommunityPage</div>;
+  const { push } = useFlow();
+
+  return (
+    <StackLayout appBar={{ title: "커뮤니티" }} navigationPath="community">
+      <button type="button" onClick={() => push("Test", {})}>
+        TEST_BUTTON
+      </button>
+    </StackLayout>
+  );
 };
 
 export default CommunityPage;

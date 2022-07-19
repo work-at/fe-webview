@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 import App from "@/App";
 import { GlobalStyle } from "./assets/styles/GlobalStyles";
+import "@stackflow/basic-ui/index.css";
 
 const container = document.getElementById("root");
 

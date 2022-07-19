@@ -1,10 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import * as S from "./NavigationToolBar.styled";
 import Icon, { IconType } from "@/assets/Icon";
 import { PATH } from "@/constants";
+import { useFlow } from "@/stack";
 
 export type ToolBarItem = {
   path: string;
+  stack: "AccommodationPage" | "MapPage" | "CommunityPage" | "MyPage";
   text: string;
   icon: IconType;
 };
@@ -16,11 +17,15 @@ interface ToolBarMenuItemProps {
   icon: React.ReactElement;
 }
 
+interface NavigationToolBarProps {
+  navigationPath: "accommodation" | "map" | "community" | "my-page";
+}
+
 const TOOLBAR_ITEMS: ToolBarItem[] = [
-  { path: PATH.ACCOMMODATION.full, text: "숙소", icon: "NaviAccomm" },
-  { path: PATH.MAP.full, text: "지도", icon: "NaviMap" },
-  { path: PATH.COMMUNITY.full, text: "커뮤니티", icon: "NaviCommunity" },
-  { path: PATH.MY_PAGE.full, text: "마이페이지", icon: "NaviMypage" },
+  { path: PATH.ACCOMMODATION.full, stack: PATH.ACCOMMODATION.stack, text: "숙소", icon: "Accommodation" },
+  { path: PATH.MAP.full, stack: PATH.MAP.stack, text: "지도", icon: "Map" },
+  { path: PATH.COMMUNITY.full, stack: PATH.COMMUNITY.stack, text: "커뮤니티", icon: "Community" },
+  { path: PATH.MY_PAGE.full, stack: PATH.MY_PAGE.stack, text: "마이페이지", icon: "Mypage" },
 ];
 
 export const ToolBarMenuItem = ({ onRoute, text, isActive, icon }: ToolBarMenuItemProps) => {
@@ -34,19 +39,18 @@ export const ToolBarMenuItem = ({ onRoute, text, isActive, icon }: ToolBarMenuIt
   );
 };
 
-const NavigationToolBar = () => {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+const NavigationToolBar = ({ navigationPath }: NavigationToolBarProps) => {
+  const { replace } = useFlow();
 
   return (
     <S.ToolBar>
       <S.MenuList>
-        {TOOLBAR_ITEMS.map(({ path, text, icon }) => (
+        {TOOLBAR_ITEMS.map(({ path, stack, text, icon }) => (
           <ToolBarMenuItem
             key={path}
             text={text}
-            onRoute={() => navigate(path)}
-            isActive={pathname.includes(path)}
+            onRoute={() => replace(stack, {}, { animate: false })}
+            isActive={path.includes(navigationPath)}
             icon={<Icon icon={icon} />}
           />
         ))}
