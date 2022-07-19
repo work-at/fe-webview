@@ -1,8 +1,12 @@
-// ToolBar
-export { default as Accommodation } from "../images/icons/Accommodation.svg";
-export { default as Community } from "../images/icons/Community.svg";
-export { default as Map } from "../images/icons/Map.svg";
-export { default as Mypage } from "../images/icons/Mypage.svg";
+// Navigation
+export { default as NaviAccomm } from "../images/icons/Navi_Accomm.svg";
+export { default as NaviCommunity } from "../images/icons/Navi_Community.svg";
+export { default as NaviMap } from "../images/icons/Navi_Map.svg";
+export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
+
+// Header
+export { default as BtnBack } from "../images/icons/BtnBack.svg";
+export { default as BtnReset } from "../images/icons/BtnReset.svg";
 
 // 공통 Tag
 export { default as CommonReview1 } from "../images/icons/CommonReview1.svg";

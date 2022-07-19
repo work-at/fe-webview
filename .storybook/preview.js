@@ -7,6 +7,7 @@ import { theme } from "../src/assets/styles/theme";
 import { BrowserRouter } from "react-router-dom";
 
 export const parameters = {
+  layout: 'fullscreen',
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {

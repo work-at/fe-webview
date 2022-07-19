@@ -8,7 +8,7 @@ export const ToolBar = styled.div`
   right: 0;
   bottom: 0;
   background: ${theme.colors.white};
-  height: 83px;
+  height: 90px;
   z-index: ${Z_INDEX.HIGH};
 `;
 
@@ -29,25 +29,24 @@ export const ListButton = styled.button<{ isActive: boolean }>`
 
   path {
     transition: fill 0.5s;
-    fill: ${({ isActive }) => (isActive ? theme.colors.mainColor : "initial")};
+    fill: ${({ isActive }) => (isActive ? theme.colors.gray01 : theme.colors.gray03)};
   }
 
   span {
     transition: color 0.5s, font-weight 0.5s;
-    color: ${({ isActive }) => (isActive ? theme.colors.mainColor : "initial")};
-    font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
+    color: ${({ isActive }) => (isActive ? theme.colors.gray01 : theme.colors.gray03)};
+    font-weight: ${({ isActive }) => (isActive ? "700" : "500")};
   }
 `;
 
 export const MenuIcon = styled.i`
   display: block;
-  width: 30px;
-  height: 30px;
-  margin: 0 auto 6px;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 7px;
 `;
 
 export const MenuText = styled.span`
-  color: #606161;
-  font-size: 12px;
-  line-height: 14px;
+  ${theme.fonts.Medium05};
+  color: ${theme.colors.gray03};
 `;

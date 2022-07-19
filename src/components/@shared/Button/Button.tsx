@@ -9,15 +9,17 @@ export type ButtonProps = {
   /** 그림자 활성화 여부 (활성화 - >true / 비활성화 -> false) */
   shadow?: boolean;
   /** 둥근 테두리 확성화 여부 (활성화 - >true / 비활성화 -> false) */
-  radius?: boolean;
+  round?: boolean;
   /** 버튼 안의 내용 */
   children: React.ReactNode;
 };
 
-export const Button = ({ size, bgColor, shadow, radius, children }: ButtonProps) => {
+const Button = ({ size, bgColor, shadow, round, children }: ButtonProps) => {
   return (
-    <S.Button size={size} bgColor={bgColor} shadow={shadow} radius={radius}>
+    <S.Button size={size} bgColor={bgColor} shadow={shadow} round={round}>
       {children}
     </S.Button>
   );
 };
+
+export default Button;

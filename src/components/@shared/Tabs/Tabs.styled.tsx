@@ -33,11 +33,13 @@ export const TabLink = styled.button`
 `;
 
 export const TabText = styled.span<{ isSelected: boolean }>`
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.gray02};
   display: block;
   transition: color 0.5s, font-weight 0.5s, transform 0.5s;
-  font-weight: ${({ isSelected }) => (isSelected ? "bold" : "normal")};
+  font-weight: ${({ isSelected }) => (isSelected ? "700" : "500")};
   transform: scale(${({ isSelected }) => (isSelected ? "120%" : "100%")});
-  color: ${({ isSelected }) => (isSelected ? theme.colors.white : theme.colors.black100)};
+  color: ${({ isSelected }) => (isSelected ? theme.colors.white : theme.colors.black)};
 `;
 
 export const TabIndicatorWrapper = styled.div<{ itemCount: number; selectedItemIndex: number }>`
@@ -49,7 +51,7 @@ export const TabIndicatorWrapper = styled.div<{ itemCount: number; selectedItemI
   height: 100%;
   transition: transform 0.5s;
   transform: ${({ selectedItemIndex }) => `translateX(${100 * selectedItemIndex}%)`};
-  padding: 4px;
+  padding: 2px;
 `;
 
 export const TabIndicator = styled.div`

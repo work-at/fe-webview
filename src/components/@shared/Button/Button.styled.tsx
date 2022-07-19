@@ -22,14 +22,14 @@ export const Button = styled.button<StyledButtonProps>`
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 		`};
   ${(props) =>
-    props.radius &&
+    props.round &&
     `
       border-radius: 17px;
 		`};
   ${(props) =>
     props.size === "lg" &&
     `
-      position: fixed;
+      position: sticky;
       left: 0;
       right: 0;
       bottom: 0;

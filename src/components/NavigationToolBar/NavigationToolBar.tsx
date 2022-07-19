@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import * as S from "./NavigationToolBar.styled";
-import { Icon, IconType } from "@/assets/Icon";
+import Icon, { IconType } from "@/assets/Icon";
 import { PATH } from "@/constants";
 
 export type ToolBarItem = {
@@ -17,10 +17,10 @@ interface ToolBarMenuItemProps {
 }
 
 const TOOLBAR_ITEMS: ToolBarItem[] = [
-  { path: PATH.ACCOMMODATION.full, text: "숙소", icon: "Accommodation" },
-  { path: PATH.MAP.full, text: "지도", icon: "Map" },
-  { path: PATH.COMMUNITY.full, text: "커뮤니티", icon: "Community" },
-  { path: PATH.MY_PAGE.full, text: "마이페이지", icon: "Mypage" },
+  { path: PATH.ACCOMMODATION.full, text: "숙소", icon: "NaviAccomm" },
+  { path: PATH.MAP.full, text: "지도", icon: "NaviMap" },
+  { path: PATH.COMMUNITY.full, text: "커뮤니티", icon: "NaviCommunity" },
+  { path: PATH.MY_PAGE.full, text: "마이페이지", icon: "NaviMypage" },
 ];
 
 export const ToolBarMenuItem = ({ onRoute, text, isActive, icon }: ToolBarMenuItemProps) => {

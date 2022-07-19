@@ -1,20 +1,19 @@
-import { Meta, Story } from "@storybook/react";
-import { useState } from "react";
-import { Icon } from "@/assets/Icon";
-import { Button, ButtonProps } from "./Button";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import Icon from "@/assets/Icon";
+import Button from "./Button";
 
 export default {
   title: "Components/Shared/Button",
   component: Button,
-} as Meta;
+} as ComponentMeta<typeof Button>;
 
-const Template: Story<ButtonProps> = () => {
+const Template: ComponentStory<typeof Button> = () => {
   return (
     <>
       <Button size="lg" bgColor="black">
         버튼 텍스트
       </Button>
-      <Button size="sm" bgColor="white" shadow radius>
+      <Button size="sm" bgColor="white" shadow round>
         <Icon icon={"BtnList"} size={14} /> 아이콘 + 텍스트
       </Button>
     </>
