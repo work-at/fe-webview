@@ -61,12 +61,10 @@ export const HiddenCheckbox = styled.input<{ checked: boolean }>`
 `;
 
 export const Label = styled.label<{ isIcon?: boolean }>`
-  ${theme.fonts.Medium03};
-  display: block;
   ${({ isIcon }) =>
     isIcon
       ? `
-      padding: 7px 21px 13px 21px;
+      padding: 7px 17px;
       border-radius: 10px;
       text-align: left;
     `
@@ -75,14 +73,18 @@ export const Label = styled.label<{ isIcon?: boolean }>`
       border-radius: 19px;
       text-align: center;
     `}
+  display: block;
   background: ${theme.colors.white};
   box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.15);
   border: 1px solid ${theme.colors.white};
   color: ${theme.colors.black};
   white-space: pre-wrap;
+  box-sizing: border-box;
   cursor: pointer;
-  & > svg {
-    display: block !important;
-    margin-bottom: 8px;
-  }
+`;
+
+export const LabelTxt = styled.span`
+  display: block;
+  ${theme.fonts.Medium03};
+  margin-top: 7px;
 `;

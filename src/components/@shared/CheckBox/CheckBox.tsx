@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Icon } from "@/assets/Icon";
+import Icon from "@/assets/Icon";
 import { useMultiselect } from "./Hooks";
 import * as S from "./CheckBox.styled";
 
@@ -31,7 +31,7 @@ const CheckBox = ({ items }: CheckboxProps) => {
             />
             <S.Label htmlFor={item.id} isIcon={item.isIcon}>
               {item.isIcon && <Icon icon={item.iconType} size={30} />}
-              {item.label}
+              <S.LabelTxt>{item.label}</S.LabelTxt>
             </S.Label>
           </S.CheckboxContainer>
         </S.ListItem>
