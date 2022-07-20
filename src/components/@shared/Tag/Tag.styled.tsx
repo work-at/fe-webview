@@ -29,15 +29,15 @@ export const TagTxt = styled.span`
   display: block;
   ${theme.fonts.Medium02};
   color: ${theme.colors.black};
-  padding: 8px 62px 7px 48px;
+  padding: 8px 62px 7px 53px;
 `;
 
 export const TagNum = styled.span`
   position: absolute;
   display: block;
-  top: 9px;
+  top: 11px;
   right: 12px;
-  color: ${theme.colors.gray02};
-  ${theme.fonts.Medium03};
+  color: ${theme.colors.gray04};
+  ${theme.fonts.Medium05};
   text-align: right;
 `;
