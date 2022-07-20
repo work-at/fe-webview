@@ -9,15 +9,19 @@ export type IconProps = {
   size?: string | number;
 };
 
-export const Icon = ({ icon, size }: IconProps): ReactElement => {
+const Icon = ({ icon, size }: IconProps): ReactElement => {
   const SVGIcon = icons[icon];
   const widthPx = size && (typeof size === "number" ? `${size}px` : `${size.replace("px", "")}px`);
   return (
     <SVGIcon
       style={{
         width: widthPx,
-        height: "auto",
+        height: widthPx,
+        display: "inline-block",
+        verticalAlign: "middle",
       }}
     />
   );
 };
+
+export default Icon;

@@ -1,21 +1,23 @@
 import React from "react";
 import * as S from "./Tag.styled";
-import { Icon } from "@/assets/Icon";
+import Icon from "@/assets/Icon";
 
 export type TagProps = {
-  IconType: any;
+  iconType: any;
   Reviews?: number;
   children: React.ReactNode;
 };
 
-export const Tag = ({ IconType, children, Reviews }: TagProps) => {
+const Tag = ({ iconType, children, Reviews }: TagProps) => {
   return (
     <S.Tag>
       <S.TagIcon>
-        <Icon icon={IconType} size={25} />
+        <Icon icon={iconType} size={30} />
       </S.TagIcon>
       <S.TagTxt>{children}</S.TagTxt>
       <S.TagNum>{Reviews}</S.TagNum>
     </S.Tag>
   );
 };
+
+export default Tag;

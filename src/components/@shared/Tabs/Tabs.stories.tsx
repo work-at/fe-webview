@@ -1,6 +1,5 @@
 import { Meta, Story } from "@storybook/react";
 import { within } from "@storybook/testing-library";
-
 import Tabs, { TabsProps } from "./Tabs";
 
 export default {
