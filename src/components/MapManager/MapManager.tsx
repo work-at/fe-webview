@@ -122,10 +122,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: cafe.id,
+            type: "카페",
             title: cafe.name,
             imageUrl: cafe.imageUrl,
-            leftSubTitle: cafe.region,
-            rightSubTitle: "카페",
+            reviewNum: 12,
+            addr: cafe.region,
+            job: cafe.region,
+            year: String(12),
             tags: cafe.tags,
             onClick: () => navigateToCafeDetail(cafe.id),
           };
@@ -136,10 +139,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: diner.id,
+            type: "음식점",
             title: diner.name,
             imageUrl: diner.imageUrl,
-            leftSubTitle: diner.region,
-            rightSubTitle: "카페",
+            reviewNum: 12,
+            addr: diner.region,
+            job: diner.region,
+            year: String(12),
             tags: diner.tags,
             onClick: () => navigateToDinerDetail(diner.id),
           };
@@ -150,10 +156,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: worker.id,
+            type: "음식점",
             title: worker.name,
             imageUrl: worker.imageUrl,
-            leftSubTitle: worker.job,
-            rightSubTitle: `${worker.yearOfService}년차`,
+            reviewNum: 12,
+            addr: worker.job,
+            job: worker.job,
+            year: String(12),
             tags: worker.tags,
             onClick: () => navigateToWorkerDetail(worker.id),
           };

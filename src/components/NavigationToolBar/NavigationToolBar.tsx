@@ -22,10 +22,10 @@ interface NavigationToolBarProps {
 }
 
 const TOOLBAR_ITEMS: ToolBarItem[] = [
-  { path: PATH.ACCOMMODATION.full, stack: PATH.ACCOMMODATION.stack, text: "숙소", icon: "Accommodation" },
-  { path: PATH.MAP.full, stack: PATH.MAP.stack, text: "지도", icon: "Map" },
-  { path: PATH.COMMUNITY.full, stack: PATH.COMMUNITY.stack, text: "커뮤니티", icon: "Community" },
-  { path: PATH.MY_PAGE.full, stack: PATH.MY_PAGE.stack, text: "마이페이지", icon: "Mypage" },
+  { path: PATH.ACCOMMODATION.full, stack: PATH.ACCOMMODATION.stack, text: "숙소", icon: "NaviAccomm" },
+  { path: PATH.MAP.full, stack: PATH.MAP.stack, text: "지도", icon: "NaviMap" },
+  { path: PATH.COMMUNITY.full, stack: PATH.COMMUNITY.stack, text: "커뮤니티", icon: "NaviCommunity" },
+  { path: PATH.MY_PAGE.full, stack: PATH.MY_PAGE.stack, text: "마이페이지", icon: "NaviMypage" },
 ];
 
 export const ToolBarMenuItem = ({ onRoute, text, isActive, icon }: ToolBarMenuItemProps) => {
