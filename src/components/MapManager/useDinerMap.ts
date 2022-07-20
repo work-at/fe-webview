@@ -2,7 +2,6 @@ import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
 import { useDinerPinsQuery, useDinerQuery } from "@/domains/diner";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
 type useDinerMapProps = {
   userCoordinates: Coordinates;
@@ -12,7 +11,6 @@ type useDinerMapProps = {
 };
 
 const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useDinerMapProps) => {
-  const navigate = useNavigate();
   const { data: dinerPins, isLoading: isDinerPinsLoading } = useDinerPinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
@@ -34,9 +32,7 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }
     }
   );
 
-  const navigateToDinerDetail = useCallback((id: number) => {
-    navigate(`${PATH.WORKER.full}/${id}`);
-  }, []);
+  const navigateToDinerDetail = useCallback((id: number) => {}, []);
 
   return {
     dinerPins,

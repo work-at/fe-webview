@@ -2,7 +2,6 @@ import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
 import { useWorkerPinsQuery, useWorkerQuery } from "@/domains/worker";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
 type useWorkerMapProps = {
   userCoordinates: Coordinates;
@@ -12,7 +11,6 @@ type useWorkerMapProps = {
 };
 
 const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useWorkerMapProps) => {
-  const navigate = useNavigate();
   const { data: workerPins, isLoading: isWorkerPinsLoading } = useWorkerPinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
@@ -34,9 +32,7 @@ const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId 
     }
   );
 
-  const navigateToWorkerDetail = useCallback((id: number) => {
-    navigate(`${PATH.WORKER.full}/${id}`);
-  }, []);
+  const navigateToWorkerDetail = useCallback((id: number) => {}, []);
 
   return {
     workerPins,
