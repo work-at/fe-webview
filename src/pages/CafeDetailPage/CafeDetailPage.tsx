@@ -1,11 +1,13 @@
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { PATH } from "@/constants";
 import { useCafeDetailQuery } from "@/domains/cafe";
+import { useFlow } from "@/stack";
+import { useActivityParams } from "@stackflow/react";
 import { Suspense, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 const CafeDetailPage = () => {
-  const { cafeId } = useParams<{ cafeId: string }>();
-  const navigate = useNavigate();
+  const { cafeId } = useActivityParams<{ cafeId: string }>();
+  const { push } = useFlow();
 
   if (Number.isNaN(Number(cafeId))) {
     throw new Error("잘못된 cafeId 입니다.");
@@ -22,13 +24,14 @@ const CafeDetailPage = () => {
   );
 
   const handleReviewButtonClick = useCallback(() => {
-    navigate(`${PATH.CAFE.CAFE_REVIEW.full}/${cafeId}`);
+    push(PATH.CAFE.CAFE_REVIEW.stack, { cafeId });
   }, []);
 
   return (
-    <div>
-      카페 아이디 : {cafeId} <button onClick={handleReviewButtonClick}>click</button>
-    </div>
+    <StackLayout appBar={{ title: "내 주변 카페" }}>
+      카페 아이디 : {cafeId}
+      <button onClick={handleReviewButtonClick}>click</button>
+    </StackLayout>
   );
 };
 

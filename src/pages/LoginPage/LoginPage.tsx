@@ -1,6 +1,8 @@
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { PATH } from "@/constants";
 import { useLoginMutation } from "@/domains/auth/auth.api";
+import { useFlow } from "@/stack";
 import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const CLIENT_ID = "7052acd04b3385c80fac9bb40d8b5a32";
 const CALLBACK_URL = (base: string) => {
@@ -23,8 +25,7 @@ const parseCallBack = (url: string) => {
 
 const LoginPage = () => {
   const [originUrl, setOriginUrl] = useState("");
-  const { search } = useLocation();
-  const navigate = useNavigate();
+  const { replace } = useFlow();
   const { mutateAsync: login } = useLoginMutation();
 
   useEffect(() => {
@@ -34,15 +35,16 @@ const LoginPage = () => {
 
   const handleLogin = useCallback(
     async (code: string) => {
+      console.log(code);
       try {
         if (code) {
           const { data } = await login({ code });
           if (data.code === "WORK01") {
-            navigate("/map");
+            replace(PATH.ACCOMMODATION.stack, {}, { animate: false });
           }
 
           if (data.code === "WORK02") {
-            navigate("/sign-up", { state: data });
+            replace(PATH.SIGN_UP.stack, { ...data }, { animate: false });
           }
         }
       } catch (error) {
@@ -53,14 +55,14 @@ const LoginPage = () => {
   );
 
   useEffect(() => {
-    const { code } = parseCallBack(search) as { code: string };
+    const { code } = parseCallBack(window.location.search) as { code: string };
     handleLogin(code);
   }, []);
 
   return (
-    <div>
+    <StackLayout>
       <a href={CALLBACK_URL(originUrl)}>login</a>
-    </div>
+    </StackLayout>
   );
 };
 

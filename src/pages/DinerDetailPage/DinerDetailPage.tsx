@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { useActivityParams } from "@stackflow/react";
 
 const DinerDetailPage = () => {
-  const { dinerId } = useParams<{ dinerId: string }>();
+  const { dinerId } = useActivityParams<{ dinerId: string }>();
 
-  return <div>음식점 아이디 : {dinerId}</div>;
+  return <StackLayout>음식점 아이디 : {dinerId}</StackLayout>;
 };
 
 export default DinerDetailPage;

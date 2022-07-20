@@ -1,18 +1,20 @@
-import { ACCESS_TOKEN } from "@/constants";
+import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { ACCESS_TOKEN, PATH } from "@/constants";
 import { usePositionListQuery, useSignUpMutation, useWorkingYearListQuery } from "@/domains/auth/auth.api";
-import { LoginResponse, SignUpRequest } from "@/domains/auth/auth.dto";
-import { POSITION, PositionType, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.text";
+import { SignUpRequest } from "@/domains/auth/auth.dto";
+import { POSITION, WORKING_YEAR } from "@/domains/auth/auth.text";
+import { useFlow } from "@/stack";
+import { useActivityParams } from "@stackflow/react";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const NICKNAME_STEP = 0;
 const POSITION_WORKING_YEAR_STEP = 1;
 
 const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const { oauthId } = useActivityParams();
+  const { push } = useFlow();
   const { mutateAsync: signUp } = useSignUpMutation();
 
   const { data: positionList } = usePositionListQuery();
@@ -37,11 +39,11 @@ const SignUpPage = () => {
   const nickname = watch("nickname");
 
   useEffect(() => {
-    if (!state) {
-      navigate("/login");
+    if (!oauthId) {
+      push(PATH.LOGIN.stack, {});
       return;
     }
-    setValue("oauthId", (state as LoginResponse).oauthId);
+    setValue("oauthId", Number(oauthId));
   }, []);
 
   useEffect(() => {
@@ -80,11 +82,11 @@ const SignUpPage = () => {
       const { data } = await signUp(formData);
       if (data.accessToken) {
         sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
-        navigate("/map");
+        push(PATH.MAP.stack, {});
         return;
       }
 
-      navigate("/login");
+      push(PATH.LOGIN.stack, {});
     } catch {
       alert("회원가입 도중 에러가 발생했습니다.");
     }
@@ -109,34 +111,36 @@ const SignUpPage = () => {
 
   if (step === POSITION_WORKING_YEAR_STEP) {
     return (
-      <form onSubmit={handleSignUp}>
-        <select {...register("position", { required: "선택해주세요" })} value={POSITION[getValues("position") ?? ""]}>
-          <option hidden disabled selected value="">
-            직무 선택
-          </option>
-          {positionList?.data.response.map(({ name, content }) => (
-            <option value={name} key={name}>
-              {content}
+      <StackLayout>
+        <form onSubmit={handleSignUp}>
+          <select {...register("position", { required: "선택해주세요" })} value={POSITION[getValues("position") ?? ""]}>
+            <option hidden disabled selected value="">
+              직무 선택
             </option>
-          ))}
-        </select>
-        <div>{errors.position?.message}</div>
-        <select
-          {...register("workingYear", { required: "선택해주세요" })}
-          value={WORKING_YEAR[getValues("workingYear") ?? ""]}
-        >
-          <option hidden disabled selected value="">
-            경력 선택
-          </option>
-          {workingYearList?.data.response.map(({ name, content }) => (
-            <option value={name} key={name}>
-              {content}
+            {positionList?.data.response.map(({ name, content }) => (
+              <option value={name} key={name}>
+                {content}
+              </option>
+            ))}
+          </select>
+          <div>{errors.position?.message}</div>
+          <select
+            {...register("workingYear", { required: "선택해주세요" })}
+            value={WORKING_YEAR[getValues("workingYear") ?? ""]}
+          >
+            <option hidden disabled selected value="">
+              경력 선택
             </option>
-          ))}
-        </select>
-        <div>{errors.workingYear?.message}</div>
-        <button type="submit">가입</button>
-      </form>
+            {workingYearList?.data.response.map(({ name, content }) => (
+              <option value={name} key={name}>
+                {content}
+              </option>
+            ))}
+          </select>
+          <div>{errors.workingYear?.message}</div>
+          <button type="submit">가입</button>
+        </form>
+      </StackLayout>
     );
   }
 

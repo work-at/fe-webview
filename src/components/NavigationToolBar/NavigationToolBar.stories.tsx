@@ -6,8 +6,8 @@ export default {
   component: NavigationToolBar,
 } as Meta;
 
-const Template: Story = () => <NavigationToolBar />;
+const Template: Story = () => <NavigationToolBar navigationPath="accommodation" />;
 
 export const Basic = Template.bind({});
 
-Basic.play = async ({ canvasElement }: any) => {};
+// Basic.play = async ({ canvasElement }: any) => { };

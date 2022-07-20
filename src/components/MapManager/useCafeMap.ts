@@ -2,7 +2,6 @@ import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
 import { useCafePinsQuery, useCafeQuery } from "@/domains/cafe";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
 type useCafeMapProps = {
   isReloaded: boolean;
@@ -12,7 +11,6 @@ type useCafeMapProps = {
 };
 
 const useCafeMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useCafeMapProps) => {
-  const navigate = useNavigate();
   const { data: cafePins, isLoading: isCafePinsLoading } = useCafePinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
@@ -34,9 +32,7 @@ const useCafeMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }:
     }
   );
 
-  const navigateToCafeDetail = useCallback((id: number) => {
-    navigate(`${PATH.WORKER.full}/${id}`);
-  }, []);
+  const navigateToCafeDetail = useCallback((id: number) => {}, []);
 
   return {
     cafePins,
