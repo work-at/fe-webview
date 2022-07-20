@@ -64,4 +64,4 @@ const Template: ComponentStory<typeof Tag> = () => {
 
 export const Basic = Template.bind({});
 
-Basic.play = async ({ canvasElement }: any) => {};
+// Basic.play = async ({ canvasElement }: any) => { };
