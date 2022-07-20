@@ -81,10 +81,12 @@ export const Label = styled.label<{ isIcon?: boolean }>`
   white-space: pre-wrap;
   box-sizing: border-box;
   cursor: pointer;
+  > svg {
+    margin-bottom: 7px;
+  }
 `;
 
 export const LabelTxt = styled.span`
   display: block;
   ${theme.fonts.Medium03};
-  margin-top: 7px;
 `;

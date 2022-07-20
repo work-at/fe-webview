@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Icon from "@/assets/Icon";
 import Button from "@/components/@shared/Button/Button";
 import Header from "@/components/@shared/Header/Header";
 import CheckBox from "@/components/@shared/CheckBox/CheckBox";

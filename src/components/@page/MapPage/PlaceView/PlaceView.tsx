@@ -42,10 +42,18 @@ const PlaceView = () => {
             리뷰를 남겼어요!
           </S.WalkTit>
           <S.ReviewWrpa>
-            <Tag Reviews={200} iconType={"CommonReview2"} children={"뷰가 좋아요"} />
-            <Tag Reviews={120} iconType={"CommonReview3"} children={"가성비가 좋아요"} />
-            <Tag Reviews={90} iconType={"CommonReview4"} children={"사람이 많이 없어요"} />
-            <Tag Reviews={42} iconType={"CommonReview5"} children={"넓고 깨끗해요"} />
+            <Tag Reviews={200} iconType={"CommonReview2"}>
+              뷰가 좋아요
+            </Tag>
+            <Tag Reviews={120} iconType={"CommonReview3"}>
+              가성비가 좋아요
+            </Tag>
+            <Tag Reviews={90} iconType={"CommonReview4"}>
+              사람이 많이 없어요
+            </Tag>
+            <Tag Reviews={42} iconType={"CommonReview5"}>
+              넓고 깨끗해요
+            </Tag>
           </S.ReviewWrpa>
         </S.InfoWrap>
         <S.BtnReview>
