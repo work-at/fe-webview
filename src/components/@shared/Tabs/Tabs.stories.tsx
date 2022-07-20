@@ -1,15 +1,19 @@
-import { Meta, Story } from "@storybook/react";
-import { within } from "@storybook/testing-library";
-import Tabs, { TabsProps } from "./Tabs";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import Tabs from "./Tabs";
 
 export default {
   title: "Components/Shared/Tabs",
   component: Tabs,
-} as Meta;
+} as ComponentMeta<typeof Tabs>;
 
-const Template: Story<TabsProps<"1" | "2" | "3">> = () => (
-  <Tabs
-    items={[
+const Template: ComponentStory<typeof Tabs> = (args) => (
+  <Tabs {...args} onSelect={(id) => alert(`id: ${id}의 탭 아이템이 선택됨`)} />
+);
+
+export const Basic = Template.bind({});
+Basic.story = {
+  args: {
+    items: [
       {
         id: "1",
         label: "탭1",
@@ -22,12 +26,9 @@ const Template: Story<TabsProps<"1" | "2" | "3">> = () => (
         id: "3",
         label: "탭3",
       },
-    ]}
-    onSelect={(id) => alert(`id: ${id}의 탭 아이템이 선택됨`)}
-  />
-);
-
-export const Basic = Template.bind({});
+    ],
+  },
+};
 
 Basic.play = async ({ canvasElement }: any) => {
   // 탭 아이템을 선택 시에 Tab Indicator 가 선택된 탭 아이템의 위치로 이동한다.

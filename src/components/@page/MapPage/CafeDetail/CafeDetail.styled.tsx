@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 
-export const PlaceViewWrap = styled.div`
+export const CafeDetailWrap = styled.div`
   position: relative;
 `;
 
@@ -85,8 +85,14 @@ export const Num = styled.strong`
   color: ${theme.colors.mainColor};
 `;
 
-export const ReviewWrpa = styled.div`
+export const ReviewWrap = styled.div`
   margin-top: 26px;
+  > div:nth-child(1) > div {
+    width: 100%;
+  }
+  > div:nth-child(2) > div {
+    width: calc(100% - 25px);
+  }
 `;
 
 export const BtnReview = styled.button`

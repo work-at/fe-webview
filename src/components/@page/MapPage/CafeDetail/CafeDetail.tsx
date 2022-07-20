@@ -1,14 +1,14 @@
-import * as S from "./PlaceView.styled";
+import * as S from "./CafeDetail.styled";
 import Tag from "@/components/@shared/Tag/Tag";
 import Header from "@/components/@shared/Header/Header";
 import Icon from "@/assets/Icon";
 import VisualImg from "@/assets/images/BgCafe1.png";
 
-const PlaceView = () => {
+const CafeDetail = () => {
   return (
     <>
       <Header useBack />
-      <S.PlaceViewWrap>
+      <S.CafeDetailWrap>
         <S.VisualWrap>
           <img src={VisualImg} alt="까페 이미지" />
         </S.VisualWrap>
@@ -41,27 +41,27 @@ const PlaceView = () => {
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
-          <S.ReviewWrpa>
-            <Tag Reviews={200} iconType={"CommonReview2"}>
+          <S.ReviewWrap>
+            <Tag reviews={200} iconType={"CommonReview2"}>
               뷰가 좋아요
             </Tag>
-            <Tag Reviews={120} iconType={"CommonReview3"}>
+            <Tag reviews={120} iconType={"CommonReview3"}>
               가성비가 좋아요
             </Tag>
-            <Tag Reviews={90} iconType={"CommonReview4"}>
+            <Tag reviews={90} iconType={"CommonReview4"}>
               사람이 많이 없어요
             </Tag>
-            <Tag Reviews={42} iconType={"CommonReview5"}>
+            <Tag reviews={42} iconType={"CommonReview5"}>
               넓고 깨끗해요
             </Tag>
-          </S.ReviewWrpa>
+          </S.ReviewWrap>
         </S.InfoWrap>
         <S.BtnReview>
           <Icon icon={"BtnReview"} size={73} />
         </S.BtnReview>
-      </S.PlaceViewWrap>
+      </S.CafeDetailWrap>
     </>
   );
 };
 
-export default PlaceView;
+export default CafeDetail;
