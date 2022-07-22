@@ -5,6 +5,7 @@ export const WorkChatWrap = styled.div`
   position: relative;
   overflow-y: hidden;
   height: calc(100vh - 97px);
+  padding-top: 97px;
   transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
   -webkit-overflow-scrolling: touch;
@@ -19,7 +20,7 @@ export const ChatBoxWrap = styled.div`
 `;
 
 export const WorkChat = styled.div`
-  padding: 97px 0 20px;
+  padding-bottom: 20px;
 `;
 
 export const DateBox = styled.div`
