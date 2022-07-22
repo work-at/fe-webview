@@ -14,6 +14,7 @@ const POSITION_WORKING_YEAR_STEP = 1;
 const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
   const { oauthId } = useActivityParams();
+
   const { push } = useFlow();
   const { mutateAsync: signUp } = useSignUpMutation();
 
@@ -113,8 +114,12 @@ const SignUpPage = () => {
     return (
       <StackLayout>
         <form onSubmit={handleSignUp}>
-          <select {...register("position", { required: "선택해주세요" })} value={POSITION[getValues("position") ?? ""]}>
-            <option hidden disabled selected value="">
+          <select
+            defaultValue=""
+            {...register("position", { required: "선택해주세요" })}
+            value={POSITION[getValues("position") ?? ""]}
+          >
+            <option hidden value="">
               직무 선택
             </option>
             {positionList?.data.response.map(({ name, content }) => (
@@ -124,11 +129,13 @@ const SignUpPage = () => {
             ))}
           </select>
           <div>{errors.position?.message}</div>
+          <br></br>
           <select
+            defaultValue=""
             {...register("workingYear", { required: "선택해주세요" })}
             value={WORKING_YEAR[getValues("workingYear") ?? ""]}
           >
-            <option hidden disabled selected value="">
+            <option hidden value="">
               경력 선택
             </option>
             {workingYearList?.data.response.map(({ name, content }) => (
