@@ -5,14 +5,13 @@ import Icon from "@/assets/Icon";
 export type TagProps = {
   iconType: any;
   reviews?: number;
-  workChat?: boolean;
   children: React.ReactNode;
 };
 
-const Tag = ({ iconType, reviews = 0, workChat = false, children }: TagProps) => {
+const Tag = ({ iconType, reviews = 0, children }: TagProps) => {
   return (
     <S.Tag>
-      <S.TagInner workChat={workChat} reviews={((window.innerWidth - 200) / 100) * reviews}>
+      <S.TagInner restWidth={((window.innerWidth - 220) / 100) * reviews}>
         <S.TagIcon>
           <Icon icon={iconType} />
         </S.TagIcon>

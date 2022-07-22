@@ -9,15 +9,14 @@ export const Tag = styled.div`
 `;
 
 interface StyledTagInnerProps {
-  workChat?: boolean;
-  reviews: number;
+  restWidth: number;
 }
 
 export const TagInner = styled.div<StyledTagInnerProps>`
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: ${({ workChat, reviews }) => (workChat ? "220px" : `calc(220px + ${reviews}px)`)};
+  width: ${({ restWidth }) => (restWidth === 0 ? "220px" : `calc(220px + ${restWidth}px)`)};
   max-width: 100%;
   border-radius: 19px;
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
