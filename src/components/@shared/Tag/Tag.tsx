@@ -5,20 +5,19 @@ import Icon from "@/assets/Icon";
 export type TagProps = {
   iconType: any;
   reviews?: number;
-  walkChat?: boolean;
+  workChat?: boolean;
   children: React.ReactNode;
 };
 
-const Tag = ({ iconType, reviews, walkChat, children }: TagProps) => {
+const Tag = ({ iconType, reviews = 0, workChat = false, children }: TagProps) => {
   return (
     <S.Tag>
-      <S.TagInnder walkChat={walkChat}>
+      <S.TagInner workChat={workChat} reviews={((window.innerWidth - 200) / 100) * reviews}>
         <S.TagIcon>
           <Icon icon={iconType} />
         </S.TagIcon>
         <S.TagTxt>{children}</S.TagTxt>
-        <S.TagNum>{reviews}</S.TagNum>
-      </S.TagInnder>
+      </S.TagInner>
     </S.Tag>
   );
 };

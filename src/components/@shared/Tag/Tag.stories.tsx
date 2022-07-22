@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof Tag> = () => {
     <>
       {/* 공통 Tag */}
       <Tag iconType={"CommonReview1"}>넓고 깨끗해요</Tag>
-      <Tag reviews={40} iconType={"CommonReview2"}>
+      <Tag reviews={100} iconType={"CommonReview2"}>
         주차하기 편해요
       </Tag>
       <Tag reviews={12} iconType={"CommonReview3"}>
@@ -81,49 +81,49 @@ const Template: ComponentStory<typeof Tag> = () => {
         콘센트 자리 많아요
       </Tag>
       {/* 워크챗 Tag */}
-      <Tag walkChat iconType={"WalkChatReview1"}>
+      <Tag workChat iconType={"WalkChatReview1"}>
         디자인 같이해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview2"}>
+      <Tag workChat iconType={"WalkChatReview2"}>
         개발 같이해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview3"}>
+      <Tag workChat iconType={"WalkChatReview3"}>
         기획 같이해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview4"}>
+      <Tag workChat iconType={"WalkChatReview4"}>
         주니어 모여라
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview5"}>
+      <Tag workChat iconType={"WalkChatReview5"}>
         시니어 모여라
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview6"}>
+      <Tag workChat iconType={"WalkChatReview6"}>
         저녁 메이트 구해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview7"}>
+      <Tag workChat iconType={"WalkChatReview7"}>
         점심 메이트 구해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview8"}>
+      <Tag workChat iconType={"WalkChatReview8"}>
         퇴근 후 함께 놀아요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview9"}>
+      <Tag workChat iconType={"WalkChatReview9"}>
         IT 함께해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview10"}>
+      <Tag workChat iconType={"WalkChatReview10"}>
         이커머스 함께해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview11"}>
+      <Tag workChat iconType={"WalkChatReview11"}>
         식품 함께해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview12"}>
+      <Tag workChat iconType={"WalkChatReview12"}>
         열정맨
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview13"}>
+      <Tag workChat iconType={"WalkChatReview13"}>
         뷰티 함께해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview14"}>
+      <Tag workChat iconType={"WalkChatReview14"}>
         스타트업 함께해요
       </Tag>
-      <Tag walkChat iconType={"WalkChatReview15"}>
+      <Tag workChat iconType={"WalkChatReview15"}>
         직무 토크 하실 분
       </Tag>
     </>
