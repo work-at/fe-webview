@@ -117,12 +117,29 @@ export const useCafeQuery = (
 type CafeDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.CafeDetailCriteria];
 
 const DUMMY_CAFE_DETAIL: Action.CafeDetailInfo = {
-  imageUrl: "imageUrl",
+  imageUrl:
+    "https://images.unsplash.com/photo-1658460349386-1056fc4dcce5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   name: "이름",
   address: "주소",
   kakaoLink: "https://map.kakao.com",
   phoneNumber: "010-0000-0000",
-  reviewPoints: [],
+  reviewPoints: [
+    {
+      icon: "BerthReview1",
+      reason: "리뷰 이유",
+      reviewCount: 10,
+    },
+    {
+      icon: "BerthReview2",
+      reason: "리뷰 이유2",
+      reviewCount: 30,
+    },
+    {
+      icon: "BerthReview3",
+      reason: "리뷰 이유3",
+      reviewCount: 20,
+    },
+  ],
   coordinates: {
     lat: 127,
     lng: 38,
