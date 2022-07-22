@@ -14,7 +14,7 @@ export const ChatBoxWrap = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden auto;
-  padding: 0 28px;
+  padding: 0 7.4667vw;
   background-color: ${theme.colors.white};
 `;
 
@@ -101,7 +101,7 @@ export const BottomFixedWrap = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  padding: 26px 28px 33px;
+  padding: 26px 7.4667vw 33px;
   background-color: ${theme.colors.white};
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;

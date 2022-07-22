@@ -43,5 +43,11 @@ IconType.args = {
       isIcon: true,
       iconType: "CommonReview2",
     },
+    {
+      id: "chk3",
+      label: "조용해요",
+      isIcon: true,
+      iconType: "CafeReview5",
+    },
   ],
 };

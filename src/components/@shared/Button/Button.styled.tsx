@@ -29,7 +29,7 @@ export const Button = styled.button<StyledButtonProps>`
   ${(props) =>
     props.size === "lg" &&
     `
-      position: sticky;
+      position: fixed;
       left: 0;
       right: 0;
       bottom: 0;

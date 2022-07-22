@@ -25,7 +25,6 @@ export const Header = styled.div<StyledHeaderProps>`
       right: 0;
     `
       : `
-      position: relative;
     `}
   top: 0;
   left: 0;
@@ -33,7 +32,7 @@ export const Header = styled.div<StyledHeaderProps>`
 `;
 
 export const HeaderInner = styled.div<{ useBack?: boolean }>`
-  padding: 0px 28px 17px 0;
+  padding: 0px 7.4667vw 17px 0;
   padding-left: ${({ useBack }) => (useBack ? "16px" : "28px")};
   display: flex;
   align-items: center;
