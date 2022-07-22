@@ -14,10 +14,12 @@ import WorkerDetailPage from "./pages/WorkerDetailPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
+import BtnReset from "@/assets/images/icons/BtnReset.svg";
 
 export const Test = () => {
-  return <StackLayout>Test</StackLayout>;
+  return <StackLayout appBar={{ title: "TEST", appendRight: () => <BtnReset /> }}>Test</StackLayout>;
 };
+
 const activities = {
   LoginPage,
   SignUpPage,
