@@ -11,6 +11,7 @@ import MyPage from "./pages/MyPage";
 import CafeDetailPage from "./pages/CafeDetailPage";
 import DinerDetailPage from "./pages/DinerDetailPage";
 import WorkerDetailPage from "./pages/WorkerDetailPage";
+import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
@@ -28,6 +29,7 @@ const activities = {
   CafeReviewPage,
   CafeDetailPage,
   DinerDetailPage,
+  DinerReviewPage,
   WorkerDetailPage,
   CommunityPage,
   WorkChatPage,

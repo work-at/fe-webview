@@ -12,11 +12,12 @@ export type ButtonProps = {
   round?: boolean;
   /** 버튼 안의 내용 */
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
-const Button = ({ size, bgColor, shadow, round, children }: ButtonProps) => {
+const Button = ({ size, bgColor, shadow, round, children, onClick }: ButtonProps) => {
   return (
-    <S.Button size={size} bgColor={bgColor} shadow={shadow} round={round}>
+    <S.Button size={size} bgColor={bgColor} shadow={shadow} round={round} onClick={onClick}>
       {children}
     </S.Button>
   );

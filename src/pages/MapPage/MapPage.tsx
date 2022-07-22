@@ -16,6 +16,7 @@ const MapPage = () => {
     },
     {
       enabled: !!userCoordinates,
+      suspense: false,
     }
   );
 
