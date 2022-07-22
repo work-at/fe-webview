@@ -2,6 +2,7 @@ import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
 import { useDinerPinsQuery, useDinerQuery } from "@/domains/diner";
 import { useCallback } from "react";
+import { useFlow } from "@/stack";
 
 type useDinerMapProps = {
   userCoordinates: Coordinates;
@@ -11,6 +12,8 @@ type useDinerMapProps = {
 };
 
 const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useDinerMapProps) => {
+  const { push } = useFlow();
+
   const { data: dinerPins, isLoading: isDinerPinsLoading } = useDinerPinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
@@ -20,6 +23,7 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }
     {
       enabled: isSelected && isReloaded,
       keepPreviousData: true,
+      suspense: false,
     }
   );
 
@@ -29,10 +33,16 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }
     },
     {
       enabled: !!selectedCardId,
+      suspense: false,
     }
   );
 
-  const navigateToDinerDetail = useCallback((id: number) => {}, []);
+  const navigateToDinerDetail = useCallback(
+    (id: number) => {
+      push(PATH.DINER.stack, { dinerId: id });
+    },
+    [push]
+  );
 
   return {
     dinerPins,
