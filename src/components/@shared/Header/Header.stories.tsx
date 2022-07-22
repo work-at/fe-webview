@@ -15,6 +15,7 @@ Basic.story = {
     bgColor: true,
     useBack: true,
     title: "제주 서귀포 남원읍",
+    useRefresh: true,
   },
 };
 

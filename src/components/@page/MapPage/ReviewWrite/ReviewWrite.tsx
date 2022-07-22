@@ -8,7 +8,7 @@ const ReviewWrite = () => {
   return (
     <>
       <Header bgColor useBack />
-      <S.PlaceViewWrap>
+      <S.ReviewWriteWrap>
         <S.Tit>
           어떤 점이 워케이션 중<br />
           가장 좋았나요?
@@ -56,11 +56,11 @@ const ReviewWrite = () => {
             ]}
           />
         </S.CheckWrap>
-      </S.PlaceViewWrap>
 
-      <Button size="lg" bgColor="black">
-        등록하기
-      </Button>
+        <Button size="lg" bgColor="black">
+          등록하기
+        </Button>
+      </S.ReviewWriteWrap>
     </>
   );
 };

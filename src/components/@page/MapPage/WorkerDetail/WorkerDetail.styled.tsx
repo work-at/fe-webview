@@ -71,7 +71,7 @@ export const EtcChatList = styled.li`
 `;
 
 export const DetailInfo = styled.div`
-  padding: 35px 28px 52px;
+  padding: 35px 7.4667vw 104px;
 `;
 
 export const AboutMe = styled.p`

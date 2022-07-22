@@ -22,128 +22,128 @@ const colors = {
 };
 
 const fonts = {
-  Bold00 : {
-    fontSize : "32px",
+  Bold00: {
+    fontSize: "32px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold01 : {
-    fontSize : "28px",
+  Bold01: {
+    fontSize: "28px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold02 : {
-    fontSize : "24px",
+  Bold02: {
+    fontSize: "24px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold03 : {
-    fontSize : "20px",
+  Bold03: {
+    fontSize: "20px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold04 : {
-    fontSize : "17px",
+  Bold04: {
+    fontSize: "17px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold05 : {
-    fontSize : "14px",
+  Bold05: {
+    fontSize: "14px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold06 : {
-    fontSize : "14px",
+  Bold06: {
+    fontSize: "12px",
     lineHeight: "140%",
     fontWeight: 700,
   },
-  Bold07 : {
-    fontSize : "11px",
+  Bold07: {
+    fontSize: "11px",
     lineHeight: "125%",
     fontWeight: 700,
   },
-  Bold08 : {
-    fontSize : "14px",
+  Bold08: {
+    fontSize: "14px",
     lineHeight: "125%",
     fontWeight: 700,
   },
-  SemiBold00 : {
-    fontSize : "22px",
+  SemiBold00: {
+    fontSize: "22px",
     lineHeight: "135%",
     fontWeight: 600,
   },
-  SemiBold01 : {
-    fontSize : "20px",
+  SemiBold01: {
+    fontSize: "20px",
     lineHeight: "135%",
     fontWeight: 600,
   },
-  SemiBold02 : {
-    fontSize : "18px",
+  SemiBold02: {
+    fontSize: "18px",
     lineHeight: "135%",
     fontWeight: 600,
   },
-  SemiBold03 : {
-    fontSize : "16px",
+  SemiBold03: {
+    fontSize: "16px",
     lineHeight: "135%",
     fontWeight: 600,
   },
-  SemiBold04 : {
-    fontSize : "11px",
+  SemiBold04: {
+    fontSize: "11px",
     lineHeight: "135%",
     fontWeight: 600,
   },
-  Medium00 : {
-    fontSize : "22px",
+  Medium00: {
+    fontSize: "22px",
     lineHeight: "125%",
     fontWeight: 500,
   },
-  Medium01 : {
-    fontSize : "18px",
+  Medium01: {
+    fontSize: "18px",
     lineHeight: "140%",
     fontWeight: 500,
   },
-  Medium02 : {
-    fontSize : "16px",
+  Medium02: {
+    fontSize: "16px",
     lineHeight: "140%",
     fontWeight: 500,
   },
-  Medium03 : {
-    fontSize : "14px",
+  Medium03: {
+    fontSize: "14px",
     lineHeight: "140%",
     fontWeight: 500,
   },
-  Medium04 : {
-    fontSize : "12px",
+  Medium04: {
+    fontSize: "12px",
     lineHeight: "160%",
     fontWeight: 500,
   },
-  Medium05 : {
-    fontSize : "12px",
+  Medium05: {
+    fontSize: "12px",
     lineHeight: "125%",
     fontWeight: 500,
   },
-  Medium06 : {
-    fontSize : "11px",
+  Medium06: {
+    fontSize: "11px",
     lineHeight: "140%",
     fontWeight: 500,
   },
-  Regular01 : {
-    fontSize : "20px",
+  Regular01: {
+    fontSize: "20px",
     lineHeight: "140%",
     fontWeight: 400,
   },
-  Regular02 : {
-    fontSize : "18px",
+  Regular02: {
+    fontSize: "18px",
     lineHeight: "140%",
     fontWeight: 400,
   },
-  Regular03 : {
-    fontSize : "16px",
+  Regular03: {
+    fontSize: "16px",
     lineHeight: "145%",
     fontWeight: 400,
   },
-  Regular04 : {
-    fontSize : "15px",
+  Regular04: {
+    fontSize: "15px",
     lineHeight: "135%",
     fontWeight: 400,
   },

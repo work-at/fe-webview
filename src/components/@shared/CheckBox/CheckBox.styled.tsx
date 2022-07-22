@@ -86,7 +86,17 @@ export const Label = styled.label<{ isIcon?: boolean }>`
   }
 `;
 
-export const LabelTxt = styled.span`
+export const LabelTxt = styled.span<{ isIcon?: boolean }>`
   display: block;
   ${theme.fonts.Medium03};
+  ${({ isIcon }) =>
+    isIcon
+      ? `
+      min-height: 40px;
+      display:flex;
+      align-items: center;
+    `
+      : `
+      
+    `}
 `;
