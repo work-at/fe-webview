@@ -28,3 +28,15 @@ export type DinerDetail = {
     lng: number;
   };
 };
+
+export type DinerReviewKey =
+  | "QUICK_FOOD"
+  | "EAT_ALONE"
+  | "MUST_GO"
+  | "QUIET"
+  | "SNACK"
+  | "VIEW"
+  | "COST"
+  | "PARKING"
+  | "SPACE"
+  | "NOT_CROWDED";

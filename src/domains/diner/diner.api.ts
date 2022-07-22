@@ -1,12 +1,13 @@
-import axios, { AxiosError } from "axios";
-import { QueryFunction, QueryKey, useQuery, UseQueryOptions } from "react-query";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { MutationFunction, QueryFunction, QueryKey, useMutation, useQuery, UseQueryOptions } from "react-query";
 
 import * as DTO from "./diner.dto";
 import * as Action from "./diner.action";
 import * as Mapper from "./diner.mapper";
 
-import { QUERY_NAME } from "@/constants";
+import { API_URL, QUERY_NAME } from "@/constants";
 import { Diner } from "./diner.type";
+import { baseInstance } from "@/services";
 
 type DinerPinsQueryKey = readonly [typeof QUERY_NAME.GET_DINER_PINS, Action.DinerPinsCriteria];
 
@@ -177,4 +178,32 @@ export const useDinerDetailQuery = (
     requestGetDinerDetail,
     options
   );
+};
+
+export const requestDinerReviewList: QueryFunction<DTO.GetDinerReviewTypeResponse> = async () => {
+  return await baseInstance().get<unknown, DTO.GetDinerReviewTypeResponse>(API_URL.GET_DINER_REVIEW_LIST);
+};
+
+export const useDinerReviewListQuery = () => {
+  return useQuery<DTO.GetDinerReviewTypeResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_DINER_REVIEW_LIST],
+    requestDinerReviewList,
+    { staleTime: Infinity, cacheTime: Infinity, keepPreviousData: true }
+  );
+};
+
+export const requestPostDinerReview: MutationFunction<AxiosResponse<null>, DTO.PostDinerReviewRequest> = async ({
+  reviewTypeNames,
+  locationId,
+}: DTO.PostDinerReviewRequest) => {
+  return await baseInstance().post<DTO.PostDinerReviewRequest, AxiosResponse<null>>(
+    API_URL.POST_DINER_REVIEW(locationId),
+    { reviewTypeNames }
+  );
+};
+
+export const usePostDinerReview = () => {
+  return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostDinerReviewRequest>({
+    mutationFn: requestPostDinerReview,
+  });
 };

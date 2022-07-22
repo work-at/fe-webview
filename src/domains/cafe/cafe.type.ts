@@ -29,3 +29,15 @@ export type CafeDetail = {
     lng: number;
   };
 };
+
+export type CafeReviewKey =
+  | "WIFI"
+  | "MEAL"
+  | "QUIET"
+  | "POWER"
+  | "SEAT"
+  | "VIEW"
+  | "COST"
+  | "PARKING"
+  | "SPACE"
+  | "NOT_CROWDED";

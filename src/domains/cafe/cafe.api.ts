@@ -1,12 +1,13 @@
-import axios, { AxiosError } from "axios";
-import { QueryFunction, QueryKey, useQuery, UseQueryOptions } from "react-query";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { MutationFunction, QueryFunction, QueryKey, useMutation, useQuery, UseQueryOptions } from "react-query";
 
 import * as DTO from "./cafe.dto";
 import * as Action from "./cafe.action";
 import * as Mapper from "./cafe.mapper";
 
-import { QUERY_NAME } from "@/constants";
+import { API_URL, QUERY_NAME } from "@/constants";
 import { Cafe } from "./cafe.type";
+import { baseInstance } from "@/services";
 
 type CafePinsQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_PINS, Action.CafePinsCriteria];
 
@@ -176,4 +177,32 @@ export const useCafeDetailQuery = (
     requestGetCafeDetail,
     options
   );
+};
+
+export const requestCafeReviewList: QueryFunction<DTO.GetCafeReviewTypeResponse> = async () => {
+  return await baseInstance().get<unknown, DTO.GetCafeReviewTypeResponse>(API_URL.GET_CAFE_REVIEW_LIST);
+};
+
+export const useCafeReviewListQuery = () => {
+  return useQuery<DTO.GetCafeReviewTypeResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_CAFE_REVIEW_LIST],
+    requestCafeReviewList,
+    { staleTime: Infinity, cacheTime: Infinity, keepPreviousData: true }
+  );
+};
+
+export const requestPostCafeReview: MutationFunction<AxiosResponse<null>, DTO.PostCafeReviewRequest> = async ({
+  reviewTypeNames,
+  locationId,
+}: DTO.PostCafeReviewRequest) => {
+  return await baseInstance().post<DTO.PostCafeReviewRequest, AxiosResponse<null>>(
+    API_URL.POST_CAFE_REVIEW(locationId),
+    { reviewTypeNames }
+  );
+};
+
+export const usePostCafeReview = () => {
+  return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostCafeReviewRequest>({
+    mutationFn: requestPostCafeReview,
+  });
 };
