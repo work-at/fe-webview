@@ -6,7 +6,7 @@ export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
 export { default as BtnBack } from "../images/icons/BtnBack.svg";
-export { default as BtnReset } from "../images/icons/BtnReset.svg";
+export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
 
 // 공통 Tag
 export { default as CommonReview1 } from "../images/icons/CommonReview1.svg";
@@ -64,3 +64,4 @@ export { default as BtnList } from "../images/icons/BtnList.svg";
 export { default as BtnReview } from "../images/icons/BtnReview.svg";
 export { default as BtnDirecion } from "../images/icons/BtnDirecion.svg";
 export { default as BtnLocation } from "../images/icons/BtnLocation.svg";
+export { default as BtnSendMsg } from "../images/icons/BtnSendMsg.svg";

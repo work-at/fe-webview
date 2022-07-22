@@ -16,7 +16,7 @@ export type CheckboxProps = {
 };
 
 const CheckBox = ({ items }: CheckboxProps) => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { isSelected, onChange } = useMultiselect([]);
   return (
     <S.CheckboxList>
       {items.map((item, index) => (
