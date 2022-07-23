@@ -7,6 +7,7 @@ export const TabWrap = styled.div`
   width: 100%;
   height: 42px;
   border-radius: 80px;
+  background: ${theme.colors.white};
   overflow: hidden;
 `;
 
