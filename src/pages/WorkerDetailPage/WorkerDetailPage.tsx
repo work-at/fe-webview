@@ -45,7 +45,7 @@ const WorkerDetailPage = () => {
   }
 
   return (
-    <StackLayout>
+    <StackLayout isHide>
       <Header useBack bgColor />
       <S.WorkerDetailWrap>
         <S.TopInfo>

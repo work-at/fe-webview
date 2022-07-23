@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "@/assets/Icon";
 import * as S from "./Header.styled";
+import { useFlow } from "@/stack";
 
 export type HeaderProps = {
   bgColor?: boolean;
@@ -11,11 +12,12 @@ export type HeaderProps = {
 };
 
 const Header = ({ bgColor, useBack, title, useRefresh, fixed }: HeaderProps) => {
+  const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed}>
       <S.HeaderInner useBack={useBack}>
         {useBack && (
-          <S.BtnBack bgColor={bgColor}>
+          <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
             <Icon icon="BtnBack" size={24} />
           </S.BtnBack>
         )}
