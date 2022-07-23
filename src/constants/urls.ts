@@ -4,6 +4,7 @@ export const API_URL = {
   GET_VALIDATE_NICKNAME: (params: string) => `/user/validation?nickname=${params}`,
   GET_POSITION_LIST: "/user/job-department",
   GET_WORKING_YEAR_LIST: "/user/job-duration",
+  GET_USER_LIST: "/user/self",
   GET_TEST: (params: string) => `/${params}`,
   GET_INFINITE_TEST: (page: number, count: number) => `/something?page=${page}&count=${count}`,
   UPDATE_TEST: (params: string) => `/${params}`,
