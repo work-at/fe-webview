@@ -15,7 +15,7 @@ const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
   const { oauthId } = useActivityParams();
 
-  const { push } = useFlow();
+  const { push, replace } = useFlow();
   const { mutateAsync: signUp } = useSignUpMutation();
 
   const { data: positionList } = usePositionListQuery();
@@ -41,7 +41,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (!oauthId) {
-      push(PATH.LOGIN.stack, {});
+      replace(PATH.LOGIN.stack, {}, { animate: false });
       return;
     }
     setValue("oauthId", Number(oauthId));
@@ -75,7 +75,7 @@ const SignUpPage = () => {
 
       setError("nickname", { type: "required", message: "입력해주세요." });
     },
-    [nickname]
+    [nickname, setError]
   );
 
   const handleSignUp = handleSubmit(async (formData) => {
