@@ -8,11 +8,16 @@ export const Tag = styled.div`
   }
 `;
 
-export const TagInnder = styled.div<{ walkChat?: boolean }>`
+interface StyledTagInnerProps {
+  restWidth: number;
+}
+
+export const TagInner = styled.div<StyledTagInnerProps>`
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: ${({ walkChat }) => (walkChat ? "200px" : "calc(100% - 50px)")};
+  width: ${({ restWidth }) => (restWidth === 0 ? "220px" : `calc(220px + ${restWidth}px)`)};
+  max-width: 100%;
   border-radius: 19px;
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
   background: ${theme.colors.white};
