@@ -8,3 +8,19 @@ export type GetAddressAndNearWorkerCountResponse = {
   address: string;
   count: number;
 };
+
+export type GetUserInfoResponse = {
+  certified: boolean;
+  id: number;
+  imageUrl: string;
+  nickname: string;
+  position: {
+    content: string;
+    name: string;
+  };
+  story: string;
+  workingYear: {
+    content: string;
+    name: string;
+  };
+};

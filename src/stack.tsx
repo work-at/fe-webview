@@ -1,8 +1,8 @@
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
-import { stackflow } from "@stackflow/react";
+import { stackflow, StackflowReactPlugin } from "@stackflow/react";
 import MapPage from "./pages/MapPage";
-import { PATH } from "./constants";
+import { ACCESS_TOKEN, PATH } from "./constants";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import AccommodationPage from "./pages/AccommodationPage";
@@ -15,10 +15,64 @@ import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
+import { id } from "@stackflow/core";
+import { requestGetUserInfoBase } from "./domains/user";
 
 export const Test = () => {
   return <StackLayout appBar={{ title: "TEST" }}>Test</StackLayout>;
 };
+
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+
+let isLogin = false;
+
+const checkAuthStatus = async () => {
+  const TOKEN = sessionStorage.getItem(ACCESS_TOKEN);
+
+  if (TOKEN && isLogin) {
+    return isLogin;
+  }
+
+  try {
+    await requestGetUserInfoBase();
+    isLogin = true;
+  } catch {
+    isLogin = false;
+  }
+
+  return isLogin;
+};
+
+export function routeCallback(): StackflowReactPlugin {
+  return () => ({
+    key: "routeCallback",
+    async onChanged({ actions: { dispatchEvent } }) {
+      if (await checkAuthStatus()) return;
+
+      const activityId = id();
+
+      return dispatchEvent("Replaced", {
+        activityId,
+        activityName: PATH.MY_PAGE.stack,
+        params: {},
+        eventDate: new Date().getTime() - MINUTE,
+      });
+    },
+    async onInit({ actions: { dispatchEvent } }) {
+      if (await checkAuthStatus()) return;
+
+      const activityId = id();
+
+      return dispatchEvent("Replaced", {
+        activityId,
+        activityName: PATH.LOGIN.stack,
+        params: {},
+        eventDate: new Date().getTime() - MINUTE,
+      });
+    },
+  });
+}
 
 const activities = {
   LoginPage,
@@ -63,7 +117,8 @@ export const { Stack, useFlow } = stackflow({
         Test: "/test",
       },
       /* TODO: 404로 교체해야 함 */
-      fallbackActivity: () => "AccommodationPage",
+      fallbackActivity: () => PATH.LOGIN.stack,
     }),
+    routeCallback(),
   ],
 });

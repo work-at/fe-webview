@@ -1,8 +1,8 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
-import { PATH } from "@/constants";
+import { ACCESS_TOKEN, PATH } from "@/constants";
 import { useLoginMutation } from "@/domains/auth/auth.api";
 import { useFlow } from "@/stack";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 
 const CLIENT_ID = "7052acd04b3385c80fac9bb40d8b5a32";
 const CALLBACK_URL = (base: string) => {
@@ -24,23 +24,17 @@ const parseCallBack = (url: string) => {
 };
 
 const LoginPage = () => {
-  const [originUrl, setOriginUrl] = useState("");
   const { replace } = useFlow();
   const { mutateAsync: login } = useLoginMutation();
 
-  useEffect(() => {
-    const { origin } = window.location;
-    setOriginUrl(origin);
-  }, []);
-
   const handleLogin = useCallback(
     async (code: string) => {
-      console.log(code);
       try {
         if (code) {
           const { data } = await login({ code });
           if (data.code === "WORK01") {
             replace(PATH.ACCOMMODATION.stack, {}, { animate: false });
+            sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
           }
 
           if (data.code === "WORK02") {
@@ -51,17 +45,17 @@ const LoginPage = () => {
         alert("로그인 도중 에러가 발생했습니다.");
       }
     },
-    [login, originUrl]
+    [login, replace]
   );
 
   useEffect(() => {
     const { code } = parseCallBack(window.location.search) as { code: string };
     handleLogin(code);
-  }, []);
+  }, [handleLogin]);
 
   return (
     <StackLayout>
-      <a href={CALLBACK_URL(originUrl)}>login</a>
+      <a href={CALLBACK_URL(window.location.origin)}>login</a>
     </StackLayout>
   );
 };

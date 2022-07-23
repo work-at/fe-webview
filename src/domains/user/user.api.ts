@@ -5,7 +5,8 @@ import * as DTO from "./user.dto";
 import * as Action from "./user.action";
 import * as Mapper from "./user.mapper";
 
-import { QUERY_NAME } from "@/constants";
+import { API_URL, QUERY_NAME } from "@/constants";
+import { baseInstance } from "@/services";
 
 type UserAddressQueryKey = readonly [typeof QUERY_NAME.GET_USER_ADDRESS, Action.UserAddressCriteria];
 
@@ -49,4 +50,10 @@ export const useUserAddressQuery = (
     requestGetUserAddress,
     options
   );
+};
+
+export const requestGetUserInfoBase = () => baseInstance().get<unknown, DTO.GetUserInfoResponse>(API_URL.GET_USER_LIST);
+
+export const requestGetUserInfo: QueryFunction<DTO.GetUserInfoResponse> = async () => {
+  return await requestGetUserInfoBase();
 };
