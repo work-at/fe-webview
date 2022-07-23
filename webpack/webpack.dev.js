@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
   devServer: {
     hot: true,
     port: "5050",
-    host: "127.0.0.1",
+    host: "localhost",
     historyApiFallback: true,
   },
   plugins: [
