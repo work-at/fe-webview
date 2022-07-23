@@ -1,3 +1,4 @@
+import { IconType } from "@/assets/Icon";
 import { PinItem } from "../map.type";
 
 export type WorkerPin = PinItem;
@@ -12,7 +13,7 @@ export type Worker = {
 };
 
 type DesiredActivity = {
-  icon: string;
+  icon: IconType;
   text: string;
 };
 

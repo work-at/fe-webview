@@ -1,12 +1,13 @@
-import axios, { AxiosError } from "axios";
-import { QueryFunction, QueryKey, useQuery, UseQueryOptions } from "react-query";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { MutationFunction, QueryFunction, QueryKey, useMutation, useQuery, UseQueryOptions } from "react-query";
 
 import * as DTO from "./cafe.dto";
 import * as Action from "./cafe.action";
 import * as Mapper from "./cafe.mapper";
 
-import { QUERY_NAME } from "@/constants";
+import { API_URL, QUERY_NAME } from "@/constants";
 import { Cafe } from "./cafe.type";
+import { baseInstance } from "@/services";
 
 type CafePinsQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_PINS, Action.CafePinsCriteria];
 
@@ -117,12 +118,29 @@ export const useCafeQuery = (
 type CafeDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.CafeDetailCriteria];
 
 const DUMMY_CAFE_DETAIL: Action.CafeDetailInfo = {
-  imageUrl: "imageUrl",
+  imageUrl:
+    "https://images.unsplash.com/photo-1658460349386-1056fc4dcce5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   name: "이름",
   address: "주소",
   kakaoLink: "https://map.kakao.com",
   phoneNumber: "010-0000-0000",
-  reviewPoints: [],
+  reviewPoints: [
+    {
+      icon: "BerthReview1",
+      reason: "리뷰 이유",
+      reviewCount: 10,
+    },
+    {
+      icon: "BerthReview2",
+      reason: "리뷰 이유2",
+      reviewCount: 30,
+    },
+    {
+      icon: "BerthReview3",
+      reason: "리뷰 이유3",
+      reviewCount: 20,
+    },
+  ],
   coordinates: {
     lat: 127,
     lng: 38,
@@ -159,4 +177,32 @@ export const useCafeDetailQuery = (
     requestGetCafeDetail,
     options
   );
+};
+
+export const requestCafeReviewList: QueryFunction<DTO.GetCafeReviewTypeResponse> = async () => {
+  return await baseInstance().get<unknown, DTO.GetCafeReviewTypeResponse>(API_URL.GET_CAFE_REVIEW_LIST);
+};
+
+export const useCafeReviewListQuery = () => {
+  return useQuery<DTO.GetCafeReviewTypeResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_CAFE_REVIEW_LIST],
+    requestCafeReviewList,
+    { staleTime: Infinity, cacheTime: Infinity, keepPreviousData: true }
+  );
+};
+
+export const requestPostCafeReview: MutationFunction<AxiosResponse<null>, DTO.PostCafeReviewRequest> = async ({
+  reviewTypeNames,
+  locationId,
+}: DTO.PostCafeReviewRequest) => {
+  return await baseInstance().post<DTO.PostCafeReviewRequest, AxiosResponse<null>>(
+    API_URL.POST_CAFE_REVIEW(locationId),
+    { reviewTypeNames }
+  );
+};
+
+export const usePostCafeReview = () => {
+  return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostCafeReviewRequest>({
+    mutationFn: requestPostCafeReview,
+  });
 };

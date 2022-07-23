@@ -27,7 +27,7 @@ export const PATH = {
     fragments: "cafe",
 
     CAFE_REVIEW: {
-      stack: "CafeDetailPage",
+      stack: "CafeReviewPage",
       full: "/cafe/review",
       fragments: "review",
     },

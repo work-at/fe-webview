@@ -2,6 +2,7 @@ import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
 import { useCafePinsQuery, useCafeQuery } from "@/domains/cafe";
 import { useCallback } from "react";
+import { useFlow } from "@/stack";
 
 type useCafeMapProps = {
   isReloaded: boolean;
@@ -11,6 +12,8 @@ type useCafeMapProps = {
 };
 
 const useCafeMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useCafeMapProps) => {
+  const { push } = useFlow();
+
   const { data: cafePins, isLoading: isCafePinsLoading } = useCafePinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
@@ -20,6 +23,7 @@ const useCafeMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }:
     {
       enabled: isSelected && isReloaded,
       keepPreviousData: true,
+      suspense: false,
     }
   );
 
@@ -29,10 +33,16 @@ const useCafeMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }:
     },
     {
       enabled: !!selectedCardId,
+      suspense: false,
     }
   );
 
-  const navigateToCafeDetail = useCallback((id: number) => {}, []);
+  const navigateToCafeDetail = useCallback(
+    (id: number) => {
+      push(PATH.CAFE.stack, { cafeId: id });
+    },
+    [push]
+  );
 
   return {
     cafePins,

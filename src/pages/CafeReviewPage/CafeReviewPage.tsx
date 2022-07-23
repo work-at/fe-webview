@@ -1,7 +1,51 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Button from "@/components/@shared/Button/Button";
+import Header from "@/components/@shared/Header/Header";
+import CheckBox from "@/components/@shared/CheckBox/CheckBox";
+import * as S from "./CafeReviewPage.styled";
+import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
+import { CafeReviewKey, useCafeReviewListQuery, usePostCafeReview } from "@/domains/cafe";
+import { useActivityParams } from "@stackflow/react";
 
 const CafeReviewPage = () => {
-  return <StackLayout appBar={{ title: "카페 리뷰" }}>CafeReviewPage</StackLayout>;
+  const { cafeId } = useActivityParams<{ cafeId: string }>();
+  const { data } = useCafeReviewListQuery();
+  const { mutateAsync } = usePostCafeReview();
+  const { selected, isSelected, onChange } = useMultiselect([]);
+
+  const reviewList = data?.data?.response.map((item) => ({
+    id: item.name,
+    label: item.content,
+    isIcon: true,
+    iconType: item.iconType,
+  }));
+
+  const handlePostReview = () => {
+    try {
+      mutateAsync({ reviewTypeNames: selected as CafeReviewKey[], locationId: cafeId });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  return (
+    <StackLayout isHide>
+      <Header bgColor useBack />
+      <S.PlaceViewWrap>
+        <S.Tit>
+          어떤 점이 워케이션 중<br />
+          가장 좋았나요?
+        </S.Tit>
+        <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
+        <S.CheckWrap>
+          {reviewList && <CheckBox isSelected={isSelected} onChange={onChange} items={reviewList} />}
+        </S.CheckWrap>
+      </S.PlaceViewWrap>
+      <Button size="lg" bgColor="black" onClick={handlePostReview} disabled={!selected.length}>
+        등록하기
+      </Button>
+    </StackLayout>
+  );
 };
 
 export default CafeReviewPage;

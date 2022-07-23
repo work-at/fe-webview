@@ -1,10 +1,12 @@
-import React, { useState } from "react";
 import Button from "@/components/@shared/Button/Button";
 import Header from "@/components/@shared/Header/Header";
 import CheckBox from "@/components/@shared/CheckBox/CheckBox";
 import * as S from "./ReviewWrite.styled";
+import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const ReviewWrite = () => {
+  const { selected, isSelected, onChange } = useMultiselect([]);
+
   return (
     <>
       <Header bgColor useBack />
@@ -16,6 +18,8 @@ const ReviewWrite = () => {
         <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
         <S.CheckWrap>
           <CheckBox
+            isSelected={isSelected}
+            onChange={onChange}
             items={[
               {
                 id: "chk1",

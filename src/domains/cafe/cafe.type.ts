@@ -1,3 +1,4 @@
+import { IconType } from "@/assets/Icon";
 import { PinItem } from "../map.type";
 
 export type CafePin = PinItem;
@@ -11,7 +12,7 @@ export type Cafe = {
 };
 
 type ReviewPoint = {
-  icon: string;
+  icon: IconType;
   reason: string;
   reviewCount: number;
 };
@@ -28,3 +29,15 @@ export type CafeDetail = {
     lng: number;
   };
 };
+
+export type CafeReviewKey =
+  | "WIFI"
+  | "MEAL"
+  | "QUIET"
+  | "POWER"
+  | "SEAT"
+  | "VIEW"
+  | "COST"
+  | "PARKING"
+  | "SPACE"
+  | "NOT_CROWDED";
