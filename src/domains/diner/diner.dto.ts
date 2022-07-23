@@ -4,7 +4,6 @@ import { DinerReviewKey } from "./diner.type";
 export type GetDinerPinsRequest = {
   latitude: number;
   longitude: number;
-  page: number;
   radius: number;
 };
 

@@ -11,9 +11,6 @@ import { baseInstance } from "@/services";
 
 type DinerPinsQueryKey = readonly [typeof QUERY_NAME.GET_DINER_PINS, Action.DinerPinsCriteria];
 
-// TODO : 액세스 토큰 연동
-const accessToken = "accessToken";
-
 // TODO : 실제 API 데이터 연동
 const DUMMY_DATA: Action.DinerPinsInfo = [
   {
@@ -122,7 +119,7 @@ const DUMMY_DINER_DETAIL: Action.DinerDetailInfo = {
     "https://images.unsplash.com/photo-1658460349386-1056fc4dcce5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   name: "이름",
   address: "주소",
-  kakaoLink: "https://map.kakao.com",
+  kakaoLink: "https://m.map.kakao.com",
   phoneNumber: "010-0000-0000",
   reviewPoints: [
     {
@@ -206,4 +203,66 @@ export const usePostDinerReview = () => {
   return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostDinerReviewRequest>({
     mutationFn: requestPostDinerReview,
   });
+};
+
+type DinersQueryKey = readonly [typeof QUERY_NAME.GET_CAFES, Action.DinersCriteria];
+
+const DUMMY_DINERS: Action.DinersInfo = [
+  {
+    id: 1,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주2",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+
+  {
+    id: 3,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주3",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+];
+
+export const requestGetDiners: QueryFunction<Action.DinersInfo, DinersQueryKey> = async ({ queryKey }) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_DINERS;
+};
+
+// TODO : Suspense 가 true 인 경우 무조건 true 가 나오도록 설정하기. isLoading 제거하ㄱ
+export const useDinersQuery = (
+  criteria: Action.DinersCriteria,
+  options: UseQueryOptions<Action.DinersInfo, AxiosError<string>, Action.DinersInfo, DinersQueryKey>
+) => {
+  return useQuery<Action.DinersInfo, AxiosError<string>, Action.DinersInfo, DinersQueryKey>(
+    [QUERY_NAME.GET_CAFES, criteria],
+    requestGetDiners,
+    options
+  );
 };

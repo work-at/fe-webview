@@ -4,7 +4,6 @@ import { CafeReviewKey } from "./cafe.type";
 export type GetCafePinsRequest = {
   latitude: number;
   longitude: number;
-  page: number;
   radius: number;
 };
 
