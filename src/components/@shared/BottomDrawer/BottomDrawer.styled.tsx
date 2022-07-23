@@ -6,13 +6,12 @@ export const Container = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: ${Z_INDEX.LOW};
+  z-index: ${Z_INDEX.HIGH};
   width: 100vw;
   height: 100vh;
 
   display: flex;
   flex-direction: column;
-  background-color: ${theme.colors.white};
 
   transition: transform 1s;
 
@@ -36,4 +35,9 @@ export const Header = styled.div`
 
 export const Body = styled.div``;
 
-export const CloseButton = styled.button``;
+export const CloseButton = styled.button`
+  width: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+`;

@@ -5,13 +5,14 @@ export type BottomDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 };
 
 const $BottomDrawer = document.getElementById("bottom-drawer");
 
-export const BottomDrawer = ({ isOpen, children, onClose }: BottomDrawerProps) => {
+export const BottomDrawerContent = ({ isOpen, children, onClose, className }: BottomDrawerProps) => {
   return (
-    <S.Container isOpen={isOpen}>
+    <S.Container isOpen={isOpen} className={className}>
       <S.Header>
         <S.CloseButton onClick={onClose}>닫기</S.CloseButton>
       </S.Header>
@@ -20,12 +21,12 @@ export const BottomDrawer = ({ isOpen, children, onClose }: BottomDrawerProps) =
   );
 };
 
-const BottomDrawerPortal = (props: BottomDrawerProps) => {
+const BottomDrawer = (props: BottomDrawerProps) => {
   if (!$BottomDrawer) {
     throw Error("bottom-drawer 요소가 HTML 상에 존재하지 않습니다.");
   }
 
-  return createPortal(<BottomDrawer {...props} />, $BottomDrawer);
+  return createPortal(<BottomDrawerContent {...props} />, $BottomDrawer);
 };
 
-export default BottomDrawerPortal;
+export default BottomDrawer;

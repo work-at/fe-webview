@@ -2,7 +2,8 @@ import { Circle, Map as KakaoMap } from "react-kakao-maps-sdk";
 import { Coordinates, PinItem } from "@/domains/map.type";
 import Pin from "./Pin";
 import UserPositionPin from "./UserPositionPin";
-import { useEffect } from "react";
+import { useRef } from "react";
+import { MAP } from "@/constants/map";
 
 /** 내 위치와 다른 핀들의 위치를 렌더링 한다. */
 export type MapViewProps = {
@@ -32,6 +33,8 @@ const MapView = ({
   selectedPinId,
   onPinSelect,
 }: MapViewProps) => {
+  const centerCoordinatesRef = useRef(userCoordinates);
+
   return (
     <KakaoMap
       center={{ lat: centerCoordinates.lat, lng: centerCoordinates.lng }}
@@ -41,10 +44,16 @@ const MapView = ({
         zIndex: zIndex,
       }}
       className={className}
-      level={1}
+      level={5}
       isPanto
     >
-      <Circle center={userCoordinates} radius={100} fillColor={"#78FFAA"} fillOpacity={0.1} strokeColor={"#78FFAA"} />
+      <Circle
+        center={centerCoordinatesRef.current}
+        radius={MAP.SearchRadius}
+        fillColor={"#78FFAA"}
+        fillOpacity={0.1}
+        strokeColor={"#78FFAA"}
+      />
 
       {pins.map((pin) => (
         <Pin

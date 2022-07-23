@@ -2,7 +2,7 @@ import * as S from "./Card.styled";
 
 export type CardItem = {
   id: number;
-  type: string;
+  type: "cafe" | "diner" | "worker";
   title: string;
   imageUrl: string;
   reviewNum?: number;
@@ -26,12 +26,12 @@ const Card = ({ type, title, reviewNum, addr, job, year, tags, imageUrl, classNa
         </S.CardThumb>
         <S.DetailInfo>
           <S.Title>{title}</S.Title>
-          {type === "worcationer" && (
+          {type === "worker" && (
             <S.WalkChat>
               워크챗 <S.ChatNum>5</S.ChatNum>
             </S.WalkChat>
           )}
-          {type === "worcationer" ? (
+          {type === "worker" ? (
             <S.WorcationerEtc>
               <S.InfoList>{job}</S.InfoList>
               <S.InfoList>{year}</S.InfoList>

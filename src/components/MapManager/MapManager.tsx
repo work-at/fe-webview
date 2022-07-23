@@ -1,6 +1,6 @@
 import { Z_INDEX } from "@/constants/zIndex";
 import { Coordinates } from "@/domains/map.type";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import Map from "../@shared/Map";
 
@@ -17,6 +17,8 @@ import WORKER_PIN_PNG from "@/assets/images/worker-pin.png";
 import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
 
 import * as S from "./MapManager.styled";
+import BottomDrawer from "../@shared/BottomDrawer/BottomDrawer";
+import CardList from "../@shared/CardList";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -42,35 +44,35 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
   const [selectedCardId, setSelectedCardId] = useState<number>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
   const [selectedTabId, setSelectedTabId] = useState<MapTabId>("cafe");
+  const [isBottomDrawerOpen, setBottomDrawerOpen] = useState(false);
 
   const { error: mapLoadingError, loading: isMapLoading } = useInjectKakaoMapApi({
     appkey: API_KEY!,
     retries: 5,
   });
 
-  const handleTabIdChange = useCallback((id: MapTabId) => {
-    setSelectedTabId(id);
-  }, []);
-
-  const { cafe, cafePins, navigateToCafeDetail } = useCafeMap({
+  const { cafe, cafes, cafePins, navigateToCafeDetail } = useCafeMap({
     isSelected: selectedTabId === "cafe",
     isReloaded,
     selectedCardId,
     userCoordinates,
+    isListShown: isBottomDrawerOpen,
   });
 
-  const { diner, dinerPins, navigateToDinerDetail } = useDinerMap({
-    isSelected: selectedTabId === "cafe",
+  const { diner, diners, dinerPins, navigateToDinerDetail } = useDinerMap({
+    isSelected: selectedTabId === "diner",
     isReloaded,
     selectedCardId,
     userCoordinates,
+    isListShown: isBottomDrawerOpen,
   });
 
-  const { worker, workerPins, navigateToWorkerDetail } = useWorkerMap({
-    isSelected: selectedTabId === "cafe",
+  const { worker, workers, workerPins, navigateToWorkerDetail } = useWorkerMap({
+    isSelected: selectedTabId === "worker",
     isReloaded,
     selectedCardId,
     userCoordinates,
+    isListShown: isBottomDrawerOpen,
   });
 
   const pins = useMemo(() => {
@@ -122,7 +124,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: cafe.id,
-            type: "카페",
+            type: "cafe" as const,
             title: cafe.name,
             imageUrl: cafe.imageUrl,
             reviewNum: 12,
@@ -139,7 +141,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: diner.id,
-            type: "음식점",
+            type: "diner" as const,
             title: diner.name,
             imageUrl: diner.imageUrl,
             reviewNum: 12,
@@ -156,7 +158,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         } else {
           return {
             id: worker.id,
-            type: "음식점",
+            type: "worker" as const,
             title: worker.name,
             imageUrl: worker.imageUrl,
             reviewNum: 12,
@@ -169,6 +171,85 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         }
     }
   }, [selectedTabId, cafe, diner, worker, navigateToCafeDetail, navigateToDinerDetail, navigateToWorkerDetail]);
+
+  const CardListInfo = useMemo(() => {
+    switch (selectedTabId) {
+      case "cafe":
+        if (!cafes) {
+          return;
+        } else {
+          return {
+            items: cafes.map((cafe) => ({
+              id: cafe.id,
+              type: "cafe" as const,
+              title: cafe.name,
+              imageUrl: cafe.imageUrl,
+              reviewNum: 12,
+              addr: cafe.region,
+              job: cafe.region,
+              year: String(12),
+              tags: cafe.tags,
+            })),
+            onClick: navigateToCafeDetail,
+          };
+        }
+      case "diner":
+        if (!diners) {
+          return;
+        } else {
+          return {
+            items: diners.map((diner) => ({
+              id: diner.id,
+              type: "diner" as const,
+              title: diner.name,
+              imageUrl: diner.imageUrl,
+              reviewNum: 12,
+              addr: diner.region,
+              job: diner.region,
+              year: String(12),
+              tags: diner.tags,
+            })),
+            onClick: navigateToDinerDetail,
+          };
+        }
+      default:
+        if (!workers) {
+          return;
+        } else {
+          return {
+            items: workers.map((worker) => ({
+              id: worker.id,
+              type: "worker" as const,
+              title: worker.name,
+              imageUrl: worker.imageUrl,
+              reviewNum: 12,
+              addr: worker.job,
+              job: worker.job,
+              year: String(12),
+              tags: worker.tags,
+            })),
+            onClick: navigateToWorkerDetail,
+          };
+        }
+    }
+  }, [selectedTabId, cafes, diners, workers, navigateToCafeDetail, navigateToDinerDetail, navigateToWorkerDetail]);
+
+  const handleTabIdChange = useCallback(
+    (id: MapTabId) => {
+      updateReloadTime();
+      setSelectedTabId(id);
+    },
+    [updateReloadTime]
+  );
+
+  const handleListToggleButtonClick = useCallback(() => setBottomDrawerOpen((isOpen) => !isOpen), []);
+
+  const handleBottomDrawerClose = useCallback(() => setBottomDrawerOpen(false), []);
+
+  useEffect(() => {
+    console.log("moutned!");
+    return () => console.log("unmounted!");
+  }, []);
 
   if (isMapLoading) {
     return <div>지도 로딩중</div>;
@@ -190,6 +271,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
       />
       {cardInfo && <S.Card {...cardInfo} />}
       <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>
+      <S.ListToggleButton onClick={handleListToggleButtonClick}>리스트 보기</S.ListToggleButton>
+      <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>
+        <S.DrawerHeader />
+        <S.DrawerBody>
+          <CardList onCardClick={CardListInfo?.onClick} items={CardListInfo?.items ?? []} />
+        </S.DrawerBody>
+      </S.BottomDrawer>
     </>
   );
 };
