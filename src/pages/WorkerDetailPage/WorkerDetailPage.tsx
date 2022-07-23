@@ -2,7 +2,7 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useWorkerDetailQuery } from "@/domains/worker";
 import { useActivityParams } from "@stackflow/react";
 import { useFlow } from "@/stack";
-import { Suspense, useCallback } from "react";
+import { useCallback } from "react";
 import { PATH } from "@/constants";
 
 import Tag from "@/components/@shared/Tag/Tag";
@@ -28,7 +28,7 @@ const WorkerDetailPage = () => {
     },
     {
       enabled: !!workerId,
-      suspense: true,
+      suspense: false,
     }
   );
 
@@ -81,10 +81,4 @@ const WorkerDetailPage = () => {
   );
 };
 
-const WorkerDetailPageSuspense = () => (
-  <Suspense fallback={<div>로딩 중</div>}>
-    <WorkerDetailPage />
-  </Suspense>
-);
-
-export default WorkerDetailPageSuspense;
+export default WorkerDetailPage;

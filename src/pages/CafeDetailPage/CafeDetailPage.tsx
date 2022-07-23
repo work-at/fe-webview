@@ -1,4 +1,4 @@
-import { Suspense, useCallback } from "react";
+import { useCallback } from "react";
 
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { PATH } from "@/constants";
@@ -45,7 +45,7 @@ const CafeDetailPage = () => {
     },
     {
       enabled: !!cafeId,
-      suspense: true,
+      suspense: false,
     }
   );
 
@@ -131,10 +131,4 @@ const CafeDetailPage = () => {
   );
 };
 
-const CafeDetailPageSuspense = () => (
-  <Suspense fallback={<div>로딩 중</div>}>
-    <CafeDetailPage />
-  </Suspense>
-);
-
-export default CafeDetailPageSuspense;
+export default CafeDetailPage;
