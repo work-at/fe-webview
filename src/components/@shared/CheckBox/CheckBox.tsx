@@ -1,6 +1,5 @@
-import React, { memo } from "react";
+import { ChangeEvent, memo } from "react";
 import Icon from "@/assets/Icon";
-import { useMultiselect } from "./Hooks";
 import * as S from "./CheckBox.styled";
 
 export type CheckBoxItem = {
@@ -13,10 +12,11 @@ export type CheckBoxItem = {
 
 export type CheckboxProps = {
   items: CheckBoxItem[];
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  isSelected: (id: string) => boolean;
 };
 
-const CheckBox = ({ items }: CheckboxProps) => {
-  const { isSelected, onChange } = useMultiselect([]);
+const CheckBox = ({ items, onChange, isSelected }: CheckboxProps) => {
   return (
     <S.CheckboxList>
       {items.map((item, index) => (
@@ -36,7 +36,6 @@ const CheckBox = ({ items }: CheckboxProps) => {
           </S.CheckboxContainer>
         </S.ListItem>
       ))}
-      {/* <div>Selected: {selected.join()}</div> */}
     </S.CheckboxList>
   );
 };
