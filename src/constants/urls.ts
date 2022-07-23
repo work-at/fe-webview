@@ -1,6 +1,6 @@
 export const API_URL = {
   POST_LOIGN: "/auth/token/kakao",
-  POST_SIGNUP: "/signup",
+  POST_SIGNUP: "/user/signup",
   GET_VALIDATE_NICKNAME: (params: string) => `/user/validation?nickname=${params}`,
   GET_POSITION_LIST: "/user/job-department",
   GET_WORKING_YEAR_LIST: "/user/job-duration",
