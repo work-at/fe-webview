@@ -15,10 +15,9 @@ import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
-import BtnReset from "@/assets/images/icons/BtnReset.svg";
 
 export const Test = () => {
-  return <StackLayout appBar={{ title: "TEST", appendRight: () => <BtnReset /> }}>Test</StackLayout>;
+  return <StackLayout appBar={{ title: "TEST" }}>Test</StackLayout>;
 };
 
 const activities = {
