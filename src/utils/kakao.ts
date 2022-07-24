@@ -1,3 +1,3 @@
 export const getPathFindingURL = (start: string, destination: string) => {
-  return `https://map.kakao.com/?sName=${start}&eName=${destination}`;
+  return `https://m.map.kakao.com/?sName=${start}&eName=${destination}`;
 };

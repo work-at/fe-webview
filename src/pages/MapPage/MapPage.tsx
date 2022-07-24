@@ -6,6 +6,7 @@ import MapManager from "@/components/MapManager";
 
 const MapPage = () => {
   const { data: userCoordinates } = useCoordinatesService({
+    suspense: false,
     refetchInterval: 5000,
   });
 

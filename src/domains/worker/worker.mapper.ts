@@ -22,7 +22,6 @@ export const a2dMapper_WorkerPinsCriteria_GetWorkerPinsRequest = (
   return {
     latitude: criteria.lat,
     longitude: criteria.lng,
-    page: criteria.page,
     radius: RADIUS,
   };
 };

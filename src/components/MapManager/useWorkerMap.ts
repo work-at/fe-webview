@@ -1,7 +1,7 @@
 import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
-import { useWorkerPinsQuery, useWorkerQuery } from "@/domains/worker";
 import { useFlow } from "@/stack";
+import { useWorkerPinsQuery, useWorkerQuery, useWorkersQuery } from "@/domains/worker";
 import { useCallback } from "react";
 
 type useWorkerMapProps = {
@@ -9,16 +9,15 @@ type useWorkerMapProps = {
   isReloaded: boolean;
   isSelected: boolean;
   selectedCardId: number | undefined;
+  isListShown: boolean;
 };
 
-const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useWorkerMapProps) => {
+const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId, isListShown }: useWorkerMapProps) => {
   const { push } = useFlow();
-
   const { data: workerPins, isLoading: isWorkerPinsLoading } = useWorkerPinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
       lng: userCoordinates ? userCoordinates.lng : 0,
-      page: 1,
     },
     {
       enabled: isSelected && isReloaded,
@@ -32,7 +31,18 @@ const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId 
       id: selectedCardId ?? 0,
     },
     {
-      enabled: !!selectedCardId,
+      enabled: isSelected && !!selectedCardId,
+      suspense: false,
+    }
+  );
+
+  const { data: workers, isLoading: isWorkersLoading } = useWorkersQuery(
+    {
+      lat: userCoordinates ? userCoordinates.lat : 0,
+      lng: userCoordinates ? userCoordinates.lng : 0,
+    },
+    {
+      enabled: isSelected && isListShown,
       suspense: false,
     }
   );
@@ -48,7 +58,9 @@ const useWorkerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId 
     workerPins,
     isWorkerPinsLoading,
     worker,
+    workers,
     isWorkerLoading,
+    isWorkersLoading,
     navigateToWorkerDetail,
   };
 };

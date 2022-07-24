@@ -1,6 +1,6 @@
 import { PATH } from "@/constants";
 import { Coordinates } from "@/domains/map.type";
-import { useDinerPinsQuery, useDinerQuery } from "@/domains/diner";
+import { useDinerPinsQuery, useDinerQuery, useDinersQuery } from "@/domains/diner";
 import { useCallback } from "react";
 import { useFlow } from "@/stack";
 
@@ -9,16 +9,16 @@ type useDinerMapProps = {
   isReloaded: boolean;
   isSelected: boolean;
   selectedCardId: number | undefined;
+  isListShown: boolean;
 };
 
-const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }: useDinerMapProps) => {
+const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId, isListShown }: useDinerMapProps) => {
   const { push } = useFlow();
 
   const { data: dinerPins, isLoading: isDinerPinsLoading } = useDinerPinsQuery(
     {
       lat: userCoordinates ? userCoordinates.lat : 0,
       lng: userCoordinates ? userCoordinates.lng : 0,
-      page: 1,
     },
     {
       enabled: isSelected && isReloaded,
@@ -32,7 +32,18 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }
       id: selectedCardId ?? 0,
     },
     {
-      enabled: !!selectedCardId,
+      enabled: isSelected && !!selectedCardId,
+      suspense: false,
+    }
+  );
+
+  const { data: diners, isLoading: isDinersLoading } = useDinersQuery(
+    {
+      lat: userCoordinates ? userCoordinates.lat : 0,
+      lng: userCoordinates ? userCoordinates.lng : 0,
+    },
+    {
+      enabled: isSelected && isListShown,
       suspense: false,
     }
   );
@@ -48,7 +59,9 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected, selectedCardId }
     dinerPins,
     isDinerPinsLoading,
     diner,
+    diners,
     isDinerLoading,
+    isDinersLoading,
     navigateToDinerDetail,
   };
 };

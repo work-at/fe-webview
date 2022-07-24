@@ -5,14 +5,14 @@ import Card from "../Card/Card";
 type CardListProps = {
   items: CardItem[];
   className?: string;
-  onCardClick: (id: number) => void;
+  onCardClick?: (id: number) => void;
 };
 
 const CardList = ({ items, className, onCardClick }: CardListProps) => {
   return (
     <div className={className}>
       {items.map((item) => (
-        <Card {...item} onClick={() => onCardClick(item.id)} />
+        <Card key={item.id} {...item} onClick={() => onCardClick?.(item.id)} />
       ))}
     </div>
   );

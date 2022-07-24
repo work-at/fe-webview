@@ -3,11 +3,15 @@ import { Cafe, CafeDetail, CafePin } from "./cafe.type";
 export type CafePinsCriteria = {
   lat: number;
   lng: number;
-  page: number;
 };
 
 export type CafeCriteria = {
   id: number;
+};
+
+export type CafesCriteria = {
+  lat: number;
+  lng: number;
 };
 
 export type CafeDetailCriteria = {
@@ -19,3 +23,5 @@ export type CafePinsInfo = CafePin[];
 export type CafeInfo = Cafe;
 
 export type CafeDetailInfo = CafeDetail;
+
+export type CafesInfo = Cafe[];

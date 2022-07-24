@@ -44,12 +44,11 @@ const DinerDetailPage = () => {
     },
     {
       enabled: !!dinerId,
-      suspense: true,
+      suspense: false,
     }
   );
 
   const handleReviewButtonClick = useCallback(() => {
-    console.log("hey");
     push(PATH.DINER.DINER_REVIEW.stack, { dinerId });
   }, [dinerId, push]);
 

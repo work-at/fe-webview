@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { useCallback } from "react";
 
 import MapView, { MapViewProps } from "./Map.view";
 import useMap from "./useMap";
@@ -22,10 +22,13 @@ const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
     userCoordinates,
   });
 
-  const handlePinSelect = useCallback((id: number) => {
-    onPinSelect(id);
-    selectPin(id);
-  }, []);
+  const handlePinSelect = useCallback(
+    (id: number) => {
+      onPinSelect(id);
+      selectPin(id);
+    },
+    [onPinSelect, selectPin]
+  );
 
   return (
     <MapView

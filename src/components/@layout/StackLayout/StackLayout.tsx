@@ -38,16 +38,16 @@ const Scrollable = styled.div<StyledScrollableProps>`
   ${({ isNavigation }) => (isNavigation ? "padding-bottom: 5.625rem;" : "")}
 `;
 
-const StackLayout: React.FC<LayoutProps> = ({ appBar, children, navigationPath, isHide = false }) => {
-  const Content = () => (
-    <Container>
-      <Scrollable isNavigation={!!navigationPath} isHide={isHide}>
-        {children}
-      </Scrollable>
-      {navigationPath && <NavigationToolBar navigationPath={navigationPath} />}
-    </Container>
-  );
+const Content = ({ children, isHide, navigationPath }: LayoutProps) => (
+  <Container>
+    <Scrollable isNavigation={!!navigationPath} isHide={isHide as boolean}>
+      {children}
+    </Scrollable>
+    {navigationPath && <NavigationToolBar navigationPath={navigationPath} />}
+  </Container>
+);
 
+const StackLayout: React.FC<LayoutProps> = ({ appBar, children, navigationPath, isHide = false }) => {
   return (
     <>
       <AppScreen
@@ -57,9 +57,17 @@ const StackLayout: React.FC<LayoutProps> = ({ appBar, children, navigationPath, 
           ...appBar,
         }}
       >
-        {!isHide && <Content />}
+        {!isHide && (
+          <Content navigationPath={navigationPath} isHide={isHide}>
+            {children}
+          </Content>
+        )}
       </AppScreen>
-      {isHide && <Content />}
+      {isHide && (
+        <Content navigationPath={navigationPath} isHide={isHide}>
+          {children}
+        </Content>
+      )}
     </>
   );
 };

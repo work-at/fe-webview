@@ -18,7 +18,7 @@ Basic.story = {
     items: [
       {
         id: 1,
-        type: "store",
+        type: "cafe",
         imageUrl: UserImg1,
         title: "제주도까페이름이름이름까페이름",
         reviewNum: 340,
@@ -27,7 +27,7 @@ Basic.story = {
       },
       {
         id: 2,
-        type: "worcationer",
+        type: "worker",
         imageUrl: UserImg2,
         title: "나는스벅라떼좋아",
         job: "개발",
@@ -36,7 +36,7 @@ Basic.story = {
       },
       {
         id: 3,
-        type: "worcationer",
+        type: "worker",
         imageUrl: UserImg3,
         title: "나는스벅아아좋아",
         job: "디자이너",

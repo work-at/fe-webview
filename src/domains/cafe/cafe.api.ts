@@ -11,10 +11,6 @@ import { baseInstance } from "@/services";
 
 type CafePinsQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_PINS, Action.CafePinsCriteria];
 
-// TODO : 액세스 토큰 연동
-const accessToken = "accessToken";
-
-// TODO : 실제 API 데이터 연동
 const DUMMY_DATA: Action.CafePinsInfo = [
   {
     id: 1,
@@ -22,7 +18,7 @@ const DUMMY_DATA: Action.CafePinsInfo = [
       lat: 37.5881116,
       lng: 126.9941114,
     },
-    name: "카페 1",
+    name: "음식점 1",
   },
   {
     id: 2,
@@ -30,7 +26,7 @@ const DUMMY_DATA: Action.CafePinsInfo = [
       lat: 37.5882026,
       lng: 126.9942424,
     },
-    name: "카페 2",
+    name: "음식점 2",
   },
   {
     id: 3,
@@ -38,27 +34,20 @@ const DUMMY_DATA: Action.CafePinsInfo = [
       lat: 37.5883036,
       lng: 126.9943434,
     },
-    name: "카페 3",
+    name: "음식점 3",
   },
 ];
 
 export const requestGetCafePins: QueryFunction<Action.CafePinsInfo, CafePinsQueryKey> = async ({ queryKey }) => {
-  //   const [, criteria] = queryKey;
+  // const [, criteria] = queryKey;
 
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
+  // const data = await baseInstance().get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>("map/cafes", {
+  //   params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
+  // });
 
-  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
-  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
+  // const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
 
-  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
-  //
-  //   return cafes;
+  // return cafes;
   return DUMMY_DATA;
 };
 
@@ -122,7 +111,7 @@ const DUMMY_CAFE_DETAIL: Action.CafeDetailInfo = {
     "https://images.unsplash.com/photo-1658460349386-1056fc4dcce5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
   name: "이름",
   address: "주소",
-  kakaoLink: "https://map.kakao.com",
+  kakaoLink: "https://m.map.kakao.com",
   phoneNumber: "010-0000-0000",
   reviewPoints: [
     {
@@ -205,4 +194,66 @@ export const usePostCafeReview = () => {
   return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostCafeReviewRequest>({
     mutationFn: requestPostCafeReview,
   });
+};
+
+type CafesQueryKey = readonly [typeof QUERY_NAME.GET_CAFES, Action.CafesCriteria];
+
+const DUMMY_CAFES: Action.CafesInfo = [
+  {
+    id: 1,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주2",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+
+  {
+    id: 3,
+    imageUrl:
+      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+    name: "포메인제주3",
+    region: "제주",
+    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
+  },
+];
+
+export const requestGetCafes: QueryFunction<Action.CafesInfo, CafesQueryKey> = async ({ queryKey }) => {
+  //   const [, criteria] = queryKey;
+
+  //   if (!accessToken) {
+  //     throw new Error("허가되지 되지 않은 접근입니다.");
+  //   }
+
+  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
+  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   });
+
+  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
+  //
+  //   return cafes;
+  return DUMMY_CAFES;
+};
+
+// TODO : Suspense 가 true 인 경우 무조건 true 가 나오도록 설정하기. isLoading 제거하ㄱ
+export const useCafesQuery = (
+  criteria: Action.CafesCriteria,
+  options: UseQueryOptions<Action.CafesInfo, AxiosError<string>, Action.CafesInfo, CafesQueryKey>
+) => {
+  return useQuery<Action.CafesInfo, AxiosError<string>, Action.CafesInfo, CafesQueryKey>(
+    [QUERY_NAME.GET_CAFES, criteria],
+    requestGetCafes,
+    options
+  );
 };
