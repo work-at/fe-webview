@@ -15,7 +15,7 @@ import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
-import { id } from "@stackflow/core";
+import { DispatchEvent, id } from "@stackflow/core";
 import { requestGetUserInfoBase } from "./domains/user";
 
 export const Test = () => {
@@ -26,12 +26,13 @@ const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 
 let isLogin = false;
+let isDirty = false;
 
-const checkAuthStatus = async () => {
+const checkAuthStatus = async (dispatchEvent: DispatchEvent) => {
   const TOKEN = sessionStorage.getItem(ACCESS_TOKEN);
 
-  if (TOKEN && isLogin) {
-    return isLogin;
+  if ((TOKEN && isLogin) || isDirty) {
+    return;
   }
 
   try {
@@ -39,37 +40,27 @@ const checkAuthStatus = async () => {
     isLogin = true;
   } catch {
     isLogin = false;
-  }
+    const activityId = id();
 
-  return isLogin;
+    return dispatchEvent("Replaced", {
+      activityId,
+      activityName: PATH.LOGIN.stack,
+      params: {},
+      eventDate: new Date().getTime() - MINUTE,
+    });
+  } finally {
+    isDirty = true;
+  }
 };
 
 export function routeCallback(): StackflowReactPlugin {
   return () => ({
     key: "routeCallback",
     async onChanged({ actions: { dispatchEvent } }) {
-      if (await checkAuthStatus()) return;
-
-      const activityId = id();
-
-      return dispatchEvent("Replaced", {
-        activityId,
-        activityName: PATH.MY_PAGE.stack,
-        params: {},
-        eventDate: new Date().getTime() - MINUTE,
-      });
+      checkAuthStatus(dispatchEvent);
     },
     async onInit({ actions: { dispatchEvent } }) {
-      if (await checkAuthStatus()) return;
-
-      const activityId = id();
-
-      return dispatchEvent("Replaced", {
-        activityId,
-        activityName: PATH.LOGIN.stack,
-        params: {},
-        eventDate: new Date().getTime() - MINUTE,
-      });
+      checkAuthStatus(dispatchEvent);
     },
   });
 }
