@@ -5,10 +5,23 @@ import BaseBottomDrawer from "../@shared/BottomDrawer/BottomDrawer";
 import BaseCard from "../@shared/Card";
 import BaseReLoadButton from "../@shared/Map/ReLoadButton";
 
+export const MapWrap = styled.div`
+  position: relative;
+  height: 100%;
+`;
+
+export const TabWrap = styled.div`
+  position: absolute;
+  top: 24px;
+  left: 14.4vw;
+  right: 14.4vw;
+  z-index: ${Z_INDEX.HIGH};
+`;
+
 export const Card = styled(BaseCard)`
   position: fixed;
   z-index: ${Z_INDEX.HIGH};
-  bottom: 6rem;
+  bottom: 110px;
   right: 0;
   left: 0;
 `;
@@ -45,3 +58,19 @@ export const DrawerHeader = styled.div`
 export const DrawerBody = styled.div`
   padding: 2rem 1rem 0rem 1rem;
 `;
+
+export const BottomBtnWrap = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: 27px;
+  z-index: ${Z_INDEX.MIDDLE};
+`;
+
+export const BtnLocation = styled.button`
+  display: block;
+  border-radius: 100%;
+  margin-top: 16px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+`;
+
+export const BtnList = styled(BtnLocation)``;

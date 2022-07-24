@@ -19,6 +19,7 @@ import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
 import * as S from "./MapManager.styled";
 import BottomDrawer from "../@shared/BottomDrawer/BottomDrawer";
 import CardList from "../@shared/CardList";
+import Icon from "@/assets/Icon";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -255,8 +256,10 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
   }
 
   return (
-    <>
-      <Tabs items={TAB_ITEMS} onSelect={handleTabIdChange} />
+    <S.MapWrap>
+      <S.TabWrap>
+        <Tabs items={TAB_ITEMS} onSelect={handleTabIdChange} />
+      </S.TabWrap>
       <Map
         pins={pins ?? []}
         userCoordinates={userCoordinates}
@@ -265,15 +268,21 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         {...pinInfo}
       />
       {cardInfo && <S.Card {...cardInfo} />}
-      <S.ReLoadButton onClick={updateReloadTime}>현 지도에서 검색</S.ReLoadButton>
-      <S.ListToggleButton onClick={handleListToggleButtonClick}>리스트 보기</S.ListToggleButton>
+      <S.BottomBtnWrap>
+        <S.BtnLocation onClick={updateReloadTime}>
+          <Icon icon="BtnMapLocation" />
+        </S.BtnLocation>
+        <S.BtnList onClick={handleListToggleButtonClick}>
+          <Icon icon="BtnMapList" />
+        </S.BtnList>
+      </S.BottomBtnWrap>
       <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>
         <S.DrawerHeader />
         <S.DrawerBody>
           <CardList onCardClick={CardListInfo?.onClick} items={CardListInfo?.items ?? []} />
         </S.DrawerBody>
       </S.BottomDrawer>
-    </>
+    </S.MapWrap>
   );
 };
 

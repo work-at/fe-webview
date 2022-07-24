@@ -36,9 +36,15 @@ const WorkerDetail = () => {
           </S.AboutMe>
           <S.HopeTit>희망 활동</S.HopeTit>
           <S.HopeTag>
-            <Tag walkChat iconType={"WalkChatReview1"} children={"디자인 같이해요"} />
-            <Tag walkChat iconType={"WalkChatReview2"} children={"개발 같이해요"} />
-            <Tag walkChat iconType={"WalkChatReview3"} children={"기획 같이해요"} />
+            <Tag walkChat iconType={"WalkChatReview1"}>
+              디자인 같이해요
+            </Tag>
+            <Tag walkChat iconType={"WalkChatReview2"}>
+              개발 같이해요
+            </Tag>
+            <Tag walkChat iconType={"WalkChatReview3"}>
+              기획 같이해요
+            </Tag>
           </S.HopeTag>
         </S.DetailInfo>
         <Button size="lg" bgColor="black">
