@@ -246,11 +246,6 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
 
   const handleBottomDrawerClose = useCallback(() => setBottomDrawerOpen(false), []);
 
-  useEffect(() => {
-    console.log("moutned!");
-    return () => console.log("unmounted!");
-  }, []);
-
   if (isMapLoading) {
     return <div>지도 로딩중</div>;
   }
