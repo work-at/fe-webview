@@ -14,6 +14,7 @@ const WorkerDetail = () => {
             <img src={UserImg} alt="유저 이미지" />
           </S.UserThumb>
           <S.UserName>이름여덟글자제한</S.UserName>
+          <S.UserEmail>emarteveryday</S.UserEmail>
           <S.EtcInfo>
             <S.EtcList>디자인</S.EtcList>
             <S.EtcList>1-2년차</S.EtcList>

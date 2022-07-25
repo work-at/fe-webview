@@ -1,6 +1,7 @@
 import { ChangeEvent, memo } from "react";
 import Icon from "@/assets/Icon";
 import * as S from "./CheckBox.styled";
+import { useMultiselect } from "./Hooks";
 
 export type CheckBoxItem = {
   id: string;
@@ -16,7 +17,8 @@ export type CheckboxProps = {
   isSelected: (id: string) => boolean;
 };
 
-const CheckBox = ({ items, onChange, isSelected }: CheckboxProps) => {
+const CheckBox = ({ items }: CheckboxProps) => {
+  const { isSelected, onChange } = useMultiselect([]);
   return (
     <S.CheckboxList>
       {items.map((item, index) => (

@@ -77,7 +77,6 @@ export const Button = styled.button<StyledButtonProps>`
 			color: ${theme.colors.white};
       border-color: ${theme.colors.mainColor};
 		`};
-
   ${(props) =>
     props.bgColor === "white" &&
     !props.disabled &&
@@ -86,4 +85,12 @@ export const Button = styled.button<StyledButtonProps>`
 			color: ${theme.colors.black};
       border-color: ${theme.colors.white};
 		`};
+
+  ${(props) =>
+    props.disabled &&
+    `
+      background: ${theme.colors.gray06};
+      color: ${theme.colors.white};
+      cursor: default;
+    `};
 `;
