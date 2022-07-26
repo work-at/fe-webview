@@ -3,7 +3,7 @@ import React from "react";
 import CafeDetail from "./CafeDetail";
 
 export default {
-  title: "components/Pages/CafeDetail",
+  title: "components/Pages/MapPage/CafeDetail",
   component: CafeDetail,
 } as ComponentMeta<typeof CafeDetail>;
 
