@@ -9,8 +9,8 @@ export const Button = styled.button<StyledButtonProps>`
   text-align: center;
   vertical-align: middle;
   user-select: none;
-  border: 1px solid transparent;
-  color: ${theme.colors.black};
+  border: 1px solid ${theme.colors.gray06};
+  color: ${theme.colors.gray05};
   background: ${theme.colors.white};
   > svg {
     margin-right: 5px;
@@ -20,12 +20,9 @@ export const Button = styled.button<StyledButtonProps>`
     props.shadow &&
     `
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+      border: none;
 		`};
-  ${(props) =>
-    props.round &&
-    `
-      border-radius: 17px;
-		`};
+
   ${(props) =>
     props.size === "lg" &&
     `
@@ -35,24 +32,32 @@ export const Button = styled.button<StyledButtonProps>`
       bottom: 0;
 			width: 100%;
 			height: 84px;
-			font-size: 23px;
-      font-weight: 600;
       padding: 22px 0 33px;
+      font-size: ${theme.fonts.SemiBold00.fontSize};
+      line-height: ${theme.fonts.SemiBold00.lineHeight};
+      font-weight: ${theme.fonts.SemiBold00.fontWeight};
 		`};
   ${(props) =>
     props.size === "md" &&
-    `
-			height: 55px;
-			padding: 0 36px;
-			font-size: 20px;
-		`};
-  ${(props) =>
-    props.size === "sm" &&
+    props.round &&
     `
 			height: 34px;
 			padding: 0 15px;
-			font-size: 13px;
-      font-weight: 500;
+      border-radius: 17px;
+      font-size: ${theme.fonts.Medium06.fontSize};
+      line-height: ${theme.fonts.Medium06.lineHeight};
+      font-weight: ${theme.fonts.Medium06.fontWeight};
+		`};
+  ${(props) =>
+    props.size === "sm" &&
+    props.round &&
+    `
+			height: 29px;
+			padding: 0 13px;
+      border-radius: 44px;
+      font-size: ${theme.fonts.Medium06.fontSize};
+      line-height: ${theme.fonts.Medium06.lineHeight};
+      font-weight: ${theme.fonts.Medium06.fontWeight};
 		`};
 
   ${(props) =>
@@ -61,6 +66,7 @@ export const Button = styled.button<StyledButtonProps>`
     `
 			background: ${theme.colors.black};
 			color: ${theme.colors.white};
+      border-color: ${theme.colors.black};
 		`};
 
   ${(props) =>
@@ -69,6 +75,7 @@ export const Button = styled.button<StyledButtonProps>`
     `
 			background: ${theme.colors.mainColor};
 			color: ${theme.colors.white};
+      border-color: ${theme.colors.mainColor};
 		`};
 
   ${(props) =>
@@ -77,5 +84,6 @@ export const Button = styled.button<StyledButtonProps>`
     `
 			background: ${theme.colors.white};
 			color: ${theme.colors.black};
+      border-color: ${theme.colors.white};
 		`};
 `;

@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 
-export const CheckboxList = styled.ul`
+export const CheckboxList = styled.ul<{ isIcon?: boolean }>`
   display: flex;
   flex-wrap: wrap;
+  ${({ isIcon }) =>
+    isIcon
+      ? `
+      margin-top: -15px;
+    `
+      : `
+      margin-top: -13px;
+    `}
 `;
 
 export const ListItem = styled.li<{ isIcon?: boolean }>`
@@ -15,7 +23,7 @@ export const ListItem = styled.li<{ isIcon?: boolean }>`
     `
       : `
       width: calc((100% - 20px) / 3);
-      margin: 10px 0 0 10px;
+      margin: 13px 0 0 10px;
     `}
   &:nth-child(odd) {
     margin-left: ${({ isIcon }) => (isIcon ? "0px" : "")};
@@ -23,7 +31,7 @@ export const ListItem = styled.li<{ isIcon?: boolean }>`
   &:nth-of-type(1) {
     margin-left: ${({ isIcon }) => (isIcon ? "" : "0px")};
   }
-  &:nth-of-type(4n + 0) {
+  &:nth-of-type(3n + 1) {
     margin-left: ${({ isIcon }) => (isIcon ? "" : "0px")};
   }
   & > div {
@@ -67,15 +75,16 @@ export const Label = styled.label<{ isIcon?: boolean }>`
       padding: 7px 17px;
       border-radius: 10px;
       text-align: left;
+      box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.15);
     `
       : `
-      padding: 9px 34px;
+      padding: 8px 0 6px;
       border-radius: 19px;
       text-align: center;
+      box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
     `}
   display: block;
   background: ${theme.colors.white};
-  box-shadow: 0px 0.7px 5px rgba(0, 0, 0, 0.15);
   border: 1px solid ${theme.colors.white};
   color: ${theme.colors.black};
   white-space: pre-wrap;
@@ -88,15 +97,20 @@ export const Label = styled.label<{ isIcon?: boolean }>`
 
 export const LabelTxt = styled.span<{ isIcon?: boolean }>`
   display: block;
-  ${theme.fonts.Medium03};
+
   ${({ isIcon }) =>
     isIcon
       ? `
       min-height: 40px;
       display:flex;
       align-items: center;
+      font-size: ${theme.fonts.Medium03.fontSize};
+      font-weight: ${theme.fonts.Medium03.fontWeight};
+      line-height: ${theme.fonts.Medium03.lineHeight};
     `
       : `
-      
+      font-size: ${theme.fonts.Medium02.fontSize};
+      font-weight: ${theme.fonts.Medium02.fontWeight};
+      line-height: ${theme.fonts.Medium02.lineHeight};
     `}
 `;
