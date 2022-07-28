@@ -26,14 +26,17 @@ export const Container = styled.div<{ isOpen: boolean }>`
 `;
 
 export const Header = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 0;
   right: 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; */
 `;
 
-export const Body = styled.div``;
+export const Body = styled.div`
+  height: 100%;
+  overflow-y: scroll;
+`;
 
 export const CloseButton = styled.button`
   width: 2rem;

@@ -20,7 +20,7 @@ export const TabWrap = styled.div`
 
 export const Card = styled(BaseCard)`
   position: fixed;
-  z-index: ${Z_INDEX.HIGH};
+  z-index: ${Z_INDEX.HIGHEST};
   bottom: 110px;
   right: 0;
   left: 0;
@@ -56,7 +56,7 @@ export const DrawerHeader = styled.div`
 `;
 
 export const DrawerBody = styled.div`
-  padding: 2rem 1rem 0rem 1rem;
+  padding: 0px 0px 20px;
 `;
 
 export const BottomBtnWrap = styled.div`
@@ -74,3 +74,38 @@ export const BtnLocation = styled.button`
 `;
 
 export const BtnList = styled(BtnLocation)``;
+
+export const WorkerLengWrap = styled.div`
+  position: absolute;
+  left: 26px;
+  bottom: 26px;
+  min-width: 110px;
+  background: ${theme.colors.white};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 8px 0px 7px;
+  border-radius: 10px;
+  z-index: ${Z_INDEX.HIGH};
+`;
+
+export const WorkerTit = styled.p`
+  ${theme.fonts.Medium05};
+  color: ${theme.colors.gray03};
+  text-align: center;
+`;
+
+export const WorkerLeng = styled.span`
+  ${theme.fonts.Medium06};
+  color: ${theme.colors.gray03};
+  display: flex;
+  margin-top: 4px;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
+export const Num = styled.span`
+  ${theme.fonts.Medium00};
+  color: ${theme.colors.mainColor};
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: -2px;
+`;
