@@ -276,6 +276,15 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
           <Icon icon="BtnMapList" />
         </S.BtnList>
       </S.BottomBtnWrap>
+      <S.WorkerLengWrap>
+        <S.WorkerTit>
+          내 근방 <br />
+          워케이셔너 수
+        </S.WorkerTit>
+        <S.WorkerLeng>
+          <S.Num>105</S.Num>명
+        </S.WorkerLeng>
+      </S.WorkerLengWrap>
       <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>
         <S.DrawerHeader />
         <S.DrawerBody>

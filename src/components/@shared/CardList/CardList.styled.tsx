@@ -6,13 +6,9 @@ export const CardWrap = styled.div<{ isClickable: boolean }>`
   background: ${theme.colors.white};
   border-radius: 27px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  margin: 16px 14px 0;
+  margin: 16px 15px 0;
 
-  ${({ isClickable }) => (isClickable ? `cursor: pointer;` : "")}
-
-  &:first-child {
-    margin-top: 0;
-  }
+  ${({ isClickable }) => (isClickable ? "cursor: pointer" : "")}
 
   @media screen and (max-width: 340px) {
     padding: 15px 12px 11px;
