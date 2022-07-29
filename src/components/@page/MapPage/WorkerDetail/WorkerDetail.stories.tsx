@@ -3,7 +3,7 @@ import React from "react";
 import WorkerDetail from "./WorkerDetail";
 
 export default {
-  title: "components/Pages/WorkerDetail",
+  title: "components/Pages/MapPage/WorkerDetail",
   component: WorkerDetail,
 } as ComponentMeta<typeof WorkerDetail>;
 

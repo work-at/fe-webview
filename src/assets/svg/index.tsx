@@ -5,6 +5,7 @@ export { default as NaviMap } from "../images/icons/Navi_Map.svg";
 export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
+export { default as Logo } from "../images/icons/logo.svg";
 export { default as BtnBack } from "../images/icons/BtnBack.svg";
 export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
 

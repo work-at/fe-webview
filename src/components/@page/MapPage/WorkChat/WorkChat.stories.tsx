@@ -3,7 +3,7 @@ import React from "react";
 import WorkChat from "./WorkChat";
 
 export default {
-  title: "components/Pages/WorkChat",
+  title: "components/Pages/MapPage/WorkChat",
   component: WorkChat,
 } as ComponentMeta<typeof WorkChat>;
 

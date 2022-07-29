@@ -3,7 +3,7 @@ import React from "react";
 import ReviewWrite from "./ReviewWrite";
 
 export default {
-  title: "components/Pages/ReviewWrite",
+  title: "components/Pages/MapPage/ReviewWrite",
   component: ReviewWrite,
 } as ComponentMeta<typeof ReviewWrite>;
 
