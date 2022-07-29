@@ -48,6 +48,11 @@ const WorkChat = () => {
                   <S.InfoList>워케이션 기간이 언제까지신가요?</S.InfoList>
                 </S.EmptyInfoList>
               </S.EmptyInfoBox>
+              <S.EtcInfoList>
+                <S.EtcList>운영정책을 위반할 경우 이용에 제한이 있을 수 있습니다.</S.EtcList>
+                <S.EtcList>회사 보안에 위반된 질문은 금지합니다.</S.EtcList>
+                <S.EtcList>개인정보 등 무례한 질문은 삼가해주세요.</S.EtcList>
+              </S.EtcInfoList>
             </S.EmptyMsgWrap>
             {/* 메시지 없을 때 케이스 */}
 

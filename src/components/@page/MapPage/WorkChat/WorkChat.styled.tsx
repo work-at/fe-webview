@@ -150,7 +150,7 @@ export const EmptyMsgWrap = styled.div``;
 export const EmptyInfoBox = styled.div`
   background: ${theme.colors.gray08};
   border-radius: 27px;
-  padding: 18px 27px 23px;
+  padding: 18px 7.4667vw 23px;
   margin-top: 23px;
 `;
 
@@ -182,5 +182,28 @@ export const InfoList = styled.li`
   }
   &:first-child {
     margin-top: 0;
+  }
+`;
+
+export const EtcInfoList = styled.ul`
+  margin-top: 15px;
+  padding: 0 7.4667vw;
+`;
+
+export const EtcList = styled.li`
+  ${theme.fonts.Bold07};
+  color: ${theme.colors.gray07};
+  position: relative;
+  padding-left: 10px;
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 3px;
+    height: 3px;
+    background: ${theme.colors.gray07};
+    border-radius: 100%;
   }
 `;
