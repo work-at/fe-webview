@@ -3,6 +3,10 @@ import { ACCESS_TOKEN, PATH } from "@/constants";
 import { useLoginMutation } from "@/domains/auth/auth.api";
 import { useFlow } from "@/stack";
 import { useCallback, useEffect } from "react";
+import * as S from "./LoginPage.styled";
+import Icon from "@/assets/Icon";
+import BtnKakaoLogin from "@/assets/images/btn-kakaologin.png";
+import { useStack } from "@stackflow/react";
 
 const CLIENT_ID = "7052acd04b3385c80fac9bb40d8b5a32";
 const CALLBACK_URL = (base: string) => {
@@ -26,7 +30,7 @@ const parseCallBack = (url: string) => {
 const LoginPage = () => {
   const { replace } = useFlow();
   const { mutateAsync: login } = useLoginMutation();
-
+  const { activities } = useStack();
   const handleLogin = useCallback(
     async (code: string) => {
       try {
@@ -38,11 +42,11 @@ const LoginPage = () => {
           }
 
           if (data.code === "WORK02") {
-            replace(PATH.SIGN_UP.stack, { ...data }, { animate: false });
+            replace(PATH.SIGN_UP.stack, { ...data }, { animate: true });
           }
         }
       } catch (error) {
-        alert("로그인 도중 에러가 발생했습니다.");
+        // alert("로그인 도중 에러가 발생했습니다.");
       }
     },
     [login, replace]
@@ -50,12 +54,29 @@ const LoginPage = () => {
 
   useEffect(() => {
     const { code } = parseCallBack(window.location.search) as { code: string };
-    handleLogin(code);
+    if (code) handleLogin(code);
   }, [handleLogin]);
 
   return (
-    <StackLayout>
-      <a href={CALLBACK_URL(window.location.origin)}>login</a>
+    <StackLayout isHide={activities[activities.length - 1].name === "LoginPage"}>
+      <S.SignUpIntro>
+        <S.Logo>
+          <Icon icon="Logo" />
+        </S.Logo>
+        <S.IntroTxt>
+          일상에 변화를 줘보세요.
+          <br />
+          <br />
+          새로운 에너지를 충전하고
+          <br />
+          업무 효율을 높이세요.
+        </S.IntroTxt>
+        <S.BtnKaKaoLogin>
+          <a href={CALLBACK_URL(window.location.origin)}>
+            <img src={BtnKakaoLogin} alt="카카오로 시작하기" />
+          </a>
+        </S.BtnKaKaoLogin>
+      </S.SignUpIntro>
     </StackLayout>
   );
 };

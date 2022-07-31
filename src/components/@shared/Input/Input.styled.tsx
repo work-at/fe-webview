@@ -19,13 +19,14 @@ export const InputBox = styled.div`
   position: relative;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<React.InputHTMLAttributes<HTMLInputElement>>`
   display: inline-block;
   width: 100%;
   height: 46px;
   padding: 0 80px 0 0;
   background: ${theme.colors.white};
   border: none;
+  outline: none;
   border-bottom: 3px solid ${theme.colors.mainColor};
   color: ${theme.colors.black};
   ${theme.fonts.Medium02};

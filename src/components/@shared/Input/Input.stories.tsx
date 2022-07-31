@@ -12,8 +12,7 @@ export const Basic = Template.bind({});
 Basic.story = {
   args: {
     placeholder: "닉네임 입력",
-    count: true,
-    doubleChk: true,
+    count: 0,
   },
 };
 

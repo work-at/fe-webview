@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./Button.styled";
 
-export type ButtonProps = {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** 버튼 사이즈 (lg|md|sm) */
   size?: string;
   /** 버튼 컬러(blue|white) */
@@ -14,7 +14,7 @@ export type ButtonProps = {
   children: React.ReactNode;
   disabled?: boolean;
   onClick?: () => void;
-};
+}
 
 const Button = ({ size, bgColor, shadow, round, children, onClick, ...props }: ButtonProps) => {
   return (

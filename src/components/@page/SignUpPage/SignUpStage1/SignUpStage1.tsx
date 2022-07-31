@@ -15,7 +15,7 @@ const SignUpStage1 = () => {
         </S.SignUpTit>
         <S.SignUpSubTit>다른 사용자에게 공개되는 닉네임이며 변경할 수 있어요.</S.SignUpSubTit>
         <S.SignUpInputWrap>
-          <Input placeholder="닉네임 입력" count doubleChk />
+          <Input placeholder="닉네임 입력" count={0} />
         </S.SignUpInputWrap>
       </S.SignUpWrap>
       <Button size="lg" bgColor="black">

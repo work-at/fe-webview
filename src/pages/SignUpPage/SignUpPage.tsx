@@ -1,43 +1,50 @@
+import { useCallback, useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { useActivityParams } from "@stackflow/react";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Button from "@/components/@shared/Button/Button";
+import Header from "@/components/@shared/Header/Header";
+import Input from "@/components/@shared/Input/Input";
 import { ACCESS_TOKEN, PATH } from "@/constants";
 import { usePositionListQuery, useSignUpMutation, useWorkingYearListQuery } from "@/domains/auth/auth.api";
 import { SignUpRequest } from "@/domains/auth/auth.dto";
-import { POSITION, WORKING_YEAR } from "@/domains/auth/auth.text";
+import { PositionType, WorkingYearType } from "@/domains/auth/auth.text";
 import { useFlow } from "@/stack";
-import { useActivityParams } from "@stackflow/react";
-import { useCallback, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import * as S from "./SignUpPage.styled";
+import CheckBox from "@/components/@shared/CheckBox";
+import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const NICKNAME_STEP = 0;
 const POSITION_WORKING_YEAR_STEP = 1;
+const SIGN_UP_FINISH = 2;
 
 const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
   const { oauthId } = useActivityParams();
 
-  const { push, replace } = useFlow();
+  const { replace } = useFlow();
   const { mutateAsync: signUp } = useSignUpMutation();
 
   const { data: positionList } = usePositionListQuery();
   const { data: workingYearList } = useWorkingYearListQuery();
 
-  const {
-    setValue,
-    getValues,
-    register,
-    watch,
-    formState: { errors },
-    setError,
-    clearErrors,
-    handleSubmit,
-  } = useForm<SignUpRequest>({
+  const methods = useForm<SignUpRequest>({
     defaultValues: {
       nickname: "",
       oauthType: "KAKAO",
     },
   });
 
-  const nickname = watch("nickname");
+  const {
+    setValue,
+    getValues,
+    watch,
+    formState: { errors },
+    handleSubmit,
+  } = methods;
+
+  watch("nickname");
+  const nickname = getValues("nickname");
 
   useEffect(() => {
     if (!oauthId) {
@@ -45,49 +52,39 @@ const SignUpPage = () => {
       return;
     }
     setValue("oauthId", Number(oauthId));
+  }, [oauthId, replace, setValue]);
+
+  const handleNextStep = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStep(POSITION_WORKING_YEAR_STEP);
   }, []);
 
-  useEffect(() => {
-    if (nickname) {
-      clearErrors();
-    }
-  }, [nickname]);
-
-  const handleNextStep = useCallback(
-    async (e: any) => {
-      e.preventDefault();
-      // TODO: 추후에 API 고쳐지면 수정
-      // try {
-      //   const { data: isDuplicate } = await requestValidateNickname(encodeURIComponent(nickname));
-      //   if (!isDuplicate) {
-      //     setError('nickname', { type: "duplicate", message: '중복됩니다.' })
-      //     return;
-      //   }
-      // } catch {
-      //   setError('nickname', { type: "duplicate", message: '중복됩니다.' })
-      //   return;
-      // }
-
-      if (nickname) {
-        setStep(POSITION_WORKING_YEAR_STEP);
-        return;
-      }
-
-      setError("nickname", { type: "required", message: "입력해주세요." });
-    },
-    [nickname, setError]
-  );
+  const {
+    selected: selectedPosition,
+    isSelected: isSelectedPosition,
+    onChangeOnly: onChangeOnlyPosition,
+  } = useMultiselect([]);
+  const {
+    selected: selectedWorkingYear,
+    isSelected: isSelectedWorkingYear,
+    onChangeOnly: onChangeOnlyWorkingYear,
+  } = useMultiselect([]);
 
   const handleSignUp = handleSubmit(async (formData) => {
+    const body = {
+      ...formData,
+      position: selectedPosition[0] as PositionType,
+      workingYear: selectedWorkingYear[0] as WorkingYearType,
+    };
     try {
-      const { data } = await signUp(formData);
+      const { data } = await signUp(body);
       if (data.accessToken) {
         sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
-        push(PATH.MAP.stack, {});
+        setStep(SIGN_UP_FINISH);
         return;
       }
 
-      push(PATH.LOGIN.stack, {});
+      replace(PATH.LOGIN.stack, {});
     } catch {
       alert("회원가입 도중 에러가 발생했습니다.");
     }
@@ -95,59 +92,85 @@ const SignUpPage = () => {
 
   if (step === NICKNAME_STEP) {
     return (
-      <form onSubmit={handleNextStep}>
-        <input
-          {...register("nickname", {
-            required: "입력해주세요.",
-            min: 2,
-            max: 8,
-            pattern: /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/,
-          })}
-        />
-        <div>{errors.nickname?.message}</div>
-        <button type="submit">next</button>
-      </form>
+      <StackLayout isHide>
+        <FormProvider {...methods}>
+          <Header useBack bgColor />
+          <form onSubmit={handleNextStep}>
+            <S.SignUpWrap>
+              <S.SignUpTit>
+                닉네임을
+                <br />
+                입력해 주세요
+              </S.SignUpTit>
+              <S.SignUpSubTit>다른 사용자에게 공개되는 닉네임이며 변경할 수 있어요.</S.SignUpSubTit>
+              <S.SignUpInputWrap>
+                <Input placeholder="닉네임 입력" count={nickname.length ?? 0} maxLength={8} />
+              </S.SignUpInputWrap>
+            </S.SignUpWrap>
+            <Button
+              type="submit"
+              size="lg"
+              bgColor="black"
+              disabled={!!errors?.nickname || getValues("nickname").length < 2}
+            >
+              다음
+            </Button>
+          </form>
+        </FormProvider>
+      </StackLayout>
     );
   }
 
   if (step === POSITION_WORKING_YEAR_STEP) {
     return (
-      <StackLayout>
+      <StackLayout isHide>
+        <Header useBack bgColor />
         <form onSubmit={handleSignUp}>
-          <select
-            defaultValue=""
-            {...register("position", { required: "선택해주세요" })}
-            value={POSITION[getValues("position") ?? ""]}
+          <S.SignUpWrap>
+            <S.SignUpTit>직무를 입력해 주세요</S.SignUpTit>
+            <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
+            <S.ChekBoxWrap>
+              <CheckBox
+                isSelected={isSelectedPosition}
+                onChange={onChangeOnlyPosition}
+                items={positionList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
+              />
+            </S.ChekBoxWrap>
+            <S.SignUpTit>경력을 입력해 주세요</S.SignUpTit>
+            <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
+            <S.ChekBoxWrap>
+              <CheckBox
+                isSelected={isSelectedWorkingYear}
+                onChange={onChangeOnlyWorkingYear}
+                items={workingYearList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
+              />
+            </S.ChekBoxWrap>
+          </S.SignUpWrap>
+          <Button
+            size="lg"
+            bgColor="black"
+            disabled={!selectedPosition.length || !selectedWorkingYear.length}
+            type="submit"
           >
-            <option hidden value="">
-              직무 선택
-            </option>
-            {positionList?.data.response.map(({ name, content }) => (
-              <option value={name} key={name}>
-                {content}
-              </option>
-            ))}
-          </select>
-          <div>{errors.position?.message}</div>
-          <br></br>
-          <select
-            defaultValue=""
-            {...register("workingYear", { required: "선택해주세요" })}
-            value={WORKING_YEAR[getValues("workingYear") ?? ""]}
-          >
-            <option hidden value="">
-              경력 선택
-            </option>
-            {workingYearList?.data.response.map(({ name, content }) => (
-              <option value={name} key={name}>
-                {content}
-              </option>
-            ))}
-          </select>
-          <div>{errors.workingYear?.message}</div>
-          <button type="submit">가입</button>
+            다음
+          </Button>
         </form>
       </StackLayout>
+    );
+  }
+
+  if (step === SIGN_UP_FINISH) {
+    return (
+      <S.SignUpFinish>
+        <S.FinishTxt>
+          축하합니다!
+          <br />
+          이제 워케이션을 떠나볼까요?
+        </S.FinishTxt>
+        <Button size="lg" bgColor="black" onClick={() => replace(PATH.MAP.stack, {})}>
+          시작하기
+        </Button>
+      </S.SignUpFinish>
     );
   }
 

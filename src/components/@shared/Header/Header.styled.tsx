@@ -5,7 +5,7 @@ import { HeaderProps } from "./Header";
 type StyledHeaderProps = Omit<HeaderProps, "useBack">;
 
 export const Header = styled.div<StyledHeaderProps>`
-  padding-top: 52px;
+  padding-top: 22px;
   z-index: 100;
   ${({ bgColor }) =>
     bgColor
