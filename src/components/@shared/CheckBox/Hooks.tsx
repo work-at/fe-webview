@@ -13,9 +13,20 @@ export const useMultiselect = (initialValue: string[]) => {
     }
   };
 
+  const onChangeOnly = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const index = selected.indexOf(value);
+    setSelected([value]);
+    if (index > -1) {
+      setSelected([]);
+    } else {
+      setSelected([value]);
+    }
+  };
+
   const isSelected = (value: string) => {
     return selected.includes(value);
   };
 
-  return { selected, isSelected, onChange };
+  return { selected, isSelected, onChange, onChangeOnly };
 };
