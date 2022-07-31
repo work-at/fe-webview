@@ -30,6 +30,7 @@ const Input = ({ count, ...props }: InputProps) => {
         return;
       }
       clearErrors();
+      (document?.activeElement as any)?.blur();
     } catch {
       setError("nickname", { type: "serverResponse" });
     }
