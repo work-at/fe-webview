@@ -6,21 +6,22 @@ export type CheckBoxItem = {
   id: string;
   checked?: boolean;
   label: string;
-  isIcon?: boolean;
   iconType?: any;
 };
 
-export type CheckboxProps = {
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   items: CheckBoxItem[];
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isSelected: (id: string) => boolean;
-};
+  isIcon?: boolean;
+  widthAuto?: boolean;
+}
 
-const CheckBox = ({ items, isSelected, onChange }: CheckboxProps) => {
+const CheckBox = ({ items, isSelected, onChange, isIcon, widthAuto }: CheckboxProps) => {
   return (
-    <S.CheckboxList>
+    <S.CheckboxList isIcon={isIcon} widthAuto={widthAuto}>
       {items.map((item, index) => (
-        <S.ListItem key={index} isIcon={item.isIcon}>
+        <S.ListItem key={index} isIcon={isIcon} widthAuto={widthAuto}>
           <S.CheckboxContainer>
             <S.HiddenCheckbox
               id={item.id}
@@ -29,9 +30,9 @@ const CheckBox = ({ items, isSelected, onChange }: CheckboxProps) => {
               onChange={onChange}
               checked={isSelected(item.id)}
             />
-            <S.Label htmlFor={item.id} isIcon={item.isIcon}>
-              {item.isIcon && <Icon icon={item.iconType} size={30} />}
-              <S.LabelTxt isIcon={item.isIcon}>{item.label}</S.LabelTxt>
+            <S.Label htmlFor={item.id} isIcon={isIcon} widthAuto={widthAuto}>
+              {isIcon && <Icon icon={item.iconType} size={30} />}
+              <S.LabelTxt isIcon={isIcon}>{item.label}</S.LabelTxt>
             </S.Label>
           </S.CheckboxContainer>
         </S.ListItem>

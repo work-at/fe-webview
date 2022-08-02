@@ -20,41 +20,36 @@ const ReviewWrite = () => {
           <CheckBox
             isSelected={isSelected}
             onChange={onChange}
+            isIcon
             items={[
               {
                 id: "chk1",
                 label: "식사메뉴가\n있어요",
-                isIcon: true,
                 iconType: "CafeReview1",
               },
               {
                 id: "chk2",
                 label: "와이파이가\n빵빵해요",
-                isIcon: true,
                 iconType: "CafeReview2",
               },
               {
                 id: "chk3",
                 label: "콘센트 자리\n많아요",
-                isIcon: true,
                 iconType: "CafeReview3",
               },
               {
                 id: "chk4",
                 label: "좌석이 업무하기\n좋아요",
-                isIcon: true,
                 iconType: "CafeReview4",
               },
               {
                 id: "chk5",
                 label: "조용한 공간이\n있어요",
-                isIcon: true,
                 iconType: "CafeReview5",
               },
               {
                 id: "chk6",
                 label: "집중이\n잘 돼요",
-                isIcon: true,
                 iconType: "CafeReview6",
               },
             ]}

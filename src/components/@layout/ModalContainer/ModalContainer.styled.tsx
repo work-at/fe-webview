@@ -1,5 +1,6 @@
 import { Z_INDEX } from "@/constants/zIndex";
 import styled from "styled-components";
+import { theme } from "@/assets/styles/theme";
 
 export const Container = styled.div<{ isOpen: boolean }>`
   position: fixed;
@@ -16,7 +17,7 @@ export const Container = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
 
   transition: opacity 1s;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(86, 86, 86, 0.5);
 
   ${({ isOpen }) =>
     isOpen
@@ -31,17 +32,12 @@ export const Container = styled.div<{ isOpen: boolean }>`
 
 export const Dialog = styled.div<{ isOpen: boolean }>`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  min-height: 12.5rem;
-  max-height: 70%;
-  min-width: 12.5rem;
-  max-width: 90%;
-
+  text-align: center;
+  max-width: 70%;
+  width: 70%;
   transition: transform 1s;
-  background-color: white;
+  background: ${theme.colors.white};
+  padding: 40px 14px 13px;
 
   ${({ isOpen }) =>
     isOpen
@@ -53,14 +49,21 @@ export const Dialog = styled.div<{ isOpen: boolean }>`
   `}
 `;
 
-export const Header = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  justify-content: flex-end;
+export const Body = styled.div`
+  ${theme.fonts.Medium02};
+  color: ${theme.colors.black};
 `;
 
-export const Body = styled.div``;
+export const Foot = styled.div`
+  display: flex;
+  margin-top: 27px;
+`;
 
-export const CloseButton = styled.button``;
+export const CloseButton = styled.button`
+  ${theme.fonts.Bold05};
+  color: ${theme.colors.white};
+  background: ${theme.colors.black};
+  width: 100%;
+  height: 44px;
+  border-radius: 44px;
+`;

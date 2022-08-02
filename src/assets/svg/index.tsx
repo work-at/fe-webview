@@ -5,7 +5,7 @@ export { default as NaviMap } from "../images/icons/Navi_Map.svg";
 export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
-export { default as Logo } from "../images/icons/logo.svg";
+export { default as Logo } from "../images/icons/Logo.svg";
 export { default as BtnBack } from "../images/icons/BtnBack.svg";
 export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
 
@@ -69,3 +69,6 @@ export { default as BtnSendMsg } from "../images/icons/BtnSendMsg.svg";
 
 export { default as BtnMapLocation } from "../images/icons/BtnMapLocation.svg";
 export { default as BtnMapList } from "../images/icons/BtnMapList.svg";
+export { default as IconCamera } from "../images/icons/IconCamera.svg";
+export { default as IconStar } from "../images/icons/IconStar.svg";
+export { default as BtnEdit } from "../images/icons/BtnEdit.svg";
