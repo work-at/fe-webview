@@ -52,8 +52,7 @@ export const Button = styled.button<StyledButtonProps>`
     props.size === "sm" &&
     props.round &&
     `
-			height: 29px;
-			padding: 0 13px;
+			padding: 6px 13px 5px;
       border-radius: 44px;
       font-size: ${theme.fonts.Medium06.fontSize};
       line-height: ${theme.fonts.Medium06.lineHeight};
@@ -87,10 +86,30 @@ export const Button = styled.button<StyledButtonProps>`
 		`};
 
   ${(props) =>
+    props.size === "lg" &&
     props.disabled &&
     `
       background: ${theme.colors.gray06};
       color: ${theme.colors.white};
       cursor: default;
+    `};
+
+  ${(props) =>
+    props.size === "sm" &&
+    props.disabled &&
+    `
+    border: 1px solid ${theme.colors.gray06};
+    color: ${theme.colors.gray05};
+    background: ${theme.colors.white};
+      cursor: default;
+    `};
+
+  ${(props) =>
+    props.size === "sm" &&
+    props.active &&
+    `
+      background: ${theme.colors.white};
+      color: ${theme.colors.mainColor};
+      border-color: ${theme.colors.mainColor};
     `};
 `;

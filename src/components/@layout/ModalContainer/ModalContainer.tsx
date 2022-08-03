@@ -77,10 +77,10 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
   return (
     <S.Container ref={modalRef} isOpen={isOpen} onClick={handleClickDimmed} tabIndex={-1}>
       <S.Dialog isOpen={isOpen}>
-        <S.Header>
-          <S.CloseButton onClick={onClose}>닫기</S.CloseButton>
-        </S.Header>
         <S.Body>{children}</S.Body>
+        <S.Foot>
+          <S.CloseButton onClick={onClose}>닫기</S.CloseButton>
+        </S.Foot>
       </S.Dialog>
     </S.Container>
   );

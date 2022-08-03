@@ -19,10 +19,13 @@ const Template: ComponentStory<typeof Button> = () => {
       <Button size="sm" round>
         작은 버튼 텍스트
       </Button>
+      <Button size="sm" round active>
+        작은 버튼 활성화
+      </Button>
     </>
   );
 };
 
 export const Basic = Template.bind({});
 
-Basic.play = async ({ canvasElement }: any) => {};
+// Basic.play = async ({ canvasElement }: any) => {};

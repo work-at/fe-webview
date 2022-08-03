@@ -13,6 +13,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /** 버튼 안의 내용 */
   children: React.ReactNode;
   disabled?: boolean;
+  active?: boolean;
   onClick?: () => void;
 }
 

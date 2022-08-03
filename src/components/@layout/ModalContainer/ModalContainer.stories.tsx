@@ -16,7 +16,7 @@ const Template: Story<ModalContainerProps> = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <div>
+    <>
       <button
         style={{ position: "fixed", bottom: "10px", right: "10px", zIndex: Z_INDEX.HIGHEST }}
         onClick={() => setOpen((isOpen) => !isOpen)}
@@ -24,9 +24,10 @@ const Template: Story<ModalContainerProps> = () => {
         Toggle Modal
       </button>
       <ModalContainer isOpen={isOpen} onClose={() => setOpen(false)}>
-        <h3>Modal</h3>
+        문의 내용이 전달되었어요. <br />
+        소중한 문의 감사합니다!
       </ModalContainer>
-    </div>
+    </>
   );
 };
 

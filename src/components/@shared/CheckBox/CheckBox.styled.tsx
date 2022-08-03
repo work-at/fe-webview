@@ -1,39 +1,39 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { CheckboxProps } from "./CheckBox";
 
-export const CheckboxList = styled.ul<{ isIcon?: boolean }>`
+type StyledCheckBoxProps = Pick<CheckboxProps, "isIcon" | "widthAuto" | "checked">;
+
+export const CheckboxList = styled.ul<StyledCheckBoxProps>`
   display: flex;
   flex-wrap: wrap;
-  ${({ isIcon }) =>
-    isIcon
+  ${(props) =>
+    props.isIcon
       ? `
-      margin-top: -15px;
+      margin: -15px 0 0 -20px;
     `
       : `
-      margin-top: -13px;
+      margin: -13px 0 0 -9px;
     `}
 `;
 
-export const ListItem = styled.li<{ isIcon?: boolean }>`
-  ${({ isIcon }) =>
-    isIcon
+export const ListItem = styled.li<StyledCheckBoxProps>`
+  ${(props) =>
+    props.isIcon
       ? `
-      width: calc((100% - 20px) / 2);
+      width: calc((100% - 40px) / 2);
       margin: 15px 0 0 20px;
     `
       : `
-      width: calc((100% - 20px) / 3);
-      margin: 13px 0 0 10px;
+      width: calc((100% - 27px) / 3);
+      margin: 13px 0 0 9px;
     `}
-  &:nth-child(odd) {
-    margin-left: ${({ isIcon }) => (isIcon ? "0px" : "")};
-  }
-  &:nth-of-type(1) {
-    margin-left: ${({ isIcon }) => (isIcon ? "" : "0px")};
-  }
-  &:nth-of-type(3n + 1) {
-    margin-left: ${({ isIcon }) => (isIcon ? "" : "0px")};
-  }
+  ${(props) =>
+    !props.isIcon &&
+    props.widthAuto &&
+    `
+      width: auto;
+    `}
   & > div {
     width: 100%;
   }
@@ -44,7 +44,7 @@ export const CheckboxContainer = styled.div`
   vertical-align: middle;
 `;
 
-export const HiddenCheckbox = styled.input<{ checked: boolean }>`
+export const HiddenCheckbox = styled.input<StyledCheckBoxProps>`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -55,8 +55,8 @@ export const HiddenCheckbox = styled.input<{ checked: boolean }>`
   white-space: nowrap;
   width: 1px;
   & + label {
-    ${({ checked }) =>
-      checked
+    ${(props) =>
+      props.checked
         ? `
       color: ${theme.colors.mainColor};
       border-color: ${theme.colors.mainColor};
@@ -65,12 +65,19 @@ export const HiddenCheckbox = styled.input<{ checked: boolean }>`
       color: ${theme.colors.black};
       border-color: ${theme.colors.white};
     `}
+    span {
+      ${(props) =>
+        props.checked &&
+        `
+        font-weight: 700;
+      `}
+    }
   }
 `;
 
-export const Label = styled.label<{ isIcon?: boolean }>`
-  ${({ isIcon }) =>
-    isIcon
+export const Label = styled.label<StyledCheckBoxProps>`
+  ${(props) =>
+    props.isIcon
       ? `
       padding: 7px 17px;
       border-radius: 10px;
@@ -82,6 +89,12 @@ export const Label = styled.label<{ isIcon?: boolean }>`
       border-radius: 19px;
       text-align: center;
       box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
+    `}
+  ${(props) =>
+    !props.isIcon &&
+    props.widthAuto &&
+    `
+      padding: 8px 16px 6px; 
     `}
   display: block;
   background: ${theme.colors.white};
@@ -95,11 +108,11 @@ export const Label = styled.label<{ isIcon?: boolean }>`
   }
 `;
 
-export const LabelTxt = styled.span<{ isIcon?: boolean }>`
+export const LabelTxt = styled.span<StyledCheckBoxProps>`
   display: block;
 
-  ${({ isIcon }) =>
-    isIcon
+  ${(props) =>
+    props.isIcon
       ? `
       min-height: 40px;
       display:flex;
