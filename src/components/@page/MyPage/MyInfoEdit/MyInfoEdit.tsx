@@ -6,7 +6,8 @@ import Button from "@/components/@shared/Button/Button";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const MyInfoEdit = () => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { selected, onChange } = useMultiselect([]);
+
   return (
     <>
       <Header bgColor useBack />
@@ -56,7 +57,7 @@ const MyInfoEdit = () => {
           <S.ItemBody>
             <S.ChekBoxWrap>
               <CheckBox
-                isSelected={isSelected}
+                selectedItemIds={selected}
                 onChange={onChange}
                 widthAuto
                 items={[

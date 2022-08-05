@@ -5,7 +5,7 @@ import Button from "@/components/@shared/Button/Button";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const SignUpStage2 = () => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { selected, onChange } = useMultiselect([]);
   return (
     <>
       <Header useBack bgColor />
@@ -14,7 +14,7 @@ const SignUpStage2 = () => {
         <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
         <S.ChekBoxWrap>
           <CheckBox
-            isSelected={isSelected}
+            selectedItemIds={selected}
             onChange={onChange}
             items={[
               {
@@ -52,7 +52,7 @@ const SignUpStage2 = () => {
         <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
         <S.ChekBoxWrap>
           <CheckBox
-            isSelected={isSelected}
+            selectedItemIds={selected}
             onChange={onChange}
             items={[
               {
