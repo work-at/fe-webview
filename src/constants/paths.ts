@@ -78,5 +78,10 @@ export const PATH = {
       full: "/my-page/job-and-year-select",
       fragments: "job-and-year-select",
     },
+    SETTING: {
+      stack: "Setting",
+      full: "/my-page/setting",
+      fragments: "setting",
+    },
   },
 } as const;

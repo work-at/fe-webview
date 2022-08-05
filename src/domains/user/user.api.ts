@@ -73,3 +73,9 @@ export const useUpdateUserProfileMutation = () => {
   queryClient.invalidateQueries(QUERY_NAME.GET_USER_INFO);
   return useMutation(requestUpdateUserProfile);
 };
+
+export const requestUserLocationBlock = async () => {
+  return;
+};
+
+export const useUserLocationBlockMutation = () => useMutation(requestUserLocationBlock);

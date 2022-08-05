@@ -25,6 +25,10 @@ const MyPage = () => {
     push("EmailVerification", {});
   }, [push]);
 
+  const handleEmailSettingRoute = useCallback(() => {
+    push("Setting", {});
+  }, [push]);
+
   const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { files } }) => {
     if (!files) return;
 
@@ -77,7 +81,7 @@ const MyPage = () => {
             <S.MenuLink onClick={handleProfileEditRoute}>프로필 수정</S.MenuLink>
           </S.MenuList>
           <S.MenuList>
-            <S.MenuLink>설정</S.MenuLink>
+            <S.MenuLink onClick={handleEmailSettingRoute}>설정</S.MenuLink>
           </S.MenuList>
           <S.MenuList>
             <S.MenuLink>문의</S.MenuLink>
