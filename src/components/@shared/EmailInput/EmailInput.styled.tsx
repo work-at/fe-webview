@@ -38,13 +38,3 @@ export const Input = styled.input<React.InputHTMLAttributes<HTMLInputElement>>`
     right: 0;
   }
 `;
-
-export const ErrorTxt = styled.p`
-  ${theme.fonts.Medium06};
-  color: ${theme.colors.seoul};
-  margin-top: 10px;
-`;
-
-export const SuccessTxt = styled(ErrorTxt)`
-  color: ${theme.colors.mainColor};
-`;
