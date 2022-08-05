@@ -1,5 +1,5 @@
-import axios, { AxiosError } from "axios";
-import { QueryFunction, QueryKey, useQuery, UseQueryOptions } from "react-query";
+import { AxiosError, AxiosResponse } from "axios";
+import { QueryFunction, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 
 import * as DTO from "./user.dto";
 import * as Action from "./user.action";
@@ -9,9 +9,6 @@ import { API_URL, QUERY_NAME } from "@/constants";
 import { baseInstance } from "@/services";
 
 type UserAddressQueryKey = readonly [typeof QUERY_NAME.GET_USER_ADDRESS, Action.UserAddressCriteria];
-
-// TODO : 액세스 토큰 연동
-const accessToken = "accessToken";
 
 // TODO : 실제 API 데이터 연동
 const DUMMY_DATA: Action.UserAddressInfo = {
@@ -55,5 +52,24 @@ export const useUserAddressQuery = (
 export const requestGetUserInfoBase = () => baseInstance().get<unknown, DTO.GetUserInfoResponse>(API_URL.GET_USER_LIST);
 
 export const requestGetUserInfo: QueryFunction<DTO.GetUserInfoResponse> = async () => {
-  return await requestGetUserInfoBase();
+  const response = await baseInstance().get<unknown, AxiosResponse<DTO.GetUserInfoResponse>>(API_URL.GET_USER_LIST);
+
+  return response.data;
+};
+
+export const useUserInfo = () => {
+  return useQuery([QUERY_NAME.GET_USER_INFO], requestGetUserInfo);
+};
+
+export const requestUpdateUserProfile = async (command: Action.UpdateUserInfoCommand) =>
+  baseInstance().put(
+    API_URL.UPDATE_USER_PROFILE,
+    Mapper.a2dMapper_UpdateUserInfoCommand_PutUserProfileRequest(command)
+  );
+
+export const useUpdateUserProfileMutation = () => {
+  const queryClient = useQueryClient();
+  // TODO : 실패 / 성공 경우 구분하기
+  queryClient.invalidateQueries(QUERY_NAME.GET_USER_INFO);
+  return useMutation(requestUpdateUserProfile);
 };

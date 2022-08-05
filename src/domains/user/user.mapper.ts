@@ -21,3 +21,16 @@ export const a2dMapper_UserAddressPinsCriteria_GetAddressAndNearWorkerCountReque
     longitude: String(criteria.lng),
   };
 };
+
+export const a2dMapper_UpdateUserInfoCommand_PutUserProfileRequest = (
+  command: Action.UpdateUserInfoCommand
+): DTO.PutUserProfileRequest => {
+  // TODO : enum 알아내서 Mapping 완성하기
+  return {
+    activities: command.desiredActivities,
+    nickname: command.nickName,
+    position: command.job,
+    story: command.story,
+    workingYear: command.yearOfService,
+  };
+};

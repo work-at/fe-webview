@@ -9,8 +9,14 @@ export type GetAddressAndNearWorkerCountResponse = {
   count: number;
 };
 
+type Activity = {
+  content: string;
+  name: string;
+};
+
 export type GetUserInfoResponse = {
   certified: boolean;
+  activities: Activity[];
   id: number;
   imageUrl: string;
   nickname: string;
@@ -19,8 +25,17 @@ export type GetUserInfoResponse = {
     name: string;
   };
   story: string;
+  workchats: number;
   workingYear: {
     content: string;
     name: string;
   };
+};
+
+export type PutUserProfileRequest = {
+  activities: string[];
+  nickname: string;
+  position: string;
+  story: string;
+  workingYear: string;
 };
