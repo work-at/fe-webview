@@ -117,6 +117,7 @@ export const ReceiveMsg = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-align: left;
 `;
 
 export const ModalWrap = styled.div`

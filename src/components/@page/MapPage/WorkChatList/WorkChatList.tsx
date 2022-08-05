@@ -16,6 +16,7 @@ export type WorkChatListProps = {
   items: WorkChatItem[];
   show: boolean;
 };
+
 export const Modal = ({ show }: WorkChatListProps) => {
   if (!show) {
     return null;
@@ -29,6 +30,29 @@ export const Modal = ({ show }: WorkChatListProps) => {
 };
 
 const WorkChatList = ({ items }: WorkChatListProps) => {
+  const [show, setShow] = useState(false);
+  const popRef = useRef<HTMLDivElement>(null);
+
+  const onClickOutside = useCallback(
+    ({ target }) => {
+      if (popRef.current && !popRef.current.contains(target)) {
+        setShow(false);
+      }
+    },
+    [setShow]
+  );
+
+  useEffect(() => {
+    document.addEventListener("click", onClickOutside);
+    return () => {
+      document.removeEventListener("click", onClickOutside);
+    };
+  }, []);
+
+  const onClickToggleModal = useCallback(() => {
+    setShow((prev) => !prev);
+  }, [setShow]);
+
   return (
     <>
       <Header useBack useRefresh bgColor fixed useLink title="이름여덟글자제한" />
@@ -54,11 +78,11 @@ const WorkChatList = ({ items }: WorkChatListProps) => {
                   <S.ReceiveMsg>{item.msg}</S.ReceiveMsg>
                 </S.ChatInfo>
               </S.BtnDetail>
-              <S.ModalWrap>
-                <S.BtnMore>
+              <S.ModalWrap ref={popRef}>
+                <S.BtnMore onClick={onClickToggleModal}>
                   <Icon icon="BtnMore" />
                 </S.BtnMore>
-                <Modal />
+                <Modal show={show} />
               </S.ModalWrap>
             </S.ListItem>
           ))}
