@@ -13,8 +13,8 @@ const Template: ComponentStory<typeof Button> = () => {
       <Button size="lg" bgColor="black">
         버튼 텍스트
       </Button>
-      <Button size="md" bgColor="white" shadow round>
-        <Icon icon={"BtnList"} size={14} /> 아이콘 + 텍스트
+      <Button size="md" bgColor="gray" round>
+        텍스트
       </Button>
       <Button size="sm" round>
         작은 버튼 텍스트

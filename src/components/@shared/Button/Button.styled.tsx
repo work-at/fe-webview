@@ -39,11 +39,24 @@ export const Button = styled.button<StyledButtonProps>`
 		`};
   ${(props) =>
     props.size === "md" &&
+    `
+			height: 44px;
+      padding: 0 24px;
+      font-size: ${theme.fonts.SemiBold03.fontSize};
+      line-height: ${theme.fonts.SemiBold03.lineHeight};
+      font-weight: ${theme.fonts.SemiBold03.fontWeight};
+		`};
+  ${(props) =>
+    props.size === "md" &&
     props.round &&
     `
-			height: 34px;
-			padding: 0 15px;
-      border-radius: 17px;
+    border-radius: 22px;
+    `};
+
+  ${(props) =>
+    props.size === "sm" &&
+    `
+			padding: 6px 13px 5px;
       font-size: ${theme.fonts.Medium06.fontSize};
       line-height: ${theme.fonts.Medium06.lineHeight};
       font-weight: ${theme.fonts.Medium06.fontWeight};
@@ -52,11 +65,7 @@ export const Button = styled.button<StyledButtonProps>`
     props.size === "sm" &&
     props.round &&
     `
-			padding: 6px 13px 5px;
-      border-radius: 44px;
-      font-size: ${theme.fonts.Medium06.fontSize};
-      line-height: ${theme.fonts.Medium06.lineHeight};
-      font-weight: ${theme.fonts.Medium06.fontWeight};
+    border-radius: 44px;
 		`};
 
   ${(props) =>
@@ -69,12 +78,12 @@ export const Button = styled.button<StyledButtonProps>`
 		`};
 
   ${(props) =>
-    props.bgColor === "blue" &&
+    props.bgColor === "gray" &&
     !props.disabled &&
     `
-			background: ${theme.colors.mainColor};
-			color: ${theme.colors.white};
-      border-color: ${theme.colors.mainColor};
+			background: ${theme.colors.gray08};
+			color: ${theme.colors.black};
+      border-color: ${theme.colors.gray08};
 		`};
   ${(props) =>
     props.bgColor === "white" &&

@@ -11,4 +11,4 @@ const Template: ComponentStory<typeof WorkChat> = () => <WorkChat />;
 
 export const Basic = Template.bind({});
 
-Basic.play = async ({ canvasElement }: any) => {};
+// Basic.play = async ({ canvasElement }: any) => {};

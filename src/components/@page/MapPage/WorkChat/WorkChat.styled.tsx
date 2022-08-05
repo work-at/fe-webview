@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { Z_INDEX } from "@/constants/zIndex";
 
 export const WorkChatWrap = styled.div`
   position: relative;
@@ -35,6 +36,12 @@ export const DataTxt = styled.span`
   vertical-align: middle;
 `;
 
+export const LeaveMsg = styled(DateBox)`
+  padding: 30px 0;
+`;
+
+export const LeaveTxt = styled(DataTxt)``;
+
 export const ReceivedMsgWrap = styled.div`
   margin-top: 19px;
 `;
@@ -57,7 +64,7 @@ export const ReceiveMsgTxt = styled.div`
   max-width: 73%;
   white-space: pre-wrap;
   border-radius: 27px;
-  z-index: 2;
+  z-index: ${Z_INDEX.ROOT};
   &:after {
     content: "";
     display: block;
@@ -69,7 +76,7 @@ export const ReceiveMsgTxt = styled.div`
     border-right: 10px solid transparent;
     border-left: 16px solid transparent;
     border-bottom: 10px solid ${theme.colors.gray08};
-    z-index: -1;
+    z-index: ${Z_INDEX.UNDER_ROOT};
   }
 `;
 
@@ -109,7 +116,7 @@ export const BottomFixedWrap = styled.div`
   transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
   -webkit-overflow-scrolling: touch;
-  z-index: 99;
+  z-index: ${Z_INDEX.HIGH};
 `;
 
 export const TxtInputWrap = styled.div`
@@ -133,7 +140,6 @@ export const Txtarea = styled.textarea`
   word-break: normal;
   min-height: 36px;
   max-height: 250px;
-  overflow: hidden;
   background-color: ${theme.colors.gray09};
 `;
 
@@ -206,4 +212,101 @@ export const EtcList = styled.li`
     background: ${theme.colors.gray07};
     border-radius: 100%;
   }
+`;
+
+export const ProModalWrap = styled.div`
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0 7.4667vw 60px;
+  border-radius: 27px 27px 0 0;
+  background-color: ${theme.colors.white};
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+  z-index: ${Z_INDEX.HIGHEST};
+`;
+
+export const ProInnerWrap = styled.div`
+  position: relative;
+  margin-top: -55px;
+  text-align: center;
+`;
+
+export const ProThumb = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 115px;
+  height: 115px;
+  overflow: hidden;
+  border-radius: 100%;
+  margin: 0 auto 10px;
+  > img {
+    display: block;
+    height: 100%;
+  }
+`;
+
+export const ProGoBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ProGoTxt = styled.span`
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.mainColor};
+  padding: 2px 5px 0 0;
+`;
+
+export const ProMsgTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 40px;
+`;
+export const BtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  > button {
+    width: calc((100% - 24px) / 2);
+  }
+`;
+
+export const BlockModalWrap = styled(ProModalWrap)`
+  display: none;
+`;
+
+export const BlockInnerWrap = styled.div`
+  padding-top: 50px;
+  text-align: center;
+`;
+
+export const BlockMsgTxt = styled(ProMsgTxt)`
+  padding-top: 18px;
+`;
+
+export const MatchMsgWrap = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  margin: 0 7.4667vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 57px;
+  background: ${theme.colors.gray09};
+  border-radius: 10px;
+  z-index: ${Z_INDEX.HIGH};
+`;
+
+export const Matchtxt = styled.span`
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.mainColor};
+  padding-left: 20px;
 `;

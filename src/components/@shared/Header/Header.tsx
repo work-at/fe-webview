@@ -9,9 +9,10 @@ export type HeaderProps = {
   useRefresh?: boolean;
   title?: string;
   fixed?: boolean;
+  useLink?: boolean;
 };
 
-const Header = ({ bgColor, useBack, title, useRefresh, fixed }: HeaderProps) => {
+const Header = ({ bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
   const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed}>
@@ -21,7 +22,12 @@ const Header = ({ bgColor, useBack, title, useRefresh, fixed }: HeaderProps) => 
             <Icon icon="BtnBack" size={24} />
           </S.BtnBack>
         )}
-        {title && <S.Tit>{title}</S.Tit>}
+        {title && !useLink && <S.Tit>{title}</S.Tit>}
+        {title && useLink && (
+          <S.Tit useLink={useLink}>
+            <S.TitBtn>{title}</S.TitBtn>
+          </S.Tit>
+        )}
         {useRefresh && (
           <S.BtnReset>
             <Icon icon="BtnRefresh" size={24} />

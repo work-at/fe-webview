@@ -1,21 +1,26 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import * as S from "./ModalContainer.styled";
+import * as S from "../ModalContainer/ModalContainer.styled";
 
-export type ModalContainerProps = {
+export type TwoBtnModalContainerProps = {
   isOpen: boolean;
   onClose: (e?: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
   children: React.ReactNode;
   closeOnClickOverlay?: boolean;
 };
 
-const $ModalContainer = document.getElementById("modal");
+const $TwoBtnModalContainer = document.getElementById("modal");
 
-export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay = true }: ModalContainerProps) => {
+export const TwoBtnModalContainer = ({
+  isOpen,
+  children,
+  onClose,
+  closeOnClickOverlay = true,
+}: TwoBtnModalContainerProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    $ModalContainer?.setAttribute("aria-hidden", "true");
+    $TwoBtnModalContainer?.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "hidden";
 
     const handleModalCloseWithEscHandler = ({ key }: KeyboardEvent) => {
@@ -58,7 +63,7 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
     document.addEventListener("keydown", handleFocusTrap);
 
     return () => {
-      $ModalContainer?.removeAttribute("aria-hidden");
+      $TwoBtnModalContainer?.removeAttribute("aria-hidden");
       document.body.style.overflow = "unset";
       document.removeEventListener("keyup", handleModalCloseWithEscHandler);
       document.removeEventListener("keydown", handleFocusTrap);
@@ -79,19 +84,20 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
       <S.Dialog isOpen={isOpen}>
         <S.Body>{children}</S.Body>
         <S.Foot>
-          <S.ConfirmButton onClick={onClose}>확인</S.ConfirmButton>
+          <S.CancelButton onClick={onClose}>취소</S.CancelButton>
+          <S.ConfirmButton onClick={onClose}>차단하기</S.ConfirmButton>
         </S.Foot>
       </S.Dialog>
     </S.Container>
   );
 };
 
-const ModalContainerPortal = (props: ModalContainerProps) => {
-  if (!$ModalContainer) {
+const TwoBtnModalContainerPortal = (props: TwoBtnModalContainerProps) => {
+  if (!$TwoBtnModalContainer) {
     throw Error("modal 요소가 HTML 상에 존재하지 않습니다.");
   }
 
-  return createPortal(<ModalContainer {...props} />, $ModalContainer);
+  return createPortal(<TwoBtnModalContainer {...props} />, $TwoBtnModalContainer);
 };
 
-export default ModalContainerPortal;
+export default TwoBtnModalContainerPortal;

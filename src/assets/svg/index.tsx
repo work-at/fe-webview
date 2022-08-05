@@ -57,18 +57,24 @@ export { default as WalkChatReview13 } from "../images/icons/WalkChatReview13.sv
 export { default as WalkChatReview14 } from "../images/icons/WalkChatReview14.svg";
 export { default as WalkChatReview15 } from "../images/icons/WalkChatReview15.svg";
 
-// 그 외 아이콘
-export { default as Addr } from "../images/icons/Addr.svg";
-export { default as Tel } from "../images/icons/Tel.svg";
-
+// 버튼 모음
 export { default as BtnList } from "../images/icons/BtnList.svg";
 export { default as BtnReview } from "../images/icons/BtnReview.svg";
 export { default as BtnDirecion } from "../images/icons/BtnDirecion.svg";
 export { default as BtnLocation } from "../images/icons/BtnLocation.svg";
 export { default as BtnSendMsg } from "../images/icons/BtnSendMsg.svg";
-
 export { default as BtnMapLocation } from "../images/icons/BtnMapLocation.svg";
 export { default as BtnMapList } from "../images/icons/BtnMapList.svg";
-export { default as IconCamera } from "../images/icons/IconCamera.svg";
-export { default as IconStar } from "../images/icons/IconStar.svg";
 export { default as BtnEdit } from "../images/icons/BtnEdit.svg";
+export { default as BtnGo } from "../images/icons/BtnGo.svg";
+export { default as BtnMore } from "../images/icons/BtnMore.svg";
+
+// 아이콘 모음
+export { default as IconCamera } from "../images/icons/IconCamera.svg";
+export { default as IconError } from "../images/icons/IconError.svg";
+export { default as IconStar } from "../images/icons/IconStar.svg";
+export { default as IconWalkChat } from "../images/icons/IconWalkChat.svg";
+
+// 그 외 아이콘
+export { default as Addr } from "../images/icons/Addr.svg";
+export { default as Tel } from "../images/icons/Tel.svg";
