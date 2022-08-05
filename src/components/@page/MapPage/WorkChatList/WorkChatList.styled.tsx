@@ -77,9 +77,9 @@ export const UserInfo = styled.div`
   margin-bottom: 4px;
 `;
 
-export const UserName = styled.p`
-  ${theme.fonts.Medium03};
-  color: ${theme.colors.gray01};
+export const UserName = styled.p<{ newMsg?: boolean }>`
+  ${({ newMsg }) => (newMsg ? theme.fonts.Bold05 : theme.fonts.Medium03)};
+  color: ${({ newMsg }) => (newMsg ? theme.colors.black : theme.colors.gray01)};
 `;
 
 export const UserEtc = styled.ul`
@@ -111,9 +111,9 @@ export const EtcList = styled.li`
   }
 `;
 
-export const ReceiveMsg = styled.p`
+export const ReceiveMsg = styled.p<{ newMsg?: boolean }>`
   ${theme.fonts.Medium03};
-  color: ${theme.colors.gray04};
+  color: ${({ newMsg }) => (newMsg ? theme.colors.black : theme.colors.gray04)};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

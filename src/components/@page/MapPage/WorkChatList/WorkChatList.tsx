@@ -4,7 +4,7 @@ import Icon from "@/assets/Icon";
 import * as S from "./WorkChatList.styled";
 
 export type WorkChatItem = {
-  new?: boolean;
+  newMsg?: boolean;
   nickName: string;
   imageUrl: string;
   job?: string;
@@ -38,17 +38,17 @@ const WorkChatList = ({ items }: WorkChatListProps) => {
                   <S.UserThumb>
                     <img src={item.imageUrl} alt="유저 이미지" />
                   </S.UserThumb>
-                  {item.new && <S.NewChat>새로운 메세지</S.NewChat>}
+                  {item.newMsg && <S.NewChat>새로운 메세지</S.NewChat>}
                 </S.ThumbWrap>
                 <S.ChatInfo>
                   <S.UserInfo>
-                    <S.UserName>{item.nickName}</S.UserName>
+                    <S.UserName newMsg={item.newMsg}>{item.nickName}</S.UserName>
                     <S.UserEtc>
                       <S.EtcList>{item.job}</S.EtcList>
                       <S.EtcList>{item.year}</S.EtcList>
                     </S.UserEtc>
                   </S.UserInfo>
-                  <S.ReceiveMsg>{item.msg}</S.ReceiveMsg>
+                  <S.ReceiveMsg newMsg={item.newMsg}>{item.msg}</S.ReceiveMsg>
                 </S.ChatInfo>
               </S.BtnDetail>
               <S.ModalWrap>

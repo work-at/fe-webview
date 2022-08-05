@@ -15,7 +15,7 @@ Basic.story = {
   args: {
     items: [
       {
-        new: true,
+        newMsg: true,
         imageUrl: UserImg,
         nickName: "아메리카노좋아",
         job: "개발",
