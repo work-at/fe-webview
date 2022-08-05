@@ -1,9 +1,9 @@
 import { theme } from "@/assets/styles/theme";
 import { Z_INDEX } from "@/constants/zIndex";
 import styled from "styled-components";
-import BaseBottomDrawer from "../@shared/BottomDrawer/BottomDrawer";
-import BaseCard from "../@shared/Card";
-import BaseReLoadButton from "../@shared/Map/ReLoadButton";
+import BaseBottomDrawer from "../../@shared/BottomDrawer/BottomDrawer";
+import BaseCard from "../../@shared/Card";
+import BaseReLoadButton from "../../@shared/Map/ReLoadButton";
 
 export const MapWrap = styled.div`
   position: relative;
