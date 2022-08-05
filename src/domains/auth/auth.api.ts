@@ -4,6 +4,8 @@ import axiosRetry from "axios-retry";
 import { API_URL, QUERY_NAME } from "@/constants";
 
 import * as DTO from "./auth.dto";
+import * as Action from "./auth.action";
+
 import { baseInstance } from "@/services";
 
 export const requestPostLogin: MutationFunction<AxiosResponse<DTO.LoginResponse>, DTO.LoginRequest> = async (
@@ -70,4 +72,28 @@ export const useWorkingYearListQuery = () => {
     [QUERY_NAME.GET_WORKING_YEAR_LIST],
     requestWorkingYearList
   );
+};
+
+export const requestPostVerifyEmail: MutationFunction<void, string> = async (email: string) => {
+  return await baseInstance().post(API_URL.VERIFY_EMAIL, email);
+};
+
+export const useVerifyEmailMutation = () => {
+  return useMutation(requestPostVerifyEmail);
+};
+
+export const requestGetEmailVerificationCountRemain: QueryFunction<
+  Action.GetEmailVerificationCountRemainInfo
+> = async () => {
+  const {
+    data: { remain },
+  } = await baseInstance().get<DTO.GetEmailVerificationCountRemainResponse>(API_URL.EMAIL_VALIDATION_COUNT_REMAIL);
+
+  return {
+    remain,
+  };
+};
+
+export const useEmailVerificationCountRemainQuery = () => {
+  return useQuery([QUERY_NAME.GET_EMAIL_VALIDATION_REMAIN_ATTEMPTS], requestGetEmailVerificationCountRemain);
 };
