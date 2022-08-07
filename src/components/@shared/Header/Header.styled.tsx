@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 import { HeaderProps } from "./Header";
 
-type StyledHeaderProps = Omit<HeaderProps, "useBack">;
+type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
 
 export const Header = styled.div<StyledHeaderProps>`
-  padding-top: 22px;
+  padding-top: 52px;
   z-index: 100;
   ${({ bgColor }) =>
     bgColor
@@ -17,14 +17,12 @@ export const Header = styled.div<StyledHeaderProps>`
       position: absolute;
     `}
   ${({ fixed }) =>
-    fixed
-      ? `
+    fixed &&
+    `
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-    `
-      : `
     `}
   top: 0;
   left: 0;
@@ -32,6 +30,7 @@ export const Header = styled.div<StyledHeaderProps>`
 `;
 
 export const HeaderInner = styled.div<{ useBack?: boolean }>`
+  position: relative;
   padding: 0px 7.4667vw 17px 0;
   padding-left: ${({ useBack }) => (useBack ? "16px" : "28px")};
   display: flex;
@@ -44,15 +43,28 @@ export const BtnBack = styled.button<{ bgColor?: boolean }>`
   }
 `;
 
-export const Tit = styled.h2<{ useBack?: boolean }>`
+export const Tit = styled.h2<StyledHeaderProps>`
   ${theme.fonts.Bold03};
   color: ${theme.colors.black};
   padding-left: ${({ useBack }) => (useBack ? "7px" : "0")};
+  ${({ useLink }) =>
+    useLink &&
+    `
+      display: flex;
+      flex: 1;
+      justify-content: center;
+    `}
+`;
+
+export const TitBtn = styled.button`
+  ${theme.fonts.Bold03};
+  color: ${theme.colors.black};
+  text-align: center;
 `;
 
 export const BtnReset = styled.button`
   display: flex;
   position: absolute;
-  top: 55px;
-  right: 29px;
+  top: 3px;
+  right: 7.4667vw;
 `;

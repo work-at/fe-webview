@@ -1,6 +1,7 @@
 const colors = {
   mainColor: "#0000FF",
   green: "#22DF9F",
+  error: "#F43327",
   white: "#fff",
   black: "#121212",
 

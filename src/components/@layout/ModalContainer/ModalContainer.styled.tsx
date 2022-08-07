@@ -38,6 +38,8 @@ export const Dialog = styled.div<{ isOpen: boolean }>`
   transition: transform 1s;
   background: ${theme.colors.white};
   padding: 40px 14px 13px;
+  border-radius: 27px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   ${({ isOpen }) =>
     isOpen
@@ -59,11 +61,21 @@ export const Foot = styled.div`
   margin-top: 27px;
 `;
 
-export const CloseButton = styled.button`
+export const ConfirmButton = styled.button`
   ${theme.fonts.Bold05};
   color: ${theme.colors.white};
   background: ${theme.colors.black};
   width: 100%;
-  height: 44px;
+  height: 33px;
+  line-height: 33px;
   border-radius: 44px;
+  flex: 1 1 0;
+  & + button {
+    margin-left: 12px;
+  }
+`;
+
+export const CancelButton = styled(ConfirmButton)`
+  background: ${theme.colors.gray08};
+  color: ${theme.colors.black};
 `;
