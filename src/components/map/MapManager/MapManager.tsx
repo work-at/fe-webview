@@ -2,10 +2,10 @@ import { Z_INDEX } from "@/constants/zIndex";
 import { Coordinates } from "@/domains/map.type";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useInjectKakaoMapApi } from "react-kakao-maps-sdk";
-import Map from "../@shared/Map";
+import Map from "../../@shared/Map";
 
-import useReLoadButton from "../@shared/Map/ReLoadButton/useReLoadButton";
-import Tabs, { TabItem } from "../@shared/Tabs";
+import useReLoadButton from "../../@shared/Map/ReLoadButton/useReLoadButton";
+import Tabs, { TabItem } from "../../@shared/Tabs";
 
 import useCafeMap from "./useCafeMap";
 import useDinerMap from "./useDinerMap";
@@ -17,8 +17,8 @@ import WORKER_PIN_PNG from "@/assets/images/worker-pin.png";
 import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
 
 import * as S from "./MapManager.styled";
-import BottomDrawer from "../@shared/BottomDrawer/BottomDrawer";
-import CardList from "../@shared/CardList";
+import BottomDrawer from "../../@shared/BottomDrawer/BottomDrawer";
+import CardList from "../../@shared/CardList";
 import Icon from "@/assets/Icon";
 
 type MapManagerProps = {

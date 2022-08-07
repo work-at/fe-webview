@@ -2,7 +2,7 @@ import * as S from "./MapPage.styled";
 import { useCoordinatesService } from "@/services/useCoordinates/useCoordinates";
 import { useUserAddressQuery } from "@/domains/user";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
-import MapManager from "@/components/MapManager";
+import MapManager from "@/components/map/MapManager";
 
 const MapPage = () => {
   const { data: userCoordinates } = useCoordinatesService({

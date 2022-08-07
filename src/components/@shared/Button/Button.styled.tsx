@@ -12,6 +12,9 @@ export const Button = styled.button<StyledButtonProps>`
   border: 1px solid ${theme.colors.gray06};
   color: ${theme.colors.gray05};
   background: ${theme.colors.white};
+
+  transition: background-color 0.5s, color 0.5s;
+
   > svg {
     margin-right: 5px;
   }

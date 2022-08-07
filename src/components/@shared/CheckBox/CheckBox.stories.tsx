@@ -8,8 +8,8 @@ export default {
 } as ComponentMeta<typeof CheckBox>;
 
 const Template: ComponentStory<typeof CheckBox> = (args) => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
-  return <CheckBox {...args} isSelected={isSelected} onChange={onChange} />;
+  const { selected, onChange } = useMultiselect([]);
+  return <CheckBox {...args} selectedItemIds={selected} onChange={onChange} />;
 };
 
 export const DefaultType = Template.bind({});

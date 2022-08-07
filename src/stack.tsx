@@ -15,6 +15,11 @@ import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
+import ProfileEdit from "./components/my-page/ProfileEdit";
+import EmailVerification from "./components/my-page/EmailVerification";
+import JobAndYearSelect from "./components/my-page/JobAndYearSelect";
+import Setting from "./components/my-page/Setting";
+
 import { DispatchEvent, id } from "@stackflow/core";
 import { requestGetUserInfoBase } from "./domains/user";
 
@@ -78,6 +83,10 @@ const activities = {
   CommunityPage,
   WorkChatPage,
   MyPage,
+  ProfileEdit,
+  EmailVerification,
+  JobAndYearSelect,
+  Setting,
   Test,
 };
 
@@ -105,6 +114,10 @@ export const { Stack, useFlow } = stackflow({
         WorkChatPage: `${PATH.WORK_CHAT.full}/:workerId`,
         /* 마이페이지 */
         MyPage: PATH.MY_PAGE.full,
+        ProfileEdit: PATH.MY_PAGE.PROFILE_EDIT.full,
+        EmailVerification: PATH.MY_PAGE.EMAIL_VERIFICATION.full,
+        JobAndYearSelect: PATH.MY_PAGE.JOB_AND_YEAR_SELECT.full,
+        Setting: PATH.MY_PAGE.SETTING.full,
         Test: "/test",
       },
       /* TODO: 404로 교체해야 함 */

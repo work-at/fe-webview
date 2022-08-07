@@ -5,7 +5,7 @@ import * as S from "./ReviewWrite.styled";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const ReviewWrite = () => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { selected, onChange } = useMultiselect([]);
 
   return (
     <>
@@ -18,7 +18,7 @@ const ReviewWrite = () => {
         <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
         <S.CheckWrap>
           <CheckBox
-            isSelected={isSelected}
+            selectedItemIds={selected}
             onChange={onChange}
             isIcon
             items={[

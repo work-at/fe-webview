@@ -62,5 +62,26 @@ export const PATH = {
     stack: "MyPage",
     full: "/my-page",
     fragments: "my-page",
+
+    PROFILE_EDIT: {
+      stack: "ProfileEdit",
+      full: "/my-page/profile-edit",
+      fragments: "profile-edit",
+    },
+    EMAIL_VERIFICATION: {
+      stack: "EmailVerification",
+      full: "/my-page/email-verification",
+      fragments: "email-verification",
+    },
+    JOB_AND_YEAR_SELECT: {
+      stack: "JobAndYearSelect",
+      full: "/my-page/job-and-year-select",
+      fragments: "job-and-year-select",
+    },
+    SETTING: {
+      stack: "Setting",
+      full: "/my-page/setting",
+      fragments: "setting",
+    },
   },
 } as const;

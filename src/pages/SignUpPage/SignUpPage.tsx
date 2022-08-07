@@ -59,16 +59,8 @@ const SignUpPage = () => {
     setStep(POSITION_WORKING_YEAR_STEP);
   }, []);
 
-  const {
-    selected: selectedPosition,
-    isSelected: isSelectedPosition,
-    onChangeOnly: onChangeOnlyPosition,
-  } = useMultiselect([]);
-  const {
-    selected: selectedWorkingYear,
-    isSelected: isSelectedWorkingYear,
-    onChangeOnly: onChangeOnlyWorkingYear,
-  } = useMultiselect([]);
+  const { selected: selectedPosition, onChangeOnly: onChangeOnlyPosition } = useMultiselect([]);
+  const { selected: selectedWorkingYear, onChangeOnly: onChangeOnlyWorkingYear } = useMultiselect([]);
 
   const handleSignUp = handleSubmit(async (formData) => {
     const body = {
@@ -131,7 +123,7 @@ const SignUpPage = () => {
             <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
             <S.ChekBoxWrap>
               <CheckBox
-                isSelected={isSelectedPosition}
+                selectedItemIds={selectedPosition}
                 onChange={onChangeOnlyPosition}
                 items={positionList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
               />
@@ -140,7 +132,7 @@ const SignUpPage = () => {
             <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
             <S.ChekBoxWrap>
               <CheckBox
-                isSelected={isSelectedWorkingYear}
+                selectedItemIds={selectedPosition}
                 onChange={onChangeOnlyWorkingYear}
                 items={workingYearList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
               />

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-export const useMultiselect = (initialValue: string[]) => {
-  const [selected, setSelected] = useState<string[]>(initialValue);
+export const useMultiselect = <T extends string>(initialValue: T[]) => {
+  const [selected, setSelected] = useState<T[]>(initialValue);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const value = event.target.value as T;
     const index = selected.indexOf(value);
     if (index > -1) {
       setSelected([...selected.slice(0, index), ...selected.slice(index + 1)]);
@@ -14,7 +14,7 @@ export const useMultiselect = (initialValue: string[]) => {
   };
 
   const onChangeOnly = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const value = event.target.value as T;
     const index = selected.indexOf(value);
     setSelected([value]);
     if (index > -1) {
@@ -24,7 +24,7 @@ export const useMultiselect = (initialValue: string[]) => {
     }
   };
 
-  const isSelected = (value: string) => {
+  const isSelected = (value: T) => {
     return selected.includes(value);
   };
 

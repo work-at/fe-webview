@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 import { CheckboxProps } from "./CheckBox";
 
-type StyledCheckBoxProps = Pick<CheckboxProps, "isIcon" | "widthAuto" | "checked">;
+type StyledCheckBoxProps = Pick<CheckboxProps, "isIcon" | "widthAuto">;
 
 export const CheckboxList = styled.ul<StyledCheckBoxProps>`
   display: flex;

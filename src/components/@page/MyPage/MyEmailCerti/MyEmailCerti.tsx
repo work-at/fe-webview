@@ -15,7 +15,7 @@ const MyEmailCerti = () => {
         </S.SignUpTit>
         <S.SignUpSubTit>회사 인증을 완료하면 워크챗 성사 확률이 높아져요.</S.SignUpSubTit>
         <S.SignUpInputWrap>
-          <EmailInput placeholder="이메일 입력" />
+          <EmailInput isActive={true} placeholder="이메일 입력" />
         </S.SignUpInputWrap>
       </S.SignUpWrap>
       <Button size="lg" bgColor="black">

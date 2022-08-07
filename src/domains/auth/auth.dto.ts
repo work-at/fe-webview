@@ -47,3 +47,7 @@ export type WorkingYearListResponse = {
     }[];
   };
 };
+
+export type GetEmailVerificationCountRemainResponse = {
+  remain: number;
+};

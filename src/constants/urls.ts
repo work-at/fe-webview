@@ -7,9 +7,11 @@ export const API_URL = {
   GET_USER_LIST: "/user/self",
   GET_TEST: (params: string) => `/${params}`,
   GET_INFINITE_TEST: (page: number, count: number) => `/something?page=${page}&count=${count}`,
-  UPDATE_TEST: (params: string) => `/${params}`,
+  UPDATE_USER_PROFILE: "/user",
   GET_CAFE_REVIEW_LIST: "/cafe/review-type",
   GET_DINER_REVIEW_LIST: "/food/review-type",
   POST_CAFE_REVIEW: (locationId: string) => `/map/cafes/${locationId}/reviews`,
   POST_DINER_REVIEW: (locationId: string) => `/map/restaurants/${locationId}/reviews`,
+  VERIFY_EMAIL: "/user/verify",
+  EMAIL_VALIDATION_COUNT_REMAIL: "/user/verify/remaining-attempts",
 };

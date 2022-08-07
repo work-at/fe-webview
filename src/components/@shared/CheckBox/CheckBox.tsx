@@ -1,23 +1,21 @@
-import { ChangeEvent, memo } from "react";
+import { memo, useCallback } from "react";
 import Icon from "@/assets/Icon";
 import * as S from "./CheckBox.styled";
 
 export type CheckBoxItem = {
   id: string;
-  checked?: boolean;
   label: string;
   iconType?: any;
 };
 
-export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
   items: CheckBoxItem[];
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  isSelected: (id: string) => boolean;
+  selectedItemIds: string[];
   isIcon?: boolean;
   widthAuto?: boolean;
 }
 
-const CheckBox = ({ items, isSelected, onChange, isIcon, widthAuto }: CheckboxProps) => {
+const CheckBox = ({ items, selectedItemIds, onChange, isIcon, widthAuto }: CheckboxProps) => {
   return (
     <S.CheckboxList isIcon={isIcon} widthAuto={widthAuto}>
       {items.map((item, index) => (
@@ -28,7 +26,7 @@ const CheckBox = ({ items, isSelected, onChange, isIcon, widthAuto }: CheckboxPr
               type="checkbox"
               value={item.id}
               onChange={onChange}
-              checked={isSelected(item.id)}
+              checked={selectedItemIds.includes(item.id)}
             />
             <S.Label htmlFor={item.id} isIcon={isIcon} widthAuto={widthAuto}>
               {isIcon && <Icon icon={item.iconType} size={30} />}
