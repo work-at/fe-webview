@@ -51,11 +51,25 @@ export const ItemBody = styled.dd`
 export const BtnEdit = styled.button``;
 
 export const TxtWrap = styled.div`
-  ${theme.fonts.Medium03};
-  background: ${theme.colors.gray10};
-  padding: 14px;
   margin-top: 20px;
+`;
+
+export const Txtarea = styled.textarea`
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.gray03};
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 14px;
   border-radius: 10px;
+  border: 0px;
+  outline: 0px;
+  resize: none;
+  word-break: normal;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+  background-color: ${theme.colors.gray10};
 `;
 
 export const ChekBoxWrap = styled.div`

@@ -1,3 +1,4 @@
+import React, { useRef, useCallback } from "react";
 import * as S from "./MyInfoEdit.styled";
 import Icon from "@/assets/Icon";
 import Header from "@/components/@shared/Header";
@@ -6,8 +7,12 @@ import Button from "@/components/@shared/Button/Button";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const MyInfoEdit = () => {
-  const { selected, onChange } = useMultiselect([]);
+  const { selected, isSelected, onChange } = useMultiselect([]);
 
+  const textRef = useRef<never>(null);
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, []);
   return (
     <>
       <Header bgColor useBack />
@@ -37,16 +42,13 @@ const MyInfoEdit = () => {
           <S.ItemHead>자기소개</S.ItemHead>
           <S.ItemBody>
             <S.TxtWrap>
-              내용 커피챗에서 베껴왔어요. 인생-커리어 다지기에 관심이 많고, 어떻게 원하는 일을 찾고, 만들고, 즐길 수
-              있을지 언제나 고민하고 있습니다. 일을 행복하게 오래 즐길 수 있는 방법을 고민하고 있는 워케이셔너와의
-              만남을 기대합니다.
-              <br />
-              <br />
-              그래서 남들 하는대로 취업활동을 하지 않았고, 흔치 않게 회사생활이 즐거운 워커홀릭이기 때문에 상상과 다른
-              인상을 받으실 수도 있을 것 같네요. 저에 대한 관심과 기대가 있으시다면 편하게 워크챗 신청을 해주세요!
-              <br />
-              <br />
-              여행, 취업, 실무적 질문 모두 좋습니다.
+              <S.Txtarea
+                defaultValue={
+                  "내용 커피챗에서 베껴왔어요. 인생-커리어 다지기에 관심이 많고, 어떻게 원하는 일을 찾고, 만들고, 즐길 수 있을지 언제나 고민하고 있습니다. 일을 행복하게 오래 즐길 수 있는 방법을 고민하고 있는 워케이셔너와의 만남을 기대합니다. 그래서 남들 하는대로 취업활동을 하지 않았고, 흔치 않게 회사생활이 즐거운 워커홀릭이기 때문에 상상과 다른 인상을 받으실 수도 있을 것 같네요. 저에 대한 관심과 기대가 있으시다면 편하게 워크챗 신청을 해주세요! 여행, 취업, 실무적 질문 모두 좋습니다."
+                }
+                ref={textRef}
+                onInput={handleResizeHeight}
+              ></S.Txtarea>
             </S.TxtWrap>
           </S.ItemBody>
         </S.MyInfoFullItem>
