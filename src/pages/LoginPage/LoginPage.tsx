@@ -60,6 +60,7 @@ const LoginPage = () => {
   return (
     <StackLayout isHide={activities[activities.length - 1].name === "LoginPage"}>
       <S.SignUpIntro>
+        <S.SignUpImage />
         <S.Logo>
           <Icon icon="Logo" />
         </S.Logo>
