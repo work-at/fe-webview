@@ -2,10 +2,9 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { ACCESS_TOKEN } from "@/constants";
 
 export const LOG_TOGGLE = false;
-export const SERVER_URL = "http://34.64.168.189:8080/api/v1";
 
 const defaultOption = {
-  baseURL: SERVER_URL,
+  baseURL: process.env.SERVER_URL,
   headers: { "Content-Type": "application/json" },
 };
 
