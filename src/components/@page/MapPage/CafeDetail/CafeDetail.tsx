@@ -42,16 +42,16 @@ const CafeDetail = () => {
             리뷰를 남겼어요!
           </S.WalkTit>
           <S.ReviewWrap>
-            <Tag reviews={200} iconType={"CommonReview2"}>
+            <Tag reviews={200} iconType={"VIEW_B"}>
               뷰가 좋아요
             </Tag>
-            <Tag reviews={120} iconType={"CommonReview3"}>
+            <Tag reviews={120} iconType={"COST_B"}>
               가성비가 좋아요
             </Tag>
-            <Tag reviews={90} iconType={"CommonReview4"}>
+            <Tag reviews={90} iconType={"NOT_CROWDED_B"}>
               사람이 많이 없어요
             </Tag>
-            <Tag reviews={42} iconType={"CommonReview5"}>
+            <Tag reviews={42} iconType={"SPACE_B"}>
               넓고 깨끗해요
             </Tag>
           </S.ReviewWrap>

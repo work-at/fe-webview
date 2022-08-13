@@ -18,7 +18,7 @@ const DinerReviewPage = () => {
     id: item.name,
     label: item.content,
     isIcon: true,
-    iconType: item.iconType,
+    iconType: item.iconType + "_B",
   }));
 
   const handlePostReview = () => {

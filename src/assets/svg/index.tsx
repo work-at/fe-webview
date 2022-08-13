@@ -15,11 +15,20 @@ export { default as COST } from "../images/icons/COST.svg";
 export { default as PARKING } from "../images/icons/PARKING.svg";
 export { default as SPACE } from "../images/icons/SPACE.svg";
 export { default as NOT_CROWDED } from "../images/icons/NOT_CROWDED.svg";
+export { default as VIEW_B } from "../images/icons/VIEW_B.svg";
+export { default as COST_B } from "../images/icons/COST_B.svg";
+export { default as PARKING_B } from "../images/icons/PARKING_B.svg";
+export { default as SPACE_B } from "../images/icons/SPACE_B.svg";
+export { default as NOT_CROWDED_B } from "../images/icons/NOT_CROWDED_B.svg";
 
 // 음식점 Tag
 export { default as QUICK_FOOD } from "../images/icons/QUICK_FOOD.svg";
 export { default as EAT_ALONE } from "../images/icons/EAT_ALONE.svg";
 export { default as MUST_GO } from "../images/icons/MUST_GO.svg";
+export { default as QUICK_FOOD_B } from "../images/icons/QUICK_FOOD_B.svg";
+export { default as EAT_ALONE_B } from "../images/icons/EAT_ALONE_B.svg";
+export { default as MUST_GO_B } from "../images/icons/MUST_GO_B.svg";
+
 // export { default as QUIET } from "../images/icons/QUIET.svg";
 // export { default as SNACK } from "../images/icons/SNACK.svg";
 
@@ -30,6 +39,12 @@ export { default as POWER } from "../images/icons/POWER.svg";
 export { default as SEAT } from "../images/icons/SEAT.svg";
 export { default as QUIET } from "../images/icons/QUIET.svg";
 export { default as SNACK } from "../images/icons/SNACK.svg";
+export { default as WIFI_B } from "../images/icons/WIFI_B.svg";
+export { default as MEAL_B } from "../images/icons/MEAL_B.svg";
+export { default as POWER_B } from "../images/icons/POWER_B.svg";
+export { default as SEAT_B } from "../images/icons/SEAT_B.svg";
+export { default as QUIET_B } from "../images/icons/QUIET_B.svg";
+export { default as SNACK_B } from "../images/icons/SNACK_B.svg";
 
 // 숙소 Tag
 export { default as BerthReview1 } from "../images/icons/BerthReview1.svg";

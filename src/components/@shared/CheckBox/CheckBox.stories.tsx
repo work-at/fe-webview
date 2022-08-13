@@ -72,17 +72,17 @@ IconType.args = {
     {
       id: "chk1",
       label: "와이파이가\n빵빵해요",
-      iconType: "CommonReview1",
+      iconType: "WIFI_B",
     },
     {
       id: "chk2",
       label: "가성비가\n좋아요",
-      iconType: "CommonReview2",
+      iconType: "COST_B",
     },
     {
       id: "chk3",
       label: "조용해요",
-      iconType: "CafeReview5",
+      iconType: "QUIET_B",
     },
   ],
 };

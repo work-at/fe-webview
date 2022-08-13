@@ -11,13 +11,13 @@ const CafeReviewPage = () => {
   const { cafeId } = useActivityParams<{ cafeId: string }>();
   const { data } = useCafeReviewListQuery();
   const { mutateAsync } = usePostCafeReview();
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { selected, onChange } = useMultiselect([]);
 
   const reviewList = data?.data?.response.map((item) => ({
     id: item.name,
     label: item.content,
     isIcon: true,
-    iconType: item.iconType,
+    iconType: item.iconType + "_B",
   }));
 
   const handlePostReview = () => {

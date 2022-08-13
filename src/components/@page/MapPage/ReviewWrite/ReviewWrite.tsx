@@ -25,32 +25,27 @@ const ReviewWrite = () => {
               {
                 id: "chk1",
                 label: "식사메뉴가\n있어요",
-                iconType: "CafeReview1",
+                iconType: "SNACK_B",
               },
               {
                 id: "chk2",
                 label: "와이파이가\n빵빵해요",
-                iconType: "CafeReview2",
+                iconType: "WIFI_B",
               },
               {
                 id: "chk3",
                 label: "콘센트 자리\n많아요",
-                iconType: "CafeReview3",
+                iconType: "POWER_B",
               },
               {
                 id: "chk4",
                 label: "좌석이 업무하기\n좋아요",
-                iconType: "CafeReview4",
+                iconType: "SEAT_B",
               },
               {
                 id: "chk5",
                 label: "조용한 공간이\n있어요",
-                iconType: "CafeReview5",
-              },
-              {
-                id: "chk6",
-                label: "집중이\n잘 돼요",
-                iconType: "CafeReview6",
+                iconType: "QUIET_B",
               },
             ]}
           />
