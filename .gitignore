@@ -52,3 +52,5 @@ yarn-error.log*
 
 # TS
 tsconfig.tsbuildinfo
+# Local Netlify folder
+.netlify
