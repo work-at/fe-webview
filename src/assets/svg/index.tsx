@@ -10,26 +10,26 @@ export { default as BtnBack } from "../images/icons/BtnBack.svg";
 export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
 
 // 공통 Tag
-export { default as CommonReview1 } from "../images/icons/CommonReview1.svg";
-export { default as CommonReview2 } from "../images/icons/CommonReview2.svg";
-export { default as CommonReview3 } from "../images/icons/CommonReview3.svg";
-export { default as CommonReview4 } from "../images/icons/CommonReview4.svg";
-export { default as CommonReview5 } from "../images/icons/CommonReview5.svg";
+export { default as VIEW } from "../images/icons/VIEW.svg";
+export { default as COST } from "../images/icons/COST.svg";
+export { default as PARKING } from "../images/icons/PARKING.svg";
+export { default as SPACE } from "../images/icons/SPACE.svg";
+export { default as NOT_CROWDED } from "../images/icons/NOT_CROWDED.svg";
 
 // 음식점 Tag
-export { default as FoodReview1 } from "../images/icons/FoodReview1.svg";
-export { default as FoodReview2 } from "../images/icons/FoodReview2.svg";
-export { default as FoodReview3 } from "../images/icons/FoodReview3.svg";
-export { default as FoodReview4 } from "../images/icons/FoodReview4.svg";
-export { default as FoodReview5 } from "../images/icons/FoodReview5.svg";
+export { default as QUICK_FOOD } from "../images/icons/QUICK_FOOD.svg";
+export { default as EAT_ALONE } from "../images/icons/EAT_ALONE.svg";
+export { default as MUST_GO } from "../images/icons/MUST_GO.svg";
+// export { default as QUIET } from "../images/icons/QUIET.svg";
+// export { default as SNACK } from "../images/icons/SNACK.svg";
 
 // 까페 Tag
-export { default as CafeReview1 } from "../images/icons/CafeReview1.svg";
-export { default as CafeReview2 } from "../images/icons/CafeReview2.svg";
-export { default as CafeReview3 } from "../images/icons/CafeReview3.svg";
-export { default as CafeReview4 } from "../images/icons/CafeReview4.svg";
-export { default as CafeReview5 } from "../images/icons/CafeReview5.svg";
-export { default as CafeReview6 } from "../images/icons/CafeReview6.svg";
+export { default as WIFI } from "../images/icons/WIFI.svg";
+export { default as MEAL } from "../images/icons/MEAL.svg";
+export { default as POWER } from "../images/icons/POWER.svg";
+export { default as SEAT } from "../images/icons/SEAT.svg";
+export { default as QUIET } from "../images/icons/QUIET.svg";
+export { default as SNACK } from "../images/icons/SNACK.svg";
 
 // 숙소 Tag
 export { default as BerthReview1 } from "../images/icons/BerthReview1.svg";
