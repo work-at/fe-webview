@@ -9,63 +9,60 @@ export default {
 const Template: ComponentStory<typeof Tag> = () => {
   return (
     <>
-      {/* 공통 Tag */}
-      <Tag iconType={"CommonReview1"}>넓고 깨끗해요</Tag>
-      <Tag reviews={40} iconType={"CommonReview2"}>
+      <div>공통</div>
+      <Tag reviews={40} iconType={"PARKING"}>
         주차하기 편해요
       </Tag>
-      <Tag reviews={12} iconType={"CommonReview3"}>
+      <Tag reviews={12} iconType={"VIEW"}>
         뷰가 좋아요
       </Tag>
-      <Tag reviews={20} iconType={"CommonReview4"}>
+      <Tag reviews={20} iconType={"COST"}>
         가성비가 좋아요
       </Tag>
-      <Tag reviews={30} iconType={"CommonReview5"}>
+      <Tag reviews={30} iconType={"NOT_CROWDED"}>
         사람이 많이 없어요
       </Tag>
-      {/* 음식점 Tag */}
-      <Tag reviews={40} iconType={"FoodReview1"}>
-        간단히 먹기 좋아요
-      </Tag>
-      <Tag reviews={90} iconType={"FoodReview2"}>
+      <Tag iconType={"SPACE"}>넓고 깨끗해요</Tag>
+      <div>음식점</div>
+      <Tag reviews={90} iconType={"QUICK_FOOD"}>
         음식이 빨리나와요
       </Tag>
-      <Tag reviews={12} iconType={"FoodReview3"}>
+      <Tag reviews={12} iconType={"EAT_ALONE"}>
         혼합 가능해요
       </Tag>
-      <Tag reviews={20} iconType={"FoodReview5"}>
+      <Tag reviews={20} iconType={"QUIET"}>
         조용해요
       </Tag>
-      <Tag reviews={30} iconType={"FoodReview4"}>
+      <Tag reviews={30} iconType={"MUST_GO"}>
         맛집이예요
       </Tag>
-      {/* 까페 Tag */}
-      <Tag reviews={4} iconType={"CafeReview1"}>
-        식사메뉴가 있어요
+      <Tag reviews={40} iconType={"SNACK"}>
+        간단히 먹기 좋아요
       </Tag>
-      <Tag reviews={90} iconType={"CafeReview2"}>
+      <div>카페</div>
+      <Tag reviews={90} iconType={"WIFI"}>
         와이파이가 빵빵해요
       </Tag>
-      <Tag reviews={12} iconType={"CafeReview3"}>
+      <Tag reviews={12} iconType={"POWER"}>
         콘센트 자리 많아요
       </Tag>
-      <Tag reviews={20} iconType={"CafeReview4"}>
+      <Tag reviews={20} iconType={"SEAT"}>
         좌석이 업무하기 좋아요
       </Tag>
-      <Tag reviews={30} iconType={"CafeReview5"}>
+      <Tag reviews={30} iconType={"QUIET"}>
         조용한 공간이 있어요
       </Tag>
-      <Tag reviews={40} iconType={"CafeReview6"}>
-        집중이 잘 돼요
+      <Tag reviews={4} iconType={"MEAL"}>
+        식사메뉴가 있어요
       </Tag>
-      {/* 숙소 Tag */}
+      <div>숙소</div>
       <Tag reviews={12} iconType={"BerthReview1"}>
         침대가 편해요
       </Tag>
       <Tag reviews={12} iconType={"BerthReview2"}>
         방이 청결해요
       </Tag>
-      <Tag reviews={12} iconType={"BerthReview3"}>
+      <Tag reviews={12} iconType={"BerthReview6"}>
         와이파이가 빵빵해요
       </Tag>
       <Tag reviews={12} iconType={"BerthReview4"}>
@@ -74,13 +71,13 @@ const Template: ComponentStory<typeof Tag> = () => {
       <Tag reviews={12} iconType={"BerthReview5"}>
         조식 먹을 수 있어요
       </Tag>
-      <Tag reviews={12} iconType={"BerthReview6"}>
-        와이파이가 빵빵해요
+      <Tag reviews={12} iconType={"BerthReview5"}>
+        위치가 좋아요
       </Tag>
       <Tag reviews={12} iconType={"BerthReview7"}>
         콘센트 자리 많아요
       </Tag>
-      {/* 워크챗 Tag */}
+      <div>워크챗</div>
       <Tag walkChat iconType={"WalkChatReview1"}>
         디자인 같이해요
       </Tag>
