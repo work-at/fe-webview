@@ -41,7 +41,6 @@ const Header = ({
           </S.BtnSearch>
         </S.HeaderInner>
       )}
-
       <S.HeaderInner useBack={useBack}>
         {useBack && (
           <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
