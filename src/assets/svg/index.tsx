@@ -6,6 +6,7 @@ export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
 export { default as Logo } from "../images/icons/Logo.svg";
+export { default as BtnSearch } from "../images/icons/BtnSearch.svg";
 export { default as BtnBack } from "../images/icons/BtnBack.svg";
 export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
 
@@ -58,7 +59,6 @@ export { default as WalkChatReview14 } from "../images/icons/WalkChatReview14.sv
 export { default as WalkChatReview15 } from "../images/icons/WalkChatReview15.svg";
 
 // 버튼 모음
-export { default as BtnList } from "../images/icons/BtnList.svg";
 export { default as BtnReview } from "../images/icons/BtnReview.svg";
 export { default as BtnDirecion } from "../images/icons/BtnDirecion.svg";
 export { default as BtnLocation } from "../images/icons/BtnLocation.svg";
@@ -74,6 +74,10 @@ export { default as IconCamera } from "../images/icons/IconCamera.svg";
 export { default as IconError } from "../images/icons/IconError.svg";
 export { default as IconStar } from "../images/icons/IconStar.svg";
 export { default as IconWalkChat } from "../images/icons/IconWalkChat.svg";
+export { default as IconReady } from "../images/icons/IconReady.svg";
+export { default as IconDensityStpe1 } from "../images/icons/IconDensityStpe1.svg";
+export { default as IconDensityStpe2 } from "../images/icons/IconDensityStpe2.svg";
+export { default as IconDensityStpe3 } from "../images/icons/IconDensityStpe3.svg";
 
 // 그 외 아이콘
 export { default as Addr } from "../images/icons/Addr.svg";
