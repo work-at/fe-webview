@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { Z_INDEX } from "@/constants/zIndex";
 import { HeaderProps } from "./Header";
 
 type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
@@ -37,6 +38,8 @@ export const HeaderInner = styled.div<{ useBack?: boolean }>`
   align-items: center;
 `;
 
+export const Logo = styled.h1``;
+
 export const BtnBack = styled.button<{ bgColor?: boolean }>`
   path {
     stroke: ${({ bgColor }) => (bgColor ? theme.colors.black : theme.colors.white)};
@@ -68,3 +71,5 @@ export const BtnReset = styled.button`
   top: 3px;
   right: 7.4667vw;
 `;
+
+export const BtnSearch = styled(BtnReset)``;
