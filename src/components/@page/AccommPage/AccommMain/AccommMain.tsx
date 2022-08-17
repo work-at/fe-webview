@@ -141,8 +141,8 @@ const AccommMain = ({ items }: AccommProps) => {
                       <img src={item.imageUrl} alt="숙소 이미지" />
                       <S.Accomminfo>
                         {item.area === "seoul" && <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>}
-                        {item.area === "jeju" && <S.AccommJejuFlag>제주</S.AccommJejuFlag>}
-                        {item.area === "gangWon" && <S.AccommGangWonFlag>강원</S.AccommGangWonFlag>}
+                        {item.area === "jeju" && <S.AccommJejuFlag>제주도</S.AccommJejuFlag>}
+                        {item.area === "gangWon" && <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>}
                         <S.AccommName>{item.name}</S.AccommName>
                       </S.Accomminfo>
                     </S.LinkDetail>
