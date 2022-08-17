@@ -14,7 +14,7 @@ export type HeaderProps = {
 };
 
 const Header = ({ main, bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
-  // const { pop } = useFlow();
+  const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed} main={main}>
       {main && (
@@ -29,8 +29,7 @@ const Header = ({ main, bgColor, useBack, title, useRefresh, fixed, useLink }: H
       )}
       <S.HeaderInner useBack={useBack}>
         {useBack && (
-          // <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
-          <S.BtnBack bgColor={bgColor}>
+          <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
             <Icon icon="BtnBack" size={24} />
           </S.BtnBack>
         )}
