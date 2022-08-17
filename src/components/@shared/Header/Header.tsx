@@ -30,8 +30,7 @@ const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed,
       )}
       <S.HeaderInner useBack={useBack}>
         {useBack && (
-          // <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
-          <S.BtnBack bgColor={bgColor}>
+          <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
             <Icon icon="BtnBack" size={24} />
           </S.BtnBack>
         )}
