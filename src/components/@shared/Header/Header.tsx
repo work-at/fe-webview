@@ -5,6 +5,7 @@ import { useFlow } from "@/stack";
 
 export type HeaderProps = {
   main?: boolean;
+  MagazinLogo?: "seoul" | "jeju" | "gangWon";
   bgColor?: boolean;
   useBack?: boolean;
   useRefresh?: boolean;
@@ -13,7 +14,7 @@ export type HeaderProps = {
   useLink?: boolean;
 };
 
-const Header = ({ main, bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
+const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
   const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed} main={main}>
@@ -38,6 +39,21 @@ const Header = ({ main, bgColor, useBack, title, useRefresh, fixed, useLink }: H
           <S.Tit useLink={useLink}>
             <S.TitBtn>{title}</S.TitBtn>
           </S.Tit>
+        )}
+        {MagazinLogo === "jeju" && (
+          <S.MagazineLogo>
+            <Icon icon="MagazinJejuLogo" />
+          </S.MagazineLogo>
+        )}
+        {MagazinLogo === "seoul" && (
+          <S.MagazineLogo>
+            <Icon icon="MagazinSeoulLogo" />
+          </S.MagazineLogo>
+        )}
+        {MagazinLogo === "gangWon" && (
+          <S.MagazineLogo>
+            <Icon icon="MagazinGangWonLogo" />
+          </S.MagazineLogo>
         )}
         {useRefresh && (
           <S.BtnReset>
