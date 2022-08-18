@@ -7,6 +7,7 @@ type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
 
 export const Header = styled.div<StyledHeaderProps>`
   padding-top: 52px;
+  height: 97px;
   z-index: 100;
   ${({ bgColor }) =>
     bgColor
@@ -32,7 +33,7 @@ export const Header = styled.div<StyledHeaderProps>`
 
 export const HeaderInner = styled.div<{ useBack?: boolean }>`
   position: relative;
-  padding: 0px 7.4667vw 17px 0;
+  padding: 0px 7.4667vw;
   padding-left: ${({ useBack }) => (useBack ? "16px" : "28px")};
   display: flex;
   align-items: center;
@@ -40,13 +41,19 @@ export const HeaderInner = styled.div<{ useBack?: boolean }>`
 
 export const Logo = styled.h1``;
 
+export const MagazineLogo = styled.h1`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+`;
+
 export const BtnBack = styled.button<{ bgColor?: boolean }>`
   path {
     stroke: ${({ bgColor }) => (bgColor ? theme.colors.black : theme.colors.white)};
   }
 `;
 
-export const Tit = styled.h2<StyledHeaderProps>`
+export const Tit = styled.h1<StyledHeaderProps>`
   ${theme.fonts.Bold03};
   color: ${theme.colors.black};
   padding-left: ${({ useBack }) => (useBack ? "7px" : "0")};
