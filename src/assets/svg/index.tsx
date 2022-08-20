@@ -1,6 +1,6 @@
 // Navigation
 export { default as NaviAccomm } from "../images/icons/Navi_Accomm.svg";
-export { default as NaviCommunity } from "../images/icons/Navi_Community.svg";
+export { default as NaviWorkChat } from "../images/icons/Navi_WorkChat.svg";
 export { default as NaviMap } from "../images/icons/Navi_Map.svg";
 export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 

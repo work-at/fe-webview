@@ -5,7 +5,7 @@ import { useFlow } from "@/stack";
 
 export type ToolBarItem = {
   path: string;
-  stack: "AccommodationPage" | "MapPage" | "CommunityPage" | "MyPage";
+  stack: "AccommodationPage" | "MapPage" | "WorkChatPage" | "MyPage";
   text: string;
   icon: IconType;
 };
@@ -18,13 +18,13 @@ interface ToolBarMenuItemProps {
 }
 
 interface NavigationToolBarProps {
-  navigationPath: "accommodation" | "map" | "community" | "my-page";
+  navigationPath: "accommodation" | "map" | "work-chat" | "my-page";
 }
 
 const TOOLBAR_ITEMS: ToolBarItem[] = [
   { path: PATH.ACCOMMODATION.full, stack: PATH.ACCOMMODATION.stack, text: "숙소", icon: "NaviAccomm" },
   { path: PATH.MAP.full, stack: PATH.MAP.stack, text: "지도", icon: "NaviMap" },
-  { path: PATH.COMMUNITY.full, stack: PATH.COMMUNITY.stack, text: "커뮤니티", icon: "NaviCommunity" },
+  { path: PATH.WORK_CHAT.full, stack: PATH.WORK_CHAT.stack, text: "워크챗", icon: "NaviWorkChat" },
   { path: PATH.MY_PAGE.full, stack: PATH.MY_PAGE.stack, text: "마이페이지", icon: "NaviMypage" },
 ];
 
