@@ -9,9 +9,11 @@ import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 const MyInfoEdit = () => {
   const { selected, isSelected, onChange } = useMultiselect([]);
 
-  const textRef = useRef<never>(null);
+  const textRef = useRef<HTMLTextAreaElement>(null);
   const handleResizeHeight = useCallback(() => {
-    textRef.current.style.height = textRef.current.scrollHeight + "px";
+    if (textRef.current) {
+      textRef.current.style.height = textRef.current.scrollHeight + "px";
+    }
   }, []);
   return (
     <>
