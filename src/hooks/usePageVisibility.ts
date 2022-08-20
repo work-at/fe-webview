@@ -45,9 +45,9 @@ const usePageVisibility = ({ callback, delay = 0 }: Props) => {
         }
 
         if (timeoutId.current) cleanupTimeout();
-        timeoutId.current = setTimeout(() => callback(!!document[hidden as "hidden"]), delay);
+        timeoutId.current = setTimeout(() => callback(!document[hidden as "hidden"]), delay);
       } else {
-        callback(!!document[hidden as "hidden"]);
+        callback(!document[hidden as "hidden"]);
       }
     };
 
