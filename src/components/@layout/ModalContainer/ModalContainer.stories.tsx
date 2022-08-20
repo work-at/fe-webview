@@ -1,8 +1,8 @@
-import { Meta, Story } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import { useState } from "react";
 
-import { ModalContainer, ModalContainerProps } from "./ModalContainer";
+import { ModalContainer } from "./ModalContainer";
 
 import { wait } from "@/components/testUtil";
 import { Z_INDEX } from "@/constants/zIndex";
@@ -10,9 +10,9 @@ import { Z_INDEX } from "@/constants/zIndex";
 export default {
   title: "Components/Layout/Modal",
   component: ModalContainer,
-} as Meta;
+} as ComponentMeta<typeof ModalContainer>;
 
-const Template: Story<ModalContainerProps> = () => {
+const Template: ComponentStory<typeof ModalContainer> = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (

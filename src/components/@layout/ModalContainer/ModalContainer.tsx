@@ -5,13 +5,22 @@ import * as S from "./ModalContainer.styled";
 export type ModalContainerProps = {
   isOpen: boolean;
   onClose: (e?: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+  onConfirm?: (e?: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+  confirmText?: string;
   children: React.ReactNode;
   closeOnClickOverlay?: boolean;
 };
 
 const $ModalContainer = document.getElementById("modal");
 
-export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay = true }: ModalContainerProps) => {
+export const ModalContainer = ({
+  isOpen,
+  children,
+  onClose,
+  onConfirm,
+  confirmText,
+  closeOnClickOverlay = true,
+}: ModalContainerProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,7 +80,7 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
         onClose(e);
       }
     },
-    [closeOnClickOverlay]
+    [closeOnClickOverlay, onClose]
   );
 
   return (
@@ -79,7 +88,14 @@ export const ModalContainer = ({ isOpen, children, onClose, closeOnClickOverlay 
       <S.Dialog isOpen={isOpen}>
         <S.Body>{children}</S.Body>
         <S.Foot>
-          <S.ConfirmButton onClick={onClose}>확인</S.ConfirmButton>
+          {onConfirm && onClose ? (
+            <>
+              <S.CancelButton onClick={onClose}>취소</S.CancelButton>
+              <S.ConfirmButton onClick={onConfirm}>{confirmText}</S.ConfirmButton>
+            </>
+          ) : (
+            <S.ConfirmButton onClick={onClose}>확인</S.ConfirmButton>
+          )}
         </S.Foot>
       </S.Dialog>
     </S.Container>
