@@ -4,6 +4,7 @@ import * as S from "./Header.styled";
 import { useFlow } from "@/stack";
 
 export type HeaderProps = {
+  main?: boolean;
   bgColor?: boolean;
   useBack?: boolean;
   useRefresh?: boolean;
@@ -12,10 +13,20 @@ export type HeaderProps = {
   useLink?: boolean;
 };
 
-const Header = ({ bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
+const Header = ({ main, bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
   const { pop } = useFlow();
   return (
-    <S.Header bgColor={bgColor} fixed={fixed}>
+    <S.Header bgColor={bgColor} fixed={fixed} main={main}>
+      {main && (
+        <S.HeaderInner>
+          <S.Logo>
+            <Icon icon="Logo" />
+          </S.Logo>
+          <S.BtnSearch>
+            <Icon icon="BtnSearch" size={24} />
+          </S.BtnSearch>
+        </S.HeaderInner>
+      )}
       <S.HeaderInner useBack={useBack}>
         {useBack && (
           <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
