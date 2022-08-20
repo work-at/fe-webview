@@ -5,7 +5,7 @@ const CommunityPage = () => {
   const { push } = useFlow();
 
   return (
-    <StackLayout appBar={{ title: "커뮤니티" }} navigationPath="community">
+    <StackLayout appBar={{ title: "커뮤니티" }}>
       <button type="button" onClick={() => push("Test", {})}>
         TEST_BUTTON
       </button>

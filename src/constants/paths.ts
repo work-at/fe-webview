@@ -52,11 +52,11 @@ export const PATH = {
     stack: "WorkChatPage",
     full: "/work-chat",
     fragments: "work-chat",
-  },
-  COMMUNITY: {
-    stack: "CommunityPage",
-    full: "/community",
-    fragments: "community",
+    ROOM: {
+      stack: "WorkChatRoomPage",
+      full: "/work-chat/room",
+      fragments: "room",
+    },
   },
   MY_PAGE: {
     stack: "MyPage",

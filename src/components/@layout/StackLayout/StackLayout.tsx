@@ -9,7 +9,7 @@ type PropOf<T> = T extends React.ComponentType<infer U> ? U : unknown;
 interface LayoutProps {
   appBar?: PropOf<typeof AppScreen>["appBar"];
   children: React.ReactNode;
-  navigationPath?: "accommodation" | "map" | "community" | "my-page";
+  navigationPath?: "accommodation" | "map" | "work-chat" | "my-page";
   isHide?: boolean;
 }
 
