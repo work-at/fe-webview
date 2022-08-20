@@ -7,14 +7,16 @@ import Button from "@/components/@shared/Button/Button";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 
 const MyInfoEdit = () => {
-  const { selected, isSelected, onChange } = useMultiselect([]);
+  const { selected, onChange } = useMultiselect([]);
 
   const textRef = useRef<HTMLTextAreaElement>(null);
+
   const handleResizeHeight = useCallback(() => {
     if (textRef.current) {
       textRef.current.style.height = textRef.current.scrollHeight + "px";
     }
   }, []);
+
   return (
     <>
       <Header bgColor useBack />

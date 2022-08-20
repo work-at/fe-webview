@@ -35,6 +35,10 @@ export const GlobalStyle = createGlobalStyle`
 		-moz-osx-font-smoothing: grayscale;
 	}
 
+	button {
+        -webkit-tap-highlight-color : transparent;
+	}
+
 	body, 
 	div, 
 	dl, 

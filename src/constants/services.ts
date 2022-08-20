@@ -1,3 +1,0 @@
-export const SERVICE_NAME = {
-  GET_USER_COORDINATES: "GET_USER_COORDINATES",
-} as const;

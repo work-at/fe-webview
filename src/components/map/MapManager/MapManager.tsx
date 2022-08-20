@@ -1,7 +1,6 @@
 import { Z_INDEX } from "@/constants/zIndex";
 import { Coordinates } from "@/domains/map.type";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useInjectKakaoMapApi } from "react-kakao-maps-sdk";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Map from "../../@shared/Map";
 
 import useReLoadButton from "../../@shared/Map/ReLoadButton/useReLoadButton";
@@ -11,15 +10,19 @@ import useCafeMap from "./useCafeMap";
 import useDinerMap from "./useDinerMap";
 import useWorkerMap from "./useWorkerMap";
 
-import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
-import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
+import CAFE_PIN_PNG from "@/assets/images/cafe-pin.png";
+import SELECTED_CAFE_PIN_PNG from "@/assets/images/selected-cafe-pin.png";
+import DINER_PIN_PNG from "@/assets/images/diner-pin.png";
+import SELECTED_DINER_PIN_PNG from "@/assets/images/selected-diner-pin.png";
+
 import WORKER_PIN_PNG from "@/assets/images/worker-pin.png";
 import SELECTED_WORKER_PIN_PNG from "@/assets/images/selected-worker-pin.png";
 
 import * as S from "./MapManager.styled";
-import BottomDrawer from "../../@shared/BottomDrawer/BottomDrawer";
 import CardList from "../../@shared/CardList";
 import Icon from "@/assets/Icon";
+import { useNearWorkersCountQuery } from "@/domains/user";
+import { atom, useAtom } from "jotai";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -39,41 +42,40 @@ const TAB_ITEMS: TabItem<MapTabId>[] = [
   },
 ];
 
-const API_KEY = process.env.KAKAO_MAP_API_KEY;
+const userCoordinatesCache: Coordinates = {
+  lat: 0,
+  lng: 0,
+};
+
+export const shouldMapReloadAtom = atom(false);
 
 const MapManager = ({ userCoordinates }: MapManagerProps) => {
-  const [selectedCardId, setSelectedCardId] = useState<number>();
+  const [selectedCardId, setSelectedCardId] = useState<number | undefined>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
   const [selectedTabId, setSelectedTabId] = useState<MapTabId>("cafe");
   const [isBottomDrawerOpen, setBottomDrawerOpen] = useState(false);
+  const [shouldMapReload, setShouldMapReload] = useAtom(shouldMapReloadAtom);
 
-  const { error: mapLoadingError, loading: isMapLoading } = useInjectKakaoMapApi({
-    appkey: API_KEY!,
-    retries: 5,
-  });
-
-  const { cafe, cafes, cafePins, navigateToCafeDetail } = useCafeMap({
+  const { cafes, cafePins, navigateToCafeDetail } = useCafeMap({
     isSelected: selectedTabId === "cafe",
     isReloaded,
-    selectedCardId,
     userCoordinates,
-    isListShown: isBottomDrawerOpen,
   });
 
-  const { diner, diners, dinerPins, navigateToDinerDetail } = useDinerMap({
+  const { diners, dinerPins, navigateToDinerDetail } = useDinerMap({
     isSelected: selectedTabId === "diner",
     isReloaded,
-    selectedCardId,
     userCoordinates,
-    isListShown: isBottomDrawerOpen,
   });
 
-  const { worker, workers, workerPins, navigateToWorkerDetail } = useWorkerMap({
+  const { workers, workerPins, navigateToWorkerDetail } = useWorkerMap({
     isSelected: selectedTabId === "worker",
     isReloaded,
-    selectedCardId,
-    userCoordinates,
-    isListShown: isBottomDrawerOpen,
+  });
+
+  const { data: nearWorkersCount } = useNearWorkersCountQuery({
+    enabled: isReloaded,
+    suspense: false,
   });
 
   const pins = useMemo(() => {
@@ -87,39 +89,56 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
     }
   }, [selectedTabId, cafePins, dinerPins, workerPins]);
 
-  const pinInfo = useMemo(
-    () =>
-      ["cafe", "diner"].includes(selectedTabId)
-        ? {
-            pinImage: CAFE_DINER_PIN_PNG,
-            selectedPinImage: SELECTED_CAFE_DINER_PIN_PNG,
-            pinSize: {
-              width: 26,
-              height: 36,
-            },
-            selectedPinSize: {
-              width: 42,
-              height: 60,
-            },
-          }
-        : {
-            pinImage: WORKER_PIN_PNG,
-            selectedPinImage: SELECTED_WORKER_PIN_PNG,
-            pinSize: {
-              width: 29,
-              height: 39,
-            },
-            selectedPinSize: {
-              width: 35,
-              height: 35,
-            },
-          },
-    [selectedTabId]
-  );
+  const pinInfo = useMemo(() => {
+    if (selectedTabId === "cafe") {
+      return {
+        pinImage: CAFE_PIN_PNG,
+        selectedPinImage: SELECTED_CAFE_PIN_PNG,
+        pinSize: {
+          width: 35,
+          height: 40,
+        },
+        selectedPinSize: {
+          width: 60,
+          height: 60,
+        },
+      };
+    }
+
+    if (selectedTabId === "diner") {
+      return {
+        pinImage: DINER_PIN_PNG,
+        selectedPinImage: SELECTED_DINER_PIN_PNG,
+        pinSize: {
+          width: 35,
+          height: 40,
+        },
+        selectedPinSize: {
+          width: 60,
+          height: 60,
+        },
+      };
+    }
+
+    return {
+      pinImage: WORKER_PIN_PNG,
+      selectedPinImage: SELECTED_WORKER_PIN_PNG,
+      pinSize: {
+        width: 35,
+        height: 40,
+      },
+      selectedPinSize: {
+        width: 60,
+        height: 60,
+      },
+    };
+  }, [selectedTabId]);
 
   const cardInfo = useMemo(() => {
     switch (selectedTabId) {
-      case "cafe":
+      case "cafe": {
+        const cafe = cafes?.find((cafe) => cafe.id === selectedCardId);
+
         if (!cafe) {
           return;
         } else {
@@ -128,15 +147,18 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             type: "cafe" as const,
             title: cafe.name,
             imageUrl: cafe.imageUrl,
-            reviewNum: 12,
-            addr: cafe.region,
-            job: cafe.region,
-            year: String(12),
+            reviewNum: cafe.reviewCount,
+            addr: cafe.address,
             tags: cafe.tags,
-            onClick: () => navigateToCafeDetail(cafe.id),
+            onClick: () => {
+              navigateToCafeDetail(cafe.id);
+            },
           };
         }
-      case "diner":
+      }
+      case "diner": {
+        const diner = diners?.find((diner) => diner.id === selectedCardId);
+
         if (!diner) {
           return;
         } else {
@@ -145,15 +167,16 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             type: "diner" as const,
             title: diner.name,
             imageUrl: diner.imageUrl,
-            reviewNum: 12,
-            addr: diner.region,
-            job: diner.region,
-            year: String(12),
+            reviewNum: diner.reviewCount,
+            addr: diner.address,
             tags: diner.tags,
             onClick: () => navigateToDinerDetail(diner.id),
           };
         }
-      default:
+      }
+      default: {
+        const worker = workers?.find((worker) => worker.id === selectedCardId);
+
         if (!worker) {
           return;
         } else {
@@ -162,16 +185,25 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             type: "worker" as const,
             title: worker.name,
             imageUrl: worker.imageUrl,
-            reviewNum: 12,
             addr: worker.job,
             job: worker.job,
-            year: String(12),
+            year: worker.yearOfService,
             tags: worker.tags,
             onClick: () => navigateToWorkerDetail(worker.id),
           };
         }
+      }
     }
-  }, [selectedTabId, cafe, diner, worker, navigateToCafeDetail, navigateToDinerDetail, navigateToWorkerDetail]);
+  }, [
+    selectedTabId,
+    selectedCardId,
+    cafes,
+    diners,
+    workers,
+    navigateToCafeDetail,
+    navigateToDinerDetail,
+    navigateToWorkerDetail,
+  ]);
 
   const CardListInfo = useMemo(() => {
     switch (selectedTabId) {
@@ -185,13 +217,14 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               type: "cafe" as const,
               title: cafe.name,
               imageUrl: cafe.imageUrl,
-              reviewNum: 12,
-              addr: cafe.region,
-              job: cafe.region,
-              year: String(12),
+              reviewNum: cafe.reviewCount,
+              addr: cafe.address,
               tags: cafe.tags,
             })),
-            onClick: navigateToCafeDetail,
+            onClick: (id: number) => {
+              navigateToCafeDetail(id);
+              setBottomDrawerOpen(false);
+            },
           };
         }
       case "diner":
@@ -205,12 +238,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               title: diner.name,
               imageUrl: diner.imageUrl,
               reviewNum: 12,
-              addr: diner.region,
-              job: diner.region,
-              year: String(12),
+              addr: diner.address,
               tags: diner.tags,
             })),
-            onClick: navigateToDinerDetail,
+            onClick: (id: number) => {
+              navigateToDinerDetail(id);
+              setBottomDrawerOpen(false);
+            },
           };
         }
       default:
@@ -226,10 +260,13 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               reviewNum: 12,
               addr: worker.job,
               job: worker.job,
-              year: String(12),
+              year: worker.yearOfService,
               tags: worker.tags,
             })),
-            onClick: navigateToWorkerDetail,
+            onClick: (id: number) => {
+              navigateToWorkerDetail(id);
+              setBottomDrawerOpen(false);
+            },
           };
         }
     }
@@ -243,16 +280,46 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
     [updateReloadTime]
   );
 
-  const handleListToggleButtonClick = useCallback(() => setBottomDrawerOpen((isOpen) => !isOpen), []);
+  const handleListToggleButtonClick = useCallback(
+    () => setBottomDrawerOpen((isOpen) => !isOpen),
+    [setBottomDrawerOpen]
+  );
 
-  const handleBottomDrawerClose = useCallback(() => setBottomDrawerOpen(false), []);
+  const handleBottomDrawerClose = useCallback(() => setBottomDrawerOpen(false), [setBottomDrawerOpen]);
 
-  if (isMapLoading) {
+  const handleReload = useCallback(() => {
+    updateReloadTime();
+    setShouldMapReload(true);
+  }, [updateReloadTime, setShouldMapReload]);
+
+  // TODO : 백그라운드에서 실행되도록 위치 옮기기
+  useEffect(() => {
+    if (userCoordinatesCache.lat === 0 && userCoordinatesCache.lng === 0) {
+      (userCoordinatesCache.lat = userCoordinates.lat), (userCoordinatesCache.lng = userCoordinates.lng);
+      return;
+    }
+
+    const distance =
+      new kakao.maps.Polyline({
+        path: [
+          new kakao.maps.LatLng(userCoordinates.lat, userCoordinatesCache.lat),
+          new kakao.maps.LatLng(userCoordinates.lng, userCoordinatesCache.lng),
+        ],
+      }).getLength() / 1000;
+
+    if (distance < 0.2) {
+      return;
+    }
+
+    // TODO : 싱크 로직 호출
+    (userCoordinatesCache.lat = userCoordinates.lat), (userCoordinatesCache.lng = userCoordinates.lng);
+  }, [userCoordinates]);
+
+  if (shouldMapReload) {
+    setTimeout(() => {
+      setShouldMapReload(false);
+    }, 10);
     return <div>지도 로딩중</div>;
-  }
-
-  if (mapLoadingError) {
-    return <div>지도 정보를 불러오는데 실패하였습니다</div>;
   }
 
   return (
@@ -269,7 +336,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
       />
       {cardInfo && <S.Card {...cardInfo} />}
       <S.BottomBtnWrap>
-        <S.BtnLocation onClick={updateReloadTime}>
+        <S.BtnLocation onClick={handleReload}>
           <Icon icon="BtnMapLocation" />
         </S.BtnLocation>
         <S.BtnList onClick={handleListToggleButtonClick}>
@@ -282,7 +349,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
           워케이셔너 수
         </S.WorkerTit>
         <S.WorkerLeng>
-          <S.Num>105</S.Num>명
+          <S.Num>{nearWorkersCount?.count}</S.Num>명
         </S.WorkerLeng>
       </S.WorkerLengWrap>
       <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>

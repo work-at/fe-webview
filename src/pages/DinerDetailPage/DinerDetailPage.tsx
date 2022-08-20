@@ -7,17 +7,20 @@ import Icon from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
 import { useUserAddressQuery } from "@/domains/user";
-import { useCoordinatesService } from "@/services/useCoordinates/useCoordinates";
 import { useFlow } from "@/stack";
 import { useCallback } from "react";
 import { PATH } from "@/constants";
 import { useDinerDetailQuery } from "@/domains/diner";
+import useCoordinates from "@/services/useCoordinates/useCoordinates";
+
+const DEFAULT_DINER_IMAGE =
+  "https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGNvb2tpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60";
 
 const DinerDetailPage = () => {
   const { dinerId } = useActivityParams<{ dinerId: string }>();
   const { push } = useFlow();
 
-  const { data: userCoordinates } = useCoordinatesService();
+  const { userCoordinates } = useCoordinates();
 
   const { data: userAddress } = useUserAddressQuery(
     {
@@ -57,7 +60,7 @@ const DinerDetailPage = () => {
   }, [dinerDetail?.kakaoLink]);
 
   const handleOpenKaKaoPathFindingLink = useCallback(() => {
-    userAddress && dinerDetail && window.open(getPathFindingURL(userAddress.address, dinerDetail.address));
+    userAddress && dinerDetail && window.open(getPathFindingURL(userAddress, dinerDetail.address));
   }, [userAddress, dinerDetail]);
 
   if (isLoading) {
@@ -75,7 +78,10 @@ const DinerDetailPage = () => {
       <Header useBack />
       <S.DinerDetailWrap>
         <S.VisualWrap>
-          <img src={dinerDetail.imageUrl} alt="음식점 이미지" />
+          <img
+            src={dinerDetail.imageUrl === "" || !dinerDetail.imageUrl ? DEFAULT_DINER_IMAGE : dinerDetail.imageUrl}
+            alt="음식점 이미지"
+          />
         </S.VisualWrap>
         <S.InfoWrap>
           <S.Tit>{dinerDetail.name}</S.Tit>
@@ -112,9 +118,11 @@ const DinerDetailPage = () => {
             ))}
           </S.ReviewWrap>
         </S.InfoWrap>
-        <S.BtnReview onClick={handleReviewButtonClick}>
-          <Icon icon={"BtnReview"} size={73} />
-        </S.BtnReview>
+        {!dinerDetail.isReviewed && (
+          <S.BtnReview onClick={handleReviewButtonClick}>
+            <Icon icon={"BtnReview"} size={73} />
+          </S.BtnReview>
+        )}
       </S.DinerDetailWrap>
     </StackLayout>
   );

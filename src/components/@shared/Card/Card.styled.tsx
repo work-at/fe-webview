@@ -31,6 +31,8 @@ export const CardThumb = styled.div`
   > img {
     display: flex;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   @media screen and (max-width: 340px) {
     width: 97px;

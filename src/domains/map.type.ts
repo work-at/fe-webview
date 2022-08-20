@@ -5,6 +5,5 @@ export type Coordinates = {
 
 export type PinItem = {
   id: number;
-  name: string;
   coordinates: Coordinates;
 };

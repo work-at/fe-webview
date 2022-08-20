@@ -26,20 +26,10 @@ export const Card = styled(BaseCard)`
   left: 0;
 `;
 
-export const ReLoadButton = styled(BaseReLoadButton)`
+export const WorkerCountIndicator = styled.div`
   position: fixed;
   z-index: ${Z_INDEX.HIGH};
-  bottom: 6rem;
-  right: 1rem;
-  padding: 1rem;
-  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
-  background-color: white;
-`;
-
-export const ListToggleButton = styled.button`
-  position: fixed;
-  z-index: ${Z_INDEX.HIGH};
-  bottom: 10rem;
+  top: 10rem;
   right: 1rem;
   padding: 1rem;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
