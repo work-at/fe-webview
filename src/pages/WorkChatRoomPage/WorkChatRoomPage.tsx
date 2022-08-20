@@ -221,8 +221,8 @@ const WorkChatRoomPage = () => {
     try {
       const { data } = await requestChat({
         roomId: Number(workerId),
-        messageId: chatMessages[chatMessages.length - 1].id,
-        sortType: "AFTER",
+        messageId: chatMessages[chatMessages.length - 1]?.id,
+        sortType: chatMessages.length === 0 ? "BEFORE" : "AFTER",
       });
 
       if (data.messages.length !== 0) {
