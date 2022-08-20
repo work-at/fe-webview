@@ -6,6 +6,9 @@ export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
 export { default as Logo } from "../images/icons/Logo.svg";
+export { default as MagazinJejuLogo } from "../images/icons/MagazinJejuLogo.svg";
+export { default as MagazinSeoulLogo } from "../images/icons/MagazinSeoulLogo.svg";
+export { default as MagazinGangWonLogo } from "../images/icons/MagazinGangWonLogo.svg";
 export { default as BtnSearch } from "../images/icons/BtnSearch.svg";
 export { default as BtnBack } from "../images/icons/BtnBack.svg";
 export { default as BtnRefresh } from "../images/icons/BtnRefresh.svg";
@@ -93,6 +96,9 @@ export { default as IconReady } from "../images/icons/IconReady.svg";
 export { default as IconDensityStpe1 } from "../images/icons/IconDensityStpe1.svg";
 export { default as IconDensityStpe2 } from "../images/icons/IconDensityStpe2.svg";
 export { default as IconDensityStpe3 } from "../images/icons/IconDensityStpe3.svg";
+export { default as IconJeju } from "../images/icons/IconJeju.svg";
+export { default as IconSeoul } from "../images/icons/IconSeoul.svg";
+export { default as IconGangWon } from "../images/icons/IconGangWon.svg";
 
 // 그 외 아이콘
 export { default as Addr } from "../images/icons/Addr.svg";

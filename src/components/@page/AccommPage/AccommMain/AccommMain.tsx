@@ -112,9 +112,7 @@ const AccommMain = ({ items }: AccommProps) => {
           </S.WalkatDensity>
 
           <S.WalkatDensity area="gangneung">
-            <S.WalkatTxt area="gangneung" t>
-              최근 강릉의 워크앳 지수는?
-            </S.WalkatTxt>
+            <S.WalkatTxt area="gangneung">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
             <S.StateBox>
               {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
               <Icon icon="IconDensityStpe3" />
