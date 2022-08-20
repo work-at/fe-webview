@@ -7,7 +7,8 @@ export type Cafe = {
   id: number;
   imageUrl: string;
   name: string;
-  region: string;
+  address: string;
+  reviewCount: number;
   tags: string[];
 };
 
@@ -24,10 +25,7 @@ export type CafeDetail = {
   phoneNumber: string;
   kakaoLink: string;
   reviewPoints: ReviewPoint[];
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  isReviewed: boolean;
 };
 
 export type CafeReviewKey =

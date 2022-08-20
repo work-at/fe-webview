@@ -1,27 +1,51 @@
 import * as DTO from "./worker.dto";
 import * as Action from "./worker.action";
+import { MAP } from "@/constants/map";
 
 export const d2aMapper_GetWorkerPinsResponse_WorkerPinsInfo = (
   response: DTO.GetWorkerPinsResponse
 ): Action.WorkerPinsInfo => {
-  return response.locations.map((WorkerPin) => ({
-    id: WorkerPin.id,
-    name: WorkerPin.placeName,
+  return response.data.response.map((pin) => ({
+    id: pin.id,
     coordinates: {
-      lat: WorkerPin.y,
-      lng: WorkerPin.x,
+      lat: pin.latitude,
+      lng: pin.longitude,
     },
   }));
 };
 
-const RADIUS = 10;
-
-export const a2dMapper_WorkerPinsCriteria_GetWorkerPinsRequest = (
-  criteria: Action.WorkerPinsCriteria
-): DTO.GetWorkerPinsRequest => {
+export const a2dMapper_WorkerPinsCriteria_GetWorkerPinsRequest = (): DTO.GetWorkerPinsRequest => {
   return {
-    latitude: criteria.lat,
-    longitude: criteria.lng,
-    radius: RADIUS,
+    kilometer: MAP.SearchRadius / 1000,
   };
+};
+
+export const d2aMapper_GetWorkerDetailResponse_WorkerDetailInfo = (
+  response: DTO.GetWorkerDetailResponse
+): Action.WorkerDetailInfo => {
+  return {
+    imageUrl: response.data.imageUrl,
+    job: response.data.position.content,
+    name: response.data.nickname,
+    story: response.data.story,
+    yearOfService: response.data.workingYear.content,
+    desiredActivities: [],
+  };
+};
+
+export const a2dMapper_WorkersCriteria_GetWorkersRequest = (): DTO.GetWorkersRequest => {
+  return {
+    kilometer: MAP.SearchRadius / 1000,
+  };
+};
+
+export const d2aMapper_GetWorkersResponse_WorkersInfo = (response: DTO.GetWorkersResponse): Action.WorkersInfo => {
+  return response.data.response.map((worker) => ({
+    id: worker.id,
+    imageUrl: worker.imageUrl,
+    job: worker.position.content,
+    name: worker.nickname,
+    yearOfService: worker.workingYear.content,
+    tags: [],
+  }));
 };

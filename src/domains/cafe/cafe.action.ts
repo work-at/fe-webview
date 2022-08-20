@@ -20,8 +20,6 @@ export type CafeDetailCriteria = {
 
 export type CafePinsInfo = CafePin[];
 
-export type CafeInfo = Cafe;
-
 export type CafeDetailInfo = CafeDetail;
 
 export type CafesInfo = Cafe[];
