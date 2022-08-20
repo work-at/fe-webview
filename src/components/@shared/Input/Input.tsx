@@ -75,6 +75,7 @@ const Input = ({ count, ...props }: InputProps) => {
           size="sm"
           round
           disabled={errors?.nickname?.type === "validate" || getValues("nickname").length < 2}
+          active={!(errors?.nickname?.type === "validate" || getValues("nickname").length < 2)}
           onClick={handleCheckDuplicate}
         >
           중복확인

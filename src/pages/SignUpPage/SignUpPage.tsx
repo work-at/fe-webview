@@ -132,7 +132,7 @@ const SignUpPage = () => {
             <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
             <S.ChekBoxWrap>
               <CheckBox
-                selectedItemIds={selectedPosition}
+                selectedItemIds={selectedWorkingYear}
                 onChange={onChangeOnlyWorkingYear}
                 items={workingYearList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
               />
