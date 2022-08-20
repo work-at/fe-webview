@@ -172,6 +172,7 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
 
 const WorkChatRoomPage = () => {
   const { workerId } = useActivityParams<{ workerId: string }>();
+  const { push, replace, pop } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
     () => data?.data.rooms.filter((item) => item.id === Number(workerId))[0] ?? {},
@@ -358,8 +359,14 @@ const WorkChatRoomPage = () => {
           </S.WorkChat>
         </S.ChatBoxWrap>
         {chatMessages.length === 0 && (
-          // TODO: 워케이셔너 페이지로 이동시키도록 처리
-          <S.MatchMsgWrap>
+          <S.MatchMsgWrap
+            onClick={() => {
+              pop();
+              setTimeout(() => {
+                replace(PATH.MAP.stack, {});
+              });
+            }}
+          >
             <Icon icon="IconWalkChat" />
             <S.Matchtxt>내 주변 워케이셔너와 만나보세요!</S.Matchtxt>
           </S.MatchMsgWrap>
