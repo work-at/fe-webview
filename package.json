@@ -21,13 +21,15 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@stackflow/basic-ui": "^0.5.0",
+    "@stackflow/basic-ui": "0.5.0",
     "@stackflow/core": "^0.4.0",
     "@stackflow/plugin-history-sync": "^0.6.0",
     "@stackflow/plugin-renderer-basic": "^0.5.0",
-    "@stackflow/react": "^0.5.0",
+    "@stackflow/react": "0.5.0",
+    "@use-gesture/react": "^10.2.18",
     "axios": "^0.26.0",
     "axios-retry": "^3.3.1",
+    "dayjs": "^1.11.5",
     "eslint-plugin-storybook": "^0.6.1",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

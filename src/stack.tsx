@@ -19,6 +19,7 @@ import ProfileEdit from "./components/my-page/ProfileEdit";
 import EmailVerification from "./components/my-page/EmailVerification";
 import JobAndYearSelect from "./components/my-page/JobAndYearSelect";
 import Setting from "./components/my-page/Setting";
+import WorkChatRoomPage from "./pages/WorkChatRoomPage";
 
 import { DispatchEvent, id } from "@stackflow/core";
 import { requestGetUserInfoBase } from "./domains/user";
@@ -82,6 +83,7 @@ const activities = {
   WorkerDetailPage,
   CommunityPage,
   WorkChatPage,
+  WorkChatRoomPage,
   MyPage,
   ProfileEdit,
   EmailVerification,
@@ -108,10 +110,9 @@ export const { Stack, useFlow } = stackflow({
         DinerReviewPage: `${PATH.DINER.DINER_REVIEW.full}/:dinerId`,
         DinerDetailPage: `${PATH.DINER.full}/:dinerId`,
         WorkerDetailPage: `${PATH.WORKER.full}/:workerId`,
-        /* 커뮤니티 페이지 */
-        CommunityPage: PATH.COMMUNITY.full,
         /* 워크챗 페이지 */
-        WorkChatPage: `${PATH.WORK_CHAT.full}/:workerId`,
+        WorkChatPage: `${PATH.WORK_CHAT.full}`,
+        WorkChatRoomPage: `${PATH.WORK_CHAT.ROOM.full}/:workerId`,
         /* 마이페이지 */
         MyPage: PATH.MY_PAGE.full,
         ProfileEdit: PATH.MY_PAGE.PROFILE_EDIT.full,
