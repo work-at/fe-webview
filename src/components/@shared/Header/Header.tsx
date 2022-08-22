@@ -12,9 +12,10 @@ export type HeaderProps = {
   title?: string;
   fixed?: boolean;
   useLink?: boolean;
+  search?: boolean;
 };
 
-const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed, useLink }: HeaderProps) => {
+const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed, useLink, search }: HeaderProps) => {
   const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed} main={main}>
@@ -28,18 +29,21 @@ const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed,
           </S.BtnSearch>
         </S.HeaderInner>
       )}
+
       <S.HeaderInner useBack={useBack}>
         {useBack && (
           <S.BtnBack bgColor={bgColor} onClick={() => pop()}>
             <Icon icon="BtnBack" size={24} />
           </S.BtnBack>
         )}
+
         {title && !useLink && <S.Tit>{title}</S.Tit>}
         {title && useLink && (
           <S.Tit useLink={useLink}>
             <S.TitBtn>{title}</S.TitBtn>
           </S.Tit>
         )}
+
         {MagazinLogo === "jeju" && (
           <S.MagazineLogo>
             <Icon icon="MagazinJejuLogo" />
@@ -55,6 +59,16 @@ const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed,
             <Icon icon="MagazinGangWonLogo" />
           </S.MagazineLogo>
         )}
+
+        {search && (
+          <S.SearchInputWrap>
+            <S.SearchInput type="text" />
+            <S.BtnConfirm>
+              <Icon icon="BtnSearch" size={24} />
+            </S.BtnConfirm>
+          </S.SearchInputWrap>
+        )}
+
         {useRefresh && (
           <S.BtnReset>
             <Icon icon="BtnRefresh" size={24} />

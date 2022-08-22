@@ -1,0 +1,85 @@
+import styled from "styled-components";
+import { theme } from "@/assets/styles/theme";
+import { Z_INDEX } from "@/constants/zIndex";
+
+export const AccommSearchWrap = styled.div`
+  position: relative;
+  padding-bottom: 50px;
+`;
+
+export const SearhchTit = styled.p`
+  ${theme.fonts.SemiBold02};
+  color: ${theme.colors.black};
+  padding: 40px 7.4667vw 20px;
+`;
+
+export const ScrollWrap = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+export const ScrollInner = styled.div`
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const InfoList = styled.ul`
+  padding: 0 0 0 7.4667vw;
+  white-space: nowrap;
+`;
+
+export const InfoListItem = styled.li`
+  display: inline-grid;
+  position: relative;
+  margin-right: 15px;
+  overflow: hidden;
+  &:last-child {
+    margin-right: 7.4667vw;
+  }
+`;
+
+export const BtnInfo = styled.button`
+  display: block;
+  width: 100%;
+`;
+
+export const InfoTxt = styled.p`
+  ${theme.fonts.Medium05};
+  color: ${theme.colors.gray02};
+  padding-top: 10px;
+`;
+
+export const ReviewList = styled.ul`
+  padding: 0 7.4667vw;
+  margin: -13px 0 0 -9px;
+`;
+
+export const ReviewListItem = styled.li`
+  display: inline-grid;
+  width: calc((100% - 27px) / 3);
+  margin: 13px 0 0 9px;
+`;
+
+export const BtnReview = styled.button`
+  ${theme.fonts.Medium04};
+  color: ${theme.colors.black};
+  line-height: 38px;
+  width: 100%;
+  border-radius: 19px;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
+`;
+
+export const AccommNoData = styled.div`
+  padding: 278px 0 100px;
+  text-align: center;
+`;
+
+export const NoDataTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 13px;
+`;

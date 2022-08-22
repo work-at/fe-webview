@@ -99,6 +99,13 @@ export { default as IconDensityStpe3 } from "../images/icons/IconDensityStpe3.sv
 export { default as IconJeju } from "../images/icons/IconJeju.svg";
 export { default as IconSeoul } from "../images/icons/IconSeoul.svg";
 export { default as IconGangWon } from "../images/icons/IconGangWon.svg";
+export { default as IconAccommInfo1 } from "../images/icons/IconAccommInfo1.svg";
+export { default as IconAccommInfo2 } from "../images/icons/IconAccommInfo2.svg";
+export { default as IconAccommInfo3 } from "../images/icons/IconAccommInfo3.svg";
+export { default as IconAccommInfo4 } from "../images/icons/IconAccommInfo4.svg";
+export { default as IconAccommInfo5 } from "../images/icons/IconAccommInfo5.svg";
+export { default as IconAccommInfo6 } from "../images/icons/IconAccommInfo6.svg";
+export { default as IconNoData } from "../images/icons/IconNoData.svg";
 
 // 그 외 아이콘
 export { default as Addr } from "../images/icons/Addr.svg";

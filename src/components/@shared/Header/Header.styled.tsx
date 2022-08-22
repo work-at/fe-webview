@@ -80,3 +80,34 @@ export const BtnReset = styled.button`
 `;
 
 export const BtnSearch = styled(BtnReset)``;
+
+export const SearchInputWrap = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-left: 8px;
+`;
+
+export const SearchInput = styled.input<React.InputHTMLAttributes<HTMLInputElement>>`
+  display: inline-block;
+  width: 100%;
+  height: 36px;
+  padding: 0 54px 0 15px;
+  background: ${theme.colors.gray08};
+  border: none;
+  outline: none;
+  color: ${theme.colors.black};
+  ${theme.fonts.Medium03};
+  box-shadow: none;
+  transform: translateZ(0);
+  border-radius: 36px;
+`;
+
+export const BtnConfirm = styled.button`
+  position: absolute;
+  top: 6px;
+  right: 16px;
+  path {
+    fill: ${theme.colors.gray06};
+  }
+`;
