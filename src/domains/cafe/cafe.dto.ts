@@ -4,7 +4,7 @@ import { CafeReviewKey } from "./cafe.type";
 export type GetCafePinsRequest = {
   latitude: number;
   longitude: number;
-  radius: number;
+  radius?: number;
 };
 
 type CafePin = {
@@ -21,7 +21,12 @@ export type GetCafePinsResponse = AxiosResponse<{
 export type GetCafesRequest = {
   latitude: number;
   longitude: number;
-  radius: number;
+  radius?: number;
+};
+
+type TopReview = {
+  name: string;
+  content: string;
 };
 
 type Cafe = {
@@ -36,6 +41,8 @@ type Cafe = {
   placeUrl: string;
   thumbnailImageUrl: string;
   roadAddressName: string;
+  reviewCount: number;
+  topReviews: TopReview[];
 };
 
 export type GetCafesResponse = AxiosResponse<{ locations: Cafe[] }>;
@@ -44,7 +51,6 @@ type Review = {
   count: number;
   reviewType: {
     content: string;
-    iconType: string;
     name: string;
   };
 };

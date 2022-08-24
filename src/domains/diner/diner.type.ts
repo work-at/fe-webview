@@ -1,3 +1,4 @@
+import { IconType } from "@/assets/Icon";
 import { PinItem } from "../map.type";
 
 export type DinerPin = PinItem;
@@ -12,7 +13,7 @@ export type Diner = {
 };
 
 type ReviewPoint = {
-  icon: string;
+  icon: IconType;
   reason: string;
   reviewCount: number;
 };

@@ -1,6 +1,6 @@
 import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
-import { useUserInfo } from "@/domains/user";
+import { useUploadUserProfileImageMutation, useUserInfo } from "@/domains/user";
 import { useFlow } from "@/stack";
 import { useCallback, useState } from "react";
 import * as S from "./MyPage.styled";
@@ -14,12 +14,14 @@ export const isValidFileSize = (file: File) => {
 const MyPage = () => {
   const { push } = useFlow();
   const [imageFile, setImageFile] = useState<File>();
-  const imageUrl = imageFile ? URL.createObjectURL(imageFile) : undefined;
   const { data: userInfo } = useUserInfo();
+  const { mutateAsync: uploadProfileImage } = useUploadUserProfileImageMutation();
+
+  const imageUrl = imageFile ? URL.createObjectURL(imageFile) : undefined;
 
   const handleProfileEditRoute = useCallback(() => {
-    push("ProfileEdit", {});
-  }, [push]);
+    push("ProfileEdit", { userInfo });
+  }, [push, userInfo]);
 
   const handleEmailVerificationRoute = useCallback(() => {
     push("EmailVerification", {});
@@ -29,7 +31,13 @@ const MyPage = () => {
     push("Setting", {});
   }, [push]);
 
+  const handleContactUsRoute = useCallback(() => {
+    push("ContactUs", {});
+  }, [push]);
+
   const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { files } }) => {
+    console.log("handle!");
+
     if (!files) return;
 
     if (!isValidFileSize(files[0])) {
@@ -37,6 +45,9 @@ const MyPage = () => {
       return;
     }
 
+    console.log("hey!!!!");
+
+    uploadProfileImage(files[0]);
     setImageFile(files[0]);
   };
 
@@ -48,8 +59,11 @@ const MyPage = () => {
             <S.UserThumb htmlFor="profile-image">
               <img
                 src={
-                  userInfo?.imageUrl ??
-                  "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
+                  imageUrl
+                    ? imageUrl
+                    : userInfo?.imageUrl
+                    ? `${process.env.STATIC_URL}/${userInfo?.imageUrl}`
+                    : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
                 }
                 alt="유저 이미지"
               />
@@ -58,7 +72,7 @@ const MyPage = () => {
                 id="profile-image"
                 accept=".jpg, .png, .jpeg, tiff"
                 style={{ display: "none" }}
-                onChange={handleImageChange}
+                onInput={handleImageChange}
               />
             </S.UserThumb>
             <S.CameraLabel>
@@ -84,7 +98,7 @@ const MyPage = () => {
             <S.MenuLink onClick={handleEmailSettingRoute}>설정</S.MenuLink>
           </S.MenuList>
           <S.MenuList>
-            <S.MenuLink>문의</S.MenuLink>
+            <S.MenuLink onClick={handleContactUsRoute}>문의</S.MenuLink>
           </S.MenuList>
         </S.MyPageMenu>
 

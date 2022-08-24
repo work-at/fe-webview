@@ -83,7 +83,9 @@ export const requestGetUserInfo: QueryFunction<DTO.GetUserInfoResponse> = async 
 };
 
 export const useUserInfo = () => {
-  return useQuery([QUERY_NAME.GET_USER_INFO], requestGetUserInfo);
+  return useQuery([QUERY_NAME.GET_USER_INFO], requestGetUserInfo, {
+    staleTime: 500000,
+  });
 };
 
 export const requestUpdateUserProfile = async (command: Action.UpdateUserInfoCommand) =>
@@ -104,3 +106,11 @@ export const requestUserLocationBlock = async () => {
 };
 
 export const useUserLocationBlockMutation = () => useMutation(requestUserLocationBlock);
+
+export const requestUploadUserProfileImage = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  await baseInstance().post(API_URL.UPDATE_USER_PROFILE_IMAGE, formData);
+};
+
+export const useUploadUserProfileImageMutation = () => useMutation(requestUploadUserProfileImage);

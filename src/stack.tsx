@@ -20,6 +20,7 @@ import EmailVerification from "./components/my-page/EmailVerification";
 import JobAndYearSelect from "./components/my-page/JobAndYearSelect";
 import Setting from "./components/my-page/Setting";
 import WorkChatRoomPage from "./pages/WorkChatRoomPage";
+import ContactUs from "./components/my-page/ContactUs";
 
 import { DispatchEvent, id } from "@stackflow/core";
 import { requestGetUserInfoBase } from "./domains/user";
@@ -103,6 +104,7 @@ const activities = {
   EmailVerification,
   JobAndYearSelect,
   Setting,
+  ContactUs,
   Test,
   Copyright,
 };
@@ -134,6 +136,7 @@ export const { Stack, useFlow } = stackflow({
         EmailVerification: PATH.MY_PAGE.EMAIL_VERIFICATION.full,
         JobAndYearSelect: PATH.MY_PAGE.JOB_AND_YEAR_SELECT.full,
         Setting: PATH.MY_PAGE.SETTING.full,
+        ContactUs: PATH.MY_PAGE.CONTACT_US.full,
         Test: "/test",
         Copyright: "/copyright",
       },

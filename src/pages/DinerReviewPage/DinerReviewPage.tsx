@@ -6,11 +6,13 @@ import * as S from "./DinerReviewPage.styled";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DinerReviewKey, useDinerReviewListQuery, usePostDinerReview } from "@/domains/diner";
 import { useActivityParams } from "@stackflow/react";
+import { useFlow } from "@/stack";
 
 const DinerReviewPage = () => {
   const { dinerId } = useActivityParams<{ dinerId: string }>();
   const { data } = useDinerReviewListQuery();
   const { mutateAsync } = usePostDinerReview();
+  const { pop } = useFlow();
 
   const { selected, onChange } = useMultiselect([]);
 
@@ -21,9 +23,10 @@ const DinerReviewPage = () => {
     iconType: item.iconType + "_B",
   }));
 
-  const handlePostReview = () => {
+  const handlePostReview = async () => {
     try {
-      mutateAsync({ reviewTypeNames: selected as DinerReviewKey[], locationId: dinerId });
+      await mutateAsync({ reviewTypeNames: selected as DinerReviewKey[], locationId: dinerId });
+      pop();
     } catch (e) {
       console.error(e);
     }

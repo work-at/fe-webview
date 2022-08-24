@@ -84,7 +84,10 @@ export const usePostCafeReview = () => {
 
   return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostCafeReviewRequest>({
     mutationFn: requestPostCafeReview,
-    onSuccess: (_, request) => queryClient.invalidateQueries([QUERY_NAME.GET_CAFE_DETAIL, { id: request.locationId }]),
+    onSuccess: (_, request) => {
+      queryClient.invalidateQueries([QUERY_NAME.GET_CAFE_DETAIL, { id: request.locationId }]);
+      queryClient.invalidateQueries([QUERY_NAME.GET_CAFES]);
+    },
   });
 };
 

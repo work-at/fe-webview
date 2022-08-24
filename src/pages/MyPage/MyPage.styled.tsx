@@ -27,7 +27,9 @@ export const UserThumb = styled.label`
   justify-content: center;
   > img {
     display: flex;
-    width: 100%;
+    width: 115px;
+    height: 115px;
+    object-fit: cover;
   }
 `;
 

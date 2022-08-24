@@ -4,11 +4,11 @@ import { Button } from "@/components/@shared/Button/Button.styled";
 import CheckBox from "@/components/@shared/CheckBox";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DESIRED_ACTIVITIES } from "@/domains/common.constant";
-import { DesiredActivity_Text } from "@/domains/common.text";
 import { DesiredActivity } from "@/domains/common.type";
 import { useUpdateUserProfileMutation, useUserInfo } from "@/domains/user";
 import { useFlow } from "@/stack";
-import { useCallback } from "react";
+import { atom, useAtom } from "jotai";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./ProfileEdit.styled";
 
@@ -31,13 +31,20 @@ const ERROR_TEXT = {
 // eslint-disable-next-line no-useless-escape
 const emailRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
+export const jobAndYearAtom = atom<any>({
+  job: undefined,
+  year: undefined,
+});
+
 const ProfileEdit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: userInfo } = useUserInfo();
   const { register, handleSubmit, setValue, setError } = useForm<ProfileFormData>();
   const { push } = useFlow();
-  const { data: userInfo } = useUserInfo();
   const { onChange, selected } = useMultiselect([]);
   const { pop } = useFlow();
   const { mutateAsync: updateUserProfile } = useUpdateUserProfileMutation();
+  const [jobAndYear] = useAtom(jobAndYearAtom);
 
   const handleEmailVerificationRoute = useCallback(() => {
     push("EmailVerification", {});
@@ -48,14 +55,15 @@ const ProfileEdit = () => {
   }, [push]);
 
   const handleFormSubmit = handleSubmit(async (formData) => {
-    // TODO : 연동 완료하기
-    // await updateUserProfile({
-    //   desiredActivities: formData.desiredActivities,
-    //   nickName: formData.nickName,
-    //   story: formData.story,
-    //   job: "development",
-    //   yearOfService: "3~4",
-    // });
+    console.log("formData", formData);
+
+    await updateUserProfile({
+      desiredActivities: selected,
+      nickName: formData.nickName,
+      story: formData.story,
+      job: jobAndYear.job,
+      yearOfService: jobAndYear.year,
+    });
 
     pop();
   });
@@ -71,6 +79,14 @@ const ProfileEdit = () => {
 
     setValue("story", text);
   };
+
+  useEffect(() => {
+    setValue("nickName", userInfo?.nickname ?? "");
+    setValue("desiredActivities", userInfo?.activities.map((activity) => activity.name) ?? []);
+    setValue("story", userInfo?.story ?? "");
+  }, [userInfo, setValue]);
+
+  // console.log("userInfo", userInfo);
 
   return (
     <StackLayout>
@@ -132,9 +148,9 @@ const ProfileEdit = () => {
                 widthAuto
                 items={
                   DESIRED_ACTIVITIES.map((activity) => ({
-                    id: activity,
-                    label: DesiredActivity_Text[activity],
-                    iconType: "ICON",
+                    id: activity.name,
+                    label: activity.content,
+                    iconType: activity.name,
                   })) ?? []
                 }
               />

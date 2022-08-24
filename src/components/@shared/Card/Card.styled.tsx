@@ -128,7 +128,11 @@ export const InfoList = styled.li`
 `;
 
 export const CardBottom = styled.ul`
-  margin: 8px 0 0 -7px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+
   &:after {
     content: "";
     display: block;
@@ -137,8 +141,8 @@ export const CardBottom = styled.ul`
 `;
 
 export const TagList = styled.li`
-  float: left;
   margin-left: 7px;
+  margin: 0;
   padding: 5px 11px;
   background: ${theme.colors.gray09};
   ${theme.fonts.Medium06}

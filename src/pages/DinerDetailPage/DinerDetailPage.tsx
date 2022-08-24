@@ -3,7 +3,7 @@ import Header from "@/components/@shared/Header";
 import { useActivityParams } from "@stackflow/react";
 
 import * as S from "./DinerDetailPage.styled";
-import Icon from "@/assets/Icon";
+import Icon, { IconType } from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
 import { useUserAddressQuery } from "@/domains/user";
@@ -112,7 +112,7 @@ const DinerDetailPage = () => {
           </S.WalkTit>
           <S.ReviewWrap>
             {dinerDetail.reviewPoints.map((reviewPoint) => (
-              <Tag key={reviewPoint.reason} reviews={200} iconType={reviewPoint.icon}>
+              <Tag key={reviewPoint.reason} reviews={reviewPoint.reviewCount} iconType={reviewPoint.icon}>
                 {reviewPoint.reason}
               </Tag>
             ))}
