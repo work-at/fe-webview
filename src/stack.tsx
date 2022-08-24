@@ -28,6 +28,16 @@ export const Test = () => {
   return <StackLayout appBar={{ title: "TEST" }}>Test</StackLayout>;
 };
 
+export const Copyright = () => {
+  return (
+    <StackLayout isHide>
+      <div>앱 &#39;Work at_&#39; (com.workat_)의 소유자와 이 웹사이트의 소유자가 동일하다는 것을 증명합니다.</div>
+      <br />
+      <div>This text evidences that same person(owner) has copyright about app(com.workat_) and this site.</div>
+    </StackLayout>
+  );
+};
+
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 
@@ -35,6 +45,10 @@ let isLogin = false;
 let isDirty = false;
 
 const checkAuthStatus = async (dispatchEvent: DispatchEvent) => {
+  if (window.location.pathname.includes("copyright")) {
+    return;
+  }
+
   const TOKEN = sessionStorage.getItem(ACCESS_TOKEN);
 
   if ((TOKEN && isLogin) || isDirty) {
@@ -90,6 +104,7 @@ const activities = {
   JobAndYearSelect,
   Setting,
   Test,
+  Copyright,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -120,6 +135,7 @@ export const { Stack, useFlow } = stackflow({
         JobAndYearSelect: PATH.MY_PAGE.JOB_AND_YEAR_SELECT.full,
         Setting: PATH.MY_PAGE.SETTING.full,
         Test: "/test",
+        Copyright: "/copyright",
       },
       /* TODO: 404로 교체해야 함 */
       fallbackActivity: () => PATH.LOGIN.stack,
