@@ -6,12 +6,14 @@ import * as S from "./CafeReviewPage.styled";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { CafeReviewKey, useCafeReviewListQuery, usePostCafeReview } from "@/domains/cafe";
 import { useActivityParams } from "@stackflow/react";
+import { useFlow } from "@/stack";
 
 const CafeReviewPage = () => {
   const { cafeId } = useActivityParams<{ cafeId: string }>();
   const { data } = useCafeReviewListQuery();
   const { mutateAsync } = usePostCafeReview();
   const { selected, onChange } = useMultiselect([]);
+  const { pop } = useFlow();
 
   const reviewList = data?.data?.response.map((item) => ({
     id: item.name,
@@ -20,9 +22,10 @@ const CafeReviewPage = () => {
     iconType: item.iconType + "_B",
   }));
 
-  const handlePostReview = () => {
+  const handlePostReview = async () => {
     try {
-      mutateAsync({ reviewTypeNames: selected as CafeReviewKey[], locationId: cafeId });
+      await mutateAsync({ reviewTypeNames: selected as CafeReviewKey[], locationId: cafeId });
+      pop();
     } catch (e) {
       console.error(e);
     }
@@ -38,7 +41,7 @@ const CafeReviewPage = () => {
         </S.Tit>
         <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
         <S.CheckWrap>
-          {reviewList && <CheckBox selectedItemIds={selected} onChange={onChange} items={reviewList} />}
+          {reviewList && <CheckBox isIcon selectedItemIds={selected} onChange={onChange} items={reviewList} />}
         </S.CheckWrap>
       </S.PlaceViewWrap>
       <Button size="lg" bgColor="black" onClick={handlePostReview} disabled={!selected.length}>

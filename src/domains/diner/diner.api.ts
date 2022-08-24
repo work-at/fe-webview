@@ -1,62 +1,25 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { MutationFunction, QueryFunction, QueryKey, useMutation, useQuery, UseQueryOptions } from "react-query";
+import { AxiosError, AxiosResponse } from "axios";
+import { MutationFunction, QueryFunction, useMutation, useQuery, UseQueryOptions } from "react-query";
 
 import * as DTO from "./diner.dto";
 import * as Action from "./diner.action";
 import * as Mapper from "./diner.mapper";
 
 import { API_URL, QUERY_NAME } from "@/constants";
-import { Diner } from "./diner.type";
 import { baseInstance } from "@/services";
 
 type DinerPinsQueryKey = readonly [typeof QUERY_NAME.GET_DINER_PINS, Action.DinerPinsCriteria];
 
-// TODO : 실제 API 데이터 연동
-const DUMMY_DATA: Action.DinerPinsInfo = [
-  {
-    id: 1,
-    coordinates: {
-      lat: 37.5881116,
-      lng: 126.9941114,
-    },
-    name: "음식점 1",
-  },
-  {
-    id: 2,
-    coordinates: {
-      lat: 37.5882026,
-      lng: 126.9942424,
-    },
-    name: "음식점 2",
-  },
-  {
-    id: 3,
-    coordinates: {
-      lat: 37.5883036,
-      lng: 126.9943434,
-    },
-    name: "음식점 3",
-  },
-];
-
 export const requestGetDinerPins: QueryFunction<Action.DinerPinsInfo, DinerPinsQueryKey> = async ({ queryKey }) => {
-  //   const [, criteria] = queryKey;
+  const [, criteria] = queryKey;
 
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
+  const data = await baseInstance().get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>("map/restaurants/pin", {
+    params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
+  });
 
-  //   const data = await axios.get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>(`/Diners`, {
-  //     params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
+  const dinerPins = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
 
-  //   const Diners = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
-  //
-  //   return Diners;
-  return DUMMY_DATA;
+  return dinerPins;
 };
 
 export const useDinerPinsQuery = (
@@ -70,100 +33,18 @@ export const useDinerPinsQuery = (
   );
 };
 
-const DUMMY_DINER_DATA: Diner = {
-  id: 1,
-  name: "음식점 상호",
-  imageUrl:
-    "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-  region: "서울",
-  tags: ["좌석이편해요", "와이파이빵빵해요"],
-};
-
-type DinerQueryKey = readonly [typeof QUERY_NAME.GET_DINER, Action.DinerCriteria];
-
-export const requestGetDiner: QueryFunction<Action.DinerInfo, DinerQueryKey> = async ({ queryKey }) => {
-  //   const [, criteria] = queryKey;
-
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
-
-  //   const data = await axios.get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>(`/Diners`, {
-  //     params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
-
-  //   const Diners = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
-  //
-  //   return Diners;
-  return DUMMY_DINER_DATA;
-};
-
-export const useDinerQuery = (
-  criteria: Action.DinerCriteria,
-  options: UseQueryOptions<Action.DinerInfo, AxiosError<string>, Action.DinerInfo, DinerQueryKey>
-) => {
-  return useQuery<Action.DinerInfo, AxiosError<string>, Action.DinerInfo, DinerQueryKey>(
-    [QUERY_NAME.GET_DINER, criteria],
-    requestGetDiner,
-    options
-  );
-};
-
-type DinerDetailQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_DETAIL, Action.DinerDetailCriteria];
-
-const DUMMY_DINER_DETAIL: Action.DinerDetailInfo = {
-  imageUrl:
-    "https://images.unsplash.com/photo-1658460349386-1056fc4dcce5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-  name: "이름",
-  address: "주소",
-  kakaoLink: "https://m.map.kakao.com",
-  phoneNumber: "010-0000-0000",
-  reviewPoints: [
-    {
-      icon: "BerthReview1",
-      reason: "리뷰 이유",
-      reviewCount: 10,
-    },
-    {
-      icon: "BerthReview2",
-      reason: "리뷰 이유2",
-      reviewCount: 30,
-    },
-    {
-      icon: "BerthReview3",
-      reason: "리뷰 이유3",
-      reviewCount: 20,
-    },
-  ],
-  coordinates: {
-    lat: 127,
-    lng: 38,
-  },
-};
+type DinerDetailQueryKey = readonly [typeof QUERY_NAME.GET_DINER_DETAIL, Action.DinerDetailCriteria];
 
 export const requestGetDinerDetail: QueryFunction<Action.DinerDetailInfo, DinerDetailQueryKey> = async ({
   queryKey,
 }) => {
-  //   const [, criteria] = queryKey;
+  const [, criteria] = queryKey;
 
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
+  const data = await baseInstance().get<void, DTO.GetDinerDetailResponse>(`map/restaurants/${criteria.id}`);
 
-  //   const data = await axios.get<DTO.GetDinerPinsRequest, DTO.GetDinerPinsResponse>(`/cafes`, {
-  //     params: Mapper.a2dMapper_DinerPinsCriteria_GetDinerPinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
+  const dinerDetail = Mapper.d2aMapper_GetDinerDetailResponse_DinerDetailInfo(data);
 
-  //   const cafes = Mapper.d2aMapper_GetDinerPinsResponse_DinerPinsInfo(data);
-  //
-  //   return cafes;
-  return DUMMY_DINER_DETAIL;
+  return dinerDetail;
 };
 
 export const useDinerDetailQuery = (
@@ -171,7 +52,7 @@ export const useDinerDetailQuery = (
   options: UseQueryOptions<Action.DinerDetailInfo, AxiosError<string>, Action.DinerDetailInfo, DinerDetailQueryKey>
 ) => {
   return useQuery<Action.DinerDetailInfo, AxiosError<string>, Action.DinerDetailInfo, DinerDetailQueryKey>(
-    [QUERY_NAME.GET_CAFE_DETAIL, criteria],
+    [QUERY_NAME.GET_DINER_DETAIL, criteria],
     requestGetDinerDetail,
     options
   );
@@ -205,54 +86,18 @@ export const usePostDinerReview = () => {
   });
 };
 
-type DinersQueryKey = readonly [typeof QUERY_NAME.GET_CAFES, Action.DinersCriteria];
-
-const DUMMY_DINERS: Action.DinersInfo = [
-  {
-    id: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    name: "포메인제주",
-    region: "제주",
-    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
-  },
-  {
-    id: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    name: "포메인제주2",
-    region: "제주",
-    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
-  },
-
-  {
-    id: 3,
-    imageUrl:
-      "https://images.unsplash.com/photo-1657299170207-d6df52b27811?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    name: "포메인제주3",
-    region: "제주",
-    tags: ["식사메뉴가있어요", "좌석이편해요", "와이파이빵빵해요"],
-  },
-];
+type DinersQueryKey = readonly [typeof QUERY_NAME.GET_DINERS, Action.DinersCriteria];
 
 export const requestGetDiners: QueryFunction<Action.DinersInfo, DinersQueryKey> = async ({ queryKey }) => {
-  //   const [, criteria] = queryKey;
+  const [, criteria] = queryKey;
 
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
+  const data = await baseInstance().get<DTO.GetDinersRequest, DTO.GetDinersResponse>("/map/restaurants", {
+    params: Mapper.a2dMapper_DinersCriteria_GetDinersRequest(criteria),
+  });
 
-  //   const data = await axios.get<DTO.GetCafePinsRequest, DTO.GetCafePinsResponse>(`/cafes`, {
-  //     params: Mapper.a2dMapper_CafePinsCriteria_GetCafePinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
+  const diners = Mapper.d2aMapper_GetDinersResponse_DinersInfo(data);
 
-  //   const cafes = Mapper.d2aMapper_GetCafePinsResponse_CafePinsInfo(data);
-  //
-  //   return cafes;
-  return DUMMY_DINERS;
+  return diners;
 };
 
 // TODO : Suspense 가 true 인 경우 무조건 true 가 나오도록 설정하기. isLoading 제거하ㄱ
@@ -261,7 +106,7 @@ export const useDinersQuery = (
   options: UseQueryOptions<Action.DinersInfo, AxiosError<string>, Action.DinersInfo, DinersQueryKey>
 ) => {
   return useQuery<Action.DinersInfo, AxiosError<string>, Action.DinersInfo, DinersQueryKey>(
-    [QUERY_NAME.GET_CAFES, criteria],
+    [QUERY_NAME.GET_DINERS, criteria],
     requestGetDiners,
     options
   );

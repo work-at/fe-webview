@@ -1,17 +1,30 @@
-export type GetAddressAndNearWorkerCountRequest = {
-  kilometer: number;
-  latitude: string;
-  longitude: string;
+import { AxiosResponse } from "axios";
+
+export type PostUserAddressRequest = {
+  latitude: number;
+  longitude: number;
 };
 
-export type GetAddressAndNearWorkerCountResponse = {
+export type PostUserAddressResponse = AxiosResponse<{
   address: string;
-  count: number;
-};
+}>;
 
 type Activity = {
   content: string;
   name: string;
+};
+
+export type GetNearWorkersCountingRequest = {
+  kilometer: number;
+};
+
+export type GetNearWorkersCountingResponse = {
+  count: number;
+};
+
+export type PostSyncRequest = {
+  latitude: number;
+  longitude: number;
 };
 
 export type GetUserInfoResponse = {

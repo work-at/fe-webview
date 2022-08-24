@@ -6,7 +6,8 @@ export type Diner = {
   id: number;
   name: string;
   imageUrl: string;
-  region: string;
+  address: string;
+  reviewCount: number;
   tags: string[];
 };
 
@@ -23,10 +24,7 @@ export type DinerDetail = {
   phoneNumber: string;
   kakaoLink: string;
   reviewPoints: ReviewPoint[];
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  isReviewed: boolean;
 };
 
 export type DinerReviewKey =

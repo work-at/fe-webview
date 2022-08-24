@@ -13,7 +13,7 @@ const Tag = ({ iconType, reviews = 0, children }: TagProps) => {
     <S.Tag>
       <S.TagInner restWidth={((window.innerWidth - 220) / 100) * reviews}>
         <S.TagIcon>
-          <Icon icon={iconType} />
+          <Icon icon={"BerthReview1"} />
         </S.TagIcon>
         <S.TagTxt>{children}</S.TagTxt>
         <S.TagNum>{reviews}</S.TagNum>

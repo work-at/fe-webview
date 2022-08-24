@@ -1,24 +1,29 @@
 import * as DTO from "./user.dto";
 import * as Action from "./user.action";
 
-export const d2aMapper_GetAddressAndNearWorkerCountResponse_UserAddressInfo = (
-  response: DTO.GetAddressAndNearWorkerCountResponse
-): Action.UserAddressInfo => {
+export const a2dMapper_UserAddressPinsCriteria_PostUserAddressRequest = (
+  criteria: Action.UserAddressCriteria
+): DTO.PostUserAddressRequest => {
   return {
-    address: response.address,
-    nearUserAddressCount: response.count,
+    latitude: criteria.lat,
+    longitude: criteria.lng,
   };
 };
 
-const KILOMETER = 10;
-
-export const a2dMapper_UserAddressPinsCriteria_GetAddressAndNearWorkerCountRequest = (
-  criteria: Action.UserAddressCriteria
-): DTO.GetAddressAndNearWorkerCountRequest => {
+export const d2aMapper_GetNearWorkersCountingResponse_NearWorkersCountInfo = (
+  response: DTO.GetNearWorkersCountingResponse
+): Action.NearWorkersCountInfo => {
   return {
-    kilometer: KILOMETER,
-    latitude: String(criteria.lat),
-    longitude: String(criteria.lng),
+    count: response.count,
+  };
+};
+
+export const a2dMapper_SyncUserLocationCommand_PostSync = (
+  command: Action.SyncUserLocationCommand
+): DTO.PostSyncRequest => {
+  return {
+    latitude: command.lat,
+    longitude: command.lng,
   };
 };
 

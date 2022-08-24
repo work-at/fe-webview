@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { QueryFunction, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
+import { MutationFunction, QueryFunction, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 
 import * as DTO from "./user.dto";
 import * as Action from "./user.action";
@@ -7,35 +7,23 @@ import * as Mapper from "./user.mapper";
 
 import { API_URL, QUERY_NAME } from "@/constants";
 import { baseInstance } from "@/services";
+import { MAP } from "@/constants/map";
 
 type UserAddressQueryKey = readonly [typeof QUERY_NAME.GET_USER_ADDRESS, Action.UserAddressCriteria];
-
-// TODO : 실제 API 데이터 연동
-const DUMMY_DATA: Action.UserAddressInfo = {
-  address: "나의 위치",
-  nearUserAddressCount: 7,
-};
 
 export const requestGetUserAddress: QueryFunction<Action.UserAddressInfo, UserAddressQueryKey> = async ({
   queryKey,
 }) => {
-  //   const [, criteria] = queryKey;
+  const [, criteria] = queryKey;
 
-  //   if (!accessToken) {
-  //     throw new Error("허가되지 되지 않은 접근입니다.");
-  //   }
+  const data = await baseInstance().post<DTO.PostUserAddressRequest, DTO.PostUserAddressResponse>(
+    "/users/address",
+    Mapper.a2dMapper_UserAddressPinsCriteria_PostUserAddressRequest(criteria)
+  );
 
-  //   const data = await axios.get<DTO.GetUserAddressPinsRequest, DTO.GetUserAddressPinsResponse>(`/UserAddresss`, {
-  //     params: Mapper.a2dMapper_UserAddressPinsCriteria_GetUserAddressPinsRequest(criteria),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   });
+  console.log("UserAddress", data);
 
-  //   const UserAddresss = Mapper.d2aMapper_GetUserAddressPinsResponse_UserAddressPinsInfo(data);
-  //
-  //   return UserAddresss;
-  return DUMMY_DATA;
+  return data.data.address;
 };
 
 export const useUserAddressQuery = (
@@ -47,6 +35,43 @@ export const useUserAddressQuery = (
     requestGetUserAddress,
     options
   );
+};
+
+type NearWorkersCountQueryKey = readonly [typeof QUERY_NAME.GET_NEAR_WORKERS_COUNT];
+
+export const requestGetNearWorkersCounting: QueryFunction<
+  Action.NearWorkersCountInfo,
+  NearWorkersCountQueryKey
+> = async () => {
+  const data = await baseInstance().get<DTO.GetNearWorkersCountingResponse>("/map/workers/counting");
+
+  return data.data;
+};
+
+export const useNearWorkersCountQuery = (
+  options: UseQueryOptions<
+    Action.NearWorkersCountInfo,
+    AxiosError<string>,
+    Action.NearWorkersCountInfo,
+    NearWorkersCountQueryKey
+  >
+) => {
+  return useQuery<
+    Action.NearWorkersCountInfo,
+    AxiosError<string>,
+    Action.NearWorkersCountInfo,
+    NearWorkersCountQueryKey
+  >([QUERY_NAME.GET_NEAR_WORKERS_COUNT], requestGetNearWorkersCounting, options);
+};
+
+export const requestPostSync: MutationFunction<void, Action.SyncUserLocationCommand> = async (command) => {
+  await baseInstance().post<DTO.PostUserAddressRequest, DTO.PostUserAddressResponse>("/", {
+    params: Mapper.a2dMapper_SyncUserLocationCommand_PostSync(command),
+  });
+};
+
+export const useSyncUserLocationMutation = () => {
+  return useMutation(requestPostSync);
 };
 
 export const requestGetUserInfoBase = () => baseInstance().get<unknown, DTO.GetUserInfoResponse>(API_URL.GET_USER_LIST);

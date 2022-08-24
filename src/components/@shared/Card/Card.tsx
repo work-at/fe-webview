@@ -4,7 +4,7 @@ export type CardItem = {
   id: number;
   type: "cafe" | "diner" | "worker";
   title: string;
-  imageUrl: string;
+  imageUrl?: string;
   reviewNum?: number;
   addr?: string;
   job?: string;
@@ -17,12 +17,15 @@ type CardProps = CardItem & {
   onClick?: () => void;
 };
 
+const DEFAULT_IMAGE =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
+
 const Card = ({ type, title, reviewNum, addr, job, year, tags, imageUrl, className, onClick }: CardProps) => {
   return (
     <S.CardWrap className={className} isClickable={!!onClick} onClick={onClick}>
       <S.CardTop>
         <S.CardThumb>
-          <img src={imageUrl} alt={`${title} 이미지`} />
+          <img src={imageUrl === "" || !imageUrl ? DEFAULT_IMAGE : imageUrl} alt={`${title} 이미지`} />
         </S.CardThumb>
         <S.DetailInfo>
           <S.Title>{title}</S.Title>

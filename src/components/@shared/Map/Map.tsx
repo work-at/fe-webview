@@ -23,7 +23,7 @@ const Map = ({ pins, userCoordinates, onPinSelect, ...rest }: MapProps) => {
   });
 
   const handlePinSelect = useCallback(
-    (id: number) => {
+    (id: number | undefined) => {
       onPinSelect(id);
       selectPin(id);
     },

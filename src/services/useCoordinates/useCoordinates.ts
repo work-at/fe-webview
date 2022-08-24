@@ -1,34 +1,27 @@
-import { SERVICE_NAME } from "@/constants/services";
 import { Coordinates } from "@/domains/map.type";
-import { getUserCoordinates } from "@/utils/browser";
-import { useCallback, useEffect, useState } from "react";
-import { useQuery, UseQueryOptions } from "react-query";
-
-type WorkerPinsQueryKey = readonly [typeof SERVICE_NAME.GET_USER_COORDINATES];
-
-export const useCoordinatesService = (
-  options?: UseQueryOptions<Coordinates, Error, Coordinates, WorkerPinsQueryKey>
-) => {
-  return useQuery<Coordinates, Error, Coordinates, WorkerPinsQueryKey>(
-    [SERVICE_NAME.GET_USER_COORDINATES],
-    getUserCoordinates,
-    options
-  );
-};
+import { alertUserPositionLoadError } from "@/utils/browser";
+import { useEffect, useState } from "react";
 
 const useCoordinates = () => {
   const [userCoordinates, setUserCoordinates] = useState<Coordinates>();
 
-  const setCurrentUserCoordinates = useCallback(async () => {
-    const userCoordinates = await getUserCoordinates();
-    setUserCoordinates(userCoordinates);
-  }, []);
-
   useEffect(() => {
-    setCurrentUserCoordinates();
+    const watchId = navigator.geolocation.watchPosition(
+      ({ coords }) => {
+        setUserCoordinates({
+          lat: coords.latitude,
+          lng: coords.longitude,
+        });
+      },
+      (error) => {
+        alertUserPositionLoadError(error);
+      }
+    );
+
+    return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
-  return { userCoordinates, isLoading: !userCoordinates };
+  return { userCoordinates };
 };
 
 export default useCoordinates;

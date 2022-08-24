@@ -12,13 +12,16 @@ import Icon from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
 import { useUserAddressQuery } from "@/domains/user";
-import { useCoordinatesService } from "@/services/useCoordinates/useCoordinates";
+import useCoordinates from "@/services/useCoordinates/useCoordinates";
+
+const DEFAULT_CAFE_IMAGE =
+  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FmZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60";
 
 const CafeDetailPage = () => {
   const { cafeId } = useActivityParams<{ cafeId: string }>();
   const { push } = useFlow();
 
-  const { data: userCoordinates } = useCoordinatesService();
+  const { userCoordinates } = useCoordinates();
 
   const { data: userAddress } = useUserAddressQuery(
     {
@@ -58,7 +61,7 @@ const CafeDetailPage = () => {
   }, [cafeDetail?.kakaoLink]);
 
   const handleOpenKaKaoPathFindingLink = useCallback(() => {
-    userAddress && cafeDetail && window.open(getPathFindingURL(userAddress.address, cafeDetail.address));
+    userAddress && cafeDetail && window.open(getPathFindingURL(userAddress, cafeDetail.address));
   }, [userAddress, cafeDetail]);
 
   if (isLoading) {
@@ -76,7 +79,10 @@ const CafeDetailPage = () => {
       <Header useBack />
       <S.CafeDetailWrap>
         <S.VisualWrap>
-          <img src={cafeDetail.imageUrl} alt="까페 이미지" />
+          <img
+            src={cafeDetail.imageUrl === "" || !cafeDetail.imageUrl ? DEFAULT_CAFE_IMAGE : cafeDetail.imageUrl}
+            alt="까페 이미지"
+          />
         </S.VisualWrap>
         <S.InfoWrap>
           <S.Tit>{cafeDetail.name}</S.Tit>
@@ -107,25 +113,17 @@ const CafeDetailPage = () => {
           </S.WalkTit>
           <S.ReviewWrap>
             {cafeDetail.reviewPoints.map((reviewPoint) => (
-              <Tag key={reviewPoint.reason} reviews={200} iconType={reviewPoint.icon}>
+              <Tag key={reviewPoint.reason} reviews={reviewPoint.reviewCount} iconType={reviewPoint.icon}>
                 {reviewPoint.reason}
               </Tag>
             ))}
-
-            <Tag reviews={120} iconType={"CommonReview3"}>
-              가성비가 좋아요
-            </Tag>
-            <Tag reviews={90} iconType={"CommonReview4"}>
-              사람이 많이 없어요
-            </Tag>
-            <Tag reviews={42} iconType={"CommonReview5"}>
-              넓고 깨끗해요
-            </Tag>
           </S.ReviewWrap>
         </S.InfoWrap>
-        <S.BtnReview onClick={handleReviewButtonClick}>
-          <Icon icon={"BtnReview"} size={73} />
-        </S.BtnReview>
+        {!cafeDetail.isReviewed && (
+          <S.BtnReview onClick={handleReviewButtonClick}>
+            <Icon icon={"BtnReview"} size={73} />
+          </S.BtnReview>
+        )}
       </S.CafeDetailWrap>
     </StackLayout>
   );

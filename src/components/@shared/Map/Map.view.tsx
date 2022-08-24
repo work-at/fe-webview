@@ -17,7 +17,7 @@ export type MapViewProps = {
   selectedPinSize: { width: number; height: number };
   selectedPinImage: string;
   className?: string;
-  onPinSelect: (id: number) => void;
+  onPinSelect: (id: number | undefined) => void;
 };
 
 const MapView = ({
@@ -46,6 +46,7 @@ const MapView = ({
       className={className}
       level={5}
       isPanto
+      onClick={() => onPinSelect(undefined)}
     >
       <Circle
         center={centerCoordinatesRef.current}
@@ -54,7 +55,6 @@ const MapView = ({
         fillOpacity={0.1}
         strokeColor={"#78FFAA"}
       />
-
       {pins.map((pin) => (
         <Pin
           key={pin.id}
