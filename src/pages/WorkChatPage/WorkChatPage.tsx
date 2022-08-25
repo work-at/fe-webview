@@ -1,6 +1,6 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import * as S from "./WorkChatPage.styled";
-import UserImg from "@/assets/images/walkchat2.png";
+import UserImg from "@/assets/images/walkchat1.png";
 import Icon from "@/assets/Icon";
 import { useBlockUser, useChatListQuery, useChatRemoveQuery } from "@/domains/chat/chat.api";
 import { Room } from "@/domains/chat/chat.type";
@@ -33,7 +33,7 @@ const DropDown = ({ isOpen, roomId, userId }: DropDownProps) => {
 
   const handleBlockUser = useCallback(async () => {
     try {
-      await blockUserMutateAsync({ userId });
+      await blockUserMutateAsync({ blockUserId: userId });
       refetch();
     } catch {
       alert("차단하기 에러 발생");
@@ -124,7 +124,7 @@ const WorkChatPage = () => {
   const { data } = useChatListQuery();
 
   return (
-    <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight, isTitleCenter: true }} navigationPath="work-chat">
+    <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">
       <S.WorkChatListWrap>
         <S.ChatList>
           {data?.data.rooms.map((item) => (
