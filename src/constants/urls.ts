@@ -25,4 +25,5 @@ export const API_URL = {
     `/users/chatting/${roomId}/lastMessage?lastMessageId=${lastMessageId}`,
   POST_CHAT_CONFIRM: (roomId: number) => `/chattings/${roomId}/confirm`,
   POST_CHAT_ROOM_CREATE: (ownerUserId: number) => `/chattings/?ownerUserId=${ownerUserId}`,
+  POST_BLOCK_USER: (blockUserId: number) => `/user/blocking?blockUserId=${blockUserId}`,
 };

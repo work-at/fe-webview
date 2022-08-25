@@ -7,7 +7,7 @@ export type DeleteChat = {
 };
 
 export type BlockUser = {
-  userId: number;
+  blockUserId: number;
 };
 
 export type Chats = Chat[];

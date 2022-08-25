@@ -5,7 +5,9 @@ export type Room = {
   deletedByOtherUser: boolean;
   id: number;
   lastMessage: string;
+  lastMessageId: number;
   otherUser: {
+    owner: boolean;
     userId: number;
     userNickname: string;
     userProfileUrl: string;
