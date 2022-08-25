@@ -84,10 +84,11 @@ const AppBarRight = ({ callback }: { callback: () => void }) => {
 };
 
 interface ProfileModalProps {
-  workerId: string;
+  chatInfo: Partial<Room>;
+  roomId: number;
 }
 
-const ProfileModal = ({ workerId }: ProfileModalProps) => {
+const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
   const { pop, push } = useFlow();
   const [isLeave, setIsLeave] = useState(false);
   const { mutateAsync: chatConfirm } = useChatConfirmQuery();
@@ -114,7 +115,7 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
               round
               onClick={async () => {
                 try {
-                  await chatRemove({ roomId: Number(workerId) });
+                  await chatRemove({ roomId: roomId });
                   await refetch();
                   pop();
                 } catch {
@@ -137,11 +138,13 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
           <img src={UserImg} alt="유저 이미지" />
         </S.ProThumb>
         <S.ProGoBtn>
-          <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId })}>프로필 보러가기</S.ProGoTxt>
+          <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId: Number(chatInfo.otherUser?.userId) })}>
+            프로필 보러가기
+          </S.ProGoTxt>
           <Icon icon="BtnGo" />
         </S.ProGoBtn>
         <S.ProMsgTxt>
-          &lsquo;개발열심히해요&rsquo; 님이 워크챗을 보냈습니다.
+          &lsquo;{chatInfo.otherUser?.userNickname}&rsquo; 님이 워크챗을 보냈습니다.
           <br />
           대화를 이어가시겠습니까?
         </S.ProMsgTxt>
@@ -155,7 +158,7 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
             round
             onClick={async () => {
               try {
-                await chatConfirm({ roomId: Number(workerId) });
+                await chatConfirm({ roomId: roomId });
                 refetch();
               } catch {
                 alert();
@@ -172,14 +175,17 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
 
 const WorkChatRoomPage = () => {
   const { workerId } = useActivityParams<{ workerId: string }>();
-  const { push, replace, pop } = useFlow();
+  const { replace, pop } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
     () => data?.data.rooms.filter((item) => item.id === Number(workerId))[0] ?? {},
     [data, workerId]
   );
   const [chatMessages, setChatMessages] = useState<Chats>([]);
-  const { data: chatMessagesData } = useChatMessagesQuery({ roomId: Number(workerId), sortType: "BEFORE" });
+  const { data: chatMessagesData } = useChatMessagesQuery({
+    roomId: Number(workerId),
+    sortType: "BEFORE",
+  });
   const { data: userInfo } = useUserInfo();
   const { mutateAsync: chatSend } = useChatSendQuery();
   const { mutateAsync: postLastMessage } = useLastMessageQuery();
@@ -271,8 +277,22 @@ const WorkChatRoomPage = () => {
   }, [chatAreaScrollRef]);
 
   useEffect(() => {
-    setChatMessages(chatMessagesData?.data.messages ?? []);
-  }, [chatMessagesData, handleScrollToEnd]);
+    (async () => {
+      // TODO: 서버 이슈 해결 후 반영
+      // const { data } = await requestChat({
+      //   roomId: Number(workerId),
+      //   messageId: chatInfo.lastMessageId,
+      //   sortType: "BEFORE",
+      // });
+      // const { data: dataAfter } = await requestChat({
+      //   roomId: Number(workerId),
+      //   messageId: chatInfo.lastMessageId,
+      //   sortType: "AFTER",
+      // });
+      // setChatMessages([...(data?.messages ?? []), ...(dataAfter.messages ?? [])]);
+      setChatMessages(chatMessagesData?.data.messages ?? []);
+    })();
+  }, [setChatMessages]);
 
   useEffect(() => {
     handleScrollToEnd();
@@ -289,10 +309,11 @@ const WorkChatRoomPage = () => {
     }
   };
 
-  if (!workerId) {
-    // TODO : 에러 메세지 피드백 후 리디렉션
-    throw new Error("워크챗 대상이 지정되지 않았습니다.");
-  }
+  // TODO: 추후 주석 제거
+  // if (!workerId) {
+  //   // TODO : 에러 메세지 피드백 후 리디렉션
+  //   throw new Error("워크챗 대상이 지정되지 않았습니다.");
+  // }
 
   return (
     <StackLayout
@@ -386,7 +407,7 @@ const WorkChatRoomPage = () => {
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
-      {!chatInfo.start && <ProfileModal workerId={workerId} />}
+      {!chatInfo.start && !chatInfo.otherUser?.owner && <ProfileModal roomId={Number(workerId)} chatInfo={chatInfo} />}
     </StackLayout>
   );
 };

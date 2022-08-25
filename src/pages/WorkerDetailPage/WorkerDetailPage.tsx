@@ -2,17 +2,35 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useWorkerDetailQuery } from "@/domains/worker";
 import { useActivityParams } from "@stackflow/react";
 import { useFlow } from "@/stack";
-import { useCallback } from "react";
+import { useMemo } from "react";
 import { PATH } from "@/constants";
 
 import Tag from "@/components/@shared/Tag/Tag";
 import Header from "@/components/@shared/Header/Header";
 import Button from "@/components/@shared/Button/Button";
 import * as S from "./WorkerDetailPage.styled";
+import { useChatListQuery, useChatRoomCreateQuery } from "@/domains/chat/chat.api";
+import { Room } from "@/domains/chat/chat.type";
+import UserImg from "@/assets/images/walkchat1.png";
+
+const isEmptyObj = (obj: any) => {
+  if (obj.constructor === Object && Object.keys(obj).length === 0) {
+    return true;
+  }
+
+  return false;
+};
 
 const WorkerDetailPage = () => {
   const { workerId } = useActivityParams<{ workerId: string }>();
-  const { push } = useFlow();
+  const { mutateAsync: chatRoomCreate } = useChatRoomCreateQuery();
+  const { data, refetch } = useChatListQuery();
+  const chatInfo = useMemo<Partial<Room>>(
+    () => data?.data.rooms.filter((item) => item.otherUser.userId === Number(workerId))[0] ?? {},
+    [data, workerId]
+  );
+
+  const { push, replace } = useFlow();
 
   if (Number.isNaN(Number(workerId))) {
     throw new Error("잘못된 cafeId 입니다.");
@@ -32,9 +50,26 @@ const WorkerDetailPage = () => {
     }
   );
 
-  const handleReviewButtonClick = useCallback(() => {
-    push(PATH.WORK_CHAT.stack, { workerId });
-  }, [push, workerId]);
+  const handleReviewButtonClick = async () => {
+    let curChatInfo = chatInfo;
+
+    try {
+      if (isEmptyObj(curChatInfo)) {
+        await chatRoomCreate({ ownerUserId: Number(workerId) });
+        const data = await refetch();
+        curChatInfo = data!.data!.data.rooms?.filter((item) => item.otherUser.userId === Number(workerId))[0];
+      }
+      replace(PATH.WORK_CHAT.stack, {});
+      push(PATH.WORK_CHAT.ROOM.stack, { workerId: curChatInfo.id });
+    } catch (e: any) {
+      if (e.response.status === 409) {
+        replace(PATH.WORK_CHAT.stack, {});
+        push(PATH.WORK_CHAT.ROOM.stack, { workerId: curChatInfo.id });
+        return;
+      }
+      alert();
+    }
+  };
 
   if (isLoading) {
     return <div>로딩중</div>;
@@ -50,7 +85,12 @@ const WorkerDetailPage = () => {
       <S.WorkerDetailWrap>
         <S.TopInfo>
           <S.UserThumb>
-            <img src={workerDetail.imageUrl} alt="워케이셔너 이미지" />
+            <img
+              src={
+                workerDetail.imageUrl ? process.env.SERVER_URL?.replace("/api/v1", "") + workerDetail.imageUrl : UserImg
+              }
+              alt="워케이셔너 이미지"
+            />
           </S.UserThumb>
           <S.UserName>{workerDetail.name}</S.UserName>
           <S.EtcInfo>
