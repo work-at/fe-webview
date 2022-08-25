@@ -107,9 +107,8 @@ export const useChatListQuery = () => {
 };
 
 // 상대방을 차단하는 api
-// TODO: 서버에서 대응해줘야 함
-export const requestBlockUser = async ({ userId }: Action.BlockUser) => {
-  return await baseInstance().put(API_URL.DELETE_CHAT(userId));
+export const requestBlockUser = async ({ blockUserId }: Action.BlockUser) => {
+  return await baseInstance().post(API_URL.POST_BLOCK_USER(blockUserId));
 };
 
 export const useBlockUser = () => {
