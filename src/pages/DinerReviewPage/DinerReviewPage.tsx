@@ -42,7 +42,7 @@ const DinerReviewPage = () => {
         </S.Tit>
         <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
         <S.CheckWrap>
-          {reviewList && <CheckBox selectedItemIds={selected} onChange={onChange} items={reviewList} />}
+          {reviewList && <CheckBox isIcon selectedItemIds={selected} onChange={onChange} items={reviewList} />}
         </S.CheckWrap>
       </S.PlaceViewWrap>
       <Button size="lg" bgColor="black" onClick={handlePostReview} disabled={!selected.length}>
