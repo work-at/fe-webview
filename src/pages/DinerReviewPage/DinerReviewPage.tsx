@@ -6,11 +6,13 @@ import * as S from "./DinerReviewPage.styled";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DinerReviewKey, useDinerReviewListQuery, usePostDinerReview } from "@/domains/diner";
 import { useActivityParams } from "@stackflow/react";
+import { useFlow } from "@/stack";
 
 const DinerReviewPage = () => {
   const { dinerId } = useActivityParams<{ dinerId: string }>();
   const { data } = useDinerReviewListQuery();
   const { mutateAsync } = usePostDinerReview();
+  const { pop } = useFlow();
 
   const { selected, onChange } = useMultiselect([]);
 
@@ -21,9 +23,10 @@ const DinerReviewPage = () => {
     iconType: item.iconType + "_B",
   }));
 
-  const handlePostReview = () => {
+  const handlePostReview = async () => {
     try {
-      mutateAsync({ reviewTypeNames: selected as DinerReviewKey[], locationId: dinerId });
+      await mutateAsync({ reviewTypeNames: selected as DinerReviewKey[], locationId: dinerId });
+      pop();
     } catch (e) {
       console.error(e);
     }
@@ -39,7 +42,7 @@ const DinerReviewPage = () => {
         </S.Tit>
         <S.SubTit>이 장소의 장점을 골라주세요! (복수선택)</S.SubTit>
         <S.CheckWrap>
-          {reviewList && <CheckBox selectedItemIds={selected} onChange={onChange} items={reviewList} />}
+          {reviewList && <CheckBox isIcon selectedItemIds={selected} onChange={onChange} items={reviewList} />}
         </S.CheckWrap>
       </S.PlaceViewWrap>
       <Button size="lg" bgColor="black" onClick={handlePostReview} disabled={!selected.length}>

@@ -1,6 +1,5 @@
 import * as DTO from "./cafe.dto";
 import * as Action from "./cafe.action";
-import { MAP } from "@/constants/map";
 import { IconType } from "@/assets/Icon";
 
 export const d2aMapper_GetCafePinsResponse_CafePinsInfo = (response: DTO.GetCafePinsResponse): Action.CafePinsInfo => {
@@ -19,8 +18,7 @@ export const a2dMapper_CafePinsCriteria_GetCafePinsRequest = (
   return {
     latitude: criteria.lat,
     longitude: criteria.lng,
-    // radius: MAP.SearchRadius,
-  } as any;
+  };
 };
 
 export const d2aMapper_GetCafeDetailResponse_CafeDetailInfo = (
@@ -34,7 +32,7 @@ export const d2aMapper_GetCafeDetailResponse_CafeDetailInfo = (
     name: response.data.locationDetail.placeName,
     phoneNumber: response.data.locationDetail.phone,
     reviewPoints: response.data.locationReview.reviews.map((review) => ({
-      icon: review.reviewType.iconType as IconType,
+      icon: review.reviewType.name as IconType,
       reason: review.reviewType.content,
       reviewCount: review.count,
     })),
@@ -46,8 +44,7 @@ export const a2dMapper_CafesCriteria_GetCafesRequest = (criteria: Action.CafesCr
   return {
     latitude: criteria.lat,
     longitude: criteria.lng,
-    // radius: MAP.SearchRadius,
-  } as any;
+  };
 };
 
 export const d2aMapper_GetCafesResponse_CafesInfo = (response: DTO.GetCafesResponse): Action.CafesInfo => {
@@ -56,8 +53,7 @@ export const d2aMapper_GetCafesResponse_CafesInfo = (response: DTO.GetCafesRespo
     imageUrl: cafe.thumbnailImageUrl,
     name: cafe.placeName,
     address: cafe.roadAddressName,
-    reviewCount: 0,
-    // TODO : 태그 정보 연동하기
-    tags: [],
+    reviewCount: cafe.reviewCount,
+    tags: cafe.topReviews.map((review) => review.content),
   }));
 };

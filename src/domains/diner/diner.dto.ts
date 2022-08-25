@@ -4,7 +4,7 @@ import { DinerReviewKey } from "./diner.type";
 export type GetDinerPinsRequest = {
   latitude: number;
   longitude: number;
-  radius: number;
+  radius?: number;
 };
 
 type DinerPin = {
@@ -14,12 +14,16 @@ type DinerPin = {
   placeId: string;
 };
 
+type topReview = {
+  name: string;
+  content: string;
+};
+
 export type GetDinerPinsResponse = AxiosResponse<{ locations: DinerPin[] }>;
 
 export type GetDinersRequest = {
   latitude: number;
   longitude: number;
-  radius: number;
 };
 
 type Diner = {
@@ -34,6 +38,8 @@ type Diner = {
   placeUrl: string;
   thumbnailImageUrl: string;
   roadAddressName: string;
+  reviewCount: number;
+  topReviews: topReview[];
 };
 
 export type GetDinersResponse = AxiosResponse<{ locations: Diner[] }>;
@@ -42,7 +48,6 @@ type Review = {
   count: number;
   reviewType: {
     content: string;
-    iconType: string;
     name: string;
   };
 };

@@ -11,23 +11,6 @@ import { MAP } from "@/constants/map";
 
 type WorkerPinsQueryKey = readonly [typeof QUERY_NAME.GET_WORKER_PINS];
 
-const DUMMY_WORKER_PINS: Action.WorkerPinsInfo = [
-  {
-    id: 1,
-    coordinates: {
-      lat: 37.582097993196896,
-      lng: 126.99972828714587,
-    },
-  },
-  {
-    id: 2,
-    coordinates: {
-      lat: 37.58297993196896,
-      lng: 126.99872828714587,
-    },
-  },
-];
-
 export const requestGetWorkerPins: QueryFunction<Action.WorkerPinsInfo, WorkerPinsQueryKey> = async () => {
   const data = await baseInstance().get<void, DTO.GetWorkerPinsResponse>("map/workers/pins", {
     params: {
@@ -37,7 +20,7 @@ export const requestGetWorkerPins: QueryFunction<Action.WorkerPinsInfo, WorkerPi
 
   const workerPins = Mapper.d2aMapper_GetWorkerPinsResponse_WorkerPinsInfo(data);
 
-  return DUMMY_WORKER_PINS;
+  return workerPins;
 };
 
 export const useWorkerPinsQuery = (
@@ -77,18 +60,6 @@ export const useWorkerDetailQuery = (
 
 type WorkersQueryKey = readonly [typeof QUERY_NAME.GET_WORKERS];
 
-const DUMMY_WORKER: Action.WorkersInfo = [
-  {
-    id: 1,
-    job: "",
-    name: "",
-    tags: [],
-    yearOfService: "1년차",
-    imageUrl:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  },
-];
-
 export const requestGetWorkers: QueryFunction<Action.WorkersInfo, WorkersQueryKey> = async () => {
   const data = await baseInstance().get<DTO.GetWorkersRequest, DTO.GetWorkersResponse>("/map/workers", {
     params: Mapper.a2dMapper_WorkersCriteria_GetWorkersRequest(),
@@ -96,10 +67,9 @@ export const requestGetWorkers: QueryFunction<Action.WorkersInfo, WorkersQueryKe
 
   const workers = Mapper.d2aMapper_GetWorkersResponse_WorkersInfo(data);
 
-  return DUMMY_WORKER;
+  return workers;
 };
 
-// TODO : Suspense 가 true 인 경우 무조건 true 가 나오도록 설정하기. isLoading 제거하ㄱ
 export const useWorkersQuery = (
   options: UseQueryOptions<Action.WorkersInfo, AxiosError<string>, Action.WorkersInfo, WorkersQueryKey>
 ) => {

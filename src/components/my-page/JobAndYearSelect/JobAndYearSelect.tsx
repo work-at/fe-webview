@@ -1,6 +1,5 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { JOBS, YEAR_OF_SERVICES } from "@/domains/common.constant";
-import { Job_TEXT, YearOfService_TEXT } from "@/domains/common.text";
 import { Job, YearOfService } from "@/domains/common.type";
 
 import * as S from "./JobAndYearSelect.styled";
@@ -8,18 +7,44 @@ import CheckBox from "@/components/@shared/CheckBox";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import Button from "@/components/@shared/Button/Button";
 import { useFlow } from "@/stack";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { useAtom } from "jotai";
+import { jobAndYearAtom } from "../ProfileEdit/ProfileEdit";
+
+// type JobAndYearSelectProps = {
+//   onJobChange: (jobs: Job) => void;
+//   onYearOfServiceChange: (yearOfService: YearOfService) => void;
+// };
 
 const JobAndYearSelect = () => {
-  const { selected: selectedJobs, onChange: onSelectedJobsChange } = useMultiselect<Job>([]);
-  const { selected: selectedYearOfServices, onChange: onSelectedYearOfServicesChange } = useMultiselect<YearOfService>(
-    []
-  );
+  const { selected: selectedJobs, onChangeOnly: onSelectedJobChange } = useMultiselect<Job>([]);
+  const { selected: selectedYearOfServices, onChangeOnly: onSelectedYearOfServiceChange } =
+    useMultiselect<YearOfService>([]);
+
+  const [jobAndYear, setJobAndYear] = useAtom(jobAndYearAtom);
+
   const { pop } = useFlow();
 
   const handleJobAndYearSelectComplete = useCallback(() => {
     pop();
   }, [pop]);
+
+  const handleJobSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setJobAndYear({
+      ...jobAndYear,
+      job: selectedJobs[0],
+    });
+
+    onSelectedJobChange(event);
+  };
+  const handleYearSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setJobAndYear({
+      ...jobAndYear,
+      year: selectedYearOfServices[0],
+    });
+
+    onSelectedYearOfServiceChange(event);
+  };
 
   return (
     <StackLayout>
@@ -29,10 +54,10 @@ const JobAndYearSelect = () => {
         <S.ChekBoxWrap>
           <CheckBox
             selectedItemIds={selectedJobs}
-            onChange={onSelectedJobsChange}
+            onChange={handleJobSelect}
             items={JOBS.map((job) => ({
-              id: job,
-              label: Job_TEXT[job],
+              id: job.content,
+              label: job.content,
             }))}
           />
         </S.ChekBoxWrap>
@@ -41,11 +66,10 @@ const JobAndYearSelect = () => {
         <S.ChekBoxWrap>
           <CheckBox
             selectedItemIds={selectedYearOfServices}
-            onChange={onSelectedYearOfServicesChange}
+            onChange={handleYearSelect}
             items={YEAR_OF_SERVICES.map((service) => ({
-              id: service,
-              label: YearOfService_TEXT[service],
-              iconType: "ICON",
+              id: service.content,
+              label: service.content,
             }))}
           />
         </S.ChekBoxWrap>

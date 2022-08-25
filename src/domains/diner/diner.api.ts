@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { MutationFunction, QueryFunction, useMutation, useQuery, UseQueryOptions } from "react-query";
+import { MutationFunction, QueryFunction, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 
 import * as DTO from "./diner.dto";
 import * as Action from "./diner.action";
@@ -81,8 +81,14 @@ export const requestPostDinerReview: MutationFunction<AxiosResponse<null>, DTO.P
 };
 
 export const usePostDinerReview = () => {
+  const queryClient = useQueryClient();
+
   return useMutation<AxiosResponse<null>, AxiosError<{ message: string }>, DTO.PostDinerReviewRequest>({
     mutationFn: requestPostDinerReview,
+    onSuccess: (_, request) => {
+      queryClient.invalidateQueries([QUERY_NAME.GET_DINER_DETAIL, { id: request.locationId }]);
+      queryClient.invalidateQueries([QUERY_NAME.GET_DINERS]);
+    },
   });
 };
 

@@ -1,5 +1,5 @@
-import { memo, useCallback } from "react";
-import Icon from "@/assets/Icon";
+import { memo } from "react";
+import Icon, { IconType } from "@/assets/Icon";
 import * as S from "./CheckBox.styled";
 
 export type CheckBoxItem = {
@@ -29,7 +29,7 @@ const CheckBox = ({ items, selectedItemIds, onChange, isIcon, widthAuto }: Check
               checked={selectedItemIds.includes(item.id)}
             />
             <S.Label htmlFor={item.id} isIcon={isIcon} widthAuto={widthAuto}>
-              {isIcon && <Icon icon={"BerthReview2"} size={30} />}
+              {isIcon && <Icon icon={item.id as IconType} size={30} />}
               <S.LabelTxt isIcon={isIcon}>{item.label}</S.LabelTxt>
             </S.Label>
           </S.CheckboxContainer>

@@ -83,5 +83,10 @@ export const PATH = {
       full: "/my-page/setting",
       fragments: "setting",
     },
+    CONTACT_US: {
+      stack: "ContactUs",
+      full: "/my-page/contact-us",
+      fragments: "contact-us",
+    },
   },
 } as const;
