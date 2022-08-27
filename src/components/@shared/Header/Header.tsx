@@ -13,9 +13,21 @@ export type HeaderProps = {
   fixed?: boolean;
   useLink?: boolean;
   search?: boolean;
+  accommArea?: boolean;
 };
 
-const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed, useLink, search }: HeaderProps) => {
+const Header = ({
+  main,
+  MagazinLogo,
+  bgColor,
+  useBack,
+  title,
+  useRefresh,
+  fixed,
+  useLink,
+  search,
+  accommArea,
+}: HeaderProps) => {
   const { pop } = useFlow();
   return (
     <S.Header bgColor={bgColor} fixed={fixed} main={main}>
@@ -67,6 +79,19 @@ const Header = ({ main, MagazinLogo, bgColor, useBack, title, useRefresh, fixed,
               <Icon icon="BtnSearch" size={24} />
             </S.BtnConfirm>
           </S.SearchInputWrap>
+        )}
+
+        {accommArea && (
+          <S.AccommSelectWrap>
+            <S.AccommSelect defaultValue={"default"}>
+              <option>전체</option>
+              <option>서울</option>
+              <option>제주</option>
+              <option>강릉</option>
+              <option>속초</option>
+            </S.AccommSelect>
+            <S.AccommIconArr></S.AccommIconArr>
+          </S.AccommSelectWrap>
         )}
 
         {useRefresh && (

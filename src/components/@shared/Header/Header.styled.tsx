@@ -103,6 +103,41 @@ export const SearchInput = styled.input<React.InputHTMLAttributes<HTMLInputEleme
   border-radius: 36px;
 `;
 
+export const AccommSelectWrap = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  border: none;
+  color: ${theme.colors.black};
+  ${theme.fonts.Bold03};
+`;
+
+export const AccommSelect = styled.select<React.SelectHTMLAttributes<HTMLSelectElement>>`
+  height: 100%;
+  padding: 0 10px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font-size: inherit;
+  outline: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+`;
+
+export const AccommIconArr = styled.span`
+  display: inline-flex;
+  width: 0px;
+  height: 0px;
+  border-right: 6px solid ${theme.colors.black};
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  transform: rotate(-90deg);
+`;
+
 export const BtnConfirm = styled.button`
   position: absolute;
   top: 6px;
