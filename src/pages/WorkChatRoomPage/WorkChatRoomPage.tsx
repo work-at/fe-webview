@@ -10,7 +10,6 @@ import {
   requestChat,
   useChatConfirmQuery,
   useChatListQuery,
-  useChatMessagesQuery,
   useChatRemoveQuery,
   useChatSendQuery,
   useLastMessageQuery,
@@ -30,6 +29,7 @@ export type ChatProps = {
   message: string;
   time?: string;
   date?: string;
+  id: number;
 };
 
 const Welcome = () => (
@@ -51,7 +51,7 @@ const Welcome = () => (
   </S.EmptyMsgWrap>
 );
 
-const Chat = ({ isMe, message, time, date }: ChatProps) => {
+const Chat = ({ isMe, message, time, date, id }: ChatProps) => {
   return (
     <>
       {date && (
@@ -60,15 +60,15 @@ const Chat = ({ isMe, message, time, date }: ChatProps) => {
         </S.DateBox>
       )}
       {isMe ? (
-        <S.ReceiveMsgBox>
-          <S.ReceiveMsgTxt>{message}</S.ReceiveMsgTxt>
-          {time && <S.ReceiveMsgTime>{time}</S.ReceiveMsgTime>}
-        </S.ReceiveMsgBox>
-      ) : (
-        <S.SendMsgBox>
+        <S.SendMsgBox id={id.toString()}>
           {time && <S.SendMsgTime>{time}</S.SendMsgTime>}
           <S.SendMsgTxt>{message}</S.SendMsgTxt>
         </S.SendMsgBox>
+      ) : (
+        <S.ReceiveMsgBox id={id.toString()}>
+          <S.ReceiveMsgTxt>{message}</S.ReceiveMsgTxt>
+          {time && <S.ReceiveMsgTime>{time}</S.ReceiveMsgTime>}
+        </S.ReceiveMsgBox>
       )}
       {time && <S.Wrap />}
     </>
@@ -84,10 +84,11 @@ const AppBarRight = ({ callback }: { callback: () => void }) => {
 };
 
 interface ProfileModalProps {
-  workerId: string;
+  chatInfo: Partial<Room>;
+  roomId: number;
 }
 
-const ProfileModal = ({ workerId }: ProfileModalProps) => {
+const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
   const { pop, push } = useFlow();
   const [isLeave, setIsLeave] = useState(false);
   const { mutateAsync: chatConfirm } = useChatConfirmQuery();
@@ -114,7 +115,7 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
               round
               onClick={async () => {
                 try {
-                  await chatRemove({ roomId: Number(workerId) });
+                  await chatRemove({ roomId: roomId });
                   await refetch();
                   pop();
                 } catch {
@@ -137,11 +138,13 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
           <img src={UserImg} alt="유저 이미지" />
         </S.ProThumb>
         <S.ProGoBtn>
-          <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId })}>프로필 보러가기</S.ProGoTxt>
+          <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId: Number(chatInfo.otherUser?.userId) })}>
+            프로필 보러가기
+          </S.ProGoTxt>
           <Icon icon="BtnGo" />
         </S.ProGoBtn>
         <S.ProMsgTxt>
-          &lsquo;개발열심히해요&rsquo; 님이 워크챗을 보냈습니다.
+          &lsquo;{chatInfo.otherUser?.userNickname}&rsquo; 님이 워크챗을 보냈습니다.
           <br />
           대화를 이어가시겠습니까?
         </S.ProMsgTxt>
@@ -155,7 +158,7 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
             round
             onClick={async () => {
               try {
-                await chatConfirm({ roomId: Number(workerId) });
+                await chatConfirm({ roomId: roomId });
                 refetch();
               } catch {
                 alert();
@@ -172,14 +175,13 @@ const ProfileModal = ({ workerId }: ProfileModalProps) => {
 
 const WorkChatRoomPage = () => {
   const { workerId } = useActivityParams<{ workerId: string }>();
-  const { push, replace, pop } = useFlow();
+  const { replace, pop } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
     () => data?.data.rooms.filter((item) => item.id === Number(workerId))[0] ?? {},
     [data, workerId]
   );
   const [chatMessages, setChatMessages] = useState<Chats>([]);
-  const { data: chatMessagesData } = useChatMessagesQuery({ roomId: Number(workerId), sortType: "BEFORE" });
   const { data: userInfo } = useUserInfo();
   const { mutateAsync: chatSend } = useChatSendQuery();
   const { mutateAsync: postLastMessage } = useLastMessageQuery();
@@ -226,13 +228,12 @@ const WorkChatRoomPage = () => {
       });
 
       if (data.messages.length !== 0) {
-        await postLastMessage({ lastMessageId: data.messages[data.messages.length - 1].id, roomId: Number(workerId) });
         setChatMessages((prev) => [...prev, ...data.messages]);
       }
     } catch {
       alert();
     }
-  }, [chatMessages, postLastMessage, workerId]);
+  }, [chatMessages, workerId]);
 
   const handleVisibilityChange = useCallback(
     async (isVisible: boolean) => {
@@ -240,22 +241,24 @@ const WorkChatRoomPage = () => {
         await handlePullUpCallback();
         return;
       }
-      await postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
     },
-    [chatMessages, handlePullUpCallback, postLastMessage, workerId]
+    [handlePullUpCallback]
   );
+
+  useEffect(() => {
+    if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
+      postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
+    }
+  }, [chatInfo.lastMessageId, chatMessages, postLastMessage, workerId]);
 
   usePageVisibility({ callback: handleVisibilityChange });
 
   useEffect(() => {
-    const unMountAction = async () => {
-      if (chatMessages.length !== 0) {
-        await postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
-        refetch();
-      }
+    const unMountAction = () => {
+      refetch();
     };
-    return () => unMountAction() as any;
-  }, [chatMessages, postLastMessage, refetch, workerId]);
+    return () => unMountAction();
+  }, [refetch]);
 
   const { headRef, headHeight } = usePullDownToCallback({ onCallback: handlePullDownCallback, chatAreaRef });
   const { tailRef, tailHeight } = usePullUpToCallback({ onCallback: handlePullUpCallback, chatAreaRef });
@@ -270,13 +273,27 @@ const WorkChatRoomPage = () => {
     }, 10);
   }, [chatAreaScrollRef]);
 
+  const [toggle, setToggle] = useState(false);
   useEffect(() => {
-    setChatMessages(chatMessagesData?.data.messages ?? []);
-  }, [chatMessagesData, handleScrollToEnd]);
+    (async () => {
+      const { data } = await requestChat({
+        roomId: Number(workerId),
+      });
+      setChatMessages(data.messages ?? []);
+      setToggle(true);
+    })();
+  }, [handleScrollToEnd, workerId]);
+  useEffect(() => {
+    if (toggle) {
+      const lastMessageId = (chatInfo.lastMessageId ?? "").toString();
+      const DOM = document.getElementById(lastMessageId);
 
-  useEffect(() => {
-    handleScrollToEnd();
-  }, [handleScrollToEnd]);
+      if (DOM) {
+        DOM.scrollIntoView();
+        setToggle(false);
+      }
+    }
+  }, [chatInfo.lastMessageId, toggle]);
 
   const handleChangeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target?.value);
@@ -289,10 +306,11 @@ const WorkChatRoomPage = () => {
     }
   };
 
-  if (!workerId) {
-    // TODO : 에러 메세지 피드백 후 리디렉션
-    throw new Error("워크챗 대상이 지정되지 않았습니다.");
-  }
+  // TODO: 추후 주석 제거
+  // if (!workerId) {
+  //   // TODO : 에러 메세지 피드백 후 리디렉션
+  //   throw new Error("워크챗 대상이 지정되지 않았습니다.");
+  // }
 
   return (
     <StackLayout
@@ -337,6 +355,7 @@ const WorkChatRoomPage = () => {
               return (
                 <Chat
                   key={currentChat.createdDate}
+                  id={currentChat.id}
                   isMe={currentChat.writerId === userInfo?.id}
                   message={currentChat.message}
                   date={date}
@@ -386,7 +405,7 @@ const WorkChatRoomPage = () => {
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
-      {!chatInfo.start && <ProfileModal workerId={workerId} />}
+      {!chatInfo.start && !chatInfo.otherUser?.owner && <ProfileModal roomId={Number(workerId)} chatInfo={chatInfo} />}
     </StackLayout>
   );
 };

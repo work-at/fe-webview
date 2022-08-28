@@ -73,12 +73,16 @@ export const requestChatMessages: QueryFunction<DTO.GetChatMessagesResponse, Cha
   return await requestChat({ messageId, roomId, sortType });
 };
 
-export const useChatMessagesQuery = ({ messageId, roomId, sortType }: Action.ChatMessages) => {
-  return useQuery<DTO.GetChatMessagesResponse, AxiosError<string>, DTO.GetChatMessagesResponse, ChatMessagesQueryKey>(
-    [QUERY_NAME.GET_CHAT, { messageId, roomId, sortType }],
-    requestChatMessages
-  );
-};
+// export const useChatMessagesQuery = ({ messageId, roomId, sortType }: Action.ChatMessages) => {
+//   return useQuery<DTO.GetChatMessagesResponse, AxiosError<string>, DTO.GetChatMessagesResponse, ChatMessagesQueryKey>(
+//     [QUERY_NAME.GET_CHAT, { messageId, roomId, sortType }],
+//     requestChatMessages
+//     // {
+//     //   staleTime: Infinity,
+//     //   cacheTime: Infinity,
+//     // }
+//   );
+// };
 
 // 유저 A가 채팅방에서 마지막으로 읽은 메세지를 최신화 해주는 api
 export const requestLastMessage: MutationFunction<AxiosResponse<null>, Action.LastMessage> = async ({
@@ -107,9 +111,8 @@ export const useChatListQuery = () => {
 };
 
 // 상대방을 차단하는 api
-// TODO: 서버에서 대응해줘야 함
-export const requestBlockUser = async ({ userId }: Action.BlockUser) => {
-  return await baseInstance().put(API_URL.DELETE_CHAT(userId));
+export const requestBlockUser = async ({ blockUserId }: Action.BlockUser) => {
+  return await baseInstance().post(API_URL.POST_BLOCK_USER(blockUserId));
 };
 
 export const useBlockUser = () => {
