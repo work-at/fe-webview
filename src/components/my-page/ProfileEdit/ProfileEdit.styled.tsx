@@ -55,7 +55,7 @@ export const BtnEdit = styled.button`
   margin-left: auto;
 `;
 
-export const TxtWrap = styled.div`
+export const TxtWrap = styled.textarea`
   width: 100%;
 
   ${theme.fonts.Medium03};
