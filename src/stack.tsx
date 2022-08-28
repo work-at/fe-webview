@@ -15,6 +15,11 @@ import DinerReviewPage from "./pages/DinerReviewPage";
 import StackLayout from "./components/@layout/StackLayout/StackLayout";
 import WorkChatPage from "./pages/WorkChatPage";
 import CafeReviewPage from "./pages/CafeReviewPage";
+
+import AccommodationList from "./components/accommodation/AccommodationList";
+import AccommodationReview from "./components/accommodation/AccommodationReview";
+import AccommodationDetail from "./components/accommodation/AccommodationDetail";
+
 import ProfileEdit from "./components/my-page/ProfileEdit";
 import EmailVerification from "./components/my-page/EmailVerification";
 import JobAndYearSelect from "./components/my-page/JobAndYearSelect";
@@ -105,6 +110,9 @@ const activities = {
   JobAndYearSelect,
   Setting,
   ContactUs,
+  AccommodationList,
+  AccommodationReview,
+  AccommodationDetail,
   Test,
   Copyright,
 };
@@ -120,6 +128,9 @@ export const { Stack, useFlow } = stackflow({
         SignUpPage: PATH.SIGN_UP.full,
         /* 숙소 페이지 */
         AccommodationPage: PATH.ACCOMMODATION.full,
+        AccommodationList: PATH.ACCOMMODATION.ACCOMMODATION_LIST.full,
+        AccommodationReview: PATH.ACCOMMODATION.ACCOMMODATION_REVIEW.full,
+        AccommodationDetail: PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.full,
         /* 지도 페이지 */
         MapPage: PATH.MAP.full,
         CafeReviewPage: `${PATH.CAFE.CAFE_REVIEW.full}/:cafeId`,
