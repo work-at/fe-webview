@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import * as S from "./MyInfoEdit.styled";
 import Icon from "@/assets/Icon";
 import Header from "@/components/@shared/Header";
@@ -9,8 +9,7 @@ import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 const MyInfoEdit = () => {
   const { selected, onChange } = useMultiselect([]);
 
-  const textRef = useRef<HTMLTextAreaElement>(null);
-
+  const textRef = useRef<HTMLTextAreaElement>(undefined as unknown as HTMLTextAreaElement);
   const handleResizeHeight = useCallback(() => {
     if (textRef.current) {
       textRef.current.style.height = textRef.current.scrollHeight + "px";
