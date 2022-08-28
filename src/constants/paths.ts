@@ -15,6 +15,22 @@ export const PATH = {
     stack: "AccommodationPage",
     full: "/accommodation",
     fragments: "accommodation",
+
+    ACCOMMODATION_LIST: {
+      stack: "AccommodationList",
+      full: "accommodation/accommodation-list",
+      fragments: "accommodation-list",
+    },
+    ACCOMMODATION_REVIEW: {
+      stack: "AccommodationReview",
+      full: "accommodation/accommodation-review",
+      fragments: "accommodation-review",
+    },
+    ACCOMMODATION_DETAIL: {
+      stack: "AccommodationDetail",
+      full: "accommodation/accommodation-detail",
+      fragments: "accommodation-detail",
+    },
   },
   MAP: {
     stack: "MapPage",
