@@ -19,7 +19,9 @@ export const API_URL = {
   DELETE_CHAT: (roomId: number) => `/chattings/${roomId}`,
   BLOCK_USER: (roomId: number) => `/chattings/${roomId}`,
   GET_CHAT_MESSAGES: (roomId: number, messageId?: number, sortType?: "AFTER" | "BEFORE") =>
-    `/chattings/${roomId}/messages?sortType=${sortType}${messageId ? `&messageId=${messageId}` : ""}`,
+    `/chattings/${roomId}/messages${sortType ? `?sortType=${sortType}` : ""}${
+      messageId ? `&messageId=${messageId}` : ""
+    }`,
   POST_CHAT_SEND: (roomId: number, message: string) => `/chattings/${roomId}?message=${message}`,
   POST_LAST_MESSAGE: (roomId: number, lastMessageId: number) =>
     `/users/chatting/${roomId}/lastMessage?lastMessageId=${lastMessageId}`,

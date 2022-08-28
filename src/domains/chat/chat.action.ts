@@ -15,7 +15,7 @@ export type Chats = Chat[];
 export type ChatMessages = {
   messageId?: number;
   roomId: number;
-  sortType: "BEFORE" | "AFTER";
+  sortType?: "BEFORE" | "AFTER";
 };
 
 export type SendChat = {

@@ -10,7 +10,6 @@ import {
   requestChat,
   useChatConfirmQuery,
   useChatListQuery,
-  useChatMessagesQuery,
   useChatRemoveQuery,
   useChatSendQuery,
   useLastMessageQuery,
@@ -30,6 +29,7 @@ export type ChatProps = {
   message: string;
   time?: string;
   date?: string;
+  id: number;
 };
 
 const Welcome = () => (
@@ -51,7 +51,7 @@ const Welcome = () => (
   </S.EmptyMsgWrap>
 );
 
-const Chat = ({ isMe, message, time, date }: ChatProps) => {
+const Chat = ({ isMe, message, time, date, id }: ChatProps) => {
   return (
     <>
       {date && (
@@ -60,15 +60,15 @@ const Chat = ({ isMe, message, time, date }: ChatProps) => {
         </S.DateBox>
       )}
       {isMe ? (
-        <S.ReceiveMsgBox>
-          <S.ReceiveMsgTxt>{message}</S.ReceiveMsgTxt>
-          {time && <S.ReceiveMsgTime>{time}</S.ReceiveMsgTime>}
-        </S.ReceiveMsgBox>
-      ) : (
-        <S.SendMsgBox>
+        <S.SendMsgBox id={id.toString()}>
           {time && <S.SendMsgTime>{time}</S.SendMsgTime>}
           <S.SendMsgTxt>{message}</S.SendMsgTxt>
         </S.SendMsgBox>
+      ) : (
+        <S.ReceiveMsgBox id={id.toString()}>
+          <S.ReceiveMsgTxt>{message}</S.ReceiveMsgTxt>
+          {time && <S.ReceiveMsgTime>{time}</S.ReceiveMsgTime>}
+        </S.ReceiveMsgBox>
       )}
       {time && <S.Wrap />}
     </>
@@ -182,10 +182,6 @@ const WorkChatRoomPage = () => {
     [data, workerId]
   );
   const [chatMessages, setChatMessages] = useState<Chats>([]);
-  const { data: chatMessagesData } = useChatMessagesQuery({
-    roomId: Number(workerId),
-    sortType: "BEFORE",
-  });
   const { data: userInfo } = useUserInfo();
   const { mutateAsync: chatSend } = useChatSendQuery();
   const { mutateAsync: postLastMessage } = useLastMessageQuery();
@@ -232,13 +228,12 @@ const WorkChatRoomPage = () => {
       });
 
       if (data.messages.length !== 0) {
-        await postLastMessage({ lastMessageId: data.messages[data.messages.length - 1].id, roomId: Number(workerId) });
         setChatMessages((prev) => [...prev, ...data.messages]);
       }
     } catch {
       alert();
     }
-  }, [chatMessages, postLastMessage, workerId]);
+  }, [chatMessages, workerId]);
 
   const handleVisibilityChange = useCallback(
     async (isVisible: boolean) => {
@@ -246,22 +241,24 @@ const WorkChatRoomPage = () => {
         await handlePullUpCallback();
         return;
       }
-      await postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
     },
-    [chatMessages, handlePullUpCallback, postLastMessage, workerId]
+    [handlePullUpCallback]
   );
+
+  useEffect(() => {
+    if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
+      postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
+    }
+  }, [chatInfo.lastMessageId, chatMessages, postLastMessage, workerId]);
 
   usePageVisibility({ callback: handleVisibilityChange });
 
   useEffect(() => {
-    const unMountAction = async () => {
-      if (chatMessages.length !== 0) {
-        await postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
-        refetch();
-      }
+    const unMountAction = () => {
+      refetch();
     };
-    return () => unMountAction() as any;
-  }, [chatMessages, postLastMessage, refetch, workerId]);
+    return () => unMountAction();
+  }, [refetch]);
 
   const { headRef, headHeight } = usePullDownToCallback({ onCallback: handlePullDownCallback, chatAreaRef });
   const { tailRef, tailHeight } = usePullUpToCallback({ onCallback: handlePullUpCallback, chatAreaRef });
@@ -276,27 +273,27 @@ const WorkChatRoomPage = () => {
     }, 10);
   }, [chatAreaScrollRef]);
 
+  const [toggle, setToggle] = useState(false);
   useEffect(() => {
     (async () => {
-      // TODO: 서버 이슈 해결 후 반영
-      // const { data } = await requestChat({
-      //   roomId: Number(workerId),
-      //   messageId: chatInfo.lastMessageId,
-      //   sortType: "BEFORE",
-      // });
-      // const { data: dataAfter } = await requestChat({
-      //   roomId: Number(workerId),
-      //   messageId: chatInfo.lastMessageId,
-      //   sortType: "AFTER",
-      // });
-      // setChatMessages([...(data?.messages ?? []), ...(dataAfter.messages ?? [])]);
-      setChatMessages(chatMessagesData?.data.messages ?? []);
+      const { data } = await requestChat({
+        roomId: Number(workerId),
+      });
+      setChatMessages(data.messages ?? []);
+      setToggle(true);
     })();
-  }, [setChatMessages]);
-
+  }, [handleScrollToEnd, workerId]);
   useEffect(() => {
-    handleScrollToEnd();
-  }, [handleScrollToEnd]);
+    if (toggle) {
+      const lastMessageId = (chatInfo.lastMessageId ?? "").toString();
+      const DOM = document.getElementById(lastMessageId);
+
+      if (DOM) {
+        DOM.scrollIntoView();
+        setToggle(false);
+      }
+    }
+  }, [chatInfo.lastMessageId, toggle]);
 
   const handleChangeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target?.value);
@@ -358,6 +355,7 @@ const WorkChatRoomPage = () => {
               return (
                 <Chat
                   key={currentChat.createdDate}
+                  id={currentChat.id}
                   isMe={currentChat.writerId === userInfo?.id}
                   message={currentChat.message}
                   date={date}
