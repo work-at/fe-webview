@@ -31,4 +31,5 @@ export const API_URL = {
   POST_CHAT_CONFIRM: (roomId: number) => `/chattings/${roomId}/confirm`,
   POST_CHAT_ROOM_CREATE: (ownerUserId: number) => `/chattings/?ownerUserId=${ownerUserId}`,
   POST_BLOCK_USER: (blockUserId: number) => `/user/blocking?blockUserId=${blockUserId}`,
+  GET_REGION_TRAFFIC: "/region-traffic",
 };
