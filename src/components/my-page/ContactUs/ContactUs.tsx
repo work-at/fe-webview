@@ -1,17 +1,8 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
-import { useEffect, useRef, useState } from "react";
+import useAutoSizeTextArea from "@/hooks/useAutoSizeTextArea";
+import { useRef, useState } from "react";
 import * as S from "./ContactUs.styled";
-
-const useAutoSizeTextArea = (textAreaRef: HTMLTextAreaElement | null, value: string) => {
-  useEffect(() => {
-    if (textAreaRef) {
-      textAreaRef.style.height = "0px";
-      const scrollHeight = textAreaRef.scrollHeight;
-      textAreaRef.style.height = scrollHeight + "px";
-    }
-  }, [textAreaRef, value]);
-};
 
 const Textarea = () => {
   const [value, setValue] = useState("");

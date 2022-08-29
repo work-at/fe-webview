@@ -36,16 +36,12 @@ const MyPage = () => {
   }, [push]);
 
   const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { files } }) => {
-    console.log("handle!");
-
     if (!files) return;
 
     if (!isValidFileSize(files[0])) {
       alert("파일 사이즈는 10MB를 넘길 수 없습니다.");
       return;
     }
-
-    console.log("hey!!!!");
 
     uploadProfileImage(files[0]);
     setImageFile(files[0]);

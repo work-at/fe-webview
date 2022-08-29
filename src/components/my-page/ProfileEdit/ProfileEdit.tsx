@@ -5,10 +5,13 @@ import CheckBox from "@/components/@shared/CheckBox";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DESIRED_ACTIVITIES } from "@/domains/common.constant";
 import { DesiredActivity } from "@/domains/common.type";
-import { useUpdateUserProfileMutation, useUserInfo } from "@/domains/user";
+import { useUpdateUserProfileMutation } from "@/domains/user";
+import useAutoSizeTextArea from "@/hooks/useAutoSizeTextArea";
 import { useFlow } from "@/stack";
+import { handleRefInjection } from "@/utils/react";
+import { useActivityParams } from "@stackflow/react";
 import { atom, useAtom } from "jotai";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./ProfileEdit.styled";
 
@@ -38,13 +41,26 @@ export const jobAndYearAtom = atom<any>({
 
 const ProfileEdit = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: userInfo } = useUserInfo();
-  const { register, handleSubmit, setValue, setError } = useForm<ProfileFormData>();
+  const { userInfo } = useActivityParams<{ userInfo: any }>();
+  const { register, handleSubmit, setValue, watch } = useForm<ProfileFormData>();
   const { push } = useFlow();
   const { onChange, selected } = useMultiselect([]);
   const { pop } = useFlow();
   const { mutateAsync: updateUserProfile } = useUpdateUserProfileMutation();
   const [jobAndYear] = useAtom(jobAndYearAtom);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const { ref, ...storyRegisterRest } = register("story", {
+    required: true,
+    maxLength: {
+      message: ERROR_TEXT.STORY_LENGTH_LIMIT_EXCEEDED,
+      value: 450,
+    },
+  });
+
+  const story = watch("story");
+
+  useAutoSizeTextArea(textAreaRef.current, story);
 
   const handleEmailVerificationRoute = useCallback(() => {
     push("EmailVerification", {});
@@ -68,25 +84,10 @@ const ProfileEdit = () => {
     pop();
   });
 
-  const handleStoryChange: React.FormEventHandler<HTMLDivElement> = ({ target }) => {
-    const text = (target as HTMLDivElement).innerText;
-
-    if (text.length > STORY_LENGTH_LIMIT) {
-      setError("story", {
-        message: ERROR_TEXT.STORY_LENGTH_LIMIT_EXCEEDED,
-      });
-    }
-
-    setValue("story", text);
-  };
-
   useEffect(() => {
     setValue("nickName", userInfo?.nickname ?? "");
-    setValue("desiredActivities", userInfo?.activities.map((activity) => activity.name) ?? []);
-    setValue("story", userInfo?.story ?? "");
-  }, [userInfo, setValue]);
-
-  // console.log("userInfo", userInfo);
+    setValue("desiredActivities", jobAndYear.job);
+  }, [userInfo, jobAndYear, setValue]);
 
   return (
     <StackLayout>
@@ -123,7 +124,7 @@ const ProfileEdit = () => {
         <S.MyInfoItem>
           <S.ItemHead>직무 및 경력</S.ItemHead>
           <S.ItemBody>
-            <S.BtnEdit onClick={handleJobAndYearRoute}>
+            <S.BtnEdit type="button" onClick={handleJobAndYearRoute}>
               <Icon icon="BtnEdit" />
             </S.BtnEdit>
           </S.ItemBody>
@@ -131,9 +132,11 @@ const ProfileEdit = () => {
         <S.MyInfoFullItem>
           <S.ItemHead>자기소개</S.ItemHead>
           <S.ItemBody>
-            <S.TxtWrap contentEditable onInput={handleStoryChange}>
-              {userInfo?.story}
-            </S.TxtWrap>
+            <S.TxtWrap
+              ref={handleRefInjection(ref, textAreaRef)}
+              {...storyRegisterRest}
+              defaultValue={userInfo?.story}
+            ></S.TxtWrap>
           </S.ItemBody>
         </S.MyInfoFullItem>
         <S.MyInfoFullItem>

@@ -21,7 +21,9 @@ export const UserThumb = styled.div`
   justify-content: center;
   > img {
     display: flex;
-    height: 100%;
+    width: 115px;
+    height: 115px;
+    object-fit: cover;
   }
 `;
 
