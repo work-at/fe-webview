@@ -38,7 +38,7 @@ const TAB_ITEMS: TabItem<MapTabId>[] = [
   },
   {
     id: "worker",
-    label: "워케이셔너",
+    label: "워크챗",
   },
 ];
 
@@ -353,7 +353,9 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
         </S.WorkerLeng>
       </S.WorkerLengWrap>
       <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>
-        <S.DrawerHeader />
+        <S.DrawerHeader>
+          <S.DrawerHeaderTxt>내 주변 카페</S.DrawerHeaderTxt>
+        </S.DrawerHeader>
         <S.DrawerBody>
           <CardList onCardClick={CardListInfo?.onClick} items={CardListInfo?.items ?? []} />
         </S.DrawerBody>
