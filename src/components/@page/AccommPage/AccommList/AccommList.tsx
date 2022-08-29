@@ -28,8 +28,8 @@ const AccommList = ({ items }: AccommListProps) => {
         <S.WalkatDensity area="seoul">
           <S.WalkatTxt area="seoul">최근 서울의 워크앳 지수는?</S.WalkatTxt>
           <S.StateBox>
-            {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
-            <Icon icon="IconDensityStpe1" />
+            {/* FREE : 한산해요 / IN_BETWEEN : 핫플직전 / POPULAR : 완전핫함  */}
+            <Icon icon="FREE" />
             <S.StateTxt area="seoul">한산해요</S.StateTxt>
           </S.StateBox>
         </S.WalkatDensity>
@@ -38,8 +38,8 @@ const AccommList = ({ items }: AccommListProps) => {
         <S.WalkatDensity area="jeju">
           <S.WalkatTxt area="jeju">최근 제주의 워크앳 지수는?</S.WalkatTxt>
           <S.StateBox>
-            {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
-            <Icon icon="IconDensityStpe2" />
+            {/* FREE : 한산해요 / IN_BETWEEN : 핫플직전 / POPULAR : 완전핫함  */}
+            <Icon icon="IN_BETWEEN" />
             <S.StateTxt area="jeju">핫플직전</S.StateTxt>
           </S.StateBox>
         </S.WalkatDensity>
@@ -48,8 +48,8 @@ const AccommList = ({ items }: AccommListProps) => {
         <S.WalkatDensity area="gangneung">
           <S.WalkatTxt area="gangneung">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
           <S.StateBox>
-            {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
-            <Icon icon="IconDensityStpe3" />
+            {/* FREE : 한산해요 / IN_BETWEEN : 핫플직전 / POPULAR : 완전핫함  */}
+            <Icon icon="POPULAR" />
             <S.StateTxt area="gangneung">완전핫함</S.StateTxt>
           </S.StateBox>
         </S.WalkatDensity>
@@ -58,8 +58,8 @@ const AccommList = ({ items }: AccommListProps) => {
         <S.WalkatDensity area="sokcho">
           <S.WalkatTxt area="sokcho">최근 속초의 워크앳 지수는?</S.WalkatTxt>
           <S.StateBox>
-            {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
-            <Icon icon="IconDensityStpe3" />
+            {/* FREE : 한산해요 / IN_BETWEEN : 핫플직전 / POPULAR : 완전핫함  */}
+            <Icon icon="POPULAR" />
             <S.StateTxt area="sokcho">완전핫함</S.StateTxt>
           </S.StateBox>
         </S.WalkatDensity>
