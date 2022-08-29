@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { AccommodationRegion } from "@/domains/accommodation/accommodation.dto";
 
 export const AccommListWrap = styled.div`
   position: relative;
@@ -11,7 +12,7 @@ export const KeywordTxt = styled.p`
   color: ${theme.colors.black};
 `;
 
-export const WalkatDensity = styled.div<{ area: string }>`
+export const WalkatDensity = styled.div<{ region: AccommodationRegion }>`
   height: 57px;
   border-radius: 15px;
   padding: 0 17px;
@@ -19,50 +20,49 @@ export const WalkatDensity = styled.div<{ area: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${(props) =>
-    props.area === "seoul" &&
+  ${({ region }) =>
+    region === "SEOUL" &&
     `
-    background: rgba(255, 0, 0, 0.05);
-
-		`};
-  ${(props) =>
-    props.area === "jeju" &&
+      background: rgba(255, 0, 0, 0.05);
+	`};
+  ${({ region }) =>
+    region === "JEJU" &&
     `
       background: rgba(255, 122, 0, 0.05);
-		`};
-  ${(props) =>
-    props.area === "gangneung" &&
+	`};
+  ${({ region }) =>
+    region === "GANGNEUNG" &&
     `
       background: rgba(73, 44, 255, 0.05);
-		`};
-  ${(props) =>
-    props.area === "sokcho" &&
+	`};
+  ${({ region }) =>
+    region === "SOKCHO" &&
     `
       background: rgba(73, 44, 255, 0.05);
     `};
   background-size: cover;
 `;
 
-export const WalkatTxt = styled.p<{ area: string }>`
+export const WalkatTxt = styled.p<{ region: AccommodationRegion }>`
   ${theme.fonts.SemiBold03};
-  ${(props) =>
-    props.area === "seoul" &&
+  ${({ region }) =>
+    region === "SEOUL" &&
     `
       color: ${theme.colors.seoul};
 
 		`};
-  ${(props) =>
-    props.area === "jeju" &&
+  ${({ region }) =>
+    region === "JEJU" &&
     `
       color: ${theme.colors.jeju};
 		`};
-  ${(props) =>
-    props.area === "gangneung" &&
+  ${({ region }) =>
+    region === "GANGNEUNG" &&
     `
       color: ${theme.colors.gangWon};
 		`};
-  ${(props) =>
-    props.area === "sokcho" &&
+  ${({ region }) =>
+    region === "SOKCHO" &&
     `
       color: ${theme.colors.gangWon};
     `};
@@ -78,25 +78,25 @@ export const StateBox = styled.div`
   border-radius: 20px;
 `;
 
-export const StateTxt = styled.span<{ area: string }>`
+export const StateTxt = styled.span<{ region: AccommodationRegion }>`
   ${theme.fonts.Bold06};
-  ${(props) =>
-    props.area === "seoul" &&
+  ${({ region }) =>
+    region === "SEOUL" &&
     `
       color: ${theme.colors.seoul};
 		`};
-  ${(props) =>
-    props.area === "jeju" &&
+  ${({ region }) =>
+    region === "JEJU" &&
     `
       color:  ${theme.colors.jeju};
 		`};
-  ${(props) =>
-    props.area === "gangneung" &&
+  ${({ region }) =>
+    region === "GANGNEUNG" &&
     `
       color: ${theme.colors.gangWon};
 		`};
-  ${(props) =>
-    props.area === "sokcho" &&
+  ${({ region }) =>
+    region === "SOKCHO" &&
     `
       color: ${theme.colors.gangWon};
 		`};
@@ -150,30 +150,30 @@ export const ConsecutivePriceTxt = styled.div`
   justify-content: space-between;
 `;
 
-export const StandardTxt = styled.span<{ area: string }>`
+export const StandardTxt = styled.span<{ region: AccommodationRegion | "ALL" }>`
   ${theme.fonts.Medium06};
-  ${(props) =>
-    props.area === "all" &&
+  ${({ region }) =>
+    region === "ALL" &&
     `
       color: ${theme.colors.mainColor};
 		`};
-  ${(props) =>
-    props.area === "seoul" &&
+  ${({ region }) =>
+    region === "SEOUL" &&
     `
       color: ${theme.colors.seoul};
 		`};
-  ${(props) =>
-    props.area === "jeju" &&
+  ${({ region }) =>
+    region === "JEJU" &&
     `
       color:  ${theme.colors.jeju};
 		`};
-  ${(props) =>
-    props.area === "gangneung" &&
+  ${({ region }) =>
+    region === "GANGNEUNG" &&
     `
       color: ${theme.colors.gangWon};
 		`};
-  ${(props) =>
-    props.area === "sokcho" &&
+  ${({ region }) =>
+    region === "SOKCHO" &&
     `
       color: ${theme.colors.gangWon};
 		`};
@@ -220,4 +220,20 @@ export const AccommReviewListItem = styled.li`
   padding: 5px 11px;
   border-radius: 40px;
   margin: 7px 0 0 5px;
+`;
+
+export const RegionSelectorWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 27px;
+`;
+
+export const RegionSelector = styled.select`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+
+  color: #121212;
 `;
