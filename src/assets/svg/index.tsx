@@ -93,9 +93,9 @@ export { default as IconError } from "../images/icons/IconError.svg";
 export { default as IconStar } from "../images/icons/IconStar.svg";
 export { default as IconWalkChat } from "../images/icons/IconWalkChat.svg";
 export { default as IconReady } from "../images/icons/IconReady.svg";
-export { default as IconDensityStpe1 } from "../images/icons/IconDensityStpe1.svg";
-export { default as IconDensityStpe2 } from "../images/icons/IconDensityStpe2.svg";
-export { default as IconDensityStpe3 } from "../images/icons/IconDensityStpe3.svg";
+export { default as FREE } from "../images/icons/FREE.svg";
+export { default as IN_BETWEEN } from "../images/icons/IN_BETWEEN.svg";
+export { default as POPULAR } from "../images/icons/POPULAR.svg";
 export { default as IconJeju } from "../images/icons/IconJeju.svg";
 export { default as IconSeoul } from "../images/icons/IconSeoul.svg";
 export { default as IconGangWon } from "../images/icons/IconGangWon.svg";
@@ -110,3 +110,5 @@ export { default as IconNoData } from "../images/icons/IconNoData.svg";
 // 그 외 아이콘
 export { default as Addr } from "../images/icons/Addr.svg";
 export { default as Tel } from "../images/icons/Tel.svg";
+export { default as Dot } from "../images/icons/Dot.svg";
+export { default as DotActive } from "../images/icons/DotActive.svg";

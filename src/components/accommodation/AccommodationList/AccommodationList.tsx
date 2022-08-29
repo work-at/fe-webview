@@ -13,7 +13,11 @@ const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 
 const AccommodationList = () => {
-  const { region } = useActivityParams<{ region: AccommodationRegion }>();
+  const { region, message, type } = useActivityParams<{
+    region: AccommodationRegion;
+    type: "POPULAR" | "IN_BETWEEN" | "FREE";
+    message: string;
+  }>();
   const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>(region);
 
   const {
@@ -62,9 +66,9 @@ const AccommodationList = () => {
             최근 {AccommodationRegions_TEXT[selectedRegion]}의 워크앳 지수는?
           </S.WalkatTxt>
           <S.StateBox>
-            {/* IconDensityStpe1 : 한산해요 / IconDensityStpe2 : 핫플직전 / IconDensityStpe3 : 완전핫함  */}
-            <Icon icon="IconDensityStpe1" />
-            <S.StateTxt region={selectedRegion}>한산해요</S.StateTxt>
+            {/* TODO : 서버 연동하기 */}
+            <Icon icon={type} />
+            <S.StateTxt region={selectedRegion}>{message}</S.StateTxt>
           </S.StateBox>
         </S.WalkatDensity>
         <S.AccommList>
