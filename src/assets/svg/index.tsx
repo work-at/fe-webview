@@ -78,6 +78,7 @@ export { default as WalkChatReview15 } from "../images/icons/WalkChatReview15.sv
 
 // 버튼 모음
 export { default as BtnReview } from "../images/icons/BtnReview.svg";
+export { default as BtnUrl } from "../images/icons/BtnUrl.svg";
 export { default as BtnDirecion } from "../images/icons/BtnDirecion.svg";
 export { default as BtnLocation } from "../images/icons/BtnLocation.svg";
 export { default as BtnSendMsg } from "../images/icons/BtnSendMsg.svg";
@@ -108,6 +109,7 @@ export { default as IconAccommInfo6 } from "../images/icons/IconAccommInfo6.svg"
 export { default as IconNoData } from "../images/icons/IconNoData.svg";
 
 // 그 외 아이콘
+export { default as Price } from "../images/icons/Price.svg";
 export { default as Addr } from "../images/icons/Addr.svg";
 export { default as Tel } from "../images/icons/Tel.svg";
 export { default as Dot } from "../images/icons/Dot.svg";
