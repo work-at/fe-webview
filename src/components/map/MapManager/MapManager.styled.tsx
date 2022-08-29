@@ -41,12 +41,38 @@ export const BottomDrawer = styled(BaseBottomDrawer)`
 `;
 
 export const DrawerHeader = styled.div`
-  height: 6rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 3.875rem;
   background-color: ${theme.colors.white};
+  z-index: ${Z_INDEX.HIGH};
+`;
+
+export const DrawerHeaderTxt = styled.p`
+  width: 100%;
+  justify-content: flex-start;
+  padding-left: 2.938rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  font-weight: 700;
+  color: ${theme.colors.black};
+  box-sizing: border-box;
+  font-family: Pretendard;
 `;
 
 export const DrawerBody = styled.div`
-  padding: 0px 0px 20px;
+  overflow: hidden;
+  height: 100%;
+  padding: 3.875rem 0px 0;
+  > div {
+    overflow-y: scroll;
+    height: 100%;
+    padding-bottom: 30px;
+  }
 `;
 
 export const BottomBtnWrap = styled.div`

@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import * as S from "./BottomDrawer.styled";
+import Icon from "@/assets/Icon";
 
 export type BottomDrawerProps = {
   isOpen: boolean;
@@ -14,7 +15,9 @@ export const BottomDrawerContent = ({ isOpen, children, onClose, className }: Bo
   return (
     <S.Container isOpen={isOpen} className={className}>
       <S.Header>
-        <S.CloseButton onClick={onClose}>닫기</S.CloseButton>
+        <S.CloseButton onClick={onClose}>
+          <Icon icon="BtnBack" size={24} />
+        </S.CloseButton>
       </S.Header>
       <S.Body>{children}</S.Body>
     </S.Container>
