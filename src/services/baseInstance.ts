@@ -48,7 +48,7 @@ export const baseInstance = () => {
   axiosInstance.defaults.paramsSerializer = (paramObj) => {
     const params = new URLSearchParams();
     for (const key in paramObj) {
-      params.append(key, paramObj[key]);
+      paramObj[key] && params.append(key, paramObj[key]);
     }
 
     return params.toString();
