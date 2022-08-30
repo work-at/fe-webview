@@ -28,8 +28,9 @@ export const Modal = () => {
 const WorkChatList = ({ items }: WorkChatListProps) => {
   return (
     <>
-      <Header useBack useRefresh bgColor fixed useLink title="이름여덟글자제한" />
+      <Header useBack useRefresh bgColor fixed title="본인닉네임" />
       <S.WorkChatListWrap>
+        {/* 채팅 기록이 있을 때 */}
         <S.ChatList>
           {items.map((item, index) => (
             <S.ListItem key={index}>
@@ -60,6 +61,18 @@ const WorkChatList = ({ items }: WorkChatListProps) => {
             </S.ListItem>
           ))}
         </S.ChatList>
+        {/* //채팅 기록이 있을 때 */}
+
+        {/* 채팅 기록이 없을 때 */}
+        <S.ChatNoData>
+          <Icon icon="IconNoData" />
+          <S.NoDataTxt>
+            아직 채팅 기록이 없어요!
+            <br />
+            워크챗 신청을 해보세요
+          </S.NoDataTxt>
+        </S.ChatNoData>
+        {/* //채팅 기록이 없을 때 */}
       </S.WorkChatListWrap>
     </>
   );
