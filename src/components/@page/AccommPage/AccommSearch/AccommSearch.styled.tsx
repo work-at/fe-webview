@@ -35,7 +35,7 @@ export const InfoList = styled.ul`
 export const InfoListItem = styled.li`
   display: inline-grid;
   position: relative;
-  margin-right: 15px;
+  margin-right: 12px;
   overflow: hidden;
   &:last-child {
     margin-right: 7.4667vw;
@@ -43,14 +43,21 @@ export const InfoListItem = styled.li`
 `;
 
 export const BtnInfo = styled.button`
-  display: block;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid ${theme.colors.gray09};
+  filter: drop-shadow(0px 1px 7px rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
 `;
 
 export const InfoTxt = styled.p`
   ${theme.fonts.Medium05};
   color: ${theme.colors.gray02};
-  padding-top: 10px;
+  padding-top: 7px;
+  text-align: center;
 `;
 
 export const ReviewList = styled.ul`
