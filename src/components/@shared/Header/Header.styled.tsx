@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
-import { Z_INDEX } from "@/constants/zIndex";
 import { HeaderProps } from "./Header";
 
 type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;

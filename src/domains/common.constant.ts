@@ -208,3 +208,63 @@ export const DINER_REVIEWS = [
     content: "사람이 많이\n없어요",
   },
 ];
+
+export const ACCOMMODATION_INFO_TAGS = [
+  {
+    name: "WORKSPACE",
+    content: "숙소 내\n업무 공간",
+    icon: "IconAccommInfo1",
+  },
+  {
+    name: "NEAR_FOREST",
+    content: "숲 인근",
+    icon: "IconAccommInfo2",
+  },
+  {
+    name: "NEAR_SEA",
+    content: "바다 인근",
+    icon: "IconAccommInfo3",
+  },
+  {
+    name: "NEAR_ATTRACTION",
+    content: "관광지\n인근",
+    icon: "IconAccommInfo4",
+  },
+  {
+    name: "NEAR_CITY",
+    content: "도시 인근",
+    icon: "IconAccommInfo5",
+  },
+  {
+    name: "SHARED_WORKSPACE",
+    content: "공용업무\n공간",
+    icon: "IconAccommInfo6",
+  },
+] as const;
+
+export const ACCOMMODATION_REVIEW_TAGS = [
+  {
+    name: "WIFI",
+    content: "와이파이가빵빵해요",
+  },
+  {
+    name: "POWER",
+    content: "콘센트자리많아요",
+  },
+  {
+    name: "SEAT",
+    content: "좌석이업무하기좋아요",
+  },
+  {
+    name: "QUIET",
+    content: "조용한 공간이 있어요",
+  },
+  {
+    name: "FOCUS",
+    content: "집중이잘돼요",
+  },
+  {
+    name: "SERVE_MEAL",
+    content: "식사메뉴가있어요",
+  },
+] as const;

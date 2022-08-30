@@ -1,4 +1,4 @@
-export const ACCOMMODATION_REGIONS = ["SEOUL", "JEJU", "GANGNEUNG", "SOKCHO"] as const;
+export const ACCOMMODATION_REGIONS = ["ALL", "SEOUL", "JEJU", "GANGNEUNG", "SOKCHO"] as const;
 
 export const REVIEW_TAG_NAMES = ["WIFI", "POWER", "SEAT", "QUIET", "FOCUS", "SERVE_MEAL"] as const;
 

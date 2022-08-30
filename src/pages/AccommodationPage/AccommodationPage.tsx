@@ -20,7 +20,9 @@ import AccommImg from "@/assets/images/@dummy/@accomm-list.png";
 import { useScrollDrag } from "@/hooks";
 import { Dot, DotActive } from "@/assets/svg";
 import { useRegionTrafficQuery } from "@/domains/accomodation/accomodation.api";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useFlow } from "@/stack";
+import { PATH } from "@/constants";
 
 const Badge = () => {
   const { data } = useRegionTrafficQuery();
@@ -80,68 +82,80 @@ const Badge = () => {
   return null;
 };
 
+const items = [
+  {
+    imageUrl: AccommImg,
+    area: "seoul",
+    name: "질그랭이센터 두줄 테스트 숙소 이름 두줄 테스트입니다 두줄 테스트",
+  },
+  {
+    imageUrl: AccommImg,
+    area: "jeju",
+    name: "질그랭이센터",
+  },
+  {
+    imageUrl: AccommImg,
+    area: "gangWon",
+    name: "질그랭이센터",
+  },
+];
+
+const item2 = [
+  {
+    src: MainVisualJeju,
+    location: "제주도",
+    text1: "제주도의 향긋함을",
+    text2: "느끼며 서귀포에서",
+    textBox: <S.AccommJejuFlag>제주</S.AccommJejuFlag>,
+  },
+  {
+    src: MainVisualSeoul,
+    location: "서울",
+    text1: "서울의 바람을",
+    text2: "즐기며 한남동에서",
+    textBox: <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>,
+  },
+  {
+    src: MainVisualGangwon,
+    location: "강원도",
+    text1: "강원도의 맑은 공기를",
+    text2: "마시며 강릉에서",
+    textBox: <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>,
+  },
+  {
+    src: MainVisualEvent1,
+    location: "이벤트",
+    text1: "이지태스크",
+    text2: "8월 제주도 워케이션 모집!",
+    textBox: <S.AccommEventFlag>이벤트</S.AccommEventFlag>,
+  },
+  {
+    src: MainVisualEvent2,
+    location: "이벤트",
+    text1: "WORK ON THE BEACH",
+    text2: "데스커 양양 워케이션",
+    textBox: <S.AccommEventFlag>이벤트</S.AccommEventFlag>,
+  },
+];
+
 const AccommodationPage = () => {
   const { events, ref, currentIndex } = useScrollDrag();
+  const { push } = useFlow();
 
-  const items = [
-    {
-      imageUrl: AccommImg,
-      area: "seoul",
-      name: "질그랭이센터 두줄 테스트 숙소 이름 두줄 테스트입니다 두줄 테스트",
-    },
-    {
-      imageUrl: AccommImg,
-      area: "jeju",
-      name: "질그랭이센터",
-    },
-    {
-      imageUrl: AccommImg,
-      area: "gangWon",
-      name: "질그랭이센터",
-    },
-  ];
-
-  const item2 = [
-    {
-      src: MainVisualJeju,
-      location: "제주도",
-      text1: "제주도의 향긋함을",
-      text2: "느끼며 서귀포에서",
-      textBox: <S.AccommJejuFlag>제주</S.AccommJejuFlag>,
-    },
-    {
-      src: MainVisualSeoul,
-      location: "서울",
-      text1: "서울의 바람을",
-      text2: "즐기며 한남동에서",
-      textBox: <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>,
-    },
-    {
-      src: MainVisualGangwon,
-      location: "강원도",
-      text1: "강원도의 맑은 공기를",
-      text2: "마시며 강릉에서",
-      textBox: <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>,
-    },
-    {
-      src: MainVisualEvent1,
-      location: "이벤트",
-      text1: "이지태스크",
-      text2: "8월 제주도 워케이션 모집!",
-      textBox: <S.AccommEventFlag>이벤트</S.AccommEventFlag>,
-    },
-    {
-      src: MainVisualEvent2,
-      location: "이벤트",
-      text1: "WORK ON THE BEACH",
-      text2: "데스커 양양 워케이션",
-      textBox: <S.AccommEventFlag>이벤트</S.AccommEventFlag>,
-    },
-  ];
+  const handleAccommodationSearchPageRoute = useCallback(
+    () => push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH.stack, {}),
+    [push]
+  );
 
   return (
     <StackLayout navigationPath="accommodation" isHide>
       <S.AccommMainWrap>
+        <button
+          onClick={handleAccommodationSearchPageRoute}
+          style={{ position: "fixed", top: "30px", right: "30px", zIndex: "1000000000000", color: "white" }}
+        >
+          검색
+        </button>
         <S.VisualWrapContainer>
           <S.VisualWrapList onMouseDown={events.onMouseDown} onMouseMove={events.onMouseMove} ref={ref}>
             {item2.map((each) => (

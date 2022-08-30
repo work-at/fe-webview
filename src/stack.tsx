@@ -19,6 +19,8 @@ import CafeReviewPage from "./pages/CafeReviewPage";
 import AccommodationList from "./components/accommodation/AccommodationList";
 import AccommodationReview from "./components/accommodation/AccommodationReview";
 import AccommodationDetail from "./components/accommodation/AccommodationDetail";
+import AccommodationSearch from "./components/accommodation/AccommodationSearch";
+import AccommodationSearchResult from "./components/accommodation/AccommodationSearchResult";
 
 import ProfileEdit from "./components/my-page/ProfileEdit";
 import EmailVerification from "./components/my-page/EmailVerification";
@@ -113,6 +115,8 @@ const activities = {
   AccommodationList,
   AccommodationReview,
   AccommodationDetail,
+  AccommodationSearch,
+  AccommodationSearchResult,
   Test,
   Copyright,
 };
@@ -131,6 +135,8 @@ export const { Stack, useFlow } = stackflow({
         AccommodationList: PATH.ACCOMMODATION.ACCOMMODATION_LIST.full,
         AccommodationReview: PATH.ACCOMMODATION.ACCOMMODATION_REVIEW.full,
         AccommodationDetail: PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.full,
+        AccommodationSearch: PATH.ACCOMMODATION.ACCOMMODATION_SEARCH.full,
+        AccommodationSearchResult: PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.full,
         /* 지도 페이지 */
         MapPage: PATH.MAP.full,
         CafeReviewPage: `${PATH.CAFE.CAFE_REVIEW.full}/:cafeId`,

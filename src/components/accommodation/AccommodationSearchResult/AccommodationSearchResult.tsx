@@ -2,23 +2,29 @@ import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
-import { AccommodationRegion } from "@/domains/accommodation/accommodation.dto";
+import {
+  AccommodationInfoTag,
+  AccommodationRegion,
+  AccommodationReviewTag,
+} from "@/domains/accommodation/accommodation.dto";
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
 import { useState } from "react";
-import * as S from "./AccommodationList.styled";
+import * as S from "./AccommodationSearchResult.styled";
 
 const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 
-const AccommodationList = () => {
-  const { region, message, type } = useActivityParams<{
-    region: AccommodationRegion;
-    type: "POPULAR" | "IN_BETWEEN" | "FREE";
-    message: string;
+const AccommodationSearchResult = () => {
+  const { infoTag, reviewTag, searchKeyword, searchedBy } = useActivityParams<{
+    infoTag: AccommodationInfoTag;
+    reviewTag: AccommodationReviewTag;
+    searchKeyword: string;
+    searchedBy: string;
   }>();
-  const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>(region);
+
+  const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>();
 
   const {
     data: accommodationList,
@@ -27,6 +33,8 @@ const AccommodationList = () => {
   } = useAccommodationListQuery(
     {
       region: selectedRegion === "ALL" ? undefined : selectedRegion,
+      infoTag,
+      topReviewTag: reviewTag,
     },
     {}
   );
@@ -46,10 +54,9 @@ const AccommodationList = () => {
   }
 
   return (
-    <StackLayout>
+    <StackLayout isHide>
       <S.AccommListWrap>
         {/* 숙소 키워드 */}
-        {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
         <S.RegionSelectorWrap>
           <S.RegionSelector onChange={handleRegionSelect}>
             {ACCOMMODATION_REGIONS.map((region) => (
@@ -59,18 +66,7 @@ const AccommodationList = () => {
             ))}
           </S.RegionSelector>
         </S.RegionSelectorWrap>
-
-        {/* 서울 워크앳 지수 */}
-        <S.WalkatDensity region={selectedRegion}>
-          <S.WalkatTxt region={selectedRegion}>
-            최근 {AccommodationRegions_TEXT[selectedRegion]}의 워크앳 지수는?
-          </S.WalkatTxt>
-          <S.StateBox>
-            {/* TODO : 서버 연동하기 */}
-            <Icon icon={type} />
-            <S.StateTxt region={selectedRegion}>{message}</S.StateTxt>
-          </S.StateBox>
-        </S.WalkatDensity>
+        <S.KeywordTxt>{searchedBy} 검색결과</S.KeywordTxt>
         <S.AccommList>
           {accommodationList.map((item, index) => (
             <S.AccommListItem key={index}>
@@ -83,7 +79,7 @@ const AccommodationList = () => {
 
                   <S.AccommPriceInfo>
                     <S.ConsecutivePriceTxt>
-                      <S.StandardTxt region={selectedRegion}>평일 5일</S.StandardTxt>
+                      <S.StandardTxt region={selectedRegion ?? "ALL"}>평일 5일</S.StandardTxt>
                       <S.PriceBox>
                         <S.PriceTxt>{decimalFormatter(item.price * 5)}</S.PriceTxt>
                         <S.WonTxt>원</S.WonTxt>
@@ -102,6 +98,15 @@ const AccommodationList = () => {
               </S.LinkDetail>
             </S.AccommListItem>
           ))}
+          {accommodationList.length === 0 && (
+            <S.AccommNoData>
+              <Icon icon="IconNoData" />
+              <S.NoDataTxt>
+                앗, 검색 결과가 없어요! <br />
+                다른 키워드를 입력해보세요.
+              </S.NoDataTxt>
+            </S.AccommNoData>
+          )}
         </S.AccommList>
 
         {/* 숙소 리스트 */}
@@ -110,4 +115,4 @@ const AccommodationList = () => {
   );
 };
 
-export default AccommodationList;
+export default AccommodationSearchResult;

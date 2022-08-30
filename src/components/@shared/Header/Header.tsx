@@ -14,6 +14,8 @@ export type HeaderProps = {
   useLink?: boolean;
   search?: boolean;
   accommArea?: boolean;
+  onSearchKeywordChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onSearchButtonClick?: () => void;
 };
 
 const Header = ({
@@ -27,6 +29,8 @@ const Header = ({
   useLink,
   search,
   accommArea,
+  onSearchKeywordChange,
+  onSearchButtonClick,
 }: HeaderProps) => {
   const { pop } = useFlow();
   return (
@@ -73,8 +77,8 @@ const Header = ({
 
         {search && (
           <S.SearchInputWrap>
-            <S.SearchInput type="text" />
-            <S.BtnConfirm>
+            <S.SearchInput type="text" onChange={onSearchKeywordChange} />
+            <S.BtnConfirm onClick={onSearchButtonClick}>
               <Icon icon="BtnSearch" size={24} />
             </S.BtnConfirm>
           </S.SearchInputWrap>
