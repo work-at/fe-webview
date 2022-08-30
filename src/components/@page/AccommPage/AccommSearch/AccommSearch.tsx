@@ -15,49 +15,49 @@ const AccommSearch = () => {
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo1" />
-                  <S.InfoTxt>
-                    숙소 내 <br />
-                    업무 공간
-                  </S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>
+                  숙소 내 <br />
+                  업무 공간
+                </S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo2" />
-                  <S.InfoTxt>숲 인근</S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>숲 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo3" />
-                  <S.InfoTxt>바다 인근</S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>바다 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo4" />
-                  <S.InfoTxt>
-                    관광지
-                    <br />
-                    인근
-                  </S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>
+                  관광지
+                  <br />
+                  인근
+                </S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo5" />
-                  <S.InfoTxt>도시 인근</S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>도시 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
                   <Icon icon="IconAccommInfo6" />
-                  <S.InfoTxt>
-                    공용업무
-                    <br />
-                    공간
-                  </S.InfoTxt>
                 </S.BtnInfo>
+                <S.InfoTxt>
+                  공용업무
+                  <br />
+                  공간
+                </S.InfoTxt>
               </S.InfoListItem>
             </S.InfoList>
           </S.ScrollInner>
