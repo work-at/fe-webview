@@ -4,7 +4,6 @@ import { Z_INDEX } from "@/constants/zIndex";
 
 export const WorkChatListWrap = styled.div`
   position: relative;
-  overflow-y: hidden;
   height: calc(100vh - 97px);
   padding-top: 97px;
   transform: translate3d(0, 0, 0);
@@ -152,4 +151,15 @@ export const MenuList = styled.button`
   width: 100%;
   padding: 15px;
   text-align: left;
+`;
+
+export const ChatNoData = styled.div`
+  padding: 225px 0 100px;
+  text-align: center;
+`;
+
+export const NoDataTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 13px;
 `;
