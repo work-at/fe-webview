@@ -12,11 +12,7 @@ import { MAP } from "@/constants/map";
 type WorkerPinsQueryKey = readonly [typeof QUERY_NAME.GET_WORKER_PINS];
 
 export const requestGetWorkerPins: QueryFunction<Action.WorkerPinsInfo, WorkerPinsQueryKey> = async () => {
-  const data = await baseInstance().get<void, DTO.GetWorkerPinsResponse>("map/workers/pins", {
-    params: {
-      kilometer: MAP.SearchRadius / 1000,
-    } as DTO.GetWorkerPinsRequest,
-  });
+  const data = await baseInstance().get<void, DTO.GetWorkerPinsResponse>("map/workers/pins");
 
   const workerPins = Mapper.d2aMapper_GetWorkerPinsResponse_WorkerPinsInfo(data);
 
@@ -61,9 +57,7 @@ export const useWorkerDetailQuery = (
 type WorkersQueryKey = readonly [typeof QUERY_NAME.GET_WORKERS];
 
 export const requestGetWorkers: QueryFunction<Action.WorkersInfo, WorkersQueryKey> = async () => {
-  const data = await baseInstance().get<DTO.GetWorkersRequest, DTO.GetWorkersResponse>("/map/workers", {
-    params: Mapper.a2dMapper_WorkersCriteria_GetWorkersRequest(),
-  });
+  const data = await baseInstance().get<DTO.GetWorkersRequest, DTO.GetWorkersResponse>("/map/workers");
 
   const workers = Mapper.d2aMapper_GetWorkersResponse_WorkersInfo(data);
 
