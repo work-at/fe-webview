@@ -8,14 +8,16 @@ import { useCallback, useRef, useState } from "react";
 import { useDetectOutsideClick } from "@/hooks";
 import ModalContainerPortal from "@/components/@layout/ModalContainer/ModalContainer";
 import { useFlow } from "@/stack";
+import { PATH } from "@/constants";
 
 export type DropDownProps = {
   isOpen: boolean;
   roomId: number;
   userId: number;
+  lastMessageId: number;
 };
 
-const DropDown = ({ isOpen, roomId, userId }: DropDownProps) => {
+const DropDown = ({ isOpen, roomId, userId, lastMessageId }: DropDownProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutateAsync: chatRemoveMutateAsync } = useChatRemoveQuery();
   const { mutateAsync: blockUserMutateAsync } = useBlockUser();
@@ -24,12 +26,12 @@ const DropDown = ({ isOpen, roomId, userId }: DropDownProps) => {
 
   const handleChatRemove = useCallback(async () => {
     try {
-      await chatRemoveMutateAsync({ roomId });
+      await chatRemoveMutateAsync({ roomId, lastMessageId });
       refetch();
     } catch {
       alert("대화 나가기 에러 발생");
     }
-  }, [chatRemoveMutateAsync, refetch, roomId]);
+  }, [chatRemoveMutateAsync, refetch, roomId, lastMessageId]);
 
   const handleBlockUser = useCallback(async () => {
     try {
@@ -75,7 +77,7 @@ const ChatList = (item: Room) => {
 
   return (
     <S.ListItem>
-      <S.BtnDetail onClick={() => push("WorkChatRoomPage", { workerId: item.id })}>
+      <S.BtnDetail onClick={() => push(PATH.WORK_CHAT.ROOM.stack, { roomId: item.id })}>
         <S.ThumbWrap>
           <S.UserThumb>
             <img
@@ -104,7 +106,7 @@ const ChatList = (item: Room) => {
         <S.BtnMore onClick={() => setIsOpen((prev) => !prev)} ref={ref}>
           <Icon icon="BtnMore" />
         </S.BtnMore>
-        <DropDown isOpen={isOpen} roomId={item.id} userId={item.otherUser.userId} />
+        <DropDown isOpen={isOpen} roomId={item.id} userId={item.otherUser.userId} lastMessageId={item.lastMessageId} />
       </S.ModalWrap>
     </S.ListItem>
   );
@@ -126,11 +128,22 @@ const WorkChatPage = () => {
   return (
     <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">
       <S.WorkChatListWrap>
-        <S.ChatList>
-          {data?.data.rooms.map((item) => (
-            <ChatList key={item.id} {...item} />
-          ))}
-        </S.ChatList>
+        {data?.data.rooms.length === 0 || !data?.data ? (
+          <S.ChatNoData>
+            <Icon icon="IconNoData" />
+            <S.NoDataTxt>
+              아직 채팅 기록이 없어요!
+              <br />
+              워크챗 신청을 해보세요
+            </S.NoDataTxt>
+          </S.ChatNoData>
+        ) : (
+          <S.ChatList>
+            {data?.data.rooms.map((item) => (
+              <ChatList key={item.id} {...item} />
+            ))}
+          </S.ChatList>
+        )}
       </S.WorkChatListWrap>
     </StackLayout>
   );

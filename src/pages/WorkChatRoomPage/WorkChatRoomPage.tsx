@@ -115,7 +115,7 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
               round
               onClick={async () => {
                 try {
-                  await chatRemove({ roomId: roomId });
+                  await chatRemove({ roomId: Number(roomId), lastMessageId: Number(chatInfo.lastMessageId) });
                   await refetch();
                   pop();
                 } catch {
@@ -174,12 +174,12 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
 };
 
 const WorkChatRoomPage = () => {
-  const { workerId } = useActivityParams<{ workerId: string }>();
+  const { roomId } = useActivityParams<{ roomId: string }>();
   const { replace, pop } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
-    () => data?.data.rooms.filter((item) => item.id === Number(workerId))[0] ?? {},
-    [data, workerId]
+    () => data?.data.rooms.filter((item) => item.id === Number(roomId))[0] ?? {},
+    [data, roomId]
   );
   const [chatMessages, setChatMessages] = useState<Chats>([]);
   const { data: userInfo } = useUserInfo();
@@ -190,7 +190,7 @@ const WorkChatRoomPage = () => {
 
   const handleSendChat = async () => {
     try {
-      await chatSend({ message, roomId: Number(workerId) });
+      await chatSend({ message, roomId: Number(roomId) });
       setMessage("");
       await handlePullUpCallback();
       handleScrollToEnd();
@@ -206,7 +206,7 @@ const WorkChatRoomPage = () => {
   const handlePullDownCallback = useCallback(async () => {
     try {
       const { data } = await requestChat({
-        roomId: Number(workerId),
+        roomId: Number(roomId),
         messageId: chatMessages[0].id,
         sortType: "BEFORE",
       });
@@ -217,12 +217,12 @@ const WorkChatRoomPage = () => {
     } catch {
       alert();
     }
-  }, [chatMessages, workerId]);
+  }, [chatMessages, roomId]);
 
   const handlePullUpCallback = useCallback(async () => {
     try {
       const { data } = await requestChat({
-        roomId: Number(workerId),
+        roomId: Number(roomId),
         messageId: chatMessages[chatMessages.length - 1]?.id,
         sortType: chatMessages.length === 0 ? "BEFORE" : "AFTER",
       });
@@ -233,7 +233,7 @@ const WorkChatRoomPage = () => {
     } catch {
       alert();
     }
-  }, [chatMessages, workerId]);
+  }, [chatMessages, roomId]);
 
   const handleVisibilityChange = useCallback(
     async (isVisible: boolean) => {
@@ -247,9 +247,9 @@ const WorkChatRoomPage = () => {
 
   useEffect(() => {
     if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
-      postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(workerId) });
+      postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(roomId) });
     }
-  }, [chatInfo.lastMessageId, chatMessages, postLastMessage, workerId]);
+  }, [chatInfo.lastMessageId, chatMessages, postLastMessage, roomId]);
 
   usePageVisibility({ callback: handleVisibilityChange });
 
@@ -277,12 +277,12 @@ const WorkChatRoomPage = () => {
   useEffect(() => {
     (async () => {
       const { data } = await requestChat({
-        roomId: Number(workerId),
+        roomId: Number(roomId),
       });
       setChatMessages(data.messages ?? []);
       setToggle(true);
     })();
-  }, [handleScrollToEnd, workerId]);
+  }, [handleScrollToEnd, roomId]);
   useEffect(() => {
     if (toggle) {
       const lastMessageId = (chatInfo.lastMessageId ?? "").toString();
@@ -405,7 +405,7 @@ const WorkChatRoomPage = () => {
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
-      {!chatInfo.start && !chatInfo.otherUser?.owner && <ProfileModal roomId={Number(workerId)} chatInfo={chatInfo} />}
+      {!chatInfo.start && !chatInfo.otherUser?.owner && <ProfileModal roomId={Number(roomId)} chatInfo={chatInfo} />}
     </StackLayout>
   );
 };

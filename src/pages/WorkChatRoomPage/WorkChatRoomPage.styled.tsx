@@ -4,7 +4,6 @@ import { Z_INDEX } from "@/constants/zIndex";
 
 export const WorkChatWrap = styled.div`
   position: relative;
-  overflow-y: hidden;
   height: calc(100% - 95px);
   min-height: calc(100% - 309px);
   transform: translate3d(0, 0, 0);

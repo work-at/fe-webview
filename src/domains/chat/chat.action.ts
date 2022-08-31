@@ -4,6 +4,7 @@ export type Rooms = Room[];
 
 export type DeleteChat = {
   roomId: number;
+  lastMessageId: number;
 };
 
 export type BlockUser = {

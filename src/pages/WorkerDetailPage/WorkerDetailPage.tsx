@@ -60,11 +60,11 @@ const WorkerDetailPage = () => {
         curChatInfo = data!.data!.data.rooms?.filter((item) => item.otherUser.userId === Number(workerId))[0];
       }
       replace(PATH.WORK_CHAT.stack, {});
-      push(PATH.WORK_CHAT.ROOM.stack, { workerId: curChatInfo.id });
+      push(PATH.WORK_CHAT.ROOM.stack, { roomId: curChatInfo.id });
     } catch (e: any) {
       if (e.response.status === 409) {
         replace(PATH.WORK_CHAT.stack, {});
-        push(PATH.WORK_CHAT.ROOM.stack, { workerId: curChatInfo.id });
+        push(PATH.WORK_CHAT.ROOM.stack, { roomId: curChatInfo.id });
         return;
       }
       alert();
