@@ -18,18 +18,28 @@ export const PATH = {
 
     ACCOMMODATION_LIST: {
       stack: "AccommodationList",
-      full: "accommodation/accommodation-list",
+      full: "/accommodation/accommodation-list",
       fragments: "accommodation-list",
     },
     ACCOMMODATION_REVIEW: {
       stack: "AccommodationReview",
-      full: "accommodation/accommodation-review",
+      full: "/accommodation/accommodation-review",
       fragments: "accommodation-review",
     },
     ACCOMMODATION_DETAIL: {
       stack: "AccommodationDetail",
-      full: "accommodation/accommodation-detail",
+      full: "/accommodation/accommodation-detail",
       fragments: "accommodation-detail",
+    },
+    ACCOMMODATION_SEARCH: {
+      stack: "AccommodationSearch",
+      full: "/accommodation/accommodation-search",
+      fragments: "accommodation-search",
+    },
+    ACCOMMODATION_SEARCH_RESULT: {
+      stack: "AccommodationSearchResult",
+      full: "/accommodation/accommodation-search-result",
+      fragments: "accommodation-search-result",
     },
   },
   MAP: {

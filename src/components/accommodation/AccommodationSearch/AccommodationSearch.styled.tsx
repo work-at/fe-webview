@@ -57,6 +57,7 @@ export const InfoTxt = styled.p`
   color: ${theme.colors.gray02};
   padding-top: 7px;
   text-align: center;
+  white-space: pre-line;
 `;
 
 export const ReviewList = styled.ul`
@@ -77,15 +78,4 @@ export const BtnReview = styled.button`
   width: 100%;
   border-radius: 19px;
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
-`;
-
-export const AccommNoData = styled.div`
-  padding: 278px 0 100px;
-  text-align: center;
-`;
-
-export const NoDataTxt = styled.p`
-  ${theme.fonts.Regular03};
-  color: ${theme.colors.black};
-  padding-top: 13px;
 `;

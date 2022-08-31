@@ -237,3 +237,14 @@ export const RegionSelector = styled.select`
 
   color: #121212;
 `;
+
+export const AccommNoData = styled.div`
+  padding: 278px 0 100px;
+  text-align: center;
+`;
+
+export const NoDataTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 13px;
+`;
