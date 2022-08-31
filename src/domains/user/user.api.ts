@@ -101,11 +101,15 @@ export const useUpdateUserProfileMutation = () => {
   return useMutation(requestUpdateUserProfile);
 };
 
-export const requestUserLocationBlock = async () => {
-  return;
+export const requestUserLocationTrackingToggle = async (turnOff: boolean) => {
+  await baseInstance().put(API_URL.PUT_USER_LOCATION_TRACKING, undefined, {
+    params: {
+      turnOff: turnOff,
+    },
+  });
 };
 
-export const useUserLocationBlockMutation = () => useMutation(requestUserLocationBlock);
+export const useUserLocationTrackingToggleMutation = () => useMutation(requestUserLocationTrackingToggle);
 
 export const requestUploadUserProfileImage = async (file: File) => {
   const formData = new FormData();
