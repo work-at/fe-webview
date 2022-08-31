@@ -1,17 +1,17 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
-import { useUserLocationBlockMutation } from "@/domains/user";
+import { useUserLocationTrackingToggleMutation } from "@/domains/user";
 import { useCallback } from "react";
 import * as S from "./Setting.styled";
 
 const Setting = () => {
-  const { mutateAsync: blockUserLocation } = useUserLocationBlockMutation();
+  const { mutateAsync: toggleUserLocationTracking } = useUserLocationTrackingToggleMutation();
 
   // TODO : 해제하기도 연동 + 분기처리
   const handleUserLocationBlockChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     ({ target }) => {
-      !target.checked && blockUserLocation();
+      toggleUserLocationTracking(target.checked);
     },
-    [blockUserLocation]
+    [toggleUserLocationTracking]
   );
 
   const handleLogout = useCallback(() => {
