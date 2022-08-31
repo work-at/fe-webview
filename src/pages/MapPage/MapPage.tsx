@@ -40,13 +40,7 @@ const MapPage = () => {
   }
 
   return (
-    <StackLayout navigationPath="map">
-      {createPortal(
-        <S.Header>
-          <S.Address>{userAddress}</S.Address>
-        </S.Header>,
-        document.body
-      )}
+    <StackLayout appBar={{ title: userAddress }} navigationPath="map">
       <MapManager userCoordinates={userCoordinates} />
     </StackLayout>
   );

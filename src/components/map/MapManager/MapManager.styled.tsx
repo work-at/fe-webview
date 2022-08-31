@@ -12,7 +12,7 @@ export const MapWrap = styled.div`
 
 export const TabWrap = styled.div`
   position: absolute;
-  top: 24px;
+  top: 61px;
   left: 14.4vw;
   right: 14.4vw;
   z-index: ${Z_INDEX.HIGH};
