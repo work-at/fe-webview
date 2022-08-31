@@ -2,7 +2,6 @@ import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { Button } from "@/components/@shared/Button/Button.styled";
 import CheckBox from "@/components/@shared/CheckBox";
-import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DESIRED_ACTIVITIES } from "@/domains/common.constant";
 import { DesiredActivity } from "@/domains/common.type";
 import { useUpdateUserProfileMutation } from "@/domains/user";
@@ -11,14 +10,13 @@ import { useFlow } from "@/stack";
 import { handleRefInjection } from "@/utils/react";
 import { useActivityParams } from "@stackflow/react";
 import { atom, useAtom } from "jotai";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./ProfileEdit.styled";
 
 type ProfileFormData = {
   nickName: string;
   story: string;
-  desiredActivities: DesiredActivity[];
 };
 
 const NICKNAME_LENGTH_LIMIT = 8;
@@ -34,20 +32,17 @@ const ERROR_TEXT = {
 // eslint-disable-next-line no-useless-escape
 const emailRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
-export const jobAndYearAtom = atom<any>({
-  job: undefined,
-  year: undefined,
-});
+export const jobAndYearAtom = atom<{ job: string; year: string } | undefined>(undefined);
 
 const ProfileEdit = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { userInfo } = useActivityParams<{ userInfo: any }>();
   const { register, handleSubmit, setValue, watch } = useForm<ProfileFormData>();
   const { push } = useFlow();
-  const { onChange, selected } = useMultiselect([]);
   const { pop } = useFlow();
   const { mutateAsync: updateUserProfile } = useUpdateUserProfileMutation();
-  const [jobAndYear] = useAtom(jobAndYearAtom);
+  const [jobAndYear, setJobAndYear] = useAtom(jobAndYearAtom);
+  const [selectedActivities, setSelectedActivities] = useState<DesiredActivity[]>([]);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const { ref, ...storyRegisterRest } = register("story", {
@@ -67,14 +62,39 @@ const ProfileEdit = () => {
   }, [push]);
 
   const handleJobAndYearRoute = useCallback(() => {
-    push("JobAndYearSelect", {});
-  }, [push]);
+    push("JobAndYearSelect", {
+      userInfo,
+    });
+  }, [userInfo, push]);
+
+  const handleDesiredActivitySelect: React.ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
+    const { value } = event.target;
+
+    setSelectedActivities((activities) => {
+      if (activities.includes(value)) {
+        return activities.filter((activity) => activity !== value);
+      }
+
+      const newActivities = [...activities].concat([value]);
+
+      if (newActivities.length > 3) {
+        return activities;
+      }
+
+      return newActivities;
+    });
+  }, []);
 
   const handleFormSubmit = handleSubmit(async (formData) => {
-    console.log("formData", formData);
+    if (!jobAndYear) {
+      alert("직업과 경력이 설정되지 않았습니다");
+      return;
+    }
+
+    console.log("selectedActivities", Array.from(new Set(selectedActivities)));
 
     await updateUserProfile({
-      desiredActivities: selected,
+      desiredActivities: Array.from(new Set(selectedActivities)),
       nickName: formData.nickName,
       story: formData.story,
       job: jobAndYear.job,
@@ -85,9 +105,21 @@ const ProfileEdit = () => {
   });
 
   useEffect(() => {
-    setValue("nickName", userInfo?.nickname ?? "");
-    setValue("desiredActivities", jobAndYear.job);
-  }, [userInfo, jobAndYear, setValue]);
+    setValue("nickName", userInfo.nickname);
+    setValue("story", userInfo.story);
+    setSelectedActivities(userInfo.activities.map((activity: any) => activity.name));
+  }, [userInfo, setValue]);
+
+  useEffect(() => {
+    if (jobAndYear) {
+      return;
+    }
+
+    setJobAndYear({
+      job: userInfo.position.name,
+      year: userInfo.workingYear.name,
+    });
+  }, [userInfo, jobAndYear, setJobAndYear]);
 
   return (
     <StackLayout>
@@ -146,8 +178,8 @@ const ProfileEdit = () => {
           <S.ItemBody>
             <S.ChekBoxWrap>
               <CheckBox
-                onChange={onChange}
-                selectedItemIds={selected}
+                onChange={handleDesiredActivitySelect}
+                selectedItemIds={selectedActivities}
                 widthAuto
                 items={
                   DESIRED_ACTIVITIES.map((activity) => ({
