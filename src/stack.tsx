@@ -31,6 +31,9 @@ import ContactUs from "./components/my-page/ContactUs";
 
 import { DispatchEvent, id } from "@stackflow/core";
 import { requestGetUserInfoBase } from "./domains/user";
+import MagazineSeoul from "./pages/Magazine/MagazineSeoul";
+import MagazineJeju from "./pages/Magazine/MagazineJeju";
+import MagazineGangwon from "./pages/Magazine/MagazineGangWon";
 
 export const Test = () => {
   return <StackLayout appBar={{ title: "TEST" }}>Test</StackLayout>;
@@ -119,6 +122,9 @@ const activities = {
   AccommodationSearchResult,
   Test,
   Copyright,
+  MagazineSeoul,
+  MagazineJeju,
+  MagazineGangwon,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -137,6 +143,9 @@ export const { Stack, useFlow } = stackflow({
         AccommodationDetail: PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.full,
         AccommodationSearch: PATH.ACCOMMODATION.ACCOMMODATION_SEARCH.full,
         AccommodationSearchResult: PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.full,
+        MagazineSeoul: PATH.ACCOMMODATION.MAGAZINE.SEOUL.full,
+        MagazineJeju: PATH.ACCOMMODATION.MAGAZINE.JEJU.full,
+        MagazineGangwon: PATH.ACCOMMODATION.MAGAZINE.GANGWON.full,
         /* 지도 페이지 */
         MapPage: PATH.MAP.full,
         CafeReviewPage: `${PATH.CAFE.CAFE_REVIEW.full}/:cafeId`,

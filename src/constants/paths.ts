@@ -15,7 +15,23 @@ export const PATH = {
     stack: "AccommodationPage",
     full: "/accommodation",
     fragments: "accommodation",
-
+    MAGAZINE: {
+      SEOUL: {
+        stack: "MagazineSeoul",
+        full: "/magazine/seoul",
+        fragments: "magazine-seoul",
+      },
+      GANGWON: {
+        stack: "MagazineGangwon",
+        full: "/magazine/gangwon",
+        fragments: "magazine-gangwon",
+      },
+      JEJU: {
+        stack: "MagazineJeju",
+        full: "/magazine/jeju",
+        fragments: "magazine-jeju",
+      },
+    },
     ACCOMMODATION_LIST: {
       stack: "AccommodationList",
       full: "/accommodation/accommodation-list",
