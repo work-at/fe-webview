@@ -223,8 +223,8 @@ const WorkChatRoomPage = () => {
     try {
       const { data } = await requestChat({
         roomId: Number(roomId),
-        messageId: chatMessages[chatMessages.length - 1]?.id,
-        sortType: chatMessages.length === 0 ? "BEFORE" : "AFTER",
+        messageId: chatMessages[chatMessages.length - 1]?.id ?? undefined,
+        sortType: "AFTER",
       });
 
       if (data.messages.length !== 0) {
