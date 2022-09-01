@@ -1,24 +1,23 @@
-import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
 import { AccommodationRegion } from "@/domains/accommodation/accommodation.dto";
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
+import { Badge } from "@/pages/AccommodationPage/AccommodationPage";
+import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
-import { useState } from "react";
 import * as S from "./AccommodationList.styled";
 
 const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 
 const AccommodationList = () => {
-  const { region, message, type } = useActivityParams<{
+  const { push, replace } = useFlow();
+  const { region } = useActivityParams<{
     region: AccommodationRegion;
-    type: "POPULAR" | "IN_BETWEEN" | "FREE";
-    message: string;
   }>();
-  const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>(region);
 
   const {
     data: accommodationList,
@@ -26,7 +25,7 @@ const AccommodationList = () => {
     isError,
   } = useAccommodationListQuery(
     {
-      region: selectedRegion === "ALL" ? undefined : selectedRegion,
+      region: region === "ALL" ? undefined : region,
     },
     {}
   );
@@ -34,7 +33,7 @@ const AccommodationList = () => {
   const handleRegionSelect: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
 
-    setSelectedRegion(value as AccommodationRegion);
+    replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, { region: value });
   };
 
   if (isLoading) {
@@ -46,35 +45,28 @@ const AccommodationList = () => {
   }
 
   return (
-    <StackLayout>
+    <StackLayout isHide>
       <S.AccommListWrap>
         {/* 숙소 키워드 */}
         {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
         <S.RegionSelectorWrap>
           <S.RegionSelector onChange={handleRegionSelect}>
-            {ACCOMMODATION_REGIONS.map((region) => (
-              <option key={region} selected={region === selectedRegion} value={region}>
-                {AccommodationRegions_TEXT[region]}
+            {ACCOMMODATION_REGIONS.map((currentRegion) => (
+              <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
+                {AccommodationRegions_TEXT[currentRegion]}
               </option>
             ))}
           </S.RegionSelector>
         </S.RegionSelectorWrap>
 
-        {/* 서울 워크앳 지수 */}
-        <S.WalkatDensity region={selectedRegion}>
-          <S.WalkatTxt region={selectedRegion}>
-            최근 {AccommodationRegions_TEXT[selectedRegion]}의 워크앳 지수는?
-          </S.WalkatTxt>
-          <S.StateBox>
-            {/* TODO : 서버 연동하기 */}
-            <Icon icon={type} />
-            <S.StateTxt region={selectedRegion}>{message}</S.StateTxt>
-          </S.StateBox>
-        </S.WalkatDensity>
+        {/* TODO: api에 region 파라미터를 넘길 수 있게 수정되면 반영 */}
+        <Badge />
         <S.AccommList>
           {accommodationList.map((item, index) => (
             <S.AccommListItem key={index}>
-              <S.LinkDetail>
+              <S.LinkDetail
+                onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
+              >
                 <S.AccommThumb>
                   <img src={item.imgUrl === "" || !item.imgUrl ? DEFAULT_IMAGE : item.imgUrl} alt="숙소 이미지" />
                 </S.AccommThumb>
@@ -83,7 +75,7 @@ const AccommodationList = () => {
 
                   <S.AccommPriceInfo>
                     <S.ConsecutivePriceTxt>
-                      <S.StandardTxt region={selectedRegion}>평일 5일</S.StandardTxt>
+                      <S.StandardTxt region={region}>평일 5일</S.StandardTxt>
                       <S.PriceBox>
                         <S.PriceTxt>{decimalFormatter(item.price * 5)}</S.PriceTxt>
                         <S.WonTxt>원</S.WonTxt>

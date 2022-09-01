@@ -128,9 +128,12 @@ export const AreaTxt = styled.span`
   padding-top: 5px;
 `;
 
+export const WalkatDensityContainer = styled.div`
+  margin: 24px 7.4667vw 55px;
+`;
+
 export const WalkatDensity = styled.div<{ area: string }>`
   height: 57px;
-  margin: 24px 7.4667vw 55px;
   border-radius: 15px;
   padding: 0 17px;
   overflow: hidden;
