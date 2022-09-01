@@ -5,6 +5,7 @@ import { QueryFunction, useMutation, useQuery, UseQueryOptions } from "react-que
 import * as DTO from "./accommodation.dto";
 import { AxiosError } from "axios";
 import { AccommodationReviewCommand } from "./accommodation.action";
+import AccommImg from "@/assets/images/@dummy/@accomm-list.png";
 
 type AccommodationListQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_REVIEW_LIST, DTO.GetAccommodationListRequest];
 
@@ -81,3 +82,50 @@ const requestReviewAccommodation = async (criteria: AccommodationReviewCommand) 
 };
 
 export const useReviewAccommodationMutation = () => useMutation(requestReviewAccommodation);
+
+export const requestRegionTraffic: QueryFunction<DTO.RegionTrafficResponse> = async () => {
+  return await baseInstance().get<unknown, DTO.RegionTrafficResponse>(API_URL.GET_REGION_TRAFFIC);
+};
+
+export const useRegionTrafficQuery = () => {
+  return useQuery<DTO.RegionTrafficResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_REGION_TRAFFIC],
+    requestRegionTraffic
+  );
+};
+
+export const requestAccommodationCuration: QueryFunction<DTO.AccommodationCurationResponse> | any = async () => {
+  // TODO: API 완성되면 제거
+  return {
+    data: {
+      accommodations: [
+        {
+          id: 1,
+          imgUrl: AccommImg,
+          region: "SEOUL",
+          name: "질그랭이센터 두줄 테스트 숙소 이름 두줄 테스트입니다 두줄 테스트",
+        },
+        {
+          id: 1,
+          imgUrl: AccommImg,
+          region: "JEJU",
+          name: "질그랭이센터",
+        },
+        {
+          id: 1,
+          imgUrl: AccommImg,
+          region: "GANGWON",
+          name: "질그랭이센터",
+        },
+      ],
+    },
+  };
+  return await baseInstance().get<unknown, DTO.AccommodationCurationResponse>(API_URL.GET_ACCOMMODATION_CURATION);
+};
+
+export const useAccommodationCurationQuery = () => {
+  return useQuery<DTO.AccommodationCurationResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_ACCOMMODATION_CURATION],
+    requestAccommodationCuration
+  );
+};

@@ -52,20 +52,43 @@ type AccommodationDetailReviewTag = {
 };
 
 export type GetAccommodationDetailResponse = {
-  accommodationDetail: {
-    id: number;
-    name: string;
-    imgUrl: string;
-    price: number;
-    phone: string;
-    roadAddressName: string;
-    placeUrl: string;
-    relatedUrl: string;
-    infoTags: InfoTagItem[];
+  data: {
+    accommodationDetail: {
+      id: number;
+      name: string;
+      imgUrl: string;
+      price: number;
+      phone: string;
+      roadAddressName: string;
+      placeUrl: string;
+      relatedUrl: string;
+      infoTags: InfoTagItem[];
+    };
+    accommodationReview: {
+      reviews: AccommodationDetailReviewTag[];
+      userReviewed: boolean;
+      userCount: number;
+    };
   };
-  accommodationReview: {
-    tags: AccommodationDetailReviewTag[];
-    userReviewed: boolean;
-    userCount: number;
+};
+
+export type RegionTrafficResponse = {
+  data: {
+    region: "JEJU" | "SEOUL" | "GANGNEUNG" | "SOKCHO";
+    type: "POPULAR" | "IN_BETWEEN" | "FREE";
+    message: "완전핫함" | "핫플직전" | "한산해요";
+  };
+};
+
+export type AccommodationCurationResponse = {
+  data: {
+    accommodations: [
+      {
+        id: number;
+        name: string;
+        region: string;
+        imgUrl: string;
+      }
+    ];
   };
 };
