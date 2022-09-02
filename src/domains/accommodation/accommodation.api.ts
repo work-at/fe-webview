@@ -1,11 +1,10 @@
 import { API_URL, QUERY_NAME } from "@/constants";
 import { baseInstance } from "@/services";
-import { QueryFunction, useMutation, useQuery, UseQueryOptions } from "react-query";
+import { QueryFunction, useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 
 import * as DTO from "./accommodation.dto";
 import { AxiosError } from "axios";
 import { AccommodationReviewCommand } from "./accommodation.action";
-import AccommImg from "@/assets/images/@dummy/@accomm-list.png";
 
 type AccommodationListQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_REVIEW_LIST, DTO.GetAccommodationListRequest];
 
@@ -83,7 +82,15 @@ const requestReviewAccommodation = async (criteria: AccommodationReviewCommand) 
   });
 };
 
-export const useReviewAccommodationMutation = () => useMutation(requestReviewAccommodation);
+export const useReviewAccommodationMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(requestReviewAccommodation, {
+    onSuccess: (_, request) => {
+      queryClient.invalidateQueries([QUERY_NAME.GET_ACCOMMODATION_DETAIL, { id: request.accommodationId }]);
+    },
+  });
+};
 
 export const requestRegionTraffic: QueryFunction<DTO.RegionTrafficResponse> = async () => {
   return await baseInstance().get<unknown, DTO.RegionTrafficResponse>(API_URL.GET_REGION_TRAFFIC);
