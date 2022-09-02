@@ -7,8 +7,12 @@ import MagazinePlaceSeoul1 from "@/assets/images/MagazinePlaceSeoul1.png";
 import MagazinePlaceSeoul2 from "@/assets/images/MagazinePlaceSeoul2.png";
 import MagazinePlaceSeoul3 from "@/assets/images/MagazinePlaceSeoul3.png";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { PATH } from "@/constants";
+import { useFlow } from "@/stack";
 
 const MagazineSeoul = () => {
+  const { push } = useFlow();
+
   return (
     <StackLayout isHide>
       <Header useBack MagazinLogo="seoul" />
@@ -56,7 +60,13 @@ const MagazineSeoul = () => {
             워케이션 어떠세요?
           </S.MagazineTxt>
 
-          <S.BtnListGo>
+          <S.BtnListGo
+            onClick={() =>
+              push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                region: "SEOUL",
+              })
+            }
+          >
             <Icon icon="IconSeoul" />
             <S.GoSeoulTxt>지금 바로 서울로 워케이션 떠나기!</S.GoSeoulTxt>
           </S.BtnListGo>
