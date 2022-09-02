@@ -53,16 +53,7 @@ const MyPage = () => {
         <S.TopInfo>
           <S.UserPicture>
             <S.UserThumb htmlFor="profile-image">
-              <img
-                src={
-                  imageUrl
-                    ? imageUrl
-                    : userInfo?.imageUrl
-                    ? `${process.env.STATIC_URL}/${userInfo?.imageUrl}`
-                    : "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"
-                }
-                alt="유저 이미지"
-              />
+              <img src={userInfo?.imageUrl} alt="유저 이미지" />
               <input
                 type="file"
                 id="profile-image"

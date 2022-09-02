@@ -1,6 +1,5 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import * as S from "./WorkChatPage.styled";
-import UserImg from "@/assets/images/walkchat1.png";
 import Icon from "@/assets/Icon";
 import { useBlockUser, useChatListQuery, useChatRemoveQuery } from "@/domains/chat/chat.api";
 import { Room } from "@/domains/chat/chat.type";
@@ -80,14 +79,7 @@ const ChatList = (item: Room) => {
       <S.BtnDetail onClick={() => push(PATH.WORK_CHAT.ROOM.stack, { roomId: item.id })}>
         <S.ThumbWrap>
           <S.UserThumb>
-            <img
-              src={
-                item.otherUser.userProfileUrl
-                  ? process.env.SERVER_URL?.replace("/api/v1", "") + item.otherUser.userProfileUrl
-                  : UserImg
-              }
-              alt="유저 이미지"
-            />
+            <img src={item.otherUser.userProfileUrl} alt="유저 이미지" />
           </S.UserThumb>
           {!item.allRead && <S.NewChat />}
         </S.ThumbWrap>
