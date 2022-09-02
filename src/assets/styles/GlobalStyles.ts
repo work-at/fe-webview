@@ -153,6 +153,12 @@ export const GlobalStyle = createGlobalStyle`
 	select, 
 	textarea, 
 	button {
+		appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
 		vertical-align:middle;
 		border:none;
 	}

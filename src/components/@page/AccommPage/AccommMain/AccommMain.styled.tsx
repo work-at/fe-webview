@@ -32,7 +32,7 @@ export const BottomWrap = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  margin-top: -6%;
+  margin-top: -7%;
   background: ${theme.colors.white};
   padding: 21px 0 0;
   border-radius: 27px 27px 0 0;
