@@ -7,15 +7,11 @@ import Button from "@/components/@shared/Button/Button";
 import { useFlow } from "@/stack";
 import { useCallback } from "react";
 import { useAtom } from "jotai";
-import { jobAndYearAtom } from "../ProfileEdit/ProfileEdit";
-
-// type JobAndYearSelectProps = {
-//   onJobChange: (jobs: Job) => void;
-//   onYearOfServiceChange: (yearOfService: YearOfService) => void;
-// };
+import { jobAtom, yearAtom } from "../ProfileEdit/ProfileEdit";
 
 const JobAndYearSelect = () => {
-  const [jobAndYear, setJobAndYear] = useAtom(jobAndYearAtom);
+  const [job, setJob] = useAtom(jobAtom);
+  const [year, setYear] = useAtom(yearAtom);
   const { pop } = useFlow();
 
   const handleJobAndYearSelectComplete = useCallback(() => {
@@ -23,18 +19,10 @@ const JobAndYearSelect = () => {
   }, [pop]);
 
   const handleJobSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    jobAndYear &&
-      setJobAndYear({
-        ...jobAndYear,
-        job: event.target.value,
-      });
+    setJob(event.target.value);
   };
   const handleYearSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    jobAndYear &&
-      setJobAndYear({
-        ...jobAndYear,
-        year: event.target.value,
-      });
+    setYear(event.target.value);
   };
 
   return (
@@ -44,7 +32,7 @@ const JobAndYearSelect = () => {
         <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
         <S.ChekBoxWrap>
           <CheckBox
-            selectedItemIds={jobAndYear ? [jobAndYear.job] : []}
+            selectedItemIds={job ? [job] : []}
             onChange={handleJobSelect}
             items={JOBS.map((job) => ({
               id: job.name,
@@ -56,7 +44,7 @@ const JobAndYearSelect = () => {
         <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
         <S.ChekBoxWrap>
           <CheckBox
-            selectedItemIds={jobAndYear ? [jobAndYear.year] : []}
+            selectedItemIds={year ? [year] : []}
             onChange={handleYearSelect}
             items={YEAR_OF_SERVICES.map((service) => ({
               id: service.name,

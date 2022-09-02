@@ -32,16 +32,17 @@ const ERROR_TEXT = {
 // eslint-disable-next-line no-useless-escape
 const emailRegExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
-export const jobAndYearAtom = atom<{ job: string; year: string } | undefined>(undefined);
+export const jobAtom = atom<string | undefined>(undefined);
+export const yearAtom = atom<string | undefined>(undefined);
 
 const ProfileEdit = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { userInfo } = useActivityParams<{ userInfo: any }>();
+  const [job, setJob] = useAtom(jobAtom);
+  const [year, setYear] = useAtom(yearAtom);
   const { register, handleSubmit, setValue, watch } = useForm<ProfileFormData>();
-  const { push } = useFlow();
-  const { pop } = useFlow();
+  const { push, pop } = useFlow();
   const { mutateAsync: updateUserProfile } = useUpdateUserProfileMutation();
-  const [jobAndYear, setJobAndYear] = useAtom(jobAndYearAtom);
   const [selectedActivities, setSelectedActivities] = useState<DesiredActivity[]>([]);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -86,8 +87,8 @@ const ProfileEdit = () => {
   }, []);
 
   const handleFormSubmit = handleSubmit(async (formData) => {
-    if (!jobAndYear) {
-      alert("직업과 경력이 설정되지 않았습니다");
+    if (!job || !year) {
+      alert("직업 또는 경력이 설정되지 않았습니다");
       return;
     }
 
@@ -95,8 +96,8 @@ const ProfileEdit = () => {
       desiredActivities: Array.from(new Set(selectedActivities)),
       nickName: formData.nickName,
       story: formData.story,
-      job: jobAndYear.job,
-      yearOfService: jobAndYear.year,
+      job: job,
+      yearOfService: year,
     });
 
     pop();
@@ -109,15 +110,14 @@ const ProfileEdit = () => {
   }, [userInfo, setValue]);
 
   useEffect(() => {
-    if (jobAndYear) {
-      return;
+    if (!job) {
+      setJob(userInfo.position.name);
     }
 
-    setJobAndYear({
-      job: userInfo.position.name,
-      year: userInfo.workingYear.name,
-    });
-  }, [userInfo, jobAndYear, setJobAndYear]);
+    if (!year) {
+      setYear(userInfo.workingYear.name);
+    }
+  }, [userInfo, job, year, setYear, setJob]);
 
   return (
     <StackLayout>
@@ -127,7 +127,6 @@ const ProfileEdit = () => {
           <S.ItemBody>
             <S.Input
               {...register("nickName", {
-                value: userInfo?.nickname,
                 maxLength: {
                   value: NICKNAME_LENGTH_LIMIT,
                   message: ERROR_TEXT.NICKNAME_LENGTH_LIMIT_EXCEEDED,
@@ -138,7 +137,6 @@ const ProfileEdit = () => {
                 },
                 validate: (value) => (emailRegExp.test(value) ? ERROR_TEXT.SPECIAL_SYMBOLS_NOT_ALLOWED : true),
               })}
-              name="닉네임 입력"
             />
           </S.ItemBody>
         </S.MyInfoItem>
