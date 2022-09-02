@@ -17,9 +17,9 @@ export const InfoWrap = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  margin-top: -6%;
+  margin-top: -7%;
   background: ${theme.colors.white};
-  padding: 40px 7.4667vw 35px;
+  padding: 40px 7.4667vw 120px;
   border-radius: 27px 27px 0 0;
   z-index: 1;
 `;
