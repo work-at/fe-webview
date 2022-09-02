@@ -141,23 +141,23 @@ export const WalkatDensity = styled.div<{ area: string }>`
   align-items: center;
   justify-content: space-between;
   ${(props) =>
-    props.area === "서울" &&
+    props.area === "SEOUL" &&
     `
     background: rgba(255, 0, 0, 0.05);
 
 		`};
   ${(props) =>
-    props.area === "제주" &&
+    props.area === "JEJU" &&
     `
       background: rgba(255, 122, 0, 0.05);
 		`};
   ${(props) =>
-    props.area === "강릉" &&
+    props.area === "GANGNEUNG" &&
     `
       background: rgba(73, 44, 255, 0.05);
 		`};
   ${(props) =>
-    props.area === "속초" &&
+    props.area === "SOKCHO" &&
     `
       background: rgba(73, 44, 255, 0.05);
     `};
@@ -167,23 +167,23 @@ export const WalkatDensity = styled.div<{ area: string }>`
 export const WalkatTxt = styled.p<{ area: string }>`
   ${theme.fonts.SemiBold03};
   ${(props) =>
-    props.area === "서울" &&
+    props.area === "SEOUL" &&
     `
       color: ${theme.colors.seoul};
 
 		`};
   ${(props) =>
-    props.area === "제주" &&
+    props.area === "JEJU" &&
     `
       color: ${theme.colors.jeju};
 		`};
   ${(props) =>
-    props.area === "gangneung" &&
+    props.area === "GANGNEUNG" &&
     `
       color: ${theme.colors.gangWon};
 		`};
   ${(props) =>
-    props.area === "sokcho" &&
+    props.area === "SOKCHO" &&
     `
       color: ${theme.colors.gangWon};
     `};
@@ -202,22 +202,22 @@ export const StateBox = styled.div`
 export const StateTxt = styled.span<{ area: string }>`
   ${theme.fonts.Bold06};
   ${(props) =>
-    props.area === "서울" &&
+    props.area === "SEOUL" &&
     `
       color: ${theme.colors.seoul};
 		`};
   ${(props) =>
-    props.area === "jeju" &&
+    props.area === "JEJU" &&
     `
       color:  ${theme.colors.jeju};
 		`};
   ${(props) =>
-    props.area === "gangneung" &&
+    props.area === "GANGNEUNG" &&
     `
       color: ${theme.colors.gangWon};
 		`};
   ${(props) =>
-    props.area === "sokcho" &&
+    props.area === "SOKCHO" &&
     `
       color: ${theme.colors.gangWon};
 		`};
