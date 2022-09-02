@@ -22,13 +22,13 @@ const CheckBox = ({ items, selectedItemIds, onChange, isIcon, widthAuto }: Check
         <S.ListItem key={index} isIcon={isIcon} widthAuto={widthAuto}>
           <S.CheckboxContainer>
             <S.HiddenCheckbox
-              id={item.id}
+              id={`${item.id}-${item.label}`}
               type="checkbox"
               value={item.id}
               onChange={onChange}
               checked={selectedItemIds.includes(item.id)}
             />
-            <S.Label htmlFor={item.id} isIcon={isIcon} widthAuto={widthAuto}>
+            <S.Label htmlFor={`${item.id}-${index}`} isIcon={isIcon} widthAuto={widthAuto}>
               {isIcon && <Icon icon={item.iconType as IconType} size={30} />}
               <S.LabelTxt isIcon={isIcon}>{item.label}</S.LabelTxt>
             </S.Label>
