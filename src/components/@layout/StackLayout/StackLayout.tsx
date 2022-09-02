@@ -55,19 +55,13 @@ const StackLayout: React.FC<LayoutProps> = ({ appBar, children, navigationPath, 
         appBar={{
           borderColor: "white",
           ...appBar,
+          isHide,
         }}
       >
-        {!isHide && (
-          <Content navigationPath={navigationPath} isHide={isHide}>
-            {children}
-          </Content>
-        )}
-      </AppScreen>
-      {isHide && (
         <Content navigationPath={navigationPath} isHide={isHide}>
           {children}
         </Content>
-      )}
+      </AppScreen>
     </>
   );
 };

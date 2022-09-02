@@ -33,7 +33,7 @@ const AccommodationList = () => {
   const handleRegionSelect: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
 
-    replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, { region: value });
+    replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, { region: value }, { animate: false });
   };
 
   if (isLoading) {

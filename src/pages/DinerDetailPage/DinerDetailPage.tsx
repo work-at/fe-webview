@@ -74,7 +74,7 @@ const DinerDetailPage = () => {
   const totalReviewCount = dinerDetail.reviewPoints.reduce((acc, point) => acc + point.reviewCount, 0);
 
   return (
-    <StackLayout appBar={{ title: "내 주변 음식점" }} isHide>
+    <StackLayout isHide>
       <Header useBack />
       <S.DinerDetailWrap>
         <S.VisualWrap>
