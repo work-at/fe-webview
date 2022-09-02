@@ -75,7 +75,9 @@ export const useWorkingYearListQuery = () => {
 };
 
 export const requestPostVerifyEmail: MutationFunction<void, string> = async (email: string) => {
-  return await baseInstance().post(API_URL.VERIFY_EMAIL, email);
+  return await baseInstance().post(API_URL.VERIFY_EMAIL, {
+    email,
+  });
 };
 
 export const useVerifyEmailMutation = () => {
