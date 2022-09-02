@@ -14,7 +14,7 @@ const SUCCESS_TEXT = {
 const ERROR_TEXT = {
   INPUT_COUNT_LIMIT_REMAINED: (remainCount: number) =>
     remainCount >= 5
-      ? "인증 메일 발송횟수를 초과해 인증이 불가합니다. (5/5)"
+      ? "인증 메일 발송횟수를 초과해 인증이 불가합니다. (5/5)\n24시간 후 다시 시도하실 수 있습니다."
       : `${remainCount}의 입력 횟수가 남았습니다`,
   EMAIL_LENGTH_LIMIT_EXCEEDED: `이메일은 ${EMAIL_LENGTH_LIMIT}자 이상을 입력하실 수 없습니다.`,
   DUPLICATED_EMAIL: "중복된 이메일이 존재합니다",
