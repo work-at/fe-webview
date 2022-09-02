@@ -24,6 +24,7 @@ const AccommodationReview = () => {
 
   const handlePostReview = async () => {
     try {
+      // console.log(selected);
       await mutateAsync({
         accommodationId: Number(accommodationId),
         tags: selected,
