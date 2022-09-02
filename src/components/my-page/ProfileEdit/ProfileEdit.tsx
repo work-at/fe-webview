@@ -91,8 +91,6 @@ const ProfileEdit = () => {
       return;
     }
 
-    console.log("selectedActivities", Array.from(new Set(selectedActivities)));
-
     await updateUserProfile({
       desiredActivities: Array.from(new Set(selectedActivities)),
       nickName: formData.nickName,

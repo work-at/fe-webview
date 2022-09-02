@@ -21,8 +21,6 @@ export const requestGetUserAddress: QueryFunction<Action.UserAddressInfo, UserAd
     Mapper.a2dMapper_UserAddressPinsCriteria_PostUserAddressRequest(criteria)
   );
 
-  console.log("UserAddress", data);
-
   return data.data.address;
 };
 
