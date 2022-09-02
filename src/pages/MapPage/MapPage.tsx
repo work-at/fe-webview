@@ -3,12 +3,15 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import MapManager from "@/components/map/MapManager";
-import { useStack } from "@stackflow/react";
+import { useActivity, useStack } from "@stackflow/react";
 
 const API_KEY = process.env.KAKAO_MAP_API_KEY;
 
 const MapPage = () => {
   const stack = useStack();
+  const activity = useActivity();
+  console.log(activity);
+  console.log(stack);
   const { userCoordinates } = useCoordinates();
 
   const { data: userAddress } = useUserAddressQuery(
@@ -51,7 +54,10 @@ const MapPage = () => {
     );
   }
 
-  if (stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1) {
+  if (
+    stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1 ||
+    stack.globalTransitionState === "loading"
+  ) {
     return (
       <StackLayout isHide navigationPath="map">
         <MapManager userCoordinates={userCoordinates} />
