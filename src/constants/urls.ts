@@ -33,4 +33,5 @@ export const API_URL = {
   POST_BLOCK_USER: (blockUserId: number) => `/user/blocking?blockUserId=${blockUserId}`,
   GET_REGION_TRAFFIC: "/region-traffic",
   PUT_USER_LOCATION_TRACKING: "/user/tracking",
+  GET_ACCOMMODATION_CURATION: "/accommodations/curations",
 };

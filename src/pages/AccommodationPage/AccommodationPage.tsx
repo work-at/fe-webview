@@ -16,15 +16,14 @@ import SpaceImg2 from "@/assets/images/BgWorkSpace2.png";
 import SpaceImg3 from "@/assets/images/BgWorkSpace3.png";
 import SpaceImg4 from "@/assets/images/BgWorkSpace4.png";
 import SpaceImg5 from "@/assets/images/BgWorkSpace5.png";
-import AccommImg from "@/assets/images/@dummy/@accomm-list.png";
 import { useScrollDrag } from "@/hooks";
 import { Dot, DotActive } from "@/assets/svg";
-import { useRegionTrafficQuery } from "@/domains/accomodation/accomodation.api";
 import { useCallback, useMemo } from "react";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
+import { useAccommodationCurationQuery, useRegionTrafficQuery } from "@/domains/accommodation/accommodation.api";
 
-const Badge = () => {
+export const Badge = () => {
   const { data } = useRegionTrafficQuery();
 
   const region = useMemo(() => data?.data.region, [data]);
@@ -82,25 +81,7 @@ const Badge = () => {
   return null;
 };
 
-const items = [
-  {
-    imageUrl: AccommImg,
-    area: "seoul",
-    name: "질그랭이센터 두줄 테스트 숙소 이름 두줄 테스트입니다 두줄 테스트",
-  },
-  {
-    imageUrl: AccommImg,
-    area: "jeju",
-    name: "질그랭이센터",
-  },
-  {
-    imageUrl: AccommImg,
-    area: "gangWon",
-    name: "질그랭이센터",
-  },
-];
-
-const item2 = [
+const SLIDER_ITEM = [
   {
     src: MainVisualJeju,
     location: "제주도",
@@ -139,6 +120,7 @@ const item2 = [
 ];
 
 const AccommodationPage = () => {
+  const { data: accommodationCurationData } = useAccommodationCurationQuery();
   const { events, ref, currentIndex } = useScrollDrag();
   const { push } = useFlow();
 
@@ -146,6 +128,12 @@ const AccommodationPage = () => {
     () => push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH.stack, {}),
     [push]
   );
+
+  const handleClickSlider = {
+    [0]: () => push(PATH.ACCOMMODATION.MAGAZINE.JEJU.stack, {}),
+    [1]: () => push(PATH.ACCOMMODATION.MAGAZINE.SEOUL.stack, {}),
+    [2]: () => push(PATH.ACCOMMODATION.MAGAZINE.GANGWON.stack, {}),
+  }[currentIndex];
 
   return (
     <StackLayout navigationPath="accommodation" isHide>
@@ -158,22 +146,24 @@ const AccommodationPage = () => {
         </button>
         <S.VisualWrapContainer>
           <S.VisualWrapList onMouseDown={events.onMouseDown} onMouseMove={events.onMouseMove} ref={ref}>
-            {item2.map((each) => (
-              <S.VisualWrap key={each.text1}>
+            {SLIDER_ITEM.map((each) => (
+              <S.VisualWrap key={each.text1} onClick={handleClickSlider}>
                 <img src={each.src} alt={each.location} />
               </S.VisualWrap>
             ))}
           </S.VisualWrapList>
           <S.VisualTxtBox>
-            {item2[currentIndex].textBox}
+            {SLIDER_ITEM[currentIndex].textBox}
             <S.VisualTxt>
-              {item2[currentIndex].text1}
+              {SLIDER_ITEM[currentIndex].text1}
               <br />
-              {item2[currentIndex].text2}
+              {SLIDER_ITEM[currentIndex].text2}
             </S.VisualTxt>
           </S.VisualTxtBox>
           <S.VisualDotBox>
-            {item2.map((_, index) => (currentIndex === index ? <DotActive key={_.text1} /> : <Dot key={_.text1} />))}
+            {SLIDER_ITEM.map((cur, index) =>
+              currentIndex === index ? <DotActive key={cur.text1} /> : <Dot key={cur.text1} />
+            )}
           </S.VisualDotBox>
         </S.VisualWrapContainer>
         <S.BottomWrap>
@@ -182,7 +172,13 @@ const AccommodationPage = () => {
             <S.ScrollInner>
               <S.AreaList>
                 <S.AreaListItem>
-                  <S.BtnArea>
+                  <S.BtnArea
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                        region: "ALL",
+                      })
+                    }
+                  >
                     <S.AreaThumb>
                       <img src={AreaAllImg} alt="전체 이미지" />
                     </S.AreaThumb>
@@ -190,7 +186,13 @@ const AccommodationPage = () => {
                   </S.BtnArea>
                 </S.AreaListItem>
                 <S.AreaListItem>
-                  <S.BtnArea>
+                  <S.BtnArea
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                        region: "SEOUL",
+                      })
+                    }
+                  >
                     <S.AreaThumb>
                       <img src={AreaSeoulImg} alt="서울 이미지" />
                     </S.AreaThumb>
@@ -198,7 +200,13 @@ const AccommodationPage = () => {
                   </S.BtnArea>
                 </S.AreaListItem>
                 <S.AreaListItem>
-                  <S.BtnArea>
+                  <S.BtnArea
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                        region: "JEJU",
+                      })
+                    }
+                  >
                     <S.AreaThumb>
                       <img src={AreaJejuImg} alt="제주 이미지" />
                     </S.AreaThumb>
@@ -206,7 +214,13 @@ const AccommodationPage = () => {
                   </S.BtnArea>
                 </S.AreaListItem>
                 <S.AreaListItem>
-                  <S.BtnArea>
+                  <S.BtnArea
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                        region: "GANGNEUNG",
+                      })
+                    }
+                  >
                     <S.AreaThumb>
                       <img src={AreaGangneungImg} alt="강릉 이미지" />
                     </S.AreaThumb>
@@ -214,7 +228,13 @@ const AccommodationPage = () => {
                   </S.BtnArea>
                 </S.AreaListItem>
                 <S.AreaListItem>
-                  <S.BtnArea>
+                  <S.BtnArea
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                        region: "SOKCHO",
+                      })
+                    }
+                  >
                     <S.AreaThumb>
                       <img src={AreaSokchoImg} alt="속초 이미지" />
                     </S.AreaThumb>
@@ -224,19 +244,23 @@ const AccommodationPage = () => {
               </S.AreaList>
             </S.ScrollInner>
           </S.ScrollWrap>
-          <Badge />
+          <S.WalkatDensityContainer>
+            <Badge />
+          </S.WalkatDensityContainer>
           <S.BottomTit>아직 숙소를 정하지 못 했다면</S.BottomTit>
           <S.ScrollWrap>
             <S.ScrollInner>
               <S.AccommList>
-                {items.map((item, index) => (
+                {accommodationCurationData?.data.accommodations.map((item, index) => (
                   <S.AccommListItem key={index}>
-                    <S.LinkDetail>
-                      <img src={item.imageUrl} alt="숙소 이미지" />
+                    <S.LinkDetail
+                      onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
+                    >
+                      <img src={item.imgUrl} alt="숙소 이미지" />
                       <S.Accomminfo>
-                        {item.area === "seoul" && <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>}
-                        {item.area === "jeju" && <S.AccommJejuFlag>제주도</S.AccommJejuFlag>}
-                        {item.area === "gangWon" && <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>}
+                        {item.region === "SEOUL" && <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>}
+                        {item.region === "JEJU" && <S.AccommJejuFlag>제주도</S.AccommJejuFlag>}
+                        {item.region === "GANGWON" && <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>}
                         <S.AccommName>{item.name}</S.AccommName>
                       </S.Accomminfo>
                     </S.LinkDetail>
@@ -250,7 +274,14 @@ const AccommodationPage = () => {
             <S.ScrollInner>
               <S.SpaceList>
                 <S.SpaceListItem>
-                  <S.LinkDetail>
+                  <S.LinkDetail
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+                        infoTag: "NEAR_SEA",
+                        searchedBy: "바다 인근",
+                      })
+                    }
+                  >
                     <img src={SpaceImg1} alt="바다 인근 이미지" />
                     <S.SpaceTxt>
                       바다를 보며
@@ -260,7 +291,14 @@ const AccommodationPage = () => {
                   </S.LinkDetail>
                 </S.SpaceListItem>
                 <S.SpaceListItem>
-                  <S.LinkDetail>
+                  <S.LinkDetail
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+                        infoTag: "NEAR_FOREST",
+                        searchedBy: "숲 인근",
+                      })
+                    }
+                  >
                     <img src={SpaceImg2} alt="숲 인근 이미지" />
                     <S.SpaceTxt>
                       산을 보며
@@ -270,7 +308,14 @@ const AccommodationPage = () => {
                   </S.LinkDetail>
                 </S.SpaceListItem>
                 <S.SpaceListItem>
-                  <S.LinkDetail>
+                  <S.LinkDetail
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+                        infoTag: "NEAR_CITY",
+                        searchedBy: "도시 인근",
+                      })
+                    }
+                  >
                     <img src={SpaceImg3} alt="도시 인근 이미지" />
                     <S.SpaceTxt>
                       도심에서
@@ -280,7 +325,14 @@ const AccommodationPage = () => {
                   </S.LinkDetail>
                 </S.SpaceListItem>
                 <S.SpaceListItem>
-                  <S.LinkDetail>
+                  <S.LinkDetail
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+                        infoTag: "WORKSPACE",
+                        searchedBy: "숙소 내\n업무 공간",
+                      })
+                    }
+                  >
                     <img src={SpaceImg4} alt="숙소내 업무공간 이미지" />
                     <S.SpaceTxt>
                       공용 업무
@@ -290,7 +342,14 @@ const AccommodationPage = () => {
                   </S.LinkDetail>
                 </S.SpaceListItem>
                 <S.SpaceListItem>
-                  <S.LinkDetail>
+                  <S.LinkDetail
+                    onClick={() =>
+                      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+                        infoTag: "NEAR_ATTRACTION",
+                        searchedBy: "관광지\n인근",
+                      })
+                    }
+                  >
                     <img src={SpaceImg5} alt="관광지 인근 이미지" />
                     <S.SpaceTxt>
                       관광지에서

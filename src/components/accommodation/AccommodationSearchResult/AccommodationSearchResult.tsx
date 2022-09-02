@@ -1,5 +1,6 @@
 import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
 import {
@@ -8,6 +9,7 @@ import {
   AccommodationReviewTag,
 } from "@/domains/accommodation/accommodation.dto";
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
+import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
 import { useState } from "react";
@@ -17,6 +19,7 @@ const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 
 const AccommodationSearchResult = () => {
+  const { push } = useFlow();
   const { infoTag, reviewTag, searchKeyword, searchedBy } = useActivityParams<{
     infoTag: AccommodationInfoTag;
     reviewTag: AccommodationReviewTag;
@@ -70,7 +73,9 @@ const AccommodationSearchResult = () => {
         <S.AccommList>
           {accommodationList.map((item, index) => (
             <S.AccommListItem key={index}>
-              <S.LinkDetail>
+              <S.LinkDetail
+                onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
+              >
                 <S.AccommThumb>
                   <img src={item.imgUrl === "" || !item.imgUrl ? DEFAULT_IMAGE : item.imgUrl} alt="숙소 이미지" />
                 </S.AccommThumb>

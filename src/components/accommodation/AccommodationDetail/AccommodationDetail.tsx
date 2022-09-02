@@ -1,5 +1,6 @@
 import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Header from "@/components/@shared/Header";
 import Tag from "@/components/@shared/Tag/Tag";
 import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
@@ -47,7 +48,7 @@ const AccommodationDetail = () => {
     return <div>에러</div>;
   }
 
-  const { accommodationDetail, accommodationReview } = data;
+  const { accommodationDetail, accommodationReview } = data.data;
 
   const handleOpenKaKaoLink = () => {
     window.open(accommodationDetail?.relatedUrl);
@@ -58,13 +59,14 @@ const AccommodationDetail = () => {
   };
 
   return (
-    <StackLayout>
+    <StackLayout isHide>
+      <Header useBack />
       <S.AccommodationDetailWrap>
         <S.VisualWrap>
-          <img src={accommodationDetail.imgUrl} alt="까페 이미지" />
+          <img src={accommodationDetail?.imgUrl} alt="까페 이미지" />
         </S.VisualWrap>
         <S.InfoWrap>
-          <S.Tit>{accommodationDetail.name}</S.Tit>
+          <S.Tit>{accommodationDetail?.name}</S.Tit>
           <S.TopInfo>
             <S.Info>
               <S.List>
@@ -73,7 +75,7 @@ const AccommodationDetail = () => {
               </S.List>
               <S.List>
                 <Icon icon={"Tel"} size={18} />
-                <S.TelLink href="tel:02-1234-1234">{accommodationDetail.phone}</S.TelLink>
+                <S.TelLink href="tel:02-1234-1234">{accommodationDetail?.phone}</S.TelLink>
               </S.List>
             </S.Info>
             <S.BtnMapWrap>
@@ -86,12 +88,12 @@ const AccommodationDetail = () => {
             </S.BtnMapWrap>
           </S.TopInfo>
           <S.WalkTit>
-            <S.Num>{accommodationReview.userCount}</S.Num>명의 워케이셔너가
+            <S.Num>{accommodationReview?.userCount}</S.Num>명의 워케이셔너가
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
           <S.ReviewWrap>
-            {accommodationReview.tags.map((tag) => (
+            {accommodationReview?.reviews.map((tag) => (
               <Tag key={tag.tagType.name} reviews={tag.count} iconType={tag.tagType.name as IconType}>
                 {tag.tagType.content}
               </Tag>
