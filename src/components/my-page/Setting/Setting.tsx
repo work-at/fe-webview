@@ -1,17 +1,22 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useUserLocationTrackingToggleMutation } from "@/domains/user";
+import { isUserLocationBlockedAtom } from "@/pages/MyPage/MyPage";
+import { useAtom } from "jotai";
 import { useCallback } from "react";
 import * as S from "./Setting.styled";
 
 const Setting = () => {
+  // TODO : 동시 접속환경 고려하기 & 새로고침 처리하기
+  const [isUserLocationBlocked, setIsUserLocationBlocked] = useAtom(isUserLocationBlockedAtom);
+
   const { mutateAsync: toggleUserLocationTracking } = useUserLocationTrackingToggleMutation();
 
-  // TODO : 해제하기도 연동 + 분기처리
   const handleUserLocationBlockChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     ({ target }) => {
       toggleUserLocationTracking(target.checked);
+      setIsUserLocationBlocked(target.checked);
     },
-    [toggleUserLocationTracking]
+    [toggleUserLocationTracking, setIsUserLocationBlocked]
   );
 
   const handleLogout = useCallback(() => {
@@ -26,7 +31,12 @@ const Setting = () => {
           <S.SettingItem>
             내 위치를 지도에 노출하기
             <S.ToggleWrapper>
-              <S.ToggleBox id="checkbox" type="checkbox" onChange={handleUserLocationBlockChange} />
+              <S.ToggleBox
+                id="checkbox"
+                type="checkbox"
+                onChange={handleUserLocationBlockChange}
+                checked={isUserLocationBlocked}
+              />
               <S.ToggleBoxLabel htmlFor="checkbox" />
             </S.ToggleWrapper>
           </S.SettingItem>

@@ -2,7 +2,8 @@ import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useUploadUserProfileImageMutation, useUserInfo } from "@/domains/user";
 import { useFlow } from "@/stack";
-import { useCallback, useState } from "react";
+import { atom, useAtom } from "jotai";
+import { useCallback, useEffect, useState } from "react";
 import * as S from "./MyPage.styled";
 
 // 3개의 스택
@@ -11,9 +12,12 @@ export const isValidFileSize = (file: File) => {
   return file.size <= 1000 * 1000 * 10;
 };
 
+export const isUserLocationBlockedAtom = atom(false);
+
 const MyPage = () => {
   const { push } = useFlow();
   const [imageFile, setImageFile] = useState<File>();
+  const [_, setIsUserLocationBlocked] = useAtom(isUserLocationBlockedAtom);
   const { data: userInfo } = useUserInfo();
   const { mutateAsync: uploadProfileImage } = useUploadUserProfileImageMutation();
 
@@ -46,6 +50,10 @@ const MyPage = () => {
     uploadProfileImage(files[0]);
     setImageFile(files[0]);
   };
+
+  useEffect(() => {
+    setIsUserLocationBlocked(userInfo?.trackingOff ?? false);
+  }, [userInfo, setIsUserLocationBlocked]);
 
   return (
     <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page">
