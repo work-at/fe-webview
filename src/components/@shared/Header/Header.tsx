@@ -40,9 +40,6 @@ const Header = ({
           <S.Logo>
             <Icon icon="Logo" />
           </S.Logo>
-          <S.BtnSearch>
-            <Icon icon="BtnSearch" size={24} />
-          </S.BtnSearch>
         </S.HeaderInner>
       )}
       <S.HeaderInner useBack={useBack}>

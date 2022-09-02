@@ -1,4 +1,5 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Header from "@/components/@shared/Header";
 import * as S from "./AccommodationPage.styled";
 import Icon from "@/assets/Icon";
 import MainVisualJeju from "@/assets/images/MainVisualJeju.png";
@@ -137,13 +138,11 @@ const AccommodationPage = () => {
 
   return (
     <StackLayout navigationPath="accommodation" isHide>
+      <Header main />
       <S.AccommMainWrap>
-        <button
-          onClick={handleAccommodationSearchPageRoute}
-          style={{ position: "fixed", top: "30px", right: "30px", zIndex: "1000000000000", color: "white" }}
-        >
-          검색
-        </button>
+        <S.BtnSearch onClick={handleAccommodationSearchPageRoute}>
+          <Icon icon="BtnSearch" size={24} />
+        </S.BtnSearch>
         <S.VisualWrapContainer>
           <S.VisualWrapList onMouseDown={events.onMouseDown} onMouseMove={events.onMouseMove} ref={ref}>
             {SLIDER_ITEM.map((each) => (
