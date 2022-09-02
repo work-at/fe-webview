@@ -72,6 +72,10 @@ export type GetAccommodationDetailResponse = {
   };
 };
 
+export type RegionTrafficRequest = {
+  region?: "JEJU" | "SEOUL" | "GANGNEUNG" | "SOKCHO";
+};
+
 export type RegionTrafficResponse = {
   data: {
     region: "JEJU" | "SEOUL" | "GANGNEUNG" | "SOKCHO";
