@@ -41,14 +41,26 @@ const AccommodationDetail = () => {
   }, [accommodationId, push]);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <StackLayout isHide>
+        <Header useBack />
+        <div>로딩중</div>
+      </StackLayout>
+    );
   }
 
   if (isError || !data) {
-    return <div>에러</div>;
+    return (
+      <StackLayout isHide>
+        <Header useBack />
+        <div>에러</div>{" "}
+      </StackLayout>
+    );
   }
 
   const { accommodationDetail, accommodationReview } = data.data;
+
+  console.log(accommodationDetail, accommodationReview);
 
   const handleOpenKaKaoLink = () => {
     window.open(accommodationDetail?.relatedUrl);
@@ -100,7 +112,7 @@ const AccommodationDetail = () => {
             ))}
           </S.ReviewWrap>
         </S.InfoWrap>
-        {accommodationReview?.reviews.length === 0 && (
+        {!accommodationReview.userReviewed && (
           <S.BtnReview onClick={handleReviewButtonClick}>
             <Icon icon={"BtnReview"} size={73} />
           </S.BtnReview>
