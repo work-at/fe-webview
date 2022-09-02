@@ -50,6 +50,8 @@ const AccommodationDetail = () => {
 
   const { accommodationDetail, accommodationReview } = data.data;
 
+  console.log("data", data);
+
   const handleOpenKaKaoLink = () => {
     window.open(accommodationDetail?.relatedUrl);
   };
@@ -93,16 +95,18 @@ const AccommodationDetail = () => {
             리뷰를 남겼어요!
           </S.WalkTit>
           <S.ReviewWrap>
-            {accommodationReview?.reviews.map((tag) => (
-              <Tag key={tag.tagType.name} reviews={tag.count} iconType={tag.tagType.name as IconType}>
-                {tag.tagType.content}
+            {accommodationReview?.reviews.map((review) => (
+              <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
+                {review.tag.content}
               </Tag>
             ))}
           </S.ReviewWrap>
         </S.InfoWrap>
-        <S.BtnReview onClick={handleReviewButtonClick}>
-          <Icon icon={"BtnReview"} size={73} />
-        </S.BtnReview>
+        {accommodationReview?.reviews.length === 0 && (
+          <S.BtnReview onClick={handleReviewButtonClick}>
+            <Icon icon={"BtnReview"} size={73} />
+          </S.BtnReview>
+        )}
       </S.AccommodationDetailWrap>
     </StackLayout>
   );

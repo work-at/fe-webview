@@ -78,7 +78,9 @@ export const useAccommodationDetailQuery = (
 };
 
 const requestReviewAccommodation = async (criteria: AccommodationReviewCommand) => {
-  return await baseInstance().post(API_URL.GET_ACCOMMODATION_REVIEW(criteria.accommodationId), criteria.tags);
+  return await baseInstance().post(API_URL.GET_ACCOMMODATION_REVIEW(criteria.accommodationId), {
+    tagNames: criteria.tags,
+  });
 };
 
 export const useReviewAccommodationMutation = () => useMutation(requestReviewAccommodation);
