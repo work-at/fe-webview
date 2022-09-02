@@ -1503,7 +1503,7 @@
   resolved "https://registry.yarnpkg.com/@stackflow/plugin-renderer-basic/-/plugin-renderer-basic-0.5.0.tgz#dd9bb5de4431749a975d1b2c2cb97c2c026ed558"
   integrity sha512-9SjpCwfEMEsulZCHXc5n7PwhSm83i4Iv1AGTGFEuCi2RG6XeU59h6ywUJ0qkMEbhyl5URhAkDgS5l5kbg3Wi6w==
 
-"@stackflow/react@^0.5.0":
+"@stackflow/react@0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@stackflow/react/-/react-0.5.0.tgz#1a5ebad5f7f4fba912a33be0c3fc38ad2d9433e0"
   integrity sha512-uum1fIQ2fDJNxVjR9OKaeLvapH+hblI6NCJgSvRPUbvHwZ/uf4pd9Tq4jPEv0H/ta+xLGkgT/ey7UluorgNaEQ==
