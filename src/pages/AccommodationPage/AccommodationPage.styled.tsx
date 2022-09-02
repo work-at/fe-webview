@@ -6,6 +6,14 @@ export const AccommMainWrap = styled.div`
   position: relative;
 `;
 
+export const BtnSearch = styled.button`
+  display: flex;
+  position: absolute;
+  top: 55px;
+  right: 7.4667vw;
+  z-index: ${Z_INDEX.HIGH};
+`;
+
 export const VisualWrapContainer = styled.div`
   position: relative;
 `;

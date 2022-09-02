@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
+import { Z_INDEX } from "@/constants/zIndex";
 import { HeaderProps } from "./Header";
 
 type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
@@ -7,7 +8,7 @@ type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
 export const Header = styled.div<StyledHeaderProps>`
   padding-top: 52px;
   height: 97px;
-  z-index: 100;
+  z-index: ${Z_INDEX.HIGH};
   ${({ bgColor }) =>
     bgColor
       ? `

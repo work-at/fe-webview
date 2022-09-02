@@ -1,4 +1,5 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Header from "@/components/@shared/Header";
 import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
@@ -46,18 +47,21 @@ const AccommodationList = () => {
 
   return (
     <StackLayout isHide>
+      <Header bgColor useBack />
+      <S.RegionSelectorWrap>
+        <S.RegionSelector onChange={handleRegionSelect}>
+          {ACCOMMODATION_REGIONS.map((currentRegion) => (
+            <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
+              {AccommodationRegions_TEXT[currentRegion]}
+            </option>
+          ))}
+        </S.RegionSelector>
+        <S.RegionSelectorArr></S.RegionSelectorArr>
+      </S.RegionSelectorWrap>
+
       <S.AccommListWrap>
         {/* 숙소 키워드 */}
         {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
-        <S.RegionSelectorWrap>
-          <S.RegionSelector onChange={handleRegionSelect}>
-            {ACCOMMODATION_REGIONS.map((currentRegion) => (
-              <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
-                {AccommodationRegions_TEXT[currentRegion]}
-              </option>
-            ))}
-          </S.RegionSelector>
-        </S.RegionSelectorWrap>
 
         {/* TODO: api에 region 파라미터를 넘길 수 있게 수정되면 반영 */}
         <Badge />
