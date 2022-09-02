@@ -60,7 +60,7 @@ export const Badge = () => {
         <S.WalkatTxt area="GANGNEUNG">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
         <S.StateBox>
           {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="gangneung">{message}</S.StateTxt>}
+          {message && <S.StateTxt area="GANGNEUNG">{message}</S.StateTxt>}
         </S.StateBox>
       </S.WalkatDensity>
     );
