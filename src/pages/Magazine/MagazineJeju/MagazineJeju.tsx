@@ -7,8 +7,12 @@ import MagazinePlaceJeju1 from "@/assets/images/MagazinePlaceJeju1.png";
 import MagazinePlaceJeju2 from "@/assets/images/MagazinePlaceJeju2.png";
 import MagazinePlaceJeju3 from "@/assets/images/MagazinePlaceJeju3.png";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { useFlow } from "@/stack";
+import { PATH } from "@/constants";
 
 const MagazineJeju = () => {
+  const { push } = useFlow();
+
   return (
     <StackLayout isHide>
       <Header useBack MagazinLogo="jeju" />
@@ -56,7 +60,13 @@ const MagazineJeju = () => {
             지금 바로! 노트북만 들고 제주도로 오세요~!
           </S.MagazineTxt>
 
-          <S.BtnListGo>
+          <S.BtnListGo
+            onClick={() =>
+              push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                region: "JEJU",
+              })
+            }
+          >
             <Icon icon="IconJeju" />
             <S.GoJejuTxt>지금 바로 제주도로 워케이션 떠나기!</S.GoJejuTxt>
           </S.BtnListGo>

@@ -7,8 +7,12 @@ import MagazinePlaceGangWon1 from "@/assets/images/MagazinePlaceGangWon1.png";
 import MagazinePlaceGangWon2 from "@/assets/images/MagazinePlaceGangWon2.png";
 import MagazinePlaceGangWon3 from "@/assets/images/MagazinePlaceGangWon3.png";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { useFlow } from "@/stack";
+import { PATH } from "@/constants";
 
 const MagazineGangWon = () => {
+  const { push } = useFlow();
+
   return (
     <StackLayout isHide>
       <Header useBack MagazinLogo="gangWon" />
@@ -58,7 +62,13 @@ const MagazineGangWon = () => {
             워크챗을 통해 직무 고민 뿐만 아니라 퇴근 후 여가 활동도 함께 즐기실 수 있어요!
           </S.MagazineTxt>
 
-          <S.BtnListGo>
+          <S.BtnListGo
+            onClick={() =>
+              push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+                region: "SEOUL",
+              })
+            }
+          >
             <Icon icon="IconGangWon" />
             <S.GoGangWonTxt>지금 바로 강릉으로 워케이션 떠나기!</S.GoGangWonTxt>
           </S.BtnListGo>
