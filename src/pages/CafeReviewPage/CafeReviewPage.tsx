@@ -19,7 +19,7 @@ const CafeReviewPage = () => {
     id: item.name,
     label: item.content,
     isIcon: true,
-    iconType: item.iconType + "_B",
+    iconType: item.name,
   }));
 
   const handlePostReview = async () => {

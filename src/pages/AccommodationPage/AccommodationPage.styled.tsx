@@ -272,6 +272,8 @@ export const LinkDetail = styled.button`
 
   > img {
     width: 100%;
+    height: 131.71px;
+    object-fit: cover;
   }
 `;
 

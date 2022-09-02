@@ -95,7 +95,7 @@ const WorkerDetailPage = () => {
           <S.UserName>{workerDetail.name}</S.UserName>
           <S.EtcInfo>
             <S.EtcList>{workerDetail.job}</S.EtcList>
-            <S.EtcList>{workerDetail.yearOfService}년차</S.EtcList>
+            <S.EtcList>{workerDetail.yearOfService}</S.EtcList>
             <S.EtcChatList>
               {/* TODO : 워크챗 횟수 연동하기 */}
               워크챗<strong>05</strong>

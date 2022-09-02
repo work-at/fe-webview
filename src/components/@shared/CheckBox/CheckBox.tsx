@@ -29,7 +29,7 @@ const CheckBox = ({ items, selectedItemIds, onChange, isIcon, widthAuto }: Check
               checked={selectedItemIds.includes(item.id)}
             />
             <S.Label htmlFor={item.id} isIcon={isIcon} widthAuto={widthAuto}>
-              {isIcon && <Icon icon={item.id as IconType} size={30} />}
+              {isIcon && <Icon icon={item.iconType as IconType} size={30} />}
               <S.LabelTxt isIcon={isIcon}>{item.label}</S.LabelTxt>
             </S.Label>
           </S.CheckboxContainer>
