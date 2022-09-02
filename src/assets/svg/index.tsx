@@ -95,6 +95,8 @@ export { default as IconStar } from "../images/icons/IconStar.svg";
 export { default as IconWalkChat } from "../images/icons/IconWalkChat.svg";
 export { default as IconReady } from "../images/icons/IconReady.svg";
 export { default as FREE } from "../images/icons/FREE.svg";
+export { default as FOCUS } from "../images/icons/FOCUS.svg";
+export { default as SERVE_MEAL } from "../images/icons/SERVE_MEAL.svg";
 export { default as IN_BETWEEN } from "../images/icons/IN_BETWEEN.svg";
 export { default as POPULAR } from "../images/icons/POPULAR.svg";
 export { default as IconJeju } from "../images/icons/IconJeju.svg";
