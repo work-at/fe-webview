@@ -32,11 +32,11 @@ export const Badge = () => {
 
   if (region === "JEJU") {
     return (
-      <S.WalkatDensity area="제주">
-        <S.WalkatTxt area="jeju">최근 제주의 워크앳 지수는?</S.WalkatTxt>
+      <S.WalkatDensity area="JEJU">
+        <S.WalkatTxt area="JEJU">최근 제주의 워크앳 지수는?</S.WalkatTxt>
         <S.StateBox>
           {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="jeju">{message}</S.StateTxt>}
+          {message && <S.StateTxt area="JEJU">{message}</S.StateTxt>}
         </S.StateBox>
       </S.WalkatDensity>
     );
@@ -44,11 +44,11 @@ export const Badge = () => {
 
   if (region === "SEOUL") {
     return (
-      <S.WalkatDensity area="서울">
-        <S.WalkatTxt area="seoul">최근 서울의 워크앳 지수는?</S.WalkatTxt>
+      <S.WalkatDensity area="SEOUL">
+        <S.WalkatTxt area="SEOUL">최근 서울의 워크앳 지수는?</S.WalkatTxt>
         <S.StateBox>
           {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="seoul">{message}</S.StateTxt>}
+          {message && <S.StateTxt area="SEOUL">{message}</S.StateTxt>}
         </S.StateBox>
       </S.WalkatDensity>
     );
@@ -56,8 +56,8 @@ export const Badge = () => {
 
   if (region === "GANGNEUNG") {
     return (
-      <S.WalkatDensity area="강릉">
-        <S.WalkatTxt area="gangneung">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
+      <S.WalkatDensity area="GANGNEUNG">
+        <S.WalkatTxt area="GANGNEUNG">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
         <S.StateBox>
           {type && <Icon icon={type} />}
           {message && <S.StateTxt area="gangneung">{message}</S.StateTxt>}
@@ -68,11 +68,11 @@ export const Badge = () => {
 
   if (region === "SOKCHO") {
     return (
-      <S.WalkatDensity area="속초">
-        <S.WalkatTxt area="sokcho">최근 속초의 워크앳 지수는?</S.WalkatTxt>
+      <S.WalkatDensity area="SOKCHO">
+        <S.WalkatTxt area="SOKCHO">최근 속초의 워크앳 지수는?</S.WalkatTxt>
         <S.StateBox>
           {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="sokcho">{message}</S.StateTxt>}
+          {message && <S.StateTxt area="SOKCHO">{message}</S.StateTxt>}
         </S.StateBox>
       </S.WalkatDensity>
     );
