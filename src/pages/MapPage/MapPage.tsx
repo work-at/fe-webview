@@ -9,6 +9,7 @@ const API_KEY = process.env.KAKAO_MAP_API_KEY;
 
 const MapPage = () => {
   const stack = useStack();
+
   const { userCoordinates } = useCoordinates();
 
   const { data: userAddress } = useUserAddressQuery(
@@ -51,7 +52,10 @@ const MapPage = () => {
     );
   }
 
-  if (stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1) {
+  if (
+    stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1 ||
+    stack.globalTransitionState === "loading"
+  ) {
     return (
       <StackLayout isHide navigationPath="map">
         <MapManager userCoordinates={userCoordinates} />
