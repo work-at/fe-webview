@@ -34,7 +34,7 @@ const Scrollable = styled.div<StyledScrollableProps>`
   flex: 1;
   overflow-y: scroll;
   z-index: ${Z_INDEX.MIDDLE};
-  ${({ isHide }) => (isHide ? "" : "padding-top: 3.875rem;")};
+  ${({ isHide }) => (isHide ? "" : "padding-top: calc(3.875rem + 37px);")};
   ${({ isNavigation }) => (isNavigation ? "padding-bottom: 5.625rem;" : "")}
 `;
 

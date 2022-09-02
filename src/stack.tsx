@@ -146,7 +146,7 @@ export const { Stack, useFlow } = stackflow({
         WorkerDetailPage: `${PATH.WORKER.full}/:workerId`,
         /* 워크챗 페이지 */
         WorkChatPage: `${PATH.WORK_CHAT.full}`,
-        WorkChatRoomPage: `${PATH.WORK_CHAT.ROOM.full}/:workerId`,
+        WorkChatRoomPage: `${PATH.WORK_CHAT.ROOM.full}/:roomId`,
         /* 마이페이지 */
         MyPage: PATH.MY_PAGE.full,
         ProfileEdit: PATH.MY_PAGE.PROFILE_EDIT.full,

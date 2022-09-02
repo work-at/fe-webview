@@ -162,3 +162,14 @@ export const MenuList = styled.button<StyledMenuProps>`
 
   ${({ isOpen }) => (isOpen ? "height: 52.4px;" : "height: 0px; padding: 0px 15px; visibility: hidden;")}
 `;
+
+export const ChatNoData = styled.div`
+  padding: 225px 0 100px;
+  text-align: center;
+`;
+
+export const NoDataTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 13px;
+`;

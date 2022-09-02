@@ -19,7 +19,7 @@ export const API_URL = {
   VERIFY_EMAIL: "/user/verify",
   EMAIL_VALIDATION_COUNT_REMAIL: "/user/verify/remaining-attempts",
   GET_CHAT_LIST: "/users/chattings",
-  DELETE_CHAT: (roomId: number) => `/chattings/${roomId}`,
+  DELETE_CHAT: (roomId: number, lastMessageId: number) => `/chattings/${roomId}?lastMessageId=${lastMessageId}`,
   BLOCK_USER: (roomId: number) => `/chattings/${roomId}`,
   GET_CHAT_MESSAGES: (roomId: number, messageId?: number, sortType?: "AFTER" | "BEFORE") =>
     `/chattings/${roomId}/messages${sortType ? `?sortType=${sortType}` : ""}${

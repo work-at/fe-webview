@@ -36,8 +36,8 @@ export const useChatSendQuery = () => {
 };
 
 // 채팅방을 나가는 api
-export const requestChatRemove = async ({ roomId }: Action.DeleteChat) => {
-  return await baseInstance().delete(API_URL.DELETE_CHAT(roomId));
+export const requestChatRemove = async ({ roomId, lastMessageId }: Action.DeleteChat) => {
+  return await baseInstance().delete(API_URL.DELETE_CHAT(roomId, lastMessageId));
 };
 
 export const useChatRemoveQuery = () => {
