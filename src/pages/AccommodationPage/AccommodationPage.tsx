@@ -23,15 +23,16 @@ import { useCallback, useMemo } from "react";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
 import { useAccommodationCurationQuery, useRegionTrafficQuery } from "@/domains/accommodation/accommodation.api";
+import * as DTO from "@/domains/accommodation/accommodation.dto";
 
-export const Badge = () => {
-  const { data } = useRegionTrafficQuery();
+export const Badge = ({ region }: DTO.RegionTrafficRequest) => {
+  const { data } = useRegionTrafficQuery({ region });
 
-  const region = useMemo(() => data?.data.region, [data]);
+  const curRegion = useMemo(() => data?.data.region, [data]);
   const type = useMemo(() => data?.data.type, [data]);
   const message = useMemo(() => data?.data.message, [data]);
 
-  if (region === "JEJU") {
+  if (curRegion === "JEJU") {
     return (
       <S.WalkatDensity area="JEJU">
         <S.WalkatTxt area="JEJU">최근 제주의 워크앳 지수는?</S.WalkatTxt>
@@ -43,7 +44,7 @@ export const Badge = () => {
     );
   }
 
-  if (region === "SEOUL") {
+  if (curRegion === "SEOUL") {
     return (
       <S.WalkatDensity area="SEOUL">
         <S.WalkatTxt area="SEOUL">최근 서울의 워크앳 지수는?</S.WalkatTxt>
@@ -55,7 +56,7 @@ export const Badge = () => {
     );
   }
 
-  if (region === "GANGNEUNG") {
+  if (curRegion === "GANGNEUNG") {
     return (
       <S.WalkatDensity area="GANGNEUNG">
         <S.WalkatTxt area="GANGNEUNG">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
@@ -67,7 +68,7 @@ export const Badge = () => {
     );
   }
 
-  if (region === "SOKCHO") {
+  if (curRegion === "SOKCHO") {
     return (
       <S.WalkatDensity area="SOKCHO">
         <S.WalkatTxt area="SOKCHO">최근 속초의 워크앳 지수는?</S.WalkatTxt>

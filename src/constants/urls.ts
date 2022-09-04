@@ -31,7 +31,8 @@ export const API_URL = {
   POST_CHAT_CONFIRM: (roomId: number) => `/chattings/${roomId}/confirm`,
   POST_CHAT_ROOM_CREATE: (ownerUserId: number) => `/chattings/?ownerUserId=${ownerUserId}`,
   POST_BLOCK_USER: (blockUserId: number) => `/user/blocking?blockUserId=${blockUserId}`,
-  GET_REGION_TRAFFIC: "/region-traffic",
+  GET_REGION_TRAFFIC: (region?: "JEJU" | "SEOUL" | "GANGNEUNG" | "SOKCHO") =>
+    `/region-traffic${region ? `?region=${region}` : ""}`,
   PUT_USER_LOCATION_TRACKING: "/user/tracking",
   GET_ACCOMMODATION_CURATION: "/accommodations/curations",
 };

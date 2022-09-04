@@ -85,15 +85,23 @@ const requestReviewAccommodation = async (criteria: AccommodationReviewCommand) 
 
 export const useReviewAccommodationMutation = () => useMutation(requestReviewAccommodation);
 
-export const requestRegionTraffic: QueryFunction<DTO.RegionTrafficResponse> = async () => {
-  return await baseInstance().get<unknown, DTO.RegionTrafficResponse>(API_URL.GET_REGION_TRAFFIC);
+type RegionTrafficQueryKey = readonly [typeof QUERY_NAME.GET_REGION_TRAFFIC, DTO.RegionTrafficRequest];
+
+export const requestRegionTraffic: QueryFunction<DTO.RegionTrafficResponse, RegionTrafficQueryKey> = async ({
+  queryKey,
+}) => {
+  const [, { region }] = queryKey;
+
+  return await baseInstance().get<unknown, DTO.RegionTrafficResponse>(API_URL.GET_REGION_TRAFFIC(region));
 };
 
-export const useRegionTrafficQuery = () => {
-  return useQuery<DTO.RegionTrafficResponse, AxiosError<{ message: string }>>(
-    [QUERY_NAME.GET_REGION_TRAFFIC],
-    requestRegionTraffic
-  );
+export const useRegionTrafficQuery = (region: DTO.RegionTrafficRequest) => {
+  return useQuery<
+    DTO.RegionTrafficResponse,
+    AxiosError<{ message: string }>,
+    DTO.RegionTrafficResponse,
+    RegionTrafficQueryKey
+  >([QUERY_NAME.GET_REGION_TRAFFIC, region], requestRegionTraffic);
 };
 
 export const requestAccommodationCuration: QueryFunction<DTO.AccommodationCurationResponse> | any = async () => {
