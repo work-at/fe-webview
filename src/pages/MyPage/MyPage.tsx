@@ -2,7 +2,8 @@ import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useUploadUserProfileImageMutation, useUserInfo } from "@/domains/user";
 import { useFlow } from "@/stack";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import { useCallback, useEffect, useState } from "react";
 import * as S from "./MyPage.styled";
 
@@ -12,7 +13,7 @@ export const isValidFileSize = (file: File) => {
   return file.size <= 1000 * 1000 * 10;
 };
 
-export const isUserLocationBlockedAtom = atom(false);
+export const isUserLocationBlockedAtom = atomWithStorage("is-user-location-blocked", false);
 
 const MyPage = () => {
   const { push } = useFlow();
