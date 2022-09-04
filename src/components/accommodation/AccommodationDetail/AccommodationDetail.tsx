@@ -60,8 +60,6 @@ const AccommodationDetail = () => {
 
   const { accommodationDetail, accommodationReview } = data.data;
 
-  console.log(accommodationDetail, accommodationReview);
-
   const handleOpenKaKaoLink = () => {
     window.open(accommodationDetail?.relatedUrl);
   };
