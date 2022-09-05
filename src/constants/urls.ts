@@ -33,6 +33,7 @@ export const API_URL = {
   POST_BLOCK_USER: (blockUserId: number) => `/user/blocking?blockUserId=${blockUserId}`,
   GET_REGION_TRAFFIC: (region?: "JEJU" | "SEOUL" | "GANGNEUNG" | "SOKCHO") =>
     `/region-traffic${region ? `?region=${region}` : ""}`,
+  POST_USER_REPORT: "reports",
   PUT_USER_LOCATION_TRACKING: "/user/tracking",
   GET_ACCOMMODATION_CURATION: "/accommodations/curations",
 };

@@ -274,3 +274,5 @@ export const ACCOMMODATION_REVIEW_TAGS = [
     preContent: "식사메뉴가\n있어요",
   },
 ] as const;
+
+export const REPORTS = ["INQUERY", "SERVICE_OFFER", "ERROR_REPORT", "OTHERS"] as const;

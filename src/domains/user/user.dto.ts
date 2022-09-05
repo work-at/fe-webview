@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { Report } from "../common.type";
 
 export type PostUserAddressRequest = {
   latitude: number;
@@ -52,4 +53,10 @@ export type PutUserProfileRequest = {
   position: string;
   story: string;
   workingYear: string;
+};
+
+export type PostUserReport = {
+  content: string;
+  email: string;
+  type: Report;
 };

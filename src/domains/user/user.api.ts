@@ -116,3 +116,8 @@ export const requestUploadUserProfileImage = async (file: File) => {
 };
 
 export const useUploadUserProfileImageMutation = () => useMutation(requestUploadUserProfileImage);
+
+export const requestPostUserReport = (report: DTO.PostUserReport) =>
+  baseInstance().post(API_URL.POST_USER_REPORT, report);
+
+export const useAddUserReportMutation = () => useMutation(requestPostUserReport);
