@@ -22,6 +22,7 @@ export const SignUpInputWrap = styled.div`
 `;
 
 export const ErrorTxt = styled.p`
+  white-space: pre-line;
   ${theme.fonts.Medium06};
   color: ${theme.colors.seoul};
   margin-top: 10px;

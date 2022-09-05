@@ -12,7 +12,7 @@ import Header from "@/components/@shared/Header";
 
 const reviewItems = ACCOMMODATION_REVIEW_TAGS.map((review) => ({
   id: review.name,
-  label: review.content,
+  label: review.preContent,
   iconType: review.name,
 }));
 
