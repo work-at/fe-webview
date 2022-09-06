@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
 		-webkit-text-size-adjust: none;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		touch-action: pan-x pan-y;
 	}
 
 	button {

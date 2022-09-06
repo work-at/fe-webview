@@ -28,5 +28,6 @@ export const BtnKaKaoLogin = styled.button`
   bottom: 74px;
   > img {
     width: 100%;
+    max-width: 100%;
   }
 `;
