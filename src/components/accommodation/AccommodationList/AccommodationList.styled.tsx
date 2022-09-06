@@ -225,7 +225,7 @@ export const AccommReviewListItem = styled.li`
 
 export const RegionSelectorWrap = styled.div`
   position: absolute;
-  top: 49px;
+  top: -50px;
   left: 50%;
   margin-left: -30px;
   display: inline-flex;

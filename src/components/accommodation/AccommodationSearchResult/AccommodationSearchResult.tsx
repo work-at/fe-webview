@@ -1,5 +1,6 @@
 import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import Header from "@/components/@shared/Header";
 import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
@@ -58,8 +59,9 @@ const AccommodationSearchResult = () => {
 
   return (
     <StackLayout isHide>
+      <Header bgColor useBack />
+
       <S.AccommListWrap>
-        {/* 숙소 키워드 */}
         <S.RegionSelectorWrap>
           <S.RegionSelector onChange={handleRegionSelect}>
             {ACCOMMODATION_REGIONS.map((region) => (
@@ -68,7 +70,10 @@ const AccommodationSearchResult = () => {
               </option>
             ))}
           </S.RegionSelector>
+          <S.RegionSelectorArr></S.RegionSelectorArr>
         </S.RegionSelectorWrap>
+
+        {/* 숙소 키워드 */}
         <S.KeywordTxt>{searchedBy} 검색결과</S.KeywordTxt>
         <S.AccommList>
           {accommodationList.map((item, index) => (

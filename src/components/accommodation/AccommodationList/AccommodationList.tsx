@@ -48,18 +48,19 @@ const AccommodationList = () => {
   return (
     <StackLayout isHide>
       <Header bgColor useBack />
-      <S.RegionSelectorWrap>
-        <S.RegionSelector onChange={handleRegionSelect}>
-          {ACCOMMODATION_REGIONS.map((currentRegion) => (
-            <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
-              {AccommodationRegions_TEXT[currentRegion]}
-            </option>
-          ))}
-        </S.RegionSelector>
-        <S.RegionSelectorArr></S.RegionSelectorArr>
-      </S.RegionSelectorWrap>
 
       <S.AccommListWrap>
+        <S.RegionSelectorWrap>
+          <S.RegionSelector onChange={handleRegionSelect}>
+            {ACCOMMODATION_REGIONS.map((currentRegion) => (
+              <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
+                {AccommodationRegions_TEXT[currentRegion]}
+              </option>
+            ))}
+          </S.RegionSelector>
+          <S.RegionSelectorArr></S.RegionSelectorArr>
+        </S.RegionSelectorWrap>
+
         {/* 숙소 키워드 */}
         {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
 

@@ -46,8 +46,9 @@ export const DrawerHeader = styled.div`
   top: 0;
   width: 100%;
   display: flex;
-  align-items: center;
-  height: 3.875rem;
+  align-items: flex-start;
+  height: 97px;
+  padding-top: 52px;
   background-color: ${theme.colors.white};
   z-index: ${Z_INDEX.HIGH};
 `;
@@ -55,10 +56,8 @@ export const DrawerHeader = styled.div`
 export const DrawerHeaderTxt = styled.p`
   width: 100%;
   justify-content: flex-start;
-  padding-left: 2.938rem;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  font-weight: 700;
+  padding-left: 47px;
+  ${theme.fonts.SemiBold01};
   color: ${theme.colors.black};
   box-sizing: border-box;
   font-family: Pretendard;
@@ -67,7 +66,7 @@ export const DrawerHeaderTxt = styled.p`
 export const DrawerBody = styled.div`
   overflow: hidden;
   height: 100%;
-  padding: 3.875rem 0px 0;
+  padding: 97px 0px 0;
   > div {
     overflow-y: scroll;
     height: 100%;

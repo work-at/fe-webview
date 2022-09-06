@@ -57,7 +57,7 @@ const MyPage = () => {
   }, [userInfo, setIsUserLocationBlocked]);
 
   return (
-    <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page">
+    <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page" isHide>
       <S.MyPageMainWrap>
         <S.TopInfo>
           <S.UserPicture>

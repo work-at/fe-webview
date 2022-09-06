@@ -39,13 +39,11 @@ export const Body = styled.div`
 `;
 
 export const CloseButton = styled.button`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 24px;
+  height: 24px;
   display: flex;
-  height: 3.875rem;
-  align-items: center;
   position: absolute;
-  top: 0;
-  left: 1.438rem;
+  top: 54px;
+  left: 16px;
   z-index: ${Z_INDEX.HIGHEST};
 `;

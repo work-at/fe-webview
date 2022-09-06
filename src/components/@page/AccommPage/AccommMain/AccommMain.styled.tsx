@@ -8,6 +8,7 @@ export const AccommMainWrap = styled.div`
 
 export const VisualWrap = styled.div`
   position: relative;
+  top: -97px;
   > img {
     display: block;
     width: 100%;
@@ -32,7 +33,7 @@ export const BottomWrap = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  margin-top: -7%;
+  margin-top: -34%;
   background: ${theme.colors.white};
   padding: 21px 0 0;
   border-radius: 27px 27px 0 0;
