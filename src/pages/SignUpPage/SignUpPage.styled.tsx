@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
-import BgVisual from "@/assets/images/signup-finish.png";
+import BgVisual from "@/assets/images/signup-finish.jpg";
+import { Z_INDEX } from "@/constants/zIndex";
 
 export const SignUpWrap = styled.div`
-  padding: 13px 7.4667vw 135px;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 `;
 
 export const SignUpTit = styled.h2`
@@ -30,12 +33,25 @@ export const ChekBoxWrap = styled.div`
 `;
 
 export const SignUpFinish = styled.div`
-  position: relative;
+  @keyframes left_to_right {
+    0% {
+      background-position: 40%;
+    }
+    100% {
+      background-position: 60%;
+    }
+  }
+
+  position: absolute;
+  top: 0;
   width: 100vw;
-  height: calc(100vh - 84px);
-  background: url(${BgVisual}) -20vw center no-repeat;
+  height: 100vh;
+  z-index: ${Z_INDEX.UNDER_ROOT};
+
+  background: url(${BgVisual}) 60% center no-repeat;
   background-size: cover;
   overflow: hidden;
+  animation: left_to_right 3s ease;
 `;
 
 export const FinishTxt = styled.p`

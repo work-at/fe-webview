@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
-import BgVisual from "@/assets/images/signup-finish.png";
+import BgVisual from "@/assets/images/signup-finish.jpg";
 
 export const SignUpFinish = styled.div`
   position: relative;
