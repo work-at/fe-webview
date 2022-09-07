@@ -13,6 +13,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new HtmlWebPackPlugin({
       template: path.resolve(TEMPLATE_PATH, "index.html"),
+      favicon: "src/assets/images/favicon.png",
       minify: true,
     }),
   ],

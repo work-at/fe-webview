@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
-import BgVisual from "@/assets/images/signup-intro.png";
+import BgVisual from "@/assets/images/signup-intro.jpg";
 
 export const SignUpIntro = styled.div`
   position: relative;
@@ -28,5 +28,6 @@ export const BtnKaKaoLogin = styled.button`
   bottom: 74px;
   > img {
     width: 100%;
+    max-width: 100%;
   }
 `;

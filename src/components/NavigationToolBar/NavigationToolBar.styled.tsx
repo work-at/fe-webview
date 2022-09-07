@@ -9,6 +9,7 @@ export const ToolBar = styled.div`
   bottom: 0;
   background: ${theme.colors.white};
   height: 90px;
+  border-top: 1px solid ${theme.colors.gray09};
   z-index: ${Z_INDEX.HIGH};
 `;
 

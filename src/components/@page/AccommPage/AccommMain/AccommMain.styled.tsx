@@ -55,6 +55,7 @@ export const AreaListItem = styled.li`
   display: inline-grid;
   margin-left: 15px;
   text-align: center;
+  align-items: start;
   &:first-child {
     margin-left: 0;
   }
@@ -199,6 +200,7 @@ export const AccommList = styled.ul`
 
 export const AccommListItem = styled.li`
   display: inline-grid;
+  align-items: start;
   position: relative;
   margin-right: 12px;
   width: 75.2vw;
@@ -294,6 +296,7 @@ export const SpaceList = styled.ul`
 
 export const SpaceListItem = styled.li`
   display: inline-grid;
+  align-items: start;
   position: relative;
   width: 38.1333vw;
   border-radius: 10px;
