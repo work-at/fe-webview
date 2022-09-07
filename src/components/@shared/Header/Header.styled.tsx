@@ -16,7 +16,7 @@ export const Header = styled.div<StyledHeaderProps>`
       position: relative;
     `
       : `
-      position: absolute;
+      position: relative;
     `}
   ${({ fixed }) =>
     fixed &&
@@ -33,7 +33,6 @@ export const Header = styled.div<StyledHeaderProps>`
 
 export const HeaderInner = styled.div<{ useBack?: boolean }>`
   position: relative;
-  padding: 0px 7.4667vw;
   padding-left: ${({ useBack }) => (useBack ? "16px" : "28px")};
   display: flex;
   align-items: center;
@@ -48,6 +47,7 @@ export const MagazineLogo = styled.h1`
 `;
 
 export const BtnBack = styled.button<{ bgColor?: boolean }>`
+  margin-top: 2px;
   path {
     stroke: ${({ bgColor }) => (bgColor ? theme.colors.black : theme.colors.white)};
   }

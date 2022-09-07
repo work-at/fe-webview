@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 import { AccommodationRegion } from "@/domains/accommodation/accommodation.dto";
+import { Z_INDEX } from "@/constants/zIndex";
 
 export const AccommListWrap = styled.div`
   position: relative;
@@ -223,9 +224,14 @@ export const AccommReviewListItem = styled.li`
 `;
 
 export const RegionSelectorWrap = styled.div`
-  display: flex;
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  margin-left: -30px;
+  display: inline-flex;
   justify-content: center;
-  margin-bottom: 27px;
+  align-items: center;
+  z-index: ${Z_INDEX.HIGH};
 `;
 
 export const RegionSelector = styled.select`
@@ -234,8 +240,18 @@ export const RegionSelector = styled.select`
   font-weight: 700;
   font-size: 20px;
   line-height: 140%;
-
+  padding: 0 10px;
   color: #121212;
+`;
+
+export const RegionSelectorArr = styled.span`
+  display: inline-flex;
+  width: 0px;
+  height: 0px;
+  border-right: 6px solid ${theme.colors.black};
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  transform: rotate(-90deg);
 `;
 
 export const AccommNoData = styled.div`

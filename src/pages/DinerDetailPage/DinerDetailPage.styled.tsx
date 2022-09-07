@@ -6,6 +6,8 @@ export const DinerDetailWrap = styled.div`
 `;
 
 export const VisualWrap = styled.div`
+  position: relative;
+  top: -97px;
   > img {
     display: block;
     width: 100%;
@@ -17,7 +19,7 @@ export const InfoWrap = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  margin-top: -7%;
+  margin-top: -34%;
   background: ${theme.colors.white};
   padding: 40px 7.4667vw 120px;
   border-radius: 27px 27px 0 0;
