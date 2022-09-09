@@ -383,7 +383,7 @@ const WorkChatRoomPage = () => {
               pop();
               setTimeout(() => {
                 replace(PATH.MAP.stack, {});
-              });
+              }, 100);
             }}
           >
             <Icon icon="IconWalkChat" />
