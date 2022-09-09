@@ -78,12 +78,12 @@ const Chat = ({ isMe, message, time, date, id }: ChatProps) => {
 const AppBarRight = ({ callback }: { callback: () => void }) => {
   const [trigger, setTrigger] = useState(false);
 
-  const handleClickRefresh = () => {
+  const handleClickRefresh = useCallback(() => {
     callback();
 
     setTrigger(true);
     setTimeout(() => setTrigger(false), 1000);
-  };
+  }, [callback]);
 
   return (
     <S.ButtonRotate type="button" onClick={handleClickRefresh} trigger={trigger}>
