@@ -135,6 +135,8 @@ const AccommodationPage = () => {
     [0]: () => push(PATH.ACCOMMODATION.MAGAZINE.JEJU.stack, {}),
     [1]: () => push(PATH.ACCOMMODATION.MAGAZINE.SEOUL.stack, {}),
     [2]: () => push(PATH.ACCOMMODATION.MAGAZINE.GANGWON.stack, {}),
+    [3]: () => window.open("https://easytask.co.kr/jeju-workcation", "_blank"),
+    [4]: () => window.open("https://www.desker.co.kr/now/detail?nowCd=311", "_blank"),
   }[currentIndex];
 
   return (
