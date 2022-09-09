@@ -76,10 +76,19 @@ const Chat = ({ isMe, message, time, date, id }: ChatProps) => {
 };
 
 const AppBarRight = ({ callback }: { callback: () => void }) => {
+  const [trigger, setTrigger] = useState(false);
+
+  const handleClickRefresh = () => {
+    callback();
+
+    setTrigger(true);
+    setTimeout(() => setTrigger(false), 1000);
+  };
+
   return (
-    <button type="button" onClick={callback}>
+    <S.ButtonRotate type="button" onClick={handleClickRefresh} trigger={trigger}>
       <Icon icon="BtnRefresh" />
-    </button>
+    </S.ButtonRotate>
   );
 };
 

@@ -324,3 +324,13 @@ export const PullAreaContent = styled.div<{ height: number }>`
 
   ${({ height }) => `height: ${height}px;`}
 `;
+
+type StyledButtonRotateProps = {
+  trigger: boolean;
+};
+
+export const ButtonRotate = styled.button<StyledButtonRotateProps>`
+  transition: transform 1s;
+
+  ${({ trigger }) => (trigger ? "transform: rotate(360deg);" : "transition: none;")};
+`;

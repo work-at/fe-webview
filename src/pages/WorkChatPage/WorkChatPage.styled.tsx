@@ -173,3 +173,13 @@ export const NoDataTxt = styled.p`
   color: ${theme.colors.black};
   padding-top: 13px;
 `;
+
+type StyledButtonRotateProps = {
+  trigger: boolean;
+};
+
+export const ButtonRotate = styled.button<StyledButtonRotateProps>`
+  transition: transform 1s;
+
+  ${({ trigger }) => (trigger ? "transform: rotate(360deg);" : "transition: none;")};
+`;

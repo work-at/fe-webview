@@ -106,11 +106,19 @@ const ChatList = (item: Room) => {
 
 const AppBarRight = () => {
   const { refetch } = useChatListQuery();
+  const [trigger, setTrigger] = useState(false);
+
+  const handleClickRefresh = () => {
+    refetch();
+
+    setTrigger(true);
+    setTimeout(() => setTrigger(false), 1000);
+  };
 
   return (
-    <button type="button" onClick={() => refetch()}>
+    <S.ButtonRotate type="button" onClick={handleClickRefresh} trigger={trigger}>
       <Icon icon="BtnRefresh" />
-    </button>
+    </S.ButtonRotate>
   );
 };
 
