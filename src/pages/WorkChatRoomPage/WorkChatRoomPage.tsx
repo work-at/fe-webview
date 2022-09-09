@@ -190,7 +190,7 @@ const WorkChatRoomPage = () => {
 
   const handleSendChat = async () => {
     try {
-      await chatSend({ message, roomId: Number(roomId) });
+      await chatSend({ message: encodeURIComponent(message), roomId: Number(roomId) });
       setMessage("");
       await handlePullUpCallback();
       handleScrollToEnd();
