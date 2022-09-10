@@ -56,7 +56,7 @@ const usePageVisibility = ({ callback, delay = 0 }: Props) => {
     return () => {
       document.removeEventListener(visibilityChange, handleVisibilityChange);
     };
-  }, [callback]);
+  }, [callback, delay]);
 };
 
 export default usePageVisibility;
