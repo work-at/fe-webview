@@ -117,6 +117,7 @@ export const ReceiveMsg = styled.p<{ newMsg?: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  min-height: 19.59px;
 `;
 
 export const ModalWrap = styled.div`

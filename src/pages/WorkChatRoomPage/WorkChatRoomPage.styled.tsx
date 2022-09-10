@@ -66,6 +66,8 @@ export const ReceiveMsgTxt = styled.div`
   white-space: pre-wrap;
   border-radius: 27px;
   z-index: ${Z_INDEX.ROOT};
+  min-height: 41.25px;
+  min-width: 50px;
   &:after {
     content: "";
     display: block;
