@@ -298,7 +298,9 @@ const WorkChatRoomPage = () => {
       const DOM = document.getElementById(lastMessageId);
 
       if (DOM) {
-        DOM.scrollIntoView();
+        setTimeout(() => {
+          DOM.scrollIntoView({ behavior: "smooth" });
+        }, 500);
         setToggle(false);
       }
     }
@@ -409,8 +411,8 @@ const WorkChatRoomPage = () => {
             rows={1}
             value={message}
           />
-          <S.BtnSend onClick={handleSendChat}>
-            <Icon icon={"BtnSendMsg"} size={26} />
+          <S.BtnSend disabled={message.length === 0} onClick={handleSendChat}>
+            <Icon icon={message.length === 0 ? "BtnSendMsgDisabled" : "BtnSendMsg"} size={26} />
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
