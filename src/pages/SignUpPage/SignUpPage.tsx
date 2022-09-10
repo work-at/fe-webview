@@ -18,6 +18,8 @@ const NICKNAME_STEP = 0;
 const POSITION_WORKING_YEAR_STEP = 1;
 const SIGN_UP_FINISH = 2;
 
+export type SignUpFiledType = SignUpRequest & { isFocus: boolean };
+
 const SignUpPage = () => {
   const [step, setStep] = useState(NICKNAME_STEP);
   const { oauthId } = useActivityParams();
@@ -28,23 +30,20 @@ const SignUpPage = () => {
   const { data: positionList } = usePositionListQuery();
   const { data: workingYearList } = useWorkingYearListQuery();
 
-  const methods = useForm<SignUpRequest>({
+  const methods = useForm<SignUpFiledType>({
     defaultValues: {
       nickname: "",
       oauthType: "KAKAO",
+      isFocus: false,
     },
   });
 
-  const {
-    setValue,
-    getValues,
-    watch,
-    formState: { errors },
-    handleSubmit,
-  } = methods;
+  const { setValue, getValues, watch, formState, handleSubmit } = methods;
 
   watch("nickname");
   const nickname = getValues("nickname");
+  watch("isFocus");
+  const isFocus = getValues("isFocus");
 
   useEffect(() => {
     if (!oauthId) {
@@ -64,7 +63,9 @@ const SignUpPage = () => {
 
   const handleSignUp = handleSubmit(async (formData) => {
     const body = {
-      ...formData,
+      nickname: formData.nickname,
+      oauthId: formData.oauthId,
+      oauthType: formData.oauthType,
       position: selectedPosition[0] as PositionType,
       workingYear: selectedWorkingYear[0] as WorkingYearType,
     };
@@ -89,24 +90,28 @@ const SignUpPage = () => {
           <Header useBack bgColor />
           <form onSubmit={handleNextStep}>
             <S.SignUpWrap>
-              <S.SignUpTit>
-                닉네임을
-                <br />
-                입력해 주세요
-              </S.SignUpTit>
-              <S.SignUpSubTit>다른 사용자에게 공개되는 닉네임이며 변경할 수 있어요.</S.SignUpSubTit>
-              <S.SignUpInputWrap>
-                <Input placeholder="닉네임 입력" count={nickname.length ?? 0} maxLength={8} />
-              </S.SignUpInputWrap>
+              <S.SignUpPaddingWrap>
+                <S.SignUpTit>
+                  닉네임을
+                  <br />
+                  입력해 주세요
+                </S.SignUpTit>
+                <S.SignUpSubTit>다른 사용자에게 공개되는 닉네임이며 변경할 수 있어요.</S.SignUpSubTit>
+                <S.SignUpInputWrap>
+                  <Input placeholder="닉네임 입력" count={nickname.length ?? 0} maxLength={8} />
+                </S.SignUpInputWrap>
+              </S.SignUpPaddingWrap>
             </S.SignUpWrap>
-            <Button
-              type="submit"
-              size="lg"
-              bgColor="black"
-              disabled={!!errors?.nickname || getValues("nickname").length < 2}
-            >
-              다음
-            </Button>
+            {!isFocus && (
+              <Button
+                type="submit"
+                size="lg"
+                bgColor="black"
+                disabled={!!formState.errors?.nickname || getValues("nickname").length < 2}
+              >
+                다음
+              </Button>
+            )}
           </form>
         </FormProvider>
       </StackLayout>
@@ -115,28 +120,30 @@ const SignUpPage = () => {
 
   if (step === POSITION_WORKING_YEAR_STEP) {
     return (
-      <StackLayout isHide>
+      <S.SignUpWrap>
         <Header useBack bgColor />
         <form onSubmit={handleSignUp}>
           <S.SignUpWrap>
-            <S.SignUpTit>직무를 입력해 주세요</S.SignUpTit>
-            <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
-            <S.ChekBoxWrap>
-              <CheckBox
-                selectedItemIds={selectedPosition}
-                onChange={onChangeOnlyPosition}
-                items={positionList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
-              />
-            </S.ChekBoxWrap>
-            <S.SignUpTit>경력을 입력해 주세요</S.SignUpTit>
-            <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
-            <S.ChekBoxWrap>
-              <CheckBox
-                selectedItemIds={selectedWorkingYear}
-                onChange={onChangeOnlyWorkingYear}
-                items={workingYearList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
-              />
-            </S.ChekBoxWrap>
+            <S.SignUpPaddingWrap>
+              <S.SignUpTit>직무를 입력해 주세요</S.SignUpTit>
+              <S.SignUpSubTit>직무에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
+              <S.ChekBoxWrap>
+                <CheckBox
+                  selectedItemIds={selectedPosition}
+                  onChange={onChangeOnlyPosition}
+                  items={positionList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
+                />
+              </S.ChekBoxWrap>
+              <S.SignUpTit>경력을 입력해 주세요</S.SignUpTit>
+              <S.SignUpSubTit>연차에 따른 워크챗 탐색을 쉽게 할 수 있어요.</S.SignUpSubTit>
+              <S.ChekBoxWrap>
+                <CheckBox
+                  selectedItemIds={selectedWorkingYear}
+                  onChange={onChangeOnlyWorkingYear}
+                  items={workingYearList?.data.response.map((each) => ({ id: each.name, label: each.content })) ?? []}
+                />
+              </S.ChekBoxWrap>
+            </S.SignUpPaddingWrap>
           </S.SignUpWrap>
           <Button
             size="lg"
@@ -147,7 +154,7 @@ const SignUpPage = () => {
             다음
           </Button>
         </form>
-      </StackLayout>
+      </S.SignUpWrap>
     );
   }
 

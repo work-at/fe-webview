@@ -1,9 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import Button from "@/components/@shared/Button/Button";
 import { requestValidateNickname } from "@/domains/auth/auth.api";
-import { SignUpRequest } from "@/domains/auth/auth.dto";
 import { useDebounce } from "@/hooks";
 import * as S from "./Input.styled";
+import { SignUpFiledType } from "@/pages/SignUpPage/SignUpPage";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   count?: number;
@@ -18,7 +18,7 @@ const Input = ({ count, ...props }: InputProps) => {
     clearErrors,
     watch,
     formState: { errors },
-  } = useFormContext<SignUpRequest>();
+  } = useFormContext<SignUpFiledType>();
 
   watch("nickname");
 
@@ -69,6 +69,8 @@ const Input = ({ count, ...props }: InputProps) => {
 
             handleOnChange(regex.test(value));
           }}
+          onFocus={() => setValue("isFocus", true)}
+          onBlur={() => setValue("isFocus", false)}
         />
         <Button
           type="button"
