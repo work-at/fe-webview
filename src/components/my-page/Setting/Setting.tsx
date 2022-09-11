@@ -20,7 +20,7 @@ const Setting = () => {
   );
 
   const handleLogout = useCallback(() => {
-    sessionStorage.removeItem("ACCESS_TOKEN");
+    localStorage.removeItem("ACCESS_TOKEN");
     location.href = "/";
   }, []);
 

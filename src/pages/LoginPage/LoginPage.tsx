@@ -38,7 +38,7 @@ const LoginPage = () => {
           const { data } = await login({ code });
           if (data.code === "WORK01") {
             replace(PATH.ACCOMMODATION.stack, {}, { animate: false });
-            sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
+            localStorage.setItem(ACCESS_TOKEN, data.accessToken);
           }
 
           if (data.code === "WORK02") {

@@ -11,7 +11,7 @@ const defaultOption = {
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   LOG_TOGGLE && console.info(`[request] [${JSON.stringify(config)}]`);
 
-  const token = sessionStorage.getItem(ACCESS_TOKEN) ?? null;
+  const token = localStorage.getItem(ACCESS_TOKEN) ?? null;
 
   if (token) {
     config.headers = {
