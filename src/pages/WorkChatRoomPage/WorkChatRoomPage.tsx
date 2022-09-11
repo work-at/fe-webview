@@ -18,7 +18,7 @@ import { Chats } from "@/domains/chat/chat.action";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { useUserInfo } from "@/domains/user";
-import { usePageVisibility, usePullDownToCallback, usePullUpToCallback } from "@/hooks";
+import { usePageVisibility, usePullDownToCallback, usePullUpToCallback, useInterval } from "@/hooks";
 import Spinner from "@/components/@shared/Spinner/Spinner";
 import { Room } from "@/domains/chat/chat.type";
 import { useFlow } from "@/stack";
@@ -243,6 +243,8 @@ const WorkChatRoomPage = () => {
       alert();
     }
   }, [chatMessages, roomId]);
+
+  useInterval({ callback: handlePullUpCallback, delay: 1000 });
 
   const handleVisibilityChange = useCallback(
     async (isVisible: boolean) => {
