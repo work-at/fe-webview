@@ -60,7 +60,7 @@ const checkAuthStatus = async (dispatchEvent: DispatchEvent) => {
     return;
   }
 
-  const TOKEN = sessionStorage.getItem(ACCESS_TOKEN);
+  const TOKEN = localStorage.getItem(ACCESS_TOKEN);
 
   if ((TOKEN && isLogin) || isDirty) {
     return;

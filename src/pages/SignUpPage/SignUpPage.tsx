@@ -72,7 +72,7 @@ const SignUpPage = () => {
     try {
       const { data } = await signUp(body);
       if (data.accessToken) {
-        sessionStorage.setItem(ACCESS_TOKEN, data.accessToken);
+        localStorage.setItem(ACCESS_TOKEN, data.accessToken);
         setStep(SIGN_UP_FINISH);
         return;
       }

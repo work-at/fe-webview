@@ -4,6 +4,7 @@ import { Z_INDEX } from "@/constants/zIndex";
 
 export const MagazineWrap = styled.div`
   position: relative;
+  top: -97px;
 `;
 
 export const VisualWrap = styled.div`
