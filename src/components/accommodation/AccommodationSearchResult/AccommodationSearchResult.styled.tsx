@@ -242,6 +242,7 @@ export const RegionSelector = styled.select`
   line-height: 140%;
   padding: 0 10px;
   color: #121212;
+  background-color: transparent;
 `;
 
 export const RegionSelectorArr = styled.span`

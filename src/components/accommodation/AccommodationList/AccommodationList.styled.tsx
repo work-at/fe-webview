@@ -232,6 +232,7 @@ export const RegionSelectorWrap = styled.div`
   justify-content: center;
   align-items: center;
   z-index: ${Z_INDEX.HIGH};
+  background-color: transparent;
 `;
 
 export const RegionSelector = styled.select`
