@@ -22,7 +22,7 @@ const CheckBox = ({ items, selectedItemIds, onChange, isIcon, widthAuto }: Check
         <S.ListItem key={index} isIcon={isIcon} widthAuto={widthAuto}>
           <S.CheckboxContainer>
             <S.HiddenCheckbox
-              id={`${item.id}-${item.label}`}
+              id={`${item.id}-${index}`}
               type="checkbox"
               value={item.id}
               onChange={onChange}

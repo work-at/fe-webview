@@ -117,6 +117,7 @@ export const ReceiveMsg = styled.p<{ newMsg?: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  min-height: 19.59px;
 `;
 
 export const ModalWrap = styled.div`
@@ -172,4 +173,14 @@ export const NoDataTxt = styled.p`
   ${theme.fonts.Regular03};
   color: ${theme.colors.black};
   padding-top: 13px;
+`;
+
+type StyledButtonRotateProps = {
+  trigger: boolean;
+};
+
+export const ButtonRotate = styled.button<StyledButtonRotateProps>`
+  transition: transform 1s;
+
+  ${({ trigger }) => (trigger ? "transform: rotate(360deg);" : "transition: none;")};
 `;

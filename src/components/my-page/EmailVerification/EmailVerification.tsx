@@ -2,6 +2,7 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
 import EmailInput from "@/components/@shared/EmailInput";
 import { useEmailVerificationCountRemainQuery, useVerifyEmailMutation } from "@/domains/auth/auth.api";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./EmailVerification.styled";
 
@@ -46,6 +47,16 @@ const EmailVerification = () => {
     renewEmailVerificationRemain();
   });
 
+  const [focused, setFocused] = useState(false);
+
+  const handleSetFocus = useCallback(() => {
+    setFocused(true);
+  }, []);
+
+  const handleUnsetFocus = useCallback(() => {
+    setFocused(false);
+  }, []);
+
   return (
     <StackLayout>
       <S.SignUpWrap onSubmit={handleFormSubmit}>
@@ -67,6 +78,8 @@ const EmailVerification = () => {
               },
               validate: (value) => (emailRegExp.test(value) ? true : "이메일 형식에 맞지 않습니다."),
             })}
+            onFocus={handleSetFocus}
+            onBlur={handleUnsetFocus}
           />
         </S.SignUpInputWrap>
         {errors.email && <S.ErrorTxt>{errors.email.message}</S.ErrorTxt>}
@@ -75,9 +88,11 @@ const EmailVerification = () => {
         )}
         {isSuccess && <S.SuccessTxt>{SUCCESS_TEXT.EMAIL_SEND}</S.SuccessTxt>}
       </S.SignUpWrap>
-      <Button type="submit" size="lg" bgColor="black">
-        확인
-      </Button>
+      {!focused && (
+        <Button type="submit" size="lg" bgColor="black">
+          확인
+        </Button>
+      )}
     </StackLayout>
   );
 };

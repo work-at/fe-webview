@@ -76,10 +76,19 @@ const Chat = ({ isMe, message, time, date, id }: ChatProps) => {
 };
 
 const AppBarRight = ({ callback }: { callback: () => void }) => {
+  const [trigger, setTrigger] = useState(false);
+
+  const handleClickRefresh = useCallback(() => {
+    callback();
+
+    setTrigger(true);
+    setTimeout(() => setTrigger(false), 1000);
+  }, [callback]);
+
   return (
-    <button type="button" onClick={callback}>
+    <S.ButtonRotate type="button" onClick={handleClickRefresh} trigger={trigger}>
       <Icon icon="BtnRefresh" />
-    </button>
+    </S.ButtonRotate>
   );
 };
 
@@ -190,7 +199,7 @@ const WorkChatRoomPage = () => {
 
   const handleSendChat = async () => {
     try {
-      await chatSend({ message, roomId: Number(roomId) });
+      await chatSend({ message: encodeURIComponent(message), roomId: Number(roomId) });
       setMessage("");
       await handlePullUpCallback();
       handleScrollToEnd();
@@ -289,7 +298,9 @@ const WorkChatRoomPage = () => {
       const DOM = document.getElementById(lastMessageId);
 
       if (DOM) {
-        DOM.scrollIntoView();
+        setTimeout(() => {
+          DOM.scrollIntoView({ behavior: "smooth" });
+        }, 500);
         setToggle(false);
       }
     }
@@ -383,7 +394,7 @@ const WorkChatRoomPage = () => {
               pop();
               setTimeout(() => {
                 replace(PATH.MAP.stack, {});
-              });
+              }, 100);
             }}
           >
             <Icon icon="IconWalkChat" />
@@ -400,8 +411,8 @@ const WorkChatRoomPage = () => {
             rows={1}
             value={message}
           />
-          <S.BtnSend onClick={handleSendChat}>
-            <Icon icon={"BtnSendMsg"} size={26} />
+          <S.BtnSend disabled={message.length === 0} onClick={handleSendChat}>
+            <Icon icon={message.length === 0 ? "BtnSendMsgDisabled" : "BtnSendMsg"} size={26} />
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>

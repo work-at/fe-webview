@@ -82,6 +82,7 @@ export { default as BtnUrl } from "../images/icons/BtnUrl.svg";
 export { default as BtnDirecion } from "../images/icons/BtnDirecion.svg";
 export { default as BtnLocation } from "../images/icons/BtnLocation.svg";
 export { default as BtnSendMsg } from "../images/icons/BtnSendMsg.svg";
+export { default as BtnSendMsgDisabled } from "../images/icons/BtnSendMsgDisabled.svg";
 export { default as BtnMapLocation } from "../images/icons/BtnMapLocation.svg";
 export { default as BtnMapList } from "../images/icons/BtnMapList.svg";
 export { default as BtnEdit } from "../images/icons/BtnEdit.svg";

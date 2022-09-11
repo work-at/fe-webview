@@ -105,12 +105,26 @@ const ChatList = (item: Room) => {
 };
 
 const AppBarRight = () => {
+  const { data } = useChatListQuery();
+
   const { refetch } = useChatListQuery();
+  const [trigger, setTrigger] = useState(false);
+
+  const handleClickRefresh = useCallback(() => {
+    refetch();
+
+    setTrigger(true);
+    setTimeout(() => setTrigger(false), 1000);
+  }, [refetch]);
+
+  if (data?.data.rooms.length === 0) {
+    return null;
+  }
 
   return (
-    <button type="button" onClick={() => refetch()}>
+    <S.ButtonRotate type="button" onClick={handleClickRefresh} trigger={trigger}>
       <Icon icon="BtnRefresh" />
-    </button>
+    </S.ButtonRotate>
   );
 };
 

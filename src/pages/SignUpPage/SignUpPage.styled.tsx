@@ -9,6 +9,10 @@ export const SignUpWrap = styled.div`
   height: 100vh;
 `;
 
+export const SignUpPaddingWrap = styled.div`
+  padding: 13px 7.4667vw 0;
+`;
+
 export const SignUpTit = styled.h2`
   ${theme.fonts.Bold01};
   color: ${theme.colors.black};
