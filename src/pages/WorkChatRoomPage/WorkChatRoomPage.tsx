@@ -23,6 +23,7 @@ import Spinner from "@/components/@shared/Spinner/Spinner";
 import { Room } from "@/domains/chat/chat.type";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 export type ChatProps = {
   isMe: boolean;
@@ -285,13 +286,17 @@ const WorkChatRoomPage = () => {
   }, [chatAreaScrollRef]);
 
   const [toggle, setToggle] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
       const { data } = await requestChat({
         roomId: Number(roomId),
       });
       setChatMessages(data.messages ?? []);
-      setToggle(true);
+      setTimeout(() => {
+        setToggle(true);
+        setLoading(false);
+      }, 500);
     })();
   }, [handleScrollToEnd, roomId]);
   useEffect(() => {
@@ -300,10 +305,8 @@ const WorkChatRoomPage = () => {
       const DOM = document.getElementById(lastMessageId);
 
       if (DOM) {
-        setTimeout(() => {
-          DOM.scrollIntoView({ behavior: "smooth" });
-        }, 500);
         setToggle(false);
+        DOM.scrollIntoView();
       }
     }
   }, [chatInfo.lastMessageId, toggle]);
@@ -318,6 +321,20 @@ const WorkChatRoomPage = () => {
       handleScrollToEnd();
     }
   };
+
+  if (loading) {
+    return (
+      <StackLayout
+        appBar={{
+          title: chatInfo?.otherUser?.userNickname ?? "",
+          appendRight: () => AppBarRight({ callback: handlePullUpCallback }),
+          isTitleCenter: true,
+        }}
+      >
+        <Lottie source={require("@/assets/loading.json")} />
+      </StackLayout>
+    );
+  }
 
   // TODO: 추후 주석 제거
   // if (!workerId) {
