@@ -1,6 +1,7 @@
 import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import Tag from "@/components/@shared/Tag/Tag";
 import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
@@ -44,7 +45,7 @@ const AccommodationDetail = () => {
     return (
       <StackLayout isHide>
         <Header useBack />
-        <div>로딩중</div>
+        <Lottie source={require("@/assets/loading.json")} />
       </StackLayout>
     );
   }
@@ -53,7 +54,7 @@ const AccommodationDetail = () => {
     return (
       <StackLayout isHide>
         <Header useBack />
-        <div>에러</div>{" "}
+        <div>에러</div>
       </StackLayout>
     );
   }

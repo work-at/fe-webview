@@ -13,6 +13,7 @@ import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
 import { useUserAddressQuery } from "@/domains/user";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const DEFAULT_CAFE_IMAGE =
   "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FmZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60";
@@ -65,7 +66,12 @@ const CafeDetailPage = () => {
   }, [userAddress, cafeDetail]);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <StackLayout isHide>
+        <Header useBack />
+        <Lottie source={require("@/assets/loading.json")} />
+      </StackLayout>
+    );
   }
 
   if (isError || !cafeDetail) {
