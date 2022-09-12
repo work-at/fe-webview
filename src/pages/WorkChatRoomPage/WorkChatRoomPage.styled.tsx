@@ -18,7 +18,6 @@ export const ChatBoxWrap = styled.div`
   padding: 0 7.4667vw;
   background-color: ${theme.colors.white};
   z-index: ${Z_INDEX.LOW};
-  touch-action: none;
 `;
 
 export const WorkChat = styled.div`
