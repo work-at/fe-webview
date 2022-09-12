@@ -135,7 +135,7 @@ const WorkChatPage = () => {
   if (isLoading) {
     return (
       <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">
-        <Lottie source={require("@/assets/loading.json")} />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }

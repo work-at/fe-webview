@@ -42,7 +42,7 @@ const AccommodationList = () => {
     return (
       <StackLayout isHide>
         <Header bgColor useBack />
-        <Lottie source={require("@/assets/loading.json")} />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }

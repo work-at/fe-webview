@@ -320,7 +320,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
     setTimeout(() => {
       setShouldMapReload(false);
     }, 10);
-    return <Lottie source={require("@/assets/loading.json")} />;
+    return <Lottie source={require("@/assets/loading.json")} speed={2} />;
   }
 
   return (

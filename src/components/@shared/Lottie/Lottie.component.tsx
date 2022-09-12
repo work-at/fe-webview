@@ -7,9 +7,10 @@ export type Props = {
   autoplay?: boolean;
   source: string;
   style?: HTMLAttributes<HTMLDivElement>;
+  speed?: number;
 };
 
-const Lottie = ({ loop = true, autoplay = true, source, style }: Props) => {
+const Lottie = ({ loop = true, autoplay = true, source, style, speed = 1 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,8 +21,9 @@ const Lottie = ({ loop = true, autoplay = true, source, style }: Props) => {
         loop,
         autoplay,
       });
+      lottie.setSpeed(speed);
     }
-  }, [autoplay, loop, source]);
+  }, [autoplay, loop, source, speed]);
 
   return (
     <S.Container>

@@ -32,7 +32,7 @@ const MapPage = () => {
   if (!userCoordinates) {
     return (
       <StackLayout appBar={{ title: userAddress }} navigationPath="map">
-        <Lottie source={require("@/assets/loading.json")} />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }
@@ -40,7 +40,7 @@ const MapPage = () => {
   if (isMapLoading) {
     return (
       <StackLayout appBar={{ title: userAddress }} navigationPath="map">
-        <Lottie source={require("@/assets/loading.json")} />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }

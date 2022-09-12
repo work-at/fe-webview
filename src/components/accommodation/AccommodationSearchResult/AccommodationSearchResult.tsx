@@ -53,7 +53,8 @@ const AccommodationSearchResult = () => {
   if (isLoading) {
     return (
       <StackLayout isHide>
-        <Header bgColor useBack /> <Lottie source={require("@/assets/loading.json")} />
+        <Header bgColor useBack />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }

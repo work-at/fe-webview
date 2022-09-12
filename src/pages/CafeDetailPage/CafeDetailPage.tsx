@@ -69,7 +69,7 @@ const CafeDetailPage = () => {
     return (
       <StackLayout isHide>
         <Header useBack />
-        <Lottie source={require("@/assets/loading.json")} />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
   }
