@@ -4,6 +4,7 @@ import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import MapManager from "@/components/map/MapManager";
 import { useStack } from "@stackflow/react";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const API_KEY = process.env.KAKAO_MAP_API_KEY;
 
@@ -31,7 +32,7 @@ const MapPage = () => {
   if (!userCoordinates) {
     return (
       <StackLayout appBar={{ title: userAddress }} navigationPath="map">
-        <div>현재 좌표 로딩중</div>
+        <Lottie source={require("@/assets/loading.json")} />
       </StackLayout>
     );
   }
@@ -39,7 +40,7 @@ const MapPage = () => {
   if (isMapLoading) {
     return (
       <StackLayout appBar={{ title: userAddress }} navigationPath="map">
-        <div>지도 로딩중</div>{" "}
+        <Lottie source={require("@/assets/loading.json")} />
       </StackLayout>
     );
   }
