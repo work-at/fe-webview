@@ -1,4 +1,5 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
+import { ACCESS_TOKEN } from "@/constants";
 import { useUserLocationTrackingToggleMutation } from "@/domains/user";
 import { isUserLocationBlockedAtom } from "@/pages/MyPage/MyPage";
 import { useAtom } from "jotai";
@@ -20,7 +21,7 @@ const Setting = () => {
   );
 
   const handleLogout = useCallback(() => {
-    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.removeItem(ACCESS_TOKEN);
     location.href = "/";
   }, []);
 
