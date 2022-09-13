@@ -74,6 +74,7 @@ export const ChekBoxWrap = styled.div`
 
 export const Input = styled.input`
   width: 100%;
+  ${theme.fonts.Medium02};
   outline: none;
 `;
 

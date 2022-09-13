@@ -75,14 +75,14 @@ const AccommodationSearch = () => {
           </S.ScrollInner>
         </S.ScrollWrap>
 
-        <S.SearhchTit>리뷰 추천 키워드</S.SearhchTit>
+        {/* <S.SearhchTit>리뷰 추천 키워드</S.SearhchTit>
         <S.ReviewList>
           {ACCOMMODATION_REVIEW_TAGS.map((tag) => (
             <S.ReviewListItem key={tag.name} onClick={() => handleReviewTagSelect(tag.name)}>
               <S.BtnReview>{tag.content}</S.BtnReview>
             </S.ReviewListItem>
           ))}
-        </S.ReviewList>
+        </S.ReviewList> */}
       </S.AccommSearchWrap>
     </StackLayout>
   );

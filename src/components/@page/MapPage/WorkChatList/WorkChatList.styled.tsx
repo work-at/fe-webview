@@ -98,7 +98,7 @@ export const EtcList = styled.li`
     top: 50%;
     left: 0;
     width: 1px;
-    margin-top: -4px;
+    margin-top: -5px;
     height: 9px;
     background: ${theme.colors.gray05};
   }
@@ -154,7 +154,6 @@ export const MenuList = styled.button`
 `;
 
 export const ChatNoData = styled.div`
-  padding: 225px 0 100px;
   text-align: center;
 `;
 

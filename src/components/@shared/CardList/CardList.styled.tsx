@@ -113,7 +113,7 @@ export const InfoList = styled.li`
     left: 0;
     width: 1px;
     height: 10px;
-    margin-top: -5px;
+    margin-top: -6px;
     background: ${theme.colors.gray02};
   }
 

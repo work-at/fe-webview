@@ -151,17 +151,17 @@ const AccommodationPage = () => {
             {SLIDER_ITEM.map((each) => (
               <S.VisualWrap key={each.text1} onClick={handleClickSlider}>
                 <img src={each.src} alt={each.location} />
+                <S.VisualTxtBox>
+                  {SLIDER_ITEM[currentIndex].textBox}
+                  <S.VisualTxt>
+                    {SLIDER_ITEM[currentIndex].text1}
+                    <br />
+                    {SLIDER_ITEM[currentIndex].text2}
+                  </S.VisualTxt>
+                </S.VisualTxtBox>
               </S.VisualWrap>
             ))}
           </S.VisualWrapList>
-          <S.VisualTxtBox>
-            {SLIDER_ITEM[currentIndex].textBox}
-            <S.VisualTxt>
-              {SLIDER_ITEM[currentIndex].text1}
-              <br />
-              {SLIDER_ITEM[currentIndex].text2}
-            </S.VisualTxt>
-          </S.VisualTxtBox>
           <S.VisualDotBox>
             {SLIDER_ITEM.map((cur, index) =>
               currentIndex === index ? <DotActive key={cur.text1} /> : <Dot key={cur.text1} />

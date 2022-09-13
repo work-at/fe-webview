@@ -135,14 +135,16 @@ const WorkChatPage = () => {
     <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">
       <S.WorkChatListWrap>
         {data?.data.rooms.length === 0 || !data?.data ? (
-          <S.ChatNoData>
-            <Icon icon="IconNoData" />
-            <S.NoDataTxt>
-              아직 채팅 기록이 없어요!
-              <br />
-              워크챗 신청을 해보세요
-            </S.NoDataTxt>
-          </S.ChatNoData>
+          <S.ChatNoDataWrap>
+            <S.ChatNoData>
+              <Icon icon="IconNoData" />
+              <S.NoDataTxt>
+                아직 채팅 기록이 없어요!
+                <br />
+                워크챗 신청을 해보세요
+              </S.NoDataTxt>
+            </S.ChatNoData>
+          </S.ChatNoDataWrap>
         ) : (
           <S.ChatList>
             {data?.data.rooms.map((item) => (

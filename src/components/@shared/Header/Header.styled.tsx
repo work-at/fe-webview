@@ -44,6 +44,9 @@ export const MagazineLogo = styled.h1`
   display: flex;
   justify-content: center;
   flex: 1;
+  > svg {
+    margin-left: -40px;
+  }
 `;
 
 export const BtnBack = styled.button<{ bgColor?: boolean }>`
@@ -85,7 +88,7 @@ export const SearchInputWrap = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  margin-left: 8px;
+  margin: 0 7.4667vw 0 8px;
 `;
 
 export const SearchInput = styled.input<React.InputHTMLAttributes<HTMLInputElement>>`
