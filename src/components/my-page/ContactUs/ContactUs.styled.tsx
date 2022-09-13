@@ -72,7 +72,6 @@ export const Txtarea = styled.textarea`
   resize: none;
   word-break: normal;
   min-height: 120px;
-  max-height: 300px;
   overflow: auto;
   background-color: ${theme.colors.gray09};
 `;
