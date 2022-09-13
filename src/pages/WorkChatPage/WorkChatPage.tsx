@@ -8,6 +8,7 @@ import { useDetectOutsideClick } from "@/hooks";
 import ModalContainerPortal from "@/components/@layout/ModalContainer/ModalContainer";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 export type DropDownProps = {
   isOpen: boolean;
@@ -129,7 +130,15 @@ const AppBarRight = () => {
 };
 
 const WorkChatPage = () => {
-  const { data } = useChatListQuery();
+  const { data, isLoading } = useChatListQuery();
+
+  if (isLoading) {
+    return (
+      <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
+  }
 
   return (
     <StackLayout appBar={{ title: "워크챗", appendRight: AppBarRight }} navigationPath="work-chat">

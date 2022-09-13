@@ -11,6 +11,7 @@ import Button from "@/components/@shared/Button/Button";
 import * as S from "./WorkerDetailPage.styled";
 import { useChatListQuery, useChatRoomCreateQuery } from "@/domains/chat/chat.api";
 import { Room } from "@/domains/chat/chat.type";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const isEmptyObj = (obj: any) => {
   if (obj.constructor === Object && Object.keys(obj).length === 0) {
@@ -71,7 +72,12 @@ const WorkerDetailPage = () => {
   };
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <StackLayout isHide>
+        <Header useBack />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
   }
 
   if (isError || !workerDetail) {

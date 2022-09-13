@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { StyledComponent } from "styled-components";
 
 const useScrollDrag = () => {
   const ref = useRef<HTMLUListElement>(null);

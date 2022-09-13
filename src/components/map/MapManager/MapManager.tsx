@@ -23,6 +23,7 @@ import CardList from "../../@shared/CardList";
 import Icon from "@/assets/Icon";
 import { useNearWorkersCountQuery } from "@/domains/user";
 import { atom, useAtom } from "jotai";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -319,7 +320,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
     setTimeout(() => {
       setShouldMapReload(false);
     }, 10);
-    return <div>지도 로딩중</div>;
+    return <Lottie source={require("@/assets/loading.json")} speed={2} />;
   }
 
   return (

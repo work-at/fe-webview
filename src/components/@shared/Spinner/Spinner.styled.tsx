@@ -10,6 +10,8 @@ export const Loading = styled.div`
       transform: rotate(359deg);
     }
   }
+  width: 100%;
+  height: 100%;
 
   display: flex;
   align-items: center;

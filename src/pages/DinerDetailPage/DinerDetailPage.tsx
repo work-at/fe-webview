@@ -12,6 +12,7 @@ import { useCallback } from "react";
 import { PATH } from "@/constants";
 import { useDinerDetailQuery } from "@/domains/diner";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const DEFAULT_DINER_IMAGE =
   "https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGNvb2tpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60";
@@ -64,7 +65,12 @@ const DinerDetailPage = () => {
   }, [userAddress, dinerDetail]);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <StackLayout isHide>
+        <Header useBack />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
   }
 
   if (isError || !dinerDetail) {

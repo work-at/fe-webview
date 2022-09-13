@@ -1,6 +1,7 @@
 import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
@@ -50,7 +51,12 @@ const AccommodationSearchResult = () => {
   };
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <StackLayout isHide>
+        <Header bgColor useBack />
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
   }
 
   if (isError || !accommodationList) {
