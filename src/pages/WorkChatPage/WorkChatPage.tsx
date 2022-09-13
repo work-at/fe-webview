@@ -9,6 +9,7 @@ import ModalContainerPortal from "@/components/@layout/ModalContainer/ModalConta
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import DefaultProfile from "@/assets/images/DefaultProfile.png";
 
 export type DropDownProps = {
   isOpen: boolean;
@@ -80,7 +81,7 @@ const ChatList = (item: Room) => {
       <S.BtnDetail onClick={() => push(PATH.WORK_CHAT.ROOM.stack, { roomId: item.id })}>
         <S.ThumbWrap>
           <S.UserThumb>
-            <img src={item.otherUser.userProfileUrl} alt="유저 이미지" />
+            <img src={item.otherUser.userProfileUrl ?? DefaultProfile} alt="유저 이미지" />
           </S.UserThumb>
           {!item.allRead && <S.NewChat />}
         </S.ThumbWrap>

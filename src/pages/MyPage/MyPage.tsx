@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { useCallback, useEffect, useState } from "react";
 import * as S from "./MyPage.styled";
+import DefaultProfile from "@/assets/images/DefaultProfile.png";
 
 // 3개의 스택
 
@@ -62,7 +63,7 @@ const MyPage = () => {
         <S.TopInfo>
           <S.UserPicture>
             <S.UserThumb htmlFor="profile-image">
-              <img src={userInfo?.imageUrl} alt="유저 이미지" />
+              <img src={userInfo?.imageUrl ?? imageUrl ?? DefaultProfile} alt="유저 이미지" />
               <input
                 type="file"
                 id="profile-image"

@@ -4,7 +4,7 @@ import { useActivityParams } from "@stackflow/react";
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Icon from "@/assets/Icon";
 import * as S from "./WorkChatRoomPage.styled";
-import UserImg from "@/assets/images/walkchat1.png";
+import DefaultProfile from "@/assets/images/DefaultProfile.png";
 import Button from "@/components/@shared/Button/Button";
 import {
   requestChat,
@@ -145,7 +145,7 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
     <S.ProModalWrap>
       <S.ProInnerWrap>
         <S.ProThumb>
-          <img src={UserImg} alt="유저 이미지" />
+          <img src={chatInfo.otherUser?.userProfileUrl ?? DefaultProfile} alt="유저 이미지" />
         </S.ProThumb>
         <S.ProGoBtn>
           <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId: Number(chatInfo.otherUser?.userId) })}>
