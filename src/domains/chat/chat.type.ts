@@ -2,7 +2,6 @@ export type Room = {
   allRead: boolean;
   blockedByOtherUser: boolean;
   createdDate: string;
-  deletedByOtherUser: boolean;
   id: number;
   lastMessage: string;
   lastMessageId: number;
