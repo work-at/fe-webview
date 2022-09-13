@@ -432,7 +432,10 @@ const WorkChatRoomPage = () => {
             value={message}
           />
           <S.BtnSend disabled={message.length === 0} onClick={handleSendChat}>
-            <Icon icon={message.length === 0 ? "BtnSendMsgDisabled" : "BtnSendMsg"} size={26} />
+            <Icon
+              icon={message.length === 0 || chatInfo.blockedByOtherUser ? "BtnSendMsgDisabled" : "BtnSendMsg"}
+              size={26}
+            />
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
