@@ -79,7 +79,12 @@ const ChatList = (item: Room) => {
   return (
     <S.ListItem>
       <S.BtnDetail onClick={() => push(PATH.WORK_CHAT.ROOM.stack, { roomId: item.id })}>
-        <S.ThumbWrap>
+        <S.ThumbWrap
+          onClick={(e) => {
+            e.stopPropagation();
+            push(PATH.WORKER.stack, { workerId: item.otherUser?.userId });
+          }}
+        >
           <S.UserThumb>
             <img src={item.otherUser.userProfileUrl ?? DefaultProfile} alt="유저 이미지" />
           </S.UserThumb>
