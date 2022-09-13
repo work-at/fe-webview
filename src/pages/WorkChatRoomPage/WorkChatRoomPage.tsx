@@ -376,10 +376,10 @@ const WorkChatRoomPage = () => {
                 }
               }
 
-              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a HH:mm");
+              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a hh:mm");
               if (index < chatMessages.length - 1) {
                 const nextChat = chatMessages[index + 1];
-                const currentTime = dayjs(nextChat.createdDate).format("a HH:mm");
+                const currentTime = dayjs(nextChat.createdDate).format("a hh:mm");
 
                 if (currentChat.writerId !== nextChat.writerId) {
                   time = currentTime;
