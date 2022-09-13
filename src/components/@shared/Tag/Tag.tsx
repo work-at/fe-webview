@@ -16,7 +16,7 @@ const Tag = ({ iconType, reviews = 0, children }: TagProps) => {
           <Icon icon={iconType} />
         </S.TagIcon>
         <S.TagTxt>{children}</S.TagTxt>
-        <S.TagNum>{reviews}</S.TagNum>
+        {!!reviews && <S.TagNum>{reviews}</S.TagNum>}
       </S.TagInner>
     </S.Tag>
   );

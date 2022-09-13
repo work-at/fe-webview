@@ -85,6 +85,8 @@ const WorkerDetailPage = () => {
     return <div>정보를 불러올 수 없습니다.</div>;
   }
 
+  console.log("workerDetail.desiredActivities", workerDetail.desiredActivities);
+
   return (
     <StackLayout isHide>
       <Header useBack bgColor />
@@ -99,7 +101,10 @@ const WorkerDetailPage = () => {
             <S.EtcList>{workerDetail.yearOfService}</S.EtcList>
             <S.EtcChatList>
               {/* TODO : 워크챗 횟수 연동하기 */}
-              워크챗<strong>05</strong>
+              워크챗
+              <strong>
+                {workerDetail.workChatCount !== 0 ? String(workerDetail.workChatCount).padStart(2, "0") : 0}
+              </strong>
             </S.EtcChatList>
           </S.EtcInfo>
         </S.TopInfo>
@@ -108,7 +113,7 @@ const WorkerDetailPage = () => {
           <S.HopeTit>희망 활동</S.HopeTit>
           <S.HopeTag>
             {workerDetail.desiredActivities.map((activity, index) => (
-              <Tag key={index} walkChat iconType={activity.icon}>
+              <Tag key={index} iconType={activity.icon}>
                 {activity.text}
               </Tag>
             ))}

@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { DESIRED_ACTIVITIES } from "../common.constant";
 
 export type GetWorkerPinsRequest = {
   kilometer: number;
@@ -50,6 +51,8 @@ type WorkerDetail = {
     content: string;
     name: string;
   };
+  workchats: number;
+  activities: typeof DESIRED_ACTIVITIES;
 };
 
 export type GetWorkerDetailResponse = AxiosResponse<WorkerDetail>;
