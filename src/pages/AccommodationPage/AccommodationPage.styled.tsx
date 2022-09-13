@@ -56,7 +56,12 @@ export const VisualWrap = styled.li`
   scroll-snap-align: start;
 `;
 
-export const VisualTxtBox = styled.div`
+type StyledVisualTxtBoxProps = {
+  textVisible: boolean;
+};
+
+export const VisualTxtBox = styled.div<StyledVisualTxtBoxProps>`
+  ${({ textVisible }) => (!textVisible ? "z-index: -1;" : "")}
   position: absolute;
   left: 7.4667vw;
   right: 7.4667vw;
