@@ -143,7 +143,7 @@ const ProfileEdit = () => {
         <S.MyInfoItem>
           <S.ItemHead>소속</S.ItemHead>
           <S.ItemBody>
-            <S.Txt>{userInfo?.position.content}</S.Txt>
+            <S.Txt>{userInfo?.company}</S.Txt>
             <S.Button type="button" onClick={handleEmailVerificationRoute} size="sm" round>
               회사 인증
             </S.Button>

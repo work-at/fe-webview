@@ -1,10 +1,12 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
 import EmailInput from "@/components/@shared/EmailInput";
+import { QUERY_NAME } from "@/constants";
 import { useEmailVerificationCountRemainQuery, useVerifyEmailMutation } from "@/domains/auth/auth.api";
 import { useFlow } from "@/stack";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "react-query";
 import * as S from "./EmailVerification.styled";
 
 const EMAIL_LENGTH_LIMIT = 100;
@@ -33,7 +35,7 @@ const EmailVerification = () => {
   } = useForm<{ email: string }>({
     mode: "onChange",
   });
-
+  const queryClient = useQueryClient();
   const { mutateAsync: verifyEmail, isSuccess } = useVerifyEmailMutation();
   const { data, refetch: renewEmailVerificationRemain } = useEmailVerificationCountRemainQuery();
   const { pop } = useFlow();
@@ -59,7 +61,10 @@ const EmailVerification = () => {
     setFocused(false);
   }, []);
 
-  const handleConfirmButtonClick = useCallback(() => pop(), [pop]);
+  const handleConfirmButtonClick = useCallback(() => {
+    queryClient.invalidateQueries([QUERY_NAME.GET_USER_INFO]);
+    pop();
+  }, [queryClient, pop]);
 
   return (
     <StackLayout>
