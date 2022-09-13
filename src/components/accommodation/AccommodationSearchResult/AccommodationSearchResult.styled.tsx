@@ -112,7 +112,7 @@ export const AccommListItem = styled.li`
   overflow: hidden;
   box-shadow: 0px 4.28462px 10px rgba(0, 0, 0, 0.1);
   &:first-child {
-    margin-top: 35px;
+    margin-top: 15px;
   }
 `;
 
@@ -123,7 +123,7 @@ export const LinkDetail = styled.button`
 
 export const AccommThumb = styled.div`
   min-height: 130px;
-  background: ${theme.colors.gray09};
+  background: ${theme.colors.gray05};
   > img {
     width: 100%;
   }
