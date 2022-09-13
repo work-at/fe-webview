@@ -245,6 +245,7 @@ export const ProThumb = styled.div`
   border-radius: 100%;
   margin: 0 auto 10px;
   > img {
+    background-color: white;
     display: block;
     height: 100%;
   }

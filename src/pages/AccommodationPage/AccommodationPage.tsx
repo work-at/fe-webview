@@ -19,7 +19,7 @@ import SpaceImg4 from "@/assets/images/BgWorkSpace4.png";
 import SpaceImg5 from "@/assets/images/BgWorkSpace5.png";
 import { useScrollDrag } from "@/hooks";
 import { Dot, DotActive } from "@/assets/svg";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
 import { useAccommodationCurationQuery, useRegionTrafficQuery } from "@/domains/accommodation/accommodation.api";
@@ -139,6 +139,7 @@ const AccommodationPage = () => {
     [4]: () => window.open("https://www.desker.co.kr/now/detail?nowCd=311", "_blank"),
   }[currentIndex];
 
+  const [textVisible, setTextVisible] = useState(true);
   return (
     <StackLayout navigationPath="accommodation" isHide>
       <Header main />
@@ -151,16 +152,20 @@ const AccommodationPage = () => {
             {SLIDER_ITEM.map((each) => (
               <S.VisualWrap key={each.text1} onClick={handleClickSlider}>
                 <img src={each.src} alt={each.location} />
-                <S.VisualTxtBox>
-                  {SLIDER_ITEM[currentIndex].textBox}
-                  <S.VisualTxt>
-                    {SLIDER_ITEM[currentIndex].text1}
-                    <br />
-                    {SLIDER_ITEM[currentIndex].text2}
-                  </S.VisualTxt>
-                </S.VisualTxtBox>
               </S.VisualWrap>
             ))}
+            <S.VisualTxtBox
+              onTouchStart={() => setTextVisible(false)}
+              onTouchEnd={() => setTextVisible(true)}
+              textVisible={textVisible}
+            >
+              {SLIDER_ITEM[currentIndex].textBox}
+              <S.VisualTxt>
+                {SLIDER_ITEM[currentIndex].text1}
+                <br />
+                {SLIDER_ITEM[currentIndex].text2}
+              </S.VisualTxt>
+            </S.VisualTxtBox>
           </S.VisualWrapList>
           <S.VisualDotBox>
             {SLIDER_ITEM.map((cur, index) =>

@@ -24,6 +24,7 @@ import Icon from "@/assets/Icon";
 import { useNearWorkersCountQuery } from "@/domains/user";
 import { atom, useAtom } from "jotai";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import DefaultProfileSquare from "@/assets/images/DefaultProfileSquare.png";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -185,7 +186,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             id: worker.id,
             type: "worker" as const,
             title: worker.name,
-            imageUrl: worker.imageUrl,
+            imageUrl: worker.imageUrl ?? DefaultProfileSquare,
             addr: worker.job,
             job: worker.job,
             year: worker.yearOfService,
@@ -257,7 +258,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               id: worker.id,
               type: "worker" as const,
               title: worker.name,
-              imageUrl: worker.imageUrl,
+              imageUrl: worker.imageUrl ?? DefaultProfileSquare,
               reviewNum: 12,
               addr: worker.job,
               job: worker.job,

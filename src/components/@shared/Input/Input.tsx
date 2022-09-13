@@ -84,7 +84,7 @@ const Input = ({ count, ...props }: InputProps) => {
         </Button>
       </S.InputBox>
       {errors?.nickname?.type === "validate" && (
-        <S.ErrorTxt>특수문자와 단일 자음,단일 모음, 공백은 사용할 수 없습니다.</S.ErrorTxt>
+        <S.ErrorTxt>특수문자와 단일 자음, 단일 모음, 공백은 사용할 수 없습니다.</S.ErrorTxt>
       )}
       {errors?.nickname?.type === "checkDuplicate" && <S.ErrorTxt>닉네임 중복확인을 해주세요.</S.ErrorTxt>}
       {errors?.nickname?.type === "duplicate" && <S.ErrorTxt>이미 사용중인 닉네임입니다.</S.ErrorTxt>}

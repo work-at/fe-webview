@@ -12,6 +12,7 @@ import * as S from "./WorkerDetailPage.styled";
 import { useChatListQuery, useChatRoomCreateQuery } from "@/domains/chat/chat.api";
 import { Room } from "@/domains/chat/chat.type";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import DefaultProfile from "@/assets/images/DefaultProfile.png";
 
 const isEmptyObj = (obj: any) => {
   if (obj.constructor === Object && Object.keys(obj).length === 0) {
@@ -90,7 +91,7 @@ const WorkerDetailPage = () => {
       <S.WorkerDetailWrap>
         <S.TopInfo>
           <S.UserThumb>
-            <img src={workerDetail.imageUrl} alt="워케이셔너 이미지" />
+            <img src={workerDetail.imageUrl ?? DefaultProfile} alt="워케이셔너 이미지" />
           </S.UserThumb>
           <S.UserName>{workerDetail.name}</S.UserName>
           <S.EtcInfo>

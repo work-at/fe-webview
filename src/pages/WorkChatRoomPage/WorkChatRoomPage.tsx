@@ -4,7 +4,7 @@ import { useActivityParams } from "@stackflow/react";
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Icon from "@/assets/Icon";
 import * as S from "./WorkChatRoomPage.styled";
-import UserImg from "@/assets/images/walkchat1.png";
+import DefaultProfile from "@/assets/images/DefaultProfile.png";
 import Button from "@/components/@shared/Button/Button";
 import {
   requestChat,
@@ -145,7 +145,7 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
     <S.ProModalWrap>
       <S.ProInnerWrap>
         <S.ProThumb>
-          <img src={UserImg} alt="유저 이미지" />
+          <img src={chatInfo.otherUser?.userProfileUrl ?? DefaultProfile} alt="유저 이미지" />
         </S.ProThumb>
         <S.ProGoBtn>
           <S.ProGoTxt onClick={() => push(PATH.WORKER.stack, { workerId: Number(chatInfo.otherUser?.userId) })}>
@@ -330,6 +330,7 @@ const WorkChatRoomPage = () => {
           appendRight: () => AppBarRight({ callback: handlePullUpCallback }),
           isTitleCenter: true,
         }}
+        isHide
       >
         <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
@@ -374,11 +375,13 @@ const WorkChatRoomPage = () => {
                 }
               }
 
-              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a HH:MM");
+              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a HH:mm");
               if (index < chatMessages.length - 1) {
                 const nextChat = chatMessages[index + 1];
+                const currentTime = dayjs(nextChat.createdDate).format("a HH:mm");
+
                 if (currentChat.writerId !== nextChat.writerId) {
-                  time = dayjs(currentChat.createdDate).format("a HH:MM");
+                  time = currentTime;
                 }
               }
 
@@ -431,7 +434,10 @@ const WorkChatRoomPage = () => {
             value={message}
           />
           <S.BtnSend disabled={message.length === 0} onClick={handleSendChat}>
-            <Icon icon={message.length === 0 ? "BtnSendMsgDisabled" : "BtnSendMsg"} size={26} />
+            <Icon
+              icon={message.length === 0 || chatInfo.blockedByOtherUser ? "BtnSendMsgDisabled" : "BtnSendMsg"}
+              size={26}
+            />
           </S.BtnSend>
         </S.TxtInputWrap>
       </S.BottomFixedWrap>
