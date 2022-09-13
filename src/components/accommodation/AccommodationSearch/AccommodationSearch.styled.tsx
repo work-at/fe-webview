@@ -32,7 +32,7 @@ export const InfoList = styled.ul`
 `;
 
 export const InfoListItem = styled.li`
-  display: inline-flex;
+  display: inline-grid;
   position: relative;
   margin-right: 12px;
   overflow: hidden;

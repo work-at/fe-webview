@@ -73,42 +73,49 @@ const AccommodationSearchResult = () => {
           <S.RegionSelectorArr></S.RegionSelectorArr>
         </S.RegionSelectorWrap>
 
-        {/* 숙소 키워드 */}
-        <S.KeywordTxt>{searchedBy} 검색결과</S.KeywordTxt>
-        <S.AccommList>
-          {accommodationList.map((item, index) => (
-            <S.AccommListItem key={index}>
-              <S.LinkDetail
-                onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
-              >
-                <S.AccommThumb>
-                  <img src={item.imgUrl === "" || !item.imgUrl ? DEFAULT_IMAGE : item.imgUrl} alt="숙소 이미지" />
-                </S.AccommThumb>
-                <S.DetailInfo>
-                  <S.AccommName>{item.name}</S.AccommName>
+        {accommodationList.length !== 0 ? (
+          <>
+            {/* 검색 키워드 */}
+            <S.KeywordTxt>{searchedBy} 검색결과</S.KeywordTxt>
 
-                  <S.AccommPriceInfo>
-                    <S.ConsecutivePriceTxt>
-                      <S.StandardTxt region={selectedRegion ?? "ALL"}>평일 5일</S.StandardTxt>
-                      <S.PriceBox>
-                        <S.PriceTxt>{decimalFormatter(item.price * 5)}</S.PriceTxt>
-                        <S.WonTxt>원</S.WonTxt>
-                        <S.FromTxt>부터</S.FromTxt>
-                      </S.PriceBox>
-                    </S.ConsecutivePriceTxt>
-                    <S.DayPriceTxt>1박 평균 {decimalFormatter(item.price)}원</S.DayPriceTxt>
-                  </S.AccommPriceInfo>
+            {/* 검색 리스트 */}
+            <S.AccommList>
+              {accommodationList.map((item, index) => (
+                <S.AccommListItem key={index}>
+                  <S.LinkDetail
+                    onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
+                  >
+                    <S.AccommThumb>
+                      <img src={item.imgUrl === "" || !item.imgUrl ? DEFAULT_IMAGE : item.imgUrl} alt="숙소 이미지" />
+                    </S.AccommThumb>
+                    <S.DetailInfo>
+                      <S.AccommName>{item.name}</S.AccommName>
 
-                  <S.AccommReviewList>
-                    {item.topReviewTags.map((tag, index) => (
-                      <S.AccommReviewListItem key={index}>{tag.content}</S.AccommReviewListItem>
-                    ))}
-                  </S.AccommReviewList>
-                </S.DetailInfo>
-              </S.LinkDetail>
-            </S.AccommListItem>
-          ))}
-          {accommodationList.length === 0 && (
+                      <S.AccommPriceInfo>
+                        <S.ConsecutivePriceTxt>
+                          <S.StandardTxt region={selectedRegion ?? "ALL"}>평일 5일</S.StandardTxt>
+                          <S.PriceBox>
+                            <S.PriceTxt>{decimalFormatter(item.price * 5)}</S.PriceTxt>
+                            <S.WonTxt>원</S.WonTxt>
+                            <S.FromTxt>부터</S.FromTxt>
+                          </S.PriceBox>
+                        </S.ConsecutivePriceTxt>
+                        <S.DayPriceTxt>1박 평균 {decimalFormatter(item.price)}원</S.DayPriceTxt>
+                      </S.AccommPriceInfo>
+
+                      <S.AccommReviewList>
+                        {item.topReviewTags.map((tag, index) => (
+                          <S.AccommReviewListItem key={index}>{tag.content}</S.AccommReviewListItem>
+                        ))}
+                      </S.AccommReviewList>
+                    </S.DetailInfo>
+                  </S.LinkDetail>
+                </S.AccommListItem>
+              ))}
+            </S.AccommList>
+          </>
+        ) : (
+          <S.AccommNoDataWrap>
             <S.AccommNoData>
               <Icon icon="IconNoData" />
               <S.NoDataTxt>
@@ -116,10 +123,8 @@ const AccommodationSearchResult = () => {
                 다른 키워드를 입력해보세요.
               </S.NoDataTxt>
             </S.AccommNoData>
-          )}
-        </S.AccommList>
-
-        {/* 숙소 리스트 */}
+          </S.AccommNoDataWrap>
+        )}
       </S.AccommListWrap>
     </StackLayout>
   );

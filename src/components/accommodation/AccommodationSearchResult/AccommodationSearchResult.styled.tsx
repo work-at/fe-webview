@@ -104,9 +104,7 @@ export const StateTxt = styled.span<{ region: AccommodationRegion }>`
   margin-left: 3px;
 `;
 
-export const AccommList = styled.ul`
-  margin-top: 15px;
-`;
+export const AccommList = styled.ul``;
 
 export const AccommListItem = styled.li`
   margin-top: 20px;
@@ -114,7 +112,7 @@ export const AccommListItem = styled.li`
   overflow: hidden;
   box-shadow: 0px 4.28462px 10px rgba(0, 0, 0, 0.1);
   &:first-child {
-    margin-top: 0;
+    margin-top: 35px;
   }
 `;
 
@@ -168,7 +166,7 @@ export const StandardTxt = styled.span<{ region: AccommodationRegion }>`
   ${({ region }) =>
     region === "JEJU" &&
     `
-      color:  ${theme.colors.jeju};
+      color:  ${theme.colors.jeju}; 
 		`};
   ${({ region }) =>
     region === "GANGNEUNG" &&
@@ -257,8 +255,14 @@ export const RegionSelectorArr = styled.span`
   transform: rotate(-90deg);
 `;
 
+export const AccommNoDataWrap = styled.div`
+  height: calc(100vh - 97px - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const AccommNoData = styled.div`
-  padding: 278px 0 100px;
   text-align: center;
 `;
 

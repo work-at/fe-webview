@@ -32,7 +32,7 @@ export const InfoList = styled.ul`
 `;
 
 export const InfoListItem = styled.li`
-  display: inline-flex;
+  display: inline-grid;
   position: relative;
   margin-right: 12px;
   overflow: hidden;
@@ -42,9 +42,6 @@ export const InfoListItem = styled.li`
 `;
 
 export const BtnInfo = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 56px;
   height: 56px;
   border: 1px solid ${theme.colors.gray09};
