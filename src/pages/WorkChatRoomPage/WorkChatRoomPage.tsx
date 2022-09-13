@@ -330,6 +330,7 @@ const WorkChatRoomPage = () => {
           appendRight: () => AppBarRight({ callback: handlePullUpCallback }),
           isTitleCenter: true,
         }}
+        isHide
       >
         <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
