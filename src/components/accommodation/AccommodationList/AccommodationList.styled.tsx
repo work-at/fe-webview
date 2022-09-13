@@ -125,7 +125,7 @@ export const LinkDetail = styled.button`
 
 export const AccommThumb = styled.div`
   min-height: 130px;
-  background: ${theme.colors.gray09};
+  background: ${theme.colors.gray05};
   > img {
     width: 100%;
   }

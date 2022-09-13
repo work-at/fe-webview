@@ -9,7 +9,7 @@ export const VisualWrap = styled.div`
   position: relative;
   top: -97px;
   min-height: 300px;
-  background: ${theme.colors.gray09};
+  background: ${theme.colors.gray05};
   > img {
     display: block;
     width: 100%;

@@ -281,7 +281,7 @@ export const LinkDetail = styled.button`
   display: block;
   width: 100%;
   min-height: 130px;
-  background: ${theme.colors.gray09};
+  background: ${theme.colors.gray05};
 
   > img {
     width: 100%;
