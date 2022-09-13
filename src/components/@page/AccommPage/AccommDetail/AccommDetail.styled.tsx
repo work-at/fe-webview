@@ -138,7 +138,7 @@ export const InfoList = styled.ul`
 `;
 
 export const InfoListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   position: relative;
   margin-right: 15px;
   overflow: hidden;

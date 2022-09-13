@@ -42,9 +42,6 @@ export const InfoListItem = styled.li`
 `;
 
 export const BtnInfo = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 56px;
   height: 56px;
   border: 1px solid ${theme.colors.gray09};
@@ -65,7 +62,7 @@ export const ReviewList = styled.ul`
 `;
 
 export const ReviewListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   width: calc((100% - 27px) / 3);
   margin: 13px 0 0 9px;
 `;

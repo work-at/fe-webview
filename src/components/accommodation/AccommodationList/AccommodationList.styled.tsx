@@ -124,6 +124,8 @@ export const LinkDetail = styled.button`
 `;
 
 export const AccommThumb = styled.div`
+  min-height: 130px;
+  background: ${theme.colors.gray09};
   > img {
     width: 100%;
   }
@@ -232,7 +234,6 @@ export const RegionSelectorWrap = styled.div`
   justify-content: center;
   align-items: center;
   z-index: ${Z_INDEX.HIGH};
-  background-color: transparent;
 `;
 
 export const RegionSelector = styled.select`
@@ -243,6 +244,7 @@ export const RegionSelector = styled.select`
   line-height: 140%;
   padding: 0 10px;
   color: #121212;
+  background: ${theme.colors.white};
 `;
 
 export const RegionSelectorArr = styled.span`

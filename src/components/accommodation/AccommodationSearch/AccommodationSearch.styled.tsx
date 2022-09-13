@@ -66,7 +66,7 @@ export const ReviewList = styled.ul`
 `;
 
 export const ReviewListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   width: calc((100% - 27px) / 3);
   margin: 13px 0 0 9px;
 `;

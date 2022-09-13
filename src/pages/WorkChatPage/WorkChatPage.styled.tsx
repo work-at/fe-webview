@@ -98,7 +98,7 @@ export const EtcList = styled.li`
     top: 50%;
     left: 0;
     width: 1px;
-    margin-top: -4px;
+    margin-top: -5px;
     height: 9px;
     background: ${theme.colors.gray05};
   }
@@ -164,8 +164,16 @@ export const MenuList = styled.button<StyledMenuProps>`
   ${({ isOpen }) => (isOpen ? "height: 52.4px;" : "height: 0px; padding: 0px 15px; visibility: hidden;")}
 `;
 
+export const ChatNoDataWrap = styled.div`
+  overflow-y: hidden;
+  height: calc(100vh - 97px - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
 export const ChatNoData = styled.div`
-  padding: 225px 0 100px;
   text-align: center;
 `;
 

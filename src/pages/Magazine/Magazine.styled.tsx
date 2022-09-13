@@ -22,7 +22,7 @@ export const BottomWrap = styled.div`
   right: 0;
   margin-top: -9%;
   background: ${theme.colors.white};
-  padding: 40px 7.4667vw 38px;
+  padding: 40px 7.4667vw 0;
   border-radius: 27px 27px 0 0;
   z-index: ${Z_INDEX.ROOT};
 `;

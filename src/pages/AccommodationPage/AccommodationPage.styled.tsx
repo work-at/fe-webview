@@ -104,7 +104,7 @@ export const AreaList = styled.ul`
 `;
 
 export const AreaListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   align-items: start;
   margin-left: 15px;
   text-align: center;
@@ -254,7 +254,7 @@ export const AccommList = styled.ul`
 `;
 
 export const AccommListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   align-items: start;
   position: relative;
   margin-right: 12px;
@@ -280,10 +280,11 @@ export const AccommListItem = styled.li`
 export const LinkDetail = styled.button`
   display: block;
   width: 100%;
+  min-height: 130px;
+  background: ${theme.colors.gray09};
 
   > img {
     width: 100%;
-    height: 131.71px;
     object-fit: cover;
   }
 `;
@@ -352,7 +353,7 @@ export const SpaceList = styled.ul`
 `;
 
 export const SpaceListItem = styled.li`
-  display: inline-grid;
+  display: inline-flex;
   align-items: start;
   position: relative;
   width: 38.1333vw;

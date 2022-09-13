@@ -8,6 +8,8 @@ export const AccommodationDetailWrap = styled.div`
 export const VisualWrap = styled.div`
   position: relative;
   top: -97px;
+  min-height: 300px;
+  background: ${theme.colors.gray09};
   > img {
     display: block;
     width: 100%;
