@@ -185,7 +185,7 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
 
 const WorkChatRoomPage = () => {
   const { roomId } = useActivityParams<{ roomId: string }>();
-  const { replace, pop } = useFlow();
+  const { replace, pop, push } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
     () => data?.data.rooms.filter((item) => item.id === Number(roomId))[0] ?? {},
@@ -349,6 +349,7 @@ const WorkChatRoomPage = () => {
         title: chatInfo?.otherUser?.userNickname ?? "",
         appendRight: () => AppBarRight({ callback: handlePullUpCallback }),
         isTitleCenter: true,
+        onClickCenter: () => push(PATH.WORKER.stack, { workerId: chatInfo.otherUser?.userId }),
       }}
     >
       <S.WorkChatWrap ref={chatAreaRef}>
