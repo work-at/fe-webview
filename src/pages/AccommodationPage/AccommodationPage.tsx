@@ -17,70 +17,66 @@ import SpaceImg2 from "@/assets/images/BgWorkSpace2.png";
 import SpaceImg3 from "@/assets/images/BgWorkSpace3.png";
 import SpaceImg4 from "@/assets/images/BgWorkSpace4.png";
 import SpaceImg5 from "@/assets/images/BgWorkSpace5.png";
-import { useScrollDrag } from "@/hooks";
+import { useInterval, useScrollDrag } from "@/hooks";
 import { Dot, DotActive } from "@/assets/svg";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
 import { useAccommodationCurationQuery, useRegionTrafficQuery } from "@/domains/accommodation/accommodation.api";
 import * as DTO from "@/domains/accommodation/accommodation.dto";
+import { useActivityParams } from "@stackflow/react";
 
-export const Badge = ({ region }: DTO.RegionTrafficRequest) => {
-  const { data } = useRegionTrafficQuery({ region });
+const REGION_TEXT = {
+  JEJU: "제주",
+  SEOUL: "서울",
+  GANGNEUNG: "강릉",
+  SOKCHO: "속초",
+};
+
+export const Badge = () => {
+  const { region } = useActivityParams<{ region: DTO.RegionTrafficRequest["region"] | "ALL" }>();
+
+  const { data, refetch } = useRegionTrafficQuery({ region: region === "ALL" ? undefined : region });
+  const ref = useRef<HTMLDivElement>(null);
 
   const curRegion = useMemo(() => data?.data.region, [data]);
   const type = useMemo(() => data?.data.type, [data]);
   const message = useMemo(() => data?.data.message, [data]);
 
-  if (curRegion === "JEJU") {
-    return (
-      <S.WalkatDensity area="JEJU">
-        <S.WalkatTxt area="JEJU">최근 제주의 워크앳 지수는?</S.WalkatTxt>
-        <S.StateBox>
-          {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="JEJU">{message}</S.StateTxt>}
-        </S.StateBox>
-      </S.WalkatDensity>
-    );
-  }
+  useInterval({
+    callback: region
+      ? () => null
+      : () => {
+          handleIconEffect();
+          refetch();
+        },
+    delay: 8000,
+  });
 
-  if (curRegion === "SEOUL") {
-    return (
-      <S.WalkatDensity area="SEOUL">
-        <S.WalkatTxt area="SEOUL">최근 서울의 워크앳 지수는?</S.WalkatTxt>
-        <S.StateBox>
-          {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="SEOUL">{message}</S.StateTxt>}
-        </S.StateBox>
-      </S.WalkatDensity>
-    );
-  }
+  const handleIconEffect = () => {
+    if (ref.current) {
+      ref.current.style.transition = "all 200ms ease-out";
+      ref.current.style.transform = "scale(110%)";
+      setTimeout(() => {
+        if (ref.current) {
+          ref.current.style.transition = "all 200ms ease-in";
+          ref.current.style.transform = "scale(100%)";
+        }
+      }, 400);
+    }
+  };
 
-  if (curRegion === "GANGNEUNG") {
-    return (
-      <S.WalkatDensity area="GANGNEUNG">
-        <S.WalkatTxt area="GANGNEUNG">최근 강릉의 워크앳 지수는?</S.WalkatTxt>
-        <S.StateBox>
-          {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="GANGNEUNG">{message}</S.StateTxt>}
-        </S.StateBox>
-      </S.WalkatDensity>
-    );
-  }
+  if (!curRegion) return null;
 
-  if (curRegion === "SOKCHO") {
-    return (
-      <S.WalkatDensity area="SOKCHO">
-        <S.WalkatTxt area="SOKCHO">최근 속초의 워크앳 지수는?</S.WalkatTxt>
-        <S.StateBox>
-          {type && <Icon icon={type} />}
-          {message && <S.StateTxt area="SOKCHO">{message}</S.StateTxt>}
-        </S.StateBox>
-      </S.WalkatDensity>
-    );
-  }
-
-  return null;
+  return (
+    <S.WalkatDensity area={curRegion} ref={ref}>
+      <S.WalkatTxt area={curRegion}>최근 {REGION_TEXT[curRegion]}의 워크앳 지수는?</S.WalkatTxt>
+      <S.StateBox>
+        {type && <Icon icon={type} />}
+        {message && <S.StateTxt area={curRegion}>{message}</S.StateTxt>}
+      </S.StateBox>
+    </S.WalkatDensity>
+  );
 };
 
 const SLIDER_ITEM = [

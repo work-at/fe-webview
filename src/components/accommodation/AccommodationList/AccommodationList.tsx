@@ -75,9 +75,7 @@ const AccommodationList = () => {
       <S.AccommListWrap>
         {/* 숙소 키워드 */}
         {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
-
-        {/* TODO: api에 region 파라미터를 넘길 수 있게 수정되면 반영 */}
-        <Badge region={region !== "ALL" ? region : undefined} />
+        <Badge />
         <S.AccommList>
           {accommodationList.map((item, index) => (
             <S.AccommListItem key={index}>
