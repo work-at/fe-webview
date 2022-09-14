@@ -16,5 +16,10 @@ module.exports = merge(baseConfig, {
       favicon: "src/assets/images/favicon.png",
       minify: true,
     }),
+    new HtmlWebPackPlugin({
+      template: path.resolve(TEMPLATE_PATH, "deploy.html"),
+      filename: "deploy.html",
+      chunks: ["deploy"],
+    }),
   ],
 });
