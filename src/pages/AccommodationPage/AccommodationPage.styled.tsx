@@ -285,7 +285,7 @@ export const AccommListItem = styled.li`
 export const LinkDetail = styled.button`
   display: block;
   width: 100%;
-  min-height: 130px;
+  min-height: 100px;
   background: ${theme.colors.gray05};
 
   > img {
