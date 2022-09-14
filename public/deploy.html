@@ -21,11 +21,24 @@
   <meta name="title" content="work at_">
   <meta name="description" content="당신이 꿈꾸던 완벽한 워케이션 워크앳, work at_">
 </head>
+<style>
+  @media (max-width: 1024px) {
+    #side_info {
+      display: none !important;
+    }
+  }
+</style>
 
 <body style="margin: 0; display: flex; justify-content: center; width: 100vw;">
-  <iframe
-    style="max-width: 400px; width: 100%; height:100vh; border:none; box-shadow: rgb(0 0 0 / 10%) 0px 4.28462px 10px;"
-    src="https://workat.o-r.kr/" allow="geolocation *"></iframe>
+  <div id="side_info"
+    style="width: 400px; display: flex; align-items: center; justify-content: center; margin-right: 100px; flex-direction: column;">
+    <img src="/assets/introduce.png" alt="introduce" style="width: 358px; height: 488px; margin-bottom: 24px;" />
+    <a href="https://play.google.com/store/apps/details?id=com.workat_" target="_blank">
+      <img src="/assets/google-play-button.png" alt="google-play-button" style="width: 232.56px; height: 90px;" />
+    </a>
+  </div>
+  <iframe src="https://workat.o-r.kr/" allow="geolocation *"
+    style="max-width: 400px; width: 100%; height:100vh; border:none; box-shadow: rgb(0 0 0 / 10%) 0px 4.28462px 10px;"></iframe>
 </body>
 
 </html>
