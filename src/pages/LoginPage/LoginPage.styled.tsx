@@ -40,8 +40,8 @@ export const IntroTxt = styled.p`
 
 export const BtnKaKaoLogin = styled.button`
   position: absolute;
-  left: 7.4667vw;
-  right: 7.4667vw;
+  left: 30px;
+  right: 30px;
   bottom: 74px;
   > a,
   img {
