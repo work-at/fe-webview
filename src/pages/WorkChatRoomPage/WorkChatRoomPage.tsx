@@ -247,23 +247,11 @@ const WorkChatRoomPage = () => {
 
   useInterval({ callback: handlePullUpCallback, delay: 1000 });
 
-  const handleVisibilityChange = useCallback(
-    async (isVisible: boolean) => {
-      if (isVisible) {
-        await handlePullUpCallback();
-        return;
-      }
-    },
-    [handlePullUpCallback]
-  );
-
   useEffect(() => {
     if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
       postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(roomId) });
     }
   }, [chatInfo.lastMessageId, chatMessages, postLastMessage, roomId]);
-
-  usePageVisibility({ callback: handleVisibilityChange });
 
   useEffect(() => {
     const unMountAction = () => {
