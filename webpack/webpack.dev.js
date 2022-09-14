@@ -25,10 +25,5 @@ module.exports = merge(baseConfig, {
         removeComments: true,
       },
     }),
-    new HtmlWebPackPlugin({
-      template: path.resolve(TEMPLATE_PATH, "deploy-dev.html"),
-      filename: "deploy-dev.html",
-      chunks: ["deploy-dev"],
-    }),
   ],
 });
