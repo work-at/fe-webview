@@ -37,9 +37,9 @@ const MapPage = () => {
     );
   }
 
-  if (isMapLoading) {
+  if (isMapLoading || stack.globalTransitionState === "loading") {
     return (
-      <StackLayout appBar={{ title: userAddress }} navigationPath="map">
+      <StackLayout appBar={{ title: userAddress }} navigationPath="map" isHide>
         <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
@@ -53,19 +53,12 @@ const MapPage = () => {
     );
   }
 
-  if (
-    stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1 ||
-    stack.globalTransitionState === "loading"
-  ) {
-    return (
-      <StackLayout isHide navigationPath="map">
-        <MapManager userCoordinates={userCoordinates} />
-      </StackLayout>
-    );
-  }
-
   return (
-    <StackLayout appBar={{ title: userAddress }} navigationPath="map">
+    <StackLayout
+      appBar={{ title: userAddress }}
+      navigationPath="map"
+      isHide={stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1}
+    >
       <MapManager userCoordinates={userCoordinates} />
     </StackLayout>
   );
