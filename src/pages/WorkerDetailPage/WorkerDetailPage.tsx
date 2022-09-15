@@ -85,8 +85,6 @@ const WorkerDetailPage = () => {
     return <div>정보를 불러올 수 없습니다.</div>;
   }
 
-  console.log("workerDetail.desiredActivities", workerDetail.desiredActivities);
-
   return (
     <StackLayout isHide>
       <Header useBack bgColor />
