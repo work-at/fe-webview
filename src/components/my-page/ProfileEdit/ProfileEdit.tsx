@@ -119,6 +119,16 @@ const ProfileEdit = () => {
     }
   }, [userInfo, job, year, setYear, setJob]);
 
+  const [focused, setFocused] = useState(false);
+
+  const handleSetFocus = useCallback(() => {
+    setFocused(true);
+  }, []);
+
+  const handleUnsetFocus = useCallback(() => {
+    setFocused(false);
+  }, []);
+
   return (
     <StackLayout>
       <S.MyInfoEditWrap onSubmit={handleFormSubmit}>
@@ -164,6 +174,8 @@ const ProfileEdit = () => {
               ref={handleRefInjection(ref, textAreaRef)}
               {...storyRegisterRest}
               defaultValue={userInfo?.story}
+              onFocus={handleSetFocus}
+              onBlur={handleUnsetFocus}
             ></S.TxtWrap>
           </S.ItemBody>
         </S.MyInfoFullItem>
@@ -188,9 +200,11 @@ const ProfileEdit = () => {
             </S.ChekBoxWrap>
           </S.ItemBody>
         </S.MyInfoFullItem>
-        <Button type="submit" size="lg" bgColor="black">
-          완료
-        </Button>
+        {!focused && (
+          <Button type="submit" size="lg" bgColor="black">
+            완료
+          </Button>
+        )}
       </S.MyInfoEditWrap>
     </StackLayout>
   );
