@@ -1,3 +1,3 @@
 export const MAP = {
-  SearchRadius: 3000,
+  SearchRadius: 2000,
 } as const;
