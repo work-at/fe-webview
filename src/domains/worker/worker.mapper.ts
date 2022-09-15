@@ -34,6 +34,7 @@ export const d2aMapper_GetWorkerDetailResponse_WorkerDetailInfo = (
       icon: activity.name as IconType,
       text: activity.content,
     })),
+    company: response.data.company,
     workChatCount: response.data.workchats,
   };
 };

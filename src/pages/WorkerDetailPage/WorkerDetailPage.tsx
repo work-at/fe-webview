@@ -93,6 +93,7 @@ const WorkerDetailPage = () => {
             <img src={workerDetail.imageUrl ?? DefaultProfile} alt="워케이셔너 이미지" />
           </S.UserThumb>
           <S.UserName>{workerDetail.name}</S.UserName>
+          <S.UserEmail>{workerDetail.company ?? "회사 미인증"}</S.UserEmail>
           <S.EtcInfo>
             <S.EtcList>{workerDetail.job}</S.EtcList>
             <S.EtcList>{workerDetail.yearOfService}</S.EtcList>

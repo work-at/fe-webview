@@ -6,7 +6,7 @@ export const WorkerDetailWrap = styled.div`
 `;
 
 export const TopInfo = styled.div`
-  padding: 8px 0 35px;
+  padding: 8px 0 28px;
   border-bottom: 3px solid ${theme.colors.gray09};
 `;
 
@@ -21,23 +21,27 @@ export const UserThumb = styled.div`
   justify-content: center;
   > img {
     display: flex;
-    width: 115px;
-    height: 115px;
-    object-fit: cover;
+    height: 100%;
   }
 `;
 
 export const UserName = styled.div`
   ${theme.fonts.Bold03};
   color: ${theme.colors.gray01};
+  padding: 0 7.4667vw;
   text-align: center;
+`;
+
+export const UserEmail = styled(UserName)`
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.gray05};
 `;
 
 export const EtcInfo = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 19px;
+  padding-top: 20px;
 `;
 
 export const EtcList = styled.li`

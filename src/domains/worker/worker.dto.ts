@@ -51,6 +51,7 @@ type WorkerDetail = {
     content: string;
     name: string;
   };
+  company: string;
   workchats: number;
   activities: typeof DESIRED_ACTIVITIES;
 };

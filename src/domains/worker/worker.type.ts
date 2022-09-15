@@ -26,4 +26,5 @@ export type WorkerDetail = {
   yearOfService: string;
   desiredActivities: DesiredActivity[];
   workChatCount: number;
+  company: string;
 };
