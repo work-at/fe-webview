@@ -75,8 +75,6 @@ const AccommodationSearchResult = () => {
     return <div>요류 발생</div>;
   }
 
-  console.log("accommodationListByName", accommodationListByName);
-
   return (
     <StackLayout
       appBar={{

@@ -47,8 +47,6 @@ const CafeDetailPage = () => {
   }, [cafeDetail?.kakaoLink]);
 
   const handleOpenKaKaoPathFindingLink = useCallback(() => {
-    console.log("userAddress", userAddress);
-
     if (!cafeDetail || !userAddress) {
       return;
     }
