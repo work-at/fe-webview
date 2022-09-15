@@ -6,7 +6,7 @@ import * as DTO from "./accommodation.dto";
 import { AxiosError } from "axios";
 import { AccommodationReviewCommand } from "./accommodation.action";
 
-type AccommodationListQueryKey = readonly [typeof QUERY_NAME.GET_CAFE_REVIEW_LIST, DTO.GetAccommodationListRequest];
+type AccommodationListQueryKey = readonly [typeof QUERY_NAME.GET_ACCOMMODATION_LIST, DTO.GetAccommodationListRequest];
 
 const requestAccommodationList: QueryFunction<DTO.Accommodation[], AccommodationListQueryKey> = async ({
   queryKey,
@@ -25,10 +25,43 @@ export const useAccommodationListQuery = (
   options: UseQueryOptions<DTO.Accommodation[], AxiosError<string>, DTO.Accommodation[], AccommodationListQueryKey>
 ) => {
   return useQuery<DTO.Accommodation[], AxiosError<string>, DTO.Accommodation[], AccommodationListQueryKey>(
-    [QUERY_NAME.GET_CAFE_REVIEW_LIST, criteria],
+    [QUERY_NAME.GET_ACCOMMODATION_LIST, criteria],
     requestAccommodationList,
     options
   );
+};
+
+type AccommodationListByNameQueryKey = readonly [
+  typeof QUERY_NAME.GET_ACCOMMODATION_LIST_BY_NAME,
+  DTO.GetAccommodationListByNameRequest
+];
+
+export const requestAccommodationListByName: QueryFunction<
+  DTO.Accommodation[],
+  AccommodationListByNameQueryKey
+> = async ({ queryKey }) => {
+  const [, criteria] = queryKey;
+
+  const items = await baseInstance().get<unknown, DTO.GetAccommodationListByNameResponse>(
+    API_URL.GET_ACCOMMODATION_LIST_BY_NAME,
+    {
+      params: criteria,
+    }
+  );
+
+  return items.data;
+};
+
+export const useAccommodationListByNameQuery = (
+  criteria: DTO.GetAccommodationListByNameRequest,
+  options?: UseQueryOptions<
+    DTO.Accommodation[],
+    AxiosError<string>,
+    DTO.Accommodation[],
+    AccommodationListByNameQueryKey
+  >
+) => {
+  return useQuery([QUERY_NAME.GET_ACCOMMODATION_LIST_BY_NAME, criteria], requestAccommodationListByName, options);
 };
 
 const requestAccommodationReviewTags = async () => {

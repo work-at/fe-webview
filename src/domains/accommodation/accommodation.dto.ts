@@ -21,13 +21,20 @@ export type Accommodation = {
 
 export type GetAccommodationListRequest = {
   region?: AccommodationRegion;
-  infoTag?: AccommodationInfoTag;
-  topReviewTag?: AccommodationReviewTag;
+  infoTagName?: AccommodationInfoTag;
+  pageSize?: number;
+  topReviewTagName?: AccommodationReviewTag;
+};
+
+export type GetAccommodationListByNameRequest = {
+  accommodationName: string;
 };
 
 export type GetAccommodationListResponse = AxiosResponse<{
   accommodations: Accommodation[];
 }>;
+
+export type GetAccommodationListByNameResponse = AxiosResponse<Accommodation[]>;
 
 export type AccommodationTag = {
   content: string;
