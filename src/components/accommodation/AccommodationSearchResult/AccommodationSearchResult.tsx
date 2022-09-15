@@ -13,7 +13,7 @@ import {
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
 import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
-import { useActivityParams } from "@stackflow/react";
+import { useActivityParams, useStack } from "@stackflow/react";
 import { useState } from "react";
 import * as S from "./AccommodationSearchResult.styled";
 
@@ -50,7 +50,9 @@ const AccommodationSearchResult = () => {
     setSelectedRegion(value as AccommodationRegion);
   };
 
-  if (isLoading) {
+  const stack = useStack();
+
+  if (isLoading || stack.globalTransitionState === "loading") {
     return (
       <StackLayout isHide>
         <Header bgColor useBack />
@@ -64,21 +66,26 @@ const AccommodationSearchResult = () => {
   }
 
   return (
-    <StackLayout isHide>
-      <Header bgColor useBack />
-
+    <StackLayout
+      appBar={{
+        title: (
+          <S.RegionSelectorWrap>
+            <S.RegionSelector onChange={handleRegionSelect}>
+              {ACCOMMODATION_REGIONS.map((region) => (
+                <option key={region} selected={region === selectedRegion} value={region}>
+                  {AccommodationRegions_TEXT[region]}
+                </option>
+              ))}
+            </S.RegionSelector>
+            <S.RegionSelectorArr></S.RegionSelectorArr>
+          </S.RegionSelectorWrap>
+        ),
+      }}
+      isHide={stack.activities.some(
+        (each) => each.name === "AccommodationDetail" && each.transitionState === "enter-done"
+      )}
+    >
       <S.AccommListWrap>
-        <S.RegionSelectorWrap>
-          <S.RegionSelector onChange={handleRegionSelect}>
-            {ACCOMMODATION_REGIONS.map((region) => (
-              <option key={region} selected={region === selectedRegion} value={region}>
-                {AccommodationRegions_TEXT[region]}
-              </option>
-            ))}
-          </S.RegionSelector>
-          <S.RegionSelectorArr></S.RegionSelectorArr>
-        </S.RegionSelectorWrap>
-
         {accommodationList.length !== 0 ? (
           <>
             {/* 검색 키워드 */}

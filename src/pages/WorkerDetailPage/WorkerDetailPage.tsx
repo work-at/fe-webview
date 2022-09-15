@@ -86,8 +86,7 @@ const WorkerDetailPage = () => {
   }
 
   return (
-    <StackLayout isHide>
-      <Header useBack bgColor />
+    <StackLayout>
       <S.WorkerDetailWrap>
         <S.TopInfo>
           <S.UserThumb>

@@ -9,7 +9,7 @@ import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation
 import { Badge } from "@/pages/AccommodationPage/AccommodationPage";
 import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
-import { useActivityParams } from "@stackflow/react";
+import { useActivityParams, useStack } from "@stackflow/react";
 import * as S from "./AccommodationList.styled";
 
 const DEFAULT_IMAGE =
@@ -38,10 +38,11 @@ const AccommodationList = () => {
     replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, { region: value }, { animate: false });
   };
 
-  if (isLoading) {
+  const stack = useStack();
+
+  if (isLoading || stack.globalTransitionState === "loading") {
     return (
       <StackLayout isHide>
-        <Header bgColor useBack />
         <Lottie source={require("@/assets/loading.json")} speed={2} />
       </StackLayout>
     );
@@ -52,26 +53,29 @@ const AccommodationList = () => {
   }
 
   return (
-    <StackLayout isHide>
-      <Header bgColor useBack />
-
+    <StackLayout
+      appBar={{
+        title: (
+          <S.RegionSelectorWrap>
+            <S.RegionSelector onChange={handleRegionSelect}>
+              {ACCOMMODATION_REGIONS.map((currentRegion) => (
+                <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
+                  {AccommodationRegions_TEXT[currentRegion]}
+                </option>
+              ))}
+            </S.RegionSelector>
+            <S.RegionSelectorArr></S.RegionSelectorArr>
+          </S.RegionSelectorWrap>
+        ),
+      }}
+      isHide={stack.activities.some(
+        (each) => each.name === "AccommodationDetail" && each.transitionState === "enter-done"
+      )}
+    >
       <S.AccommListWrap>
-        <S.RegionSelectorWrap>
-          <S.RegionSelector onChange={handleRegionSelect}>
-            {ACCOMMODATION_REGIONS.map((currentRegion) => (
-              <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
-                {AccommodationRegions_TEXT[currentRegion]}
-              </option>
-            ))}
-          </S.RegionSelector>
-          <S.RegionSelectorArr></S.RegionSelectorArr>
-        </S.RegionSelectorWrap>
-
         {/* 숙소 키워드 */}
         {/* <S.KeywordTxt>바다 인근 검색결과</S.KeywordTxt> */}
-
-        {/* TODO: api에 region 파라미터를 넘길 수 있게 수정되면 반영 */}
-        <Badge region={region !== "ALL" ? region : undefined} />
+        <Badge />
         <S.AccommList>
           {accommodationList.map((item, index) => (
             <S.AccommListItem key={index}>

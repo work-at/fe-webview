@@ -7,7 +7,7 @@ type Props = {
 };
 
 const useInterval = ({ callback, delay = 0 }: Props) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const handleVisibilityChange = useCallback((isVisible: boolean) => {
     setIsVisible(isVisible);
   }, []);

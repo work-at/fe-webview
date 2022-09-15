@@ -185,7 +185,7 @@ const ProfileModal = ({ roomId, chatInfo }: ProfileModalProps) => {
 
 const WorkChatRoomPage = () => {
   const { roomId } = useActivityParams<{ roomId: string }>();
-  const { replace, pop } = useFlow();
+  const { replace, pop, push } = useFlow();
   const { data, refetch } = useChatListQuery();
   const chatInfo = useMemo<Partial<Room>>(
     () => data?.data.rooms.filter((item) => item.id === Number(roomId))[0] ?? {},
@@ -234,7 +234,7 @@ const WorkChatRoomPage = () => {
       const { data } = await requestChat({
         roomId: Number(roomId),
         messageId: chatMessages[chatMessages.length - 1]?.id ?? undefined,
-        sortType: "AFTER",
+        sortType: chatMessages[chatMessages.length - 1]?.id ? "AFTER" : undefined,
       });
 
       if (data.messages.length !== 0) {
@@ -247,23 +247,11 @@ const WorkChatRoomPage = () => {
 
   useInterval({ callback: handlePullUpCallback, delay: 1000 });
 
-  const handleVisibilityChange = useCallback(
-    async (isVisible: boolean) => {
-      if (isVisible) {
-        await handlePullUpCallback();
-        return;
-      }
-    },
-    [handlePullUpCallback]
-  );
-
   useEffect(() => {
     if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
       postLastMessage({ lastMessageId: chatMessages[chatMessages.length - 1].id, roomId: Number(roomId) });
     }
   }, [chatInfo.lastMessageId, chatMessages, postLastMessage, roomId]);
-
-  usePageVisibility({ callback: handleVisibilityChange });
 
   useEffect(() => {
     const unMountAction = () => {
@@ -349,6 +337,7 @@ const WorkChatRoomPage = () => {
         title: chatInfo?.otherUser?.userNickname ?? "",
         appendRight: () => AppBarRight({ callback: handlePullUpCallback }),
         isTitleCenter: true,
+        onClickCenter: () => push(PATH.WORKER.stack, { workerId: chatInfo.otherUser?.userId }),
       }}
     >
       <S.WorkChatWrap ref={chatAreaRef}>
@@ -375,10 +364,10 @@ const WorkChatRoomPage = () => {
                 }
               }
 
-              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a HH:mm");
+              if (index === chatMessages.length - 1) time = dayjs(currentChat.createdDate).format("a hh:mm");
               if (index < chatMessages.length - 1) {
                 const nextChat = chatMessages[index + 1];
-                const currentTime = dayjs(nextChat.createdDate).format("a HH:mm");
+                const currentTime = dayjs(nextChat.createdDate).format("a hh:mm");
 
                 if (currentChat.writerId !== nextChat.writerId) {
                   time = currentTime;
@@ -403,7 +392,7 @@ const WorkChatRoomPage = () => {
                 </S.PullAreaContent>
               </S.PullArea>
             )}
-            {(chatInfo.blockedByOtherUser || chatInfo.deletedByOtherUser) && (
+            {chatInfo.blockedByOtherUser && (
               <S.LeaveMsg>
                 <S.LeaveTxt>대화 상대방이 채팅방을 나갔어요.</S.LeaveTxt>
               </S.LeaveMsg>
