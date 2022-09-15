@@ -45,6 +45,7 @@ export type GetUserInfoResponse = {
     name: string;
   };
   trackingOff: boolean;
+  company: string;
 };
 
 export type PutUserProfileRequest = {

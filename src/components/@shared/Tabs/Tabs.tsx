@@ -7,13 +7,14 @@ export type TabItem<TabId> = {
 };
 
 export type TabsProps<T> = {
+  selectedId: T;
   items: TabItem<T>[];
   /** 탭 아이템이 선택되었을 때 동작하는 핸들러 */
   onSelect: (id: T) => void;
 };
 
-const Tabs = <T,>({ items, onSelect }: TabsProps<T>) => {
-  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+const Tabs = <T,>({ selectedId, items, onSelect }: TabsProps<T>) => {
+  const selectedItemIndex = items.findIndex((item) => item.id === selectedId);
 
   const handleTabItemSelect = useCallback(
     (id: T) => {
@@ -23,10 +24,9 @@ const Tabs = <T,>({ items, onSelect }: TabsProps<T>) => {
         throw Error("선택된 탭 아이템을 찾을 수 없습니다.");
       }
 
-      setSelectedItemIndex(newSelectedItemIndex);
       onSelect(id);
     },
-    [items]
+    [items, onSelect]
   );
 
   return (

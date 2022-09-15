@@ -1,6 +1,7 @@
 import * as DTO from "./worker.dto";
 import * as Action from "./worker.action";
 import { MAP } from "@/constants/map";
+import { IconType } from "@/assets/Icon";
 
 export const d2aMapper_GetWorkerPinsResponse_WorkerPinsInfo = (
   response: DTO.GetWorkerPinsResponse
@@ -29,7 +30,11 @@ export const d2aMapper_GetWorkerDetailResponse_WorkerDetailInfo = (
     name: response.data.nickname,
     story: response.data.story,
     yearOfService: response.data.workingYear.content,
-    desiredActivities: [],
+    desiredActivities: response.data.activities.map((activity) => ({
+      icon: activity.name as IconType,
+      text: activity.content,
+    })),
+    workChatCount: response.data.workchats,
   };
 };
 

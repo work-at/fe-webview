@@ -25,6 +25,9 @@ import { useNearWorkersCountQuery } from "@/domains/user";
 import { atom, useAtom } from "jotai";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import DefaultProfileSquare from "@/assets/images/DefaultProfileSquare.png";
+import { atomWithStorage } from "jotai/utils";
+import { useQueryClient } from "react-query";
+import { QUERY_NAME } from "@/constants";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
@@ -51,12 +54,21 @@ const userCoordinatesCache: Coordinates = {
 
 export const shouldMapReloadAtom = atom(false);
 
+const TabId_TEXT: Record<MapTabId, string> = {
+  cafe: "카페",
+  diner: "음식점",
+  worker: "워케이셔너",
+};
+
+const selectedTabIdAtom = atomWithStorage<MapTabId>("selected-tab-id", "cafe");
+
 const MapManager = ({ userCoordinates }: MapManagerProps) => {
   const [selectedCardId, setSelectedCardId] = useState<number | undefined>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
-  const [selectedTabId, setSelectedTabId] = useState<MapTabId>("cafe");
+  const [selectedTabId, setSelectedTabId] = useAtom(selectedTabIdAtom);
   const [isBottomDrawerOpen, setBottomDrawerOpen] = useState(false);
   const [shouldMapReload, setShouldMapReload] = useAtom(shouldMapReloadAtom);
+  const queryClient = useQueryClient();
 
   const { cafes, cafePins, navigateToCafeDetail } = useCafeMap({
     isSelected: selectedTabId === "cafe",
@@ -279,7 +291,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
       updateReloadTime();
       setSelectedTabId(id);
     },
-    [updateReloadTime]
+    [updateReloadTime, setSelectedTabId]
   );
 
   const handleListToggleButtonClick = useCallback(
@@ -297,7 +309,6 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
   // TODO : 백그라운드에서 실행되도록 위치 옮기기
   useEffect(() => {
     if (userCoordinatesCache.lat === 0 && userCoordinatesCache.lng === 0) {
-      (userCoordinatesCache.lat = userCoordinates.lat), (userCoordinatesCache.lng = userCoordinates.lng);
       return;
     }
 
@@ -313,9 +324,10 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
       return;
     }
 
-    // TODO : 싱크 로직 호출
+    updateReloadTime();
+    queryClient.invalidateQueries([QUERY_NAME.GET_USER_ADDRESS]);
     (userCoordinatesCache.lat = userCoordinates.lat), (userCoordinatesCache.lng = userCoordinates.lng);
-  }, [userCoordinates]);
+  }, [userCoordinates, queryClient, updateReloadTime]);
 
   if (shouldMapReload) {
     setTimeout(() => {
@@ -327,7 +339,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
   return (
     <S.MapWrap>
       <S.TabWrap>
-        <Tabs items={TAB_ITEMS} onSelect={handleTabIdChange} />
+        <Tabs selectedId={selectedTabId} items={TAB_ITEMS} onSelect={handleTabIdChange} />
       </S.TabWrap>
       <Map
         pins={pins ?? []}
@@ -345,18 +357,21 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
           <Icon icon="BtnMapList" />
         </S.BtnList>
       </S.BottomBtnWrap>
-      <S.WorkerLengWrap>
-        <S.WorkerTit>
-          내 근방 <br />
-          워케이셔너 수
-        </S.WorkerTit>
-        <S.WorkerLeng>
-          <S.Num>{nearWorkersCount?.count}</S.Num>명
-        </S.WorkerLeng>
-      </S.WorkerLengWrap>
+      {selectedTabId === "worker" && (
+        <S.WorkerLengWrap>
+          <S.WorkerTit>
+            내 근방 <br />
+            워케이셔너 수
+          </S.WorkerTit>
+
+          <S.WorkerLeng>
+            <S.Num>{nearWorkersCount?.count ?? 0}</S.Num>명
+          </S.WorkerLeng>
+        </S.WorkerLengWrap>
+      )}
       <S.BottomDrawer isOpen={isBottomDrawerOpen} onClose={handleBottomDrawerClose}>
         <S.DrawerHeader>
-          <S.DrawerHeaderTxt>내 주변 카페</S.DrawerHeaderTxt>
+          <S.DrawerHeaderTxt>내 주변 {TabId_TEXT[selectedTabId]}</S.DrawerHeaderTxt>
         </S.DrawerHeader>
         <S.DrawerBody>
           <CardList onCardClick={CardListInfo?.onClick} items={CardListInfo?.items ?? []} />

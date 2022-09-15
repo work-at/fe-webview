@@ -76,6 +76,23 @@ export { default as WalkChatReview13 } from "../images/icons/WalkChatReview13.sv
 export { default as WalkChatReview14 } from "../images/icons/WalkChatReview14.svg";
 export { default as WalkChatReview15 } from "../images/icons/WalkChatReview15.svg";
 
+export { default as JUNIOR } from "../images/icons/JUNIOR.svg";
+export { default as SENIOR } from "../images/icons/SENIOR.svg";
+export { default as DESIGN } from "../images/icons/DESIGN.svg";
+export { default as DEVELOP } from "../images/icons/DEVELOP.svg";
+export { default as PLAN } from "../images/icons/PLAN.svg";
+export { default as IT } from "../images/icons/IT.svg";
+export { default as FINANCIAL } from "../images/icons/FINANCIAL.svg";
+export { default as COMMERCE } from "../images/icons/COMMERCE.svg";
+export { default as BUSINESS } from "../images/icons/BUSINESS.svg";
+export { default as STARTUP } from "../images/icons/STARTUP.svg";
+export { default as PASSION } from "../images/icons/PASSION.svg";
+export { default as TALK } from "../images/icons/TALK.svg";
+export { default as CAREER } from "../images/icons/CAREER.svg";
+export { default as DINNER } from "../images/icons/DINNER.svg";
+export { default as LUNCH } from "../images/icons/LUNCH.svg";
+export { default as AFTER_WORK } from "../images/icons/AFTER_WORK.svg";
+
 // 버튼 모음
 export { default as BtnReview } from "../images/icons/BtnReview.svg";
 export { default as BtnUrl } from "../images/icons/BtnUrl.svg";

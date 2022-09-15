@@ -56,6 +56,8 @@ const ContactUs = () => {
         type: reportType,
       });
 
+      alert("문의사항이 전송되었습니다! 기입하신 이메일로 빠른 시일 내로 답변드리겠습니다.");
+
       pop();
     } catch (error) {
       alert("문의사항 전송에 실패하였습니다.");
@@ -87,7 +89,7 @@ const ContactUs = () => {
           value={content}
         />
       </S.MyContactUsWrap>
-      <Button size="lg" bgColor="black" onClick={handleSendUserReport}>
+      <Button size="lg" bgColor="black" disabled={!reportType} onClick={handleSendUserReport}>
         보내기
       </Button>
     </StackLayout>

@@ -1,9 +1,12 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
 import EmailInput from "@/components/@shared/EmailInput";
+import { QUERY_NAME } from "@/constants";
 import { useEmailVerificationCountRemainQuery, useVerifyEmailMutation } from "@/domains/auth/auth.api";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useFlow } from "@/stack";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "react-query";
 import * as S from "./EmailVerification.styled";
 
 const EMAIL_LENGTH_LIMIT = 100;
@@ -14,7 +17,7 @@ const SUCCESS_TEXT = {
 
 const ERROR_TEXT = {
   INPUT_COUNT_LIMIT_REMAINED: (remainCount: number) =>
-    remainCount >= 5
+    remainCount === 0
       ? "인증 메일 발송횟수를 초과해 인증이 불가합니다. (5/5)\n24시간 후 다시 시도하실 수 있습니다."
       : `${remainCount}의 입력 횟수가 남았습니다`,
   EMAIL_LENGTH_LIMIT_EXCEEDED: `이메일은 ${EMAIL_LENGTH_LIMIT}자 이상을 입력하실 수 없습니다.`,
@@ -32,14 +35,15 @@ const EmailVerification = () => {
   } = useForm<{ email: string }>({
     mode: "onChange",
   });
-
+  const queryClient = useQueryClient();
   const { mutateAsync: verifyEmail, isSuccess } = useVerifyEmailMutation();
   const { data, refetch: renewEmailVerificationRemain } = useEmailVerificationCountRemainQuery();
+  const { pop } = useFlow();
 
   const emailVerificationCountRemain = data?.remain;
 
   const handleFormSubmit = handleSubmit((formData) => {
-    if (!emailVerificationCountRemain || emailVerificationCountRemain >= 5) {
+    if (emailVerificationCountRemain === undefined || emailVerificationCountRemain === 0) {
       return;
     }
 
@@ -56,6 +60,11 @@ const EmailVerification = () => {
   const handleUnsetFocus = useCallback(() => {
     setFocused(false);
   }, []);
+
+  const handleConfirmButtonClick = useCallback(() => {
+    queryClient.invalidateQueries([QUERY_NAME.GET_USER_INFO]);
+    pop();
+  }, [queryClient, pop]);
 
   return (
     <StackLayout>
@@ -83,13 +92,13 @@ const EmailVerification = () => {
           />
         </S.SignUpInputWrap>
         {errors.email && <S.ErrorTxt>{errors.email.message}</S.ErrorTxt>}
-        {emailVerificationCountRemain && emailVerificationCountRemain >= 5 && (
-          <S.ErrorTxt>{ERROR_TEXT.INPUT_COUNT_LIMIT_REMAINED(data.remain)}</S.ErrorTxt>
+        {emailVerificationCountRemain === 0 && (
+          <S.ErrorTxt>{ERROR_TEXT.INPUT_COUNT_LIMIT_REMAINED(emailVerificationCountRemain)}</S.ErrorTxt>
         )}
         {isSuccess && <S.SuccessTxt>{SUCCESS_TEXT.EMAIL_SEND}</S.SuccessTxt>}
       </S.SignUpWrap>
       {!focused && (
-        <Button type="submit" size="lg" bgColor="black">
+        <Button type="button" onClick={handleConfirmButtonClick} size="lg" bgColor="black">
           확인
         </Button>
       )}

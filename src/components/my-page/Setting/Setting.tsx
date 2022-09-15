@@ -14,8 +14,8 @@ const Setting = () => {
 
   const handleUserLocationBlockChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     ({ target }) => {
-      toggleUserLocationTracking(target.checked);
-      setIsUserLocationBlocked(target.checked);
+      toggleUserLocationTracking(!target.checked);
+      setIsUserLocationBlocked(!target.checked);
     },
     [toggleUserLocationTracking, setIsUserLocationBlocked]
   );
@@ -36,7 +36,7 @@ const Setting = () => {
                 id="checkbox"
                 type="checkbox"
                 onChange={handleUserLocationBlockChange}
-                checked={isUserLocationBlocked}
+                checked={!isUserLocationBlocked}
               />
               <S.ToggleBoxLabel htmlFor="checkbox" />
             </S.ToggleWrapper>
