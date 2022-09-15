@@ -53,8 +53,6 @@ const CafeDetailPage = () => {
     const kakaoLinkFragments = cafeDetail.kakaoLink.split("/");
     const placeId = kakaoLinkFragments[kakaoLinkFragments.length - 1];
 
-    alert(getPathFindingURL(userAddress, cafeDetail.address, placeId));
-
     window.open(getPathFindingURL(userAddress, cafeDetail.address, placeId));
   }, [userAddress, cafeDetail]);
 
