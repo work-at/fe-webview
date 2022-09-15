@@ -56,6 +56,12 @@ export const UserName = styled.div`
   text-align: center;
 `;
 
+export const UserEmail = styled(UserName)`
+  padding: 0 7.4667vw;
+  ${theme.fonts.Medium03};
+  color: ${theme.colors.gray05};
+`;
+
 export const EtcInfo = styled.ul`
   display: flex;
   justify-content: center;
