@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 
 export const PlaceViewWrap = styled.div`
-  padding: 12px 7.4667vw 30px;
+  padding: 12px 7.4667vw 120px;
 `;
 
 export const Tit = styled.h2`

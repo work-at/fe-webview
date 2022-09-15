@@ -28,6 +28,7 @@ export const CardThumb = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: ${theme.colors.gray09};
   > img {
     display: flex;
     width: 100%;
