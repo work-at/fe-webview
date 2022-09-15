@@ -78,6 +78,7 @@ const MyPage = () => {
             </S.CameraLabel>
           </S.UserPicture>
           <S.UserName>{userInfo?.nickname}</S.UserName>
+          <S.UserEmail>emarteveryday</S.UserEmail>
           <S.EtcInfo>
             <S.EtcList>{userInfo?.position?.content}</S.EtcList>
             <S.EtcList>{userInfo?.workingYear?.content}</S.EtcList>
