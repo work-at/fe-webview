@@ -2,7 +2,7 @@ import { theme } from "@/assets/styles/theme";
 import styled from "styled-components";
 
 export const ReviewWriteWrap = styled.div`
-  padding: 12px 7.4667vw 104px;
+  padding: 12px 7.4667vw 120px;
 `;
 
 export const Tit = styled.h2`
