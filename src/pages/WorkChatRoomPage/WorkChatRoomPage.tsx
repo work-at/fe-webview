@@ -18,7 +18,7 @@ import { Chats } from "@/domains/chat/chat.action";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import { useUserInfo } from "@/domains/user";
-import { usePageVisibility, usePullDownToCallback, usePullUpToCallback, useInterval } from "@/hooks";
+import { usePullDownToCallback, useInterval } from "@/hooks";
 import Spinner from "@/components/@shared/Spinner/Spinner";
 import { Room } from "@/domains/chat/chat.type";
 import { useFlow } from "@/stack";
@@ -261,7 +261,6 @@ const WorkChatRoomPage = () => {
   }, [refetch]);
 
   const { headRef, headHeight } = usePullDownToCallback({ onCallback: handlePullDownCallback, chatAreaRef });
-  const { tailRef, tailHeight } = usePullUpToCallback({ onCallback: handlePullUpCallback, chatAreaRef });
 
   const handleScrollToEnd = useCallback(() => {
     setTimeout(() => {
@@ -385,13 +384,6 @@ const WorkChatRoomPage = () => {
                 />
               );
             })}
-            {chatMessages.length > 0 && (
-              <S.PullArea ref={tailRef}>
-                <S.PullAreaContent height={tailHeight}>
-                  <Spinner />
-                </S.PullAreaContent>
-              </S.PullArea>
-            )}
             {chatInfo.blockedByOtherUser && (
               <S.LeaveMsg>
                 <S.LeaveTxt>대화 상대방이 채팅방을 나갔어요.</S.LeaveTxt>
