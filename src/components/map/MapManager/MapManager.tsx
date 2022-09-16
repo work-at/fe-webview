@@ -1,6 +1,6 @@
 import { Z_INDEX } from "@/constants/zIndex";
 import { Coordinates } from "@/domains/map.type";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Map from "../../@shared/Map";
 
 import useReLoadButton from "../../@shared/Map/ReLoadButton/useReLoadButton";
@@ -31,6 +31,7 @@ import { QUERY_NAME } from "@/constants";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
+  userAddress: string;
 };
 
 type MapTabId = "cafe" | "diner" | "worker";
@@ -62,7 +63,7 @@ const TabId_TEXT: Record<MapTabId, string> = {
 
 const selectedTabIdAtom = atomWithStorage<MapTabId>("selected-tab-id", "cafe");
 
-const MapManager = ({ userCoordinates }: MapManagerProps) => {
+const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
   const [selectedCardId, setSelectedCardId] = useState<number | undefined>();
   const { isReloaded, updateReloadTime } = useReLoadButton();
   const [selectedTabId, setSelectedTabId] = useAtom(selectedTabIdAtom);
@@ -165,7 +166,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             addr: cafe.address,
             tags: cafe.tags,
             onClick: () => {
-              navigateToCafeDetail(cafe.id);
+              navigateToCafeDetail(cafe.id, userAddress);
             },
           };
         }
@@ -184,7 +185,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
             reviewNum: diner.reviewCount,
             addr: diner.address,
             tags: diner.tags,
-            onClick: () => navigateToDinerDetail(diner.id),
+            onClick: () => navigateToDinerDetail(diner.id, userAddress),
           };
         }
       }
@@ -214,6 +215,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
     cafes,
     diners,
     workers,
+    userAddress,
     navigateToCafeDetail,
     navigateToDinerDetail,
     navigateToWorkerDetail,
@@ -236,7 +238,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               tags: cafe.tags,
             })),
             onClick: (id: number) => {
-              navigateToCafeDetail(id);
+              navigateToCafeDetail(id, userAddress);
               setBottomDrawerOpen(false);
             },
           };
@@ -256,7 +258,7 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
               tags: diner.tags,
             })),
             onClick: (id: number) => {
-              navigateToDinerDetail(id);
+              navigateToDinerDetail(id, userAddress);
               setBottomDrawerOpen(false);
             },
           };
@@ -284,7 +286,16 @@ const MapManager = ({ userCoordinates }: MapManagerProps) => {
           };
         }
     }
-  }, [selectedTabId, cafes, diners, workers, navigateToCafeDetail, navigateToDinerDetail, navigateToWorkerDetail]);
+  }, [
+    selectedTabId,
+    cafes,
+    diners,
+    workers,
+    userAddress,
+    navigateToCafeDetail,
+    navigateToDinerDetail,
+    navigateToWorkerDetail,
+  ]);
 
   const handleTabIdChange = useCallback(
     (id: MapTabId) => {

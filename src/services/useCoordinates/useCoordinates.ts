@@ -15,6 +15,9 @@ const useCoordinates = () => {
       },
       (error) => {
         alertUserPositionLoadError(error);
+      },
+      {
+        maximumAge: 1000 * 10,
       }
     );
 

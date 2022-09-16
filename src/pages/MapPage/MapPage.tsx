@@ -37,7 +37,7 @@ const MapPage = () => {
     );
   }
 
-  if (isMapLoading || stack.globalTransitionState === "loading") {
+  if (isMapLoading || stack.globalTransitionState === "loading" || !userAddress) {
     return (
       <StackLayout appBar={{ title: userAddress }} navigationPath="map" isHide>
         <Lottie source={require("@/assets/loading.json")} speed={2} />
@@ -59,7 +59,7 @@ const MapPage = () => {
       navigationPath="map"
       isHide={stack.activities.filter(({ transitionState }) => transitionState === "enter-done").length > 1}
     >
-      <MapManager userCoordinates={userCoordinates} />
+      <MapManager userCoordinates={userCoordinates} userAddress={userAddress} />
     </StackLayout>
   );
 };

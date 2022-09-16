@@ -3,36 +3,21 @@ import Header from "@/components/@shared/Header";
 import { useActivityParams } from "@stackflow/react";
 
 import * as S from "./DinerDetailPage.styled";
-import Icon, { IconType } from "@/assets/Icon";
+import Icon from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
-import { useUserAddressQuery } from "@/domains/user";
 import { useFlow } from "@/stack";
 import { useCallback } from "react";
 import { PATH } from "@/constants";
 import { useDinerDetailQuery } from "@/domains/diner";
-import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const DEFAULT_DINER_IMAGE =
   "https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGNvb2tpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60";
 
 const DinerDetailPage = () => {
-  const { dinerId } = useActivityParams<{ dinerId: string }>();
+  const { dinerId, userAddress } = useActivityParams<{ dinerId: string; userAddress: string }>();
   const { push } = useFlow();
-
-  const { userCoordinates } = useCoordinates();
-
-  const { data: userAddress } = useUserAddressQuery(
-    {
-      lat: userCoordinates?.lat ?? 0,
-      lng: userCoordinates?.lng ?? 0,
-    },
-    {
-      enabled: !!userCoordinates,
-      suspense: false,
-    }
-  );
 
   if (Number.isNaN(Number(dinerId))) {
     throw new Error("잘못된 dinerId 입니다.");
@@ -61,7 +46,13 @@ const DinerDetailPage = () => {
   }, [dinerDetail?.kakaoLink]);
 
   const handleOpenKaKaoPathFindingLink = useCallback(() => {
-    userAddress && dinerDetail && window.open(getPathFindingURL(userAddress, dinerDetail.address));
+    if (!dinerDetail || !userAddress) {
+      return;
+    }
+
+    const kakaoLinkFragments = dinerDetail.kakaoLink.split("/");
+    const placeId = kakaoLinkFragments[kakaoLinkFragments.length - 1];
+    window.open(getPathFindingURL(userAddress, dinerDetail.address, placeId));
   }, [userAddress, dinerDetail]);
 
   if (isLoading) {
@@ -99,7 +90,9 @@ const DinerDetailPage = () => {
               </S.List>
               <S.List>
                 <Icon icon={"Tel"} size={18} />
-                <S.TelLink href="tel:02-1234-1234">{dinerDetail.phoneNumber}</S.TelLink>
+                <S.TelLink href={`tel:${dinerDetail.phoneNumber}`}>
+                  {dinerDetail.phoneNumber === "" ? "제공되지 않음" : dinerDetail.phoneNumber}
+                </S.TelLink>
               </S.List>
             </S.Info>
             <S.BtnMapWrap>

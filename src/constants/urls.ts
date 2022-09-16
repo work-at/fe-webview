@@ -6,6 +6,7 @@ export const API_URL = {
   GET_WORKING_YEAR_LIST: "/user/job-duration",
   GET_USER_LIST: "/user/self",
   GET_ACCOMMODATION_LIST: "/accommodations",
+  GET_ACCOMMODATION_LIST_BY_NAME: "/accommodations/names",
   GET_ACCOMMODATION_DETAIL: (accommodationId: number) => `/accommodations/${accommodationId}`,
   GET_ACCOMMODATION_REVIEW: (accommodationId: number) => `/accommodations/${accommodationId}/reviews`,
   GET_TEST: (params: string) => `/${params}`,

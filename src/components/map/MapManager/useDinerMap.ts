@@ -37,8 +37,8 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected }: useDinerMapPro
   );
 
   const navigateToDinerDetail = useCallback(
-    (id: number) => {
-      push(PATH.DINER.stack, { dinerId: id });
+    (id: number, userAddress: string) => {
+      push(PATH.DINER.stack, { dinerId: id, userAddress });
     },
     [push]
   );

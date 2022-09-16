@@ -36,8 +36,8 @@ const useCafeMap = ({ userCoordinates, isReloaded, isSelected }: useCafeMapProps
   );
 
   const navigateToCafeDetail = useCallback(
-    (id: number) => {
-      push(PATH.CAFE.stack, { cafeId: id });
+    (id: number, userAddress: string) => {
+      push(PATH.CAFE.stack, { cafeId: id, userAddress });
     },
     [push]
   );

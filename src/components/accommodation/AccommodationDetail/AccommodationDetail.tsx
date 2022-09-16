@@ -1,28 +1,20 @@
-import Icon, { IconType } from "@/assets/Icon";
+import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
-import Tag from "@/components/@shared/Tag/Tag";
 import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
 import { useUserAddressQuery } from "@/domains/user";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useFlow } from "@/stack";
 import { getPathFindingURL } from "@/utils/kakao";
+import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
 import { useCallback } from "react";
 import * as S from "./AccommodationDetail.styled";
 
 const AccommodationDetail = () => {
-  const { accommodationId } = useActivityParams<{ accommodationId: string }>();
-  const { push } = useFlow();
-
-  const { data, isLoading, isError } = useAccommodationDetailQuery(
-    {
-      accommodationId: Number(accommodationId),
-    },
-    {}
-  );
+  const { accommodationId } = useActivityParams<{ accommodationId: string; userAddress: string }>();
 
   const { userCoordinates } = useCoordinates();
 
@@ -35,6 +27,15 @@ const AccommodationDetail = () => {
       enabled: !!userCoordinates,
       suspense: false,
     }
+  );
+
+  const { push } = useFlow();
+
+  const { data, isLoading, isError } = useAccommodationDetailQuery(
+    {
+      accommodationId: Number(accommodationId),
+    },
+    {}
   );
 
   const handleReviewButtonClick = useCallback(() => {
@@ -66,7 +67,10 @@ const AccommodationDetail = () => {
   };
 
   const handleOpenKaKaoPathFindingLink = () => {
-    userAddress && window.open(getPathFindingURL(userAddress, accommodationDetail.roadAddressName));
+    const kakaoLinkFragments = accommodationDetail.placeUrl.split("/");
+    const placeId = kakaoLinkFragments[kakaoLinkFragments.length - 1];
+
+    userAddress && window.open(getPathFindingURL(userAddress, accommodationDetail.name, placeId));
   };
 
   return (
@@ -81,12 +85,18 @@ const AccommodationDetail = () => {
           <S.TopInfo>
             <S.Info>
               <S.List>
+                <Icon icon={"Price"} size={18} />
+                1박 평균 {decimalFormatter(Math.round(accommodationDetail?.price / 7))}원~
+              </S.List>
+              <S.List>
                 <Icon icon={"Addr"} size={18} />
                 {accommodationDetail?.roadAddressName}
               </S.List>
               <S.List>
                 <Icon icon={"Tel"} size={18} />
-                <S.TelLink href="tel:02-1234-1234">{accommodationDetail?.phone}</S.TelLink>
+                <S.TelLink href={`tel:${accommodationDetail?.phone}`}>
+                  {accommodationDetail?.phone === "" ? "제공되지 않음" : accommodationDetail?.phone}
+                </S.TelLink>
               </S.List>
             </S.Info>
             <S.BtnMapWrap>
@@ -103,13 +113,13 @@ const AccommodationDetail = () => {
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
-          <S.ReviewWrap>
+          {/* <S.ReviewWrap>
             {accommodationReview?.reviews.map((review) => (
               <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
                 {review.tag.content}
               </Tag>
             ))}
-          </S.ReviewWrap>
+          </S.ReviewWrap> */}
         </S.InfoWrap>
         {!accommodationReview.userReviewed && (
           <S.BtnReview onClick={handleReviewButtonClick}>

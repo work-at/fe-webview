@@ -3,7 +3,7 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import { PATH } from "@/constants";
-import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
+import { useAccommodationListByNameQuery, useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
 import {
   AccommodationInfoTag,
@@ -38,10 +38,20 @@ const AccommodationSearchResult = () => {
   } = useAccommodationListQuery(
     {
       region: selectedRegion === "ALL" ? undefined : selectedRegion,
-      infoTag,
-      topReviewTag: reviewTag,
+      infoTagName: infoTag,
+      topReviewTagName: reviewTag,
+      pageSize: 100,
     },
     {}
+  );
+
+  const { data: accommodationListByName } = useAccommodationListByNameQuery(
+    {
+      accommodationName: searchKeyword,
+    },
+    {
+      enabled: !!searchKeyword,
+    }
   );
 
   const handleRegionSelect: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -93,7 +103,7 @@ const AccommodationSearchResult = () => {
 
             {/* 검색 리스트 */}
             <S.AccommList>
-              {accommodationList.map((item, index) => (
+              {(accommodationListByName ?? accommodationList).map((item, index) => (
                 <S.AccommListItem key={index}>
                   <S.LinkDetail
                     onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}

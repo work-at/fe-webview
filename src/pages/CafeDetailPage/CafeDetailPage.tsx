@@ -11,29 +11,14 @@ import Header from "@/components/@shared/Header";
 import Icon from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
-import { useUserAddressQuery } from "@/domains/user";
-import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 const DEFAULT_CAFE_IMAGE =
   "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FmZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60";
 
 const CafeDetailPage = () => {
-  const { cafeId } = useActivityParams<{ cafeId: string }>();
+  const { cafeId, userAddress } = useActivityParams<{ cafeId: string; userAddress: string }>();
   const { push } = useFlow();
-
-  const { userCoordinates } = useCoordinates();
-
-  const { data: userAddress } = useUserAddressQuery(
-    {
-      lat: userCoordinates?.lat ?? 0,
-      lng: userCoordinates?.lng ?? 0,
-    },
-    {
-      enabled: !!userCoordinates,
-      suspense: false,
-    }
-  );
 
   if (Number.isNaN(Number(cafeId))) {
     throw new Error("잘못된 cafeId 입니다.");
@@ -62,7 +47,13 @@ const CafeDetailPage = () => {
   }, [cafeDetail?.kakaoLink]);
 
   const handleOpenKaKaoPathFindingLink = useCallback(() => {
-    userAddress && cafeDetail && window.open(getPathFindingURL(userAddress, cafeDetail.address));
+    if (!cafeDetail || !userAddress) {
+      return;
+    }
+    const kakaoLinkFragments = cafeDetail.kakaoLink.split("/");
+    const placeId = kakaoLinkFragments[kakaoLinkFragments.length - 1];
+
+    window.open(getPathFindingURL(userAddress, cafeDetail.address, placeId));
   }, [userAddress, cafeDetail]);
 
   if (isLoading) {
@@ -100,7 +91,9 @@ const CafeDetailPage = () => {
               </S.List>
               <S.List>
                 <Icon icon={"Tel"} size={18} />
-                <S.TelLink href="tel:02-1234-1234">{cafeDetail.phoneNumber}</S.TelLink>
+                <S.TelLink href={`tel:${cafeDetail.phoneNumber}`}>
+                  {cafeDetail.phoneNumber === "" ? "제공되지 않음" : cafeDetail.phoneNumber}
+                </S.TelLink>
               </S.List>
             </S.Info>
             <S.BtnMapWrap>

@@ -74,16 +74,18 @@ export const useSyncUserLocationMutation = () => {
 
 export const requestGetUserInfoBase = () => baseInstance().get<unknown, DTO.GetUserInfoResponse>(API_URL.GET_USER_LIST);
 
+type UserInfoQueryKey = readonly [typeof QUERY_NAME.GET_USER_INFO];
+
 export const requestGetUserInfo: QueryFunction<DTO.GetUserInfoResponse> = async () => {
   const response = await baseInstance().get<unknown, AxiosResponse<DTO.GetUserInfoResponse>>(API_URL.GET_USER_LIST);
 
   return response.data;
 };
 
-export const useUserInfo = () => {
-  return useQuery([QUERY_NAME.GET_USER_INFO], requestGetUserInfo, {
-    staleTime: 500000,
-  });
+export const useUserInfo = (
+  options?: UseQueryOptions<DTO.GetUserInfoResponse, AxiosError<string>, DTO.GetUserInfoResponse, UserInfoQueryKey>
+) => {
+  return useQuery([QUERY_NAME.GET_USER_INFO] as const, requestGetUserInfo, options);
 };
 
 export const requestUpdateUserProfile = async (command: Action.UpdateUserInfoCommand) =>
