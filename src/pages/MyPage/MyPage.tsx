@@ -7,6 +7,7 @@ import { atomWithStorage } from "jotai/utils";
 import { useCallback, useEffect, useState } from "react";
 import * as S from "./MyPage.styled";
 import DefaultProfile from "@/assets/images/DefaultProfile.png";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 
 // 3개의 스택
 
@@ -20,8 +21,8 @@ const MyPage = () => {
   const { push } = useFlow();
   const [imageFile, setImageFile] = useState<File>();
   const [_, setIsUserLocationBlocked] = useAtom(isUserLocationBlockedAtom);
-  const { data: userInfo } = useUserInfo();
-  const { mutateAsync: uploadProfileImage } = useUploadUserProfileImageMutation();
+  const { data: userInfo, refetch } = useUserInfo();
+  const { mutateAsync: uploadProfileImage, isLoading } = useUploadUserProfileImageMutation();
 
   const imageUrl = imageFile ? URL.createObjectURL(imageFile) : undefined;
 
@@ -41,7 +42,7 @@ const MyPage = () => {
     push("ContactUs", {});
   }, [push]);
 
-  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { files } }) => {
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = async ({ currentTarget: { files } }) => {
     if (!files) return;
 
     if (!isValidFileSize(files[0])) {
@@ -49,13 +50,23 @@ const MyPage = () => {
       return;
     }
 
-    uploadProfileImage(files[0]);
+    await uploadProfileImage(files[0]);
     setImageFile(files[0]);
+    refetch();
   };
 
+  console.log(imageUrl);
   useEffect(() => {
     setIsUserLocationBlocked(userInfo?.trackingOff ?? false);
   }, [userInfo, setIsUserLocationBlocked]);
+
+  if (isLoading) {
+    return (
+      <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page" isHide>
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
+  }
 
   return (
     <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page" isHide>
@@ -63,7 +74,7 @@ const MyPage = () => {
         <S.TopInfo>
           <S.UserPicture>
             <S.UserThumb htmlFor="profile-image">
-              <img src={userInfo?.imageUrl ?? imageUrl ?? DefaultProfile} alt="유저 이미지" />
+              <img src={imageUrl ?? userInfo?.imageUrl ?? DefaultProfile} alt="유저 이미지" />
               <input
                 type="file"
                 id="profile-image"
