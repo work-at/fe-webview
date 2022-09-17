@@ -43,8 +43,6 @@ const MyPage = () => {
   }, [push]);
 
   const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = async ({ currentTarget: { files } }) => {
-    console.log("files", files);
-
     if (!files) return;
 
     if (!isValidFileSize(files[0])) {
