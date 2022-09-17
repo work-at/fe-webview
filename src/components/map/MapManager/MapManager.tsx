@@ -31,7 +31,7 @@ import { QUERY_NAME } from "@/constants";
 
 type MapManagerProps = {
   userCoordinates: Coordinates;
-  userAddress: string;
+  userAddress: string | undefined;
 };
 
 type MapTabId = "cafe" | "diner" | "worker";
@@ -166,7 +166,7 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
             addr: cafe.address,
             tags: cafe.tags,
             onClick: () => {
-              navigateToCafeDetail(cafe.id, userAddress);
+              userAddress && navigateToCafeDetail(cafe.id, userAddress);
             },
           };
         }
@@ -185,7 +185,7 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
             reviewNum: diner.reviewCount,
             addr: diner.address,
             tags: diner.tags,
-            onClick: () => navigateToDinerDetail(diner.id, userAddress),
+            onClick: () => userAddress && navigateToDinerDetail(diner.id, userAddress),
           };
         }
       }
@@ -239,6 +239,10 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
               tags: cafe.tags,
             })),
             onClick: (id: number) => {
+              if (!userAddress) {
+                return;
+              }
+
               navigateToCafeDetail(id, userAddress);
               setBottomDrawerOpen(false);
             },
@@ -259,6 +263,10 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
               tags: diner.tags,
             })),
             onClick: (id: number) => {
+              if (!userAddress) {
+                return;
+              }
+
               navigateToDinerDetail(id, userAddress);
               setBottomDrawerOpen(false);
             },

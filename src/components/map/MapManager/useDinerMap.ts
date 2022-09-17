@@ -32,6 +32,7 @@ const useDinerMap = ({ userCoordinates, isReloaded, isSelected }: useDinerMapPro
     },
     {
       enabled: isSelected,
+      keepPreviousData: true,
       suspense: false,
     }
   );
