@@ -115,8 +115,8 @@ const AccommodationDetail = () => {
             <S.ScrollInner>
               <S.InfoList>
                 {accommodationDetail.infoTags.map((each) => (
-                  <S.InfoListItem key={each.name}>
-                    <Icon icon={each.name as IconType} />
+                  <S.InfoListItem key={each?.name}>
+                    <Icon icon={each?.name as IconType} />
                     <S.InfoTxt>
                       {ACCOMMODATION_INFO_TAGS.filter((item) => item.name === each.name)[0].content}
                     </S.InfoTxt>
@@ -132,8 +132,8 @@ const AccommodationDetail = () => {
           </S.WalkTit>
           <S.ReviewWrap>
             {accommodationReview?.reviews.map((review) => (
-              <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
-                {review.tag.content}
+              <Tag key={review.reviewType.name} reviews={review.count} iconType={review.reviewType.name as IconType}>
+                {review.reviewType.content}
               </Tag>
             ))}
           </S.ReviewWrap>
