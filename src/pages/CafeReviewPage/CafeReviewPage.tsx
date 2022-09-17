@@ -7,6 +7,7 @@ import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { CafeReviewKey, useCafeReviewListQuery, usePostCafeReview } from "@/domains/cafe";
 import { useActivityParams } from "@stackflow/react";
 import { useFlow } from "@/stack";
+import { useMemo } from "react";
 
 const CafeReviewPage = () => {
   const { cafeId } = useActivityParams<{ cafeId: string }>();
@@ -15,12 +16,16 @@ const CafeReviewPage = () => {
   const { selected, onChange } = useMultiselect([]);
   const { pop } = useFlow();
 
-  const reviewList = data?.data?.response.map((item) => ({
-    id: item.name,
-    label: item.content,
-    isIcon: true,
-    iconType: item.name,
-  }));
+  const reviewList = useMemo(
+    () =>
+      data?.data?.response.map((item) => ({
+        id: item.name,
+        label: item.content,
+        isIcon: true,
+        iconType: item.name + "_B",
+      })),
+    [data?.data?.response]
+  );
 
   const handlePostReview = async () => {
     try {

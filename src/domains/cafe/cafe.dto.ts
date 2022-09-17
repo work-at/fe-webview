@@ -78,7 +78,7 @@ export type GetCafeDetailResponse = AxiosResponse<{
 type ReviewTypeItem = {
   name: CafeReviewKey;
   content: string;
-  iconType: string;
+  content2: string;
 };
 
 export type GetCafeReviewTypeResponse = AxiosResponse<{ response: ReviewTypeItem[] }>;
