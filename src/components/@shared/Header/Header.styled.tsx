@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { theme } from "@/assets/styles/theme";
 import { Z_INDEX } from "@/constants/zIndex";
 import { HeaderProps } from "./Header";
+import React from "react";
 
 type StyledHeaderProps = Omit<HeaderProps, "useRefresh">;
 
@@ -91,7 +92,7 @@ export const SearchInputWrap = styled.div`
   margin: 0 7.4667vw 0 8px;
 `;
 
-export const SearchInput = styled.input<React.InputHTMLAttributes<HTMLInputElement>>`
+export const SearchInput = styled.input<any>`
   display: inline-block;
   width: 100%;
   height: 36px;

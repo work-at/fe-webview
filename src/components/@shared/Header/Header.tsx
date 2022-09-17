@@ -74,7 +74,11 @@ const Header = ({
 
         {search && (
           <S.SearchInputWrap>
-            <S.SearchInput type="text" onChange={onSearchKeywordChange} />
+            <S.SearchInput
+              type="text"
+              onChange={onSearchKeywordChange}
+              onKeyDown={(e: any) => e.key === "Enter" && onSearchButtonClick && onSearchButtonClick()}
+            />
             <S.BtnConfirm onClick={onSearchButtonClick}>
               <Icon icon="BtnSearch" size={24} />
             </S.BtnConfirm>

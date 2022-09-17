@@ -25,17 +25,17 @@ const AccommodationSearch = () => {
     [push]
   );
 
-  const handleReviewTagSelect = useCallback(
-    (tag: AccommodationReviewTag) => {
-      const selectedTag = ACCOMMODATION_REVIEW_TAGS.find((reviewTag) => reviewTag.name === tag);
+  // const handleReviewTagSelect = useCallback(
+  //   (tag: AccommodationReviewTag) => {
+  //     const selectedTag = ACCOMMODATION_REVIEW_TAGS.find((reviewTag) => reviewTag.name === tag);
 
-      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
-        reviewTag: tag,
-        searchedBy: selectedTag?.content,
-      });
-    },
-    [push]
-  );
+  //     push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+  //       reviewTag: tag,
+  //       searchedBy: selectedTag?.content,
+  //     });
+  //   },
+  //   [push]
+  // );
 
   const handleSearchKeywordChange: React.ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
     const { value } = event.target;

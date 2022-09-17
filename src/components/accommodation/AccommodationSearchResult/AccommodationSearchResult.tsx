@@ -42,7 +42,9 @@ const AccommodationSearchResult = () => {
       topReviewTagName: reviewTag,
       pageSize: 100,
     },
-    {}
+    {
+      enabled: !searchKeyword,
+    }
   );
 
   const { data: accommodationListByName } = useAccommodationListByNameQuery(
@@ -71,8 +73,10 @@ const AccommodationSearchResult = () => {
     );
   }
 
-  if (isError || !accommodationList) {
-    return <div>요류 발생</div>;
+  const list = accommodationListByName ?? accommodationList;
+
+  if (isError || !list) {
+    return <div>오류 발생</div>;
   }
 
   return (
@@ -96,14 +100,14 @@ const AccommodationSearchResult = () => {
       )}
     >
       <S.AccommListWrap>
-        {accommodationList.length !== 0 ? (
+        {list.length !== 0 ? (
           <>
             {/* 검색 키워드 */}
             <S.KeywordTxt>{searchedBy} 검색결과</S.KeywordTxt>
 
             {/* 검색 리스트 */}
             <S.AccommList>
-              {(accommodationListByName ?? accommodationList).map((item, index) => (
+              {list.map((item, index) => (
                 <S.AccommListItem key={index}>
                   <S.LinkDetail
                     onClick={() => push(PATH.ACCOMMODATION.ACCOMMODATION_DETAIL.stack, { accommodationId: item.id })}
