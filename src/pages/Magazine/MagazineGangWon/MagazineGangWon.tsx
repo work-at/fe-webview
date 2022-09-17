@@ -9,9 +9,19 @@ import MagazinePlaceGangWon3 from "@/assets/images/MagazinePlaceGangWon3.png";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
+import { useMemo } from "react";
 
 const MagazineGangWon = () => {
   const { push } = useFlow();
+
+  const region = useMemo(
+    () =>
+      [
+        { key: "GANGNEUNG", name: "강릉으로" },
+        { key: "SOKCHO", name: "속초로" },
+      ][Math.floor(Math.random() * 2)],
+    []
+  );
 
   return (
     <StackLayout isHide>
@@ -65,12 +75,12 @@ const MagazineGangWon = () => {
           <S.BtnListGo
             onClick={() =>
               push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
-                region: "SEOUL",
+                region: region.key,
               })
             }
           >
             <Icon icon="IconGangWon" />
-            <S.GoGangWonTxt>지금 바로 강릉으로 워케이션 떠나기!</S.GoGangWonTxt>
+            <S.GoGangWonTxt>지금 바로 {region.name} 워케이션 떠나기!</S.GoGangWonTxt>
           </S.BtnListGo>
         </S.BottomWrap>
       </S.MagazineWrap>
