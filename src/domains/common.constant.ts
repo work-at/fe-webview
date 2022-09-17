@@ -213,32 +213,32 @@ export const ACCOMMODATION_INFO_TAGS = [
   {
     name: "WORKSPACE",
     content: "숙소 내\n업무 공간",
-    icon: "IconAccommInfo1",
+    icon: "WORKSPACE",
   },
   {
     name: "NEAR_FOREST",
     content: "숲 인근",
-    icon: "IconAccommInfo2",
+    icon: "NEAR_FOREST",
   },
   {
     name: "NEAR_SEA",
     content: "바다 인근",
-    icon: "IconAccommInfo3",
+    icon: "NEAR_SEA",
   },
   {
     name: "NEAR_ATTRACTION",
     content: "관광지\n인근",
-    icon: "IconAccommInfo4",
+    icon: "NEAR_ATTRACTION",
   },
   {
     name: "NEAR_CITY",
     content: "도시 인근",
-    icon: "IconAccommInfo5",
+    icon: "NEAR_CITY",
   },
   {
     name: "SHARED_WORKSPACE",
     content: "공용업무\n공간",
-    icon: "IconAccommInfo6",
+    icon: "SHARED_WORKSPACE",
   },
 ] as const;
 

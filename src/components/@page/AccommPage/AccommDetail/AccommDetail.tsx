@@ -7,7 +7,7 @@ import VisualImg from "@/assets/images/BgCafe1.png";
 const AccommDetail = () => {
   return (
     <>
-      <Header useBack />
+      {/* <Header useBack /> */}
       <S.AccommDetailWrap>
         <S.VisualWrap>
           <img src={VisualImg} alt="까페 이미지" />
@@ -46,22 +46,22 @@ const AccommDetail = () => {
             <S.ScrollInner>
               <S.InfoList>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo1" />
+                  <Icon icon="WORKSPACE" />
                   <S.InfoTxt>
                     숙소 내 <br />
                     업무 공간
                   </S.InfoTxt>
                 </S.InfoListItem>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo2" />
+                  <Icon icon="NEAR_FOREST" />
                   <S.InfoTxt>숲 인근</S.InfoTxt>
                 </S.InfoListItem>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo3" />
+                  <Icon icon="NEAR_SEA" />
                   <S.InfoTxt>바다 인근</S.InfoTxt>
                 </S.InfoListItem>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo4" />
+                  <Icon icon="NEAR_ATTRACTION" />
                   <S.InfoTxt>
                     관광지
                     <br />
@@ -69,11 +69,11 @@ const AccommDetail = () => {
                   </S.InfoTxt>
                 </S.InfoListItem>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo5" />
+                  <Icon icon="NEAR_CITY" />
                   <S.InfoTxt>도시 인근</S.InfoTxt>
                 </S.InfoListItem>
                 <S.InfoListItem>
-                  <Icon icon="IconAccommInfo6" />
+                  <Icon icon="SHARED_WORKSPACE" />
                   <S.InfoTxt>
                     공용업무
                     <br />

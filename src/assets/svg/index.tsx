@@ -134,12 +134,12 @@ export { default as POPULAR } from "../images/icons/POPULAR.svg";
 export { default as IconJeju } from "../images/icons/IconJeju.svg";
 export { default as IconSeoul } from "../images/icons/IconSeoul.svg";
 export { default as IconGangWon } from "../images/icons/IconGangWon.svg";
-export { default as IconAccommInfo1 } from "../images/icons/IconAccommInfo1.svg";
-export { default as IconAccommInfo2 } from "../images/icons/IconAccommInfo2.svg";
-export { default as IconAccommInfo3 } from "../images/icons/IconAccommInfo3.svg";
-export { default as IconAccommInfo4 } from "../images/icons/IconAccommInfo4.svg";
-export { default as IconAccommInfo5 } from "../images/icons/IconAccommInfo5.svg";
-export { default as IconAccommInfo6 } from "../images/icons/IconAccommInfo6.svg";
+export { default as WORKSPACE } from "../images/icons/WORKSPACE.svg";
+export { default as NEAR_FOREST } from "../images/icons/NEAR_FOREST.svg";
+export { default as NEAR_SEA } from "../images/icons/NEAR_SEA.svg";
+export { default as NEAR_ATTRACTION } from "../images/icons/NEAR_ATTRACTION.svg";
+export { default as NEAR_CITY } from "../images/icons/NEAR_CITY.svg";
+export { default as SHARED_WORKSPACE } from "../images/icons/SHARED_WORKSPACE.svg";
 export { default as IconNoData } from "../images/icons/IconNoData.svg";
 
 // 그 외 아이콘
