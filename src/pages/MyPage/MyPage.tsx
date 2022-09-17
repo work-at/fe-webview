@@ -43,6 +43,8 @@ const MyPage = () => {
   }, [push]);
 
   const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = async ({ currentTarget: { files } }) => {
+    console.log("files", files);
+
     if (!files) return;
 
     if (!isValidFileSize(files[0])) {
@@ -82,9 +84,15 @@ const MyPage = () => {
                 onInput={handleImageChange}
               />
             </S.UserThumb>
-            <S.CameraLabel>
+            <S.CameraLabel htmlFor="profile-image-upload-button">
               <Icon icon="IconCamera" />
-              <S.BtnCamera type="file" accept="image/*" />
+              <S.BtnCamera
+                type="file"
+                id="profile-image-upload-button"
+                accept=".jpg, .png, .jpeg, tiff"
+                style={{ display: "none" }}
+                onInput={handleImageChange}
+              />
             </S.CameraLabel>
           </S.UserPicture>
           <S.UserName>{userInfo?.nickname}</S.UserName>
