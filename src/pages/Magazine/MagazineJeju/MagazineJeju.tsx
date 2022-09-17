@@ -11,7 +11,7 @@ import { useFlow } from "@/stack";
 import { PATH } from "@/constants";
 
 const MagazineJeju = () => {
-  const { push } = useFlow();
+  const { replace } = useFlow();
 
   return (
     <StackLayout isHide>
@@ -62,7 +62,7 @@ const MagazineJeju = () => {
 
           <S.BtnListGo
             onClick={() =>
-              push(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
+              replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, {
                 region: "JEJU",
               })
             }

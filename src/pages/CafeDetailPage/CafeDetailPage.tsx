@@ -69,8 +69,6 @@ const CafeDetailPage = () => {
     return <div>정보를 불러올 수 없습니다.</div>;
   }
 
-  const totalReviewCount = cafeDetail.reviewPoints.reduce((acc, point) => acc + point.reviewCount, 0);
-
   return (
     <StackLayout isHide>
       <Header useBack />
@@ -106,7 +104,7 @@ const CafeDetailPage = () => {
             </S.BtnMapWrap>
           </S.TopInfo>
           <S.WalkTit>
-            <S.Num>{totalReviewCount}</S.Num>명의 워케이셔너가
+            <S.Num>{cafeDetail.userCount}</S.Num>명의 워케이셔너가
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
@@ -118,7 +116,7 @@ const CafeDetailPage = () => {
             ))}
           </S.ReviewWrap>
         </S.InfoWrap>
-        {!cafeDetail.isReviewed && (
+        {!cafeDetail?.isReviewed && (
           <S.BtnReview onClick={handleReviewButtonClick}>
             <Icon icon={"BtnReview"} size={73} />
           </S.BtnReview>

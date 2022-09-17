@@ -69,6 +69,7 @@ export type GetDinerDetailResponse = AxiosResponse<{
   locationReview: {
     reviews: Review[];
     userReviewed: boolean;
+    userCount: number;
   };
 }>;
 
@@ -78,7 +79,7 @@ type ReviewTypeItem = {
   iconType: string;
 };
 
-export type GetDinerReviewTypeResponse = AxiosResponse<{ response: ReviewTypeItem[] }>;
+export type GetDinerReviewTypeResponse = AxiosResponse<{ tags: ReviewTypeItem[] }>;
 
 export type PostDinerReviewRequest = {
   reviewTypeNames: DinerReviewKey[];

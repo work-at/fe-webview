@@ -26,6 +26,7 @@ export type DinerDetail = {
   kakaoLink: string;
   reviewPoints: ReviewPoint[];
   isReviewed: boolean;
+  userCount: number;
 };
 
 export type DinerReviewKey =

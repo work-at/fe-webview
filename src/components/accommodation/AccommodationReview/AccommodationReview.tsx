@@ -3,6 +3,7 @@ import Button from "@/components/@shared/Button/Button";
 import CheckBox from "@/components/@shared/CheckBox";
 import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import {
+  useAccommodationDetailQuery,
   useAccommodationReviewListQuery,
   useReviewAccommodationMutation,
 } from "@/domains/accommodation/accommodation.api";
@@ -11,10 +12,21 @@ import * as S from "./AccommodationReview.styled";
 import { AccommodationReviewTag } from "@/domains/accommodation/accommodation.dto";
 import { useActivityParams } from "@stackflow/react";
 import Header from "@/components/@shared/Header";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const AccommodationReview = () => {
   const { accommodationId } = useActivityParams<{ accommodationId: string }>();
+  const { refetch } = useAccommodationDetailQuery(
+    {
+      accommodationId: Number(accommodationId),
+    },
+    {}
+  );
+
+  useEffect(() => {
+    return (() => refetch()) as () => void;
+  }, [refetch]);
+
   const { data } = useAccommodationReviewListQuery();
   const { selected, onChange } = useMultiselect<AccommodationReviewTag>([]);
   const { pop } = useFlow();

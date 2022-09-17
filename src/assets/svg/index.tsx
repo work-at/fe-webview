@@ -51,8 +51,8 @@ export { default as QUIET_B } from "../images/icons/QUIET_B.svg";
 export { default as SNACK_B } from "../images/icons/SNACK_B.svg";
 
 // 숙소 Tag
-export { default as PRICE } from "../images/icons/COST.svg";
-export { default as DESK } from "../images/icons/SEAT.svg";
+export { default as PRICE } from "../images/icons/PRICE.svg";
+export { default as DESK } from "../images/icons/DESK.svg";
 export { default as BED } from "../images/icons/BED.svg";
 export { default as CLEAN } from "../images/icons/CLEAN.svg";
 export { default as BREAKFAST } from "../images/icons/BREAKFAST.svg";
@@ -143,7 +143,7 @@ export { default as SHARED_WORKSPACE } from "../images/icons/SHARED_WORKSPACE.sv
 export { default as IconNoData } from "../images/icons/IconNoData.svg";
 
 // 그 외 아이콘
-export { default as Price } from "../images/icons/Price.svg";
+export { default as PriceIcon } from "../images/icons/PriceIcon.svg";
 export { default as Addr } from "../images/icons/Addr.svg";
 export { default as Tel } from "../images/icons/Tel.svg";
 export { default as Dot } from "../images/icons/Dot.svg";
