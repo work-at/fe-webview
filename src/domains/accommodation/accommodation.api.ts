@@ -154,3 +154,17 @@ export const useAccommodationCurationQuery = () => {
     requestAccommodationCuration
   );
 };
+
+export const requestAccommodationReviewList: QueryFunction<DTO.GetAccommodationReviewTypeResponse> = async () => {
+  return await baseInstance().get<unknown, DTO.GetAccommodationReviewTypeResponse>(
+    API_URL.GET_ACCOMMODATION_REVIEW_LIST
+  );
+};
+
+export const useAccommodationReviewListQuery = () => {
+  return useQuery<DTO.GetAccommodationReviewTypeResponse, AxiosError<{ message: string }>>(
+    [QUERY_NAME.GET_ACCOMMODATION_REVIEW_LIST],
+    requestAccommodationReviewList,
+    { staleTime: Infinity, cacheTime: Infinity, keepPreviousData: true }
+  );
+};

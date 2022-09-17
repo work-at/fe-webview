@@ -1,7 +1,8 @@
-import Icon from "@/assets/Icon";
+import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import Tag from "@/components/@shared/Tag/Tag";
 import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
 import { useUserAddressQuery } from "@/domains/user";
@@ -113,15 +114,15 @@ const AccommodationDetail = () => {
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
-          {/* <S.ReviewWrap>
+          <S.ReviewWrap>
             {accommodationReview?.reviews.map((review) => (
               <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
                 {review.tag.content}
               </Tag>
             ))}
-          </S.ReviewWrap> */}
+          </S.ReviewWrap>
         </S.InfoWrap>
-        {!accommodationReview.userReviewed && (
+        {!accommodationReview?.userReviewed && (
           <S.BtnReview onClick={handleReviewButtonClick}>
             <Icon icon={"BtnReview"} size={73} />
           </S.BtnReview>
