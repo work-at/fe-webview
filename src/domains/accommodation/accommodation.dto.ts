@@ -55,7 +55,7 @@ export type GetAccommodationDetailRequest = {
 
 type AccommodationDetailReviewTag = {
   count: number;
-  reviewType: ReviewTagItem;
+  tag: ReviewTagItem;
 };
 
 export type GetAccommodationDetailResponse = {
