@@ -4,17 +4,18 @@ import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import { PATH } from "@/constants";
 import { useAccommodationListByNameQuery, useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
-import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
 import {
   AccommodationInfoTag,
   AccommodationRegion,
   AccommodationReviewTag,
 } from "@/domains/accommodation/accommodation.dto";
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
+import { useDetectOutsideClick } from "@/hooks";
 import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams, useStack } from "@stackflow/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { DropDown } from "../AccommodationList/AccommodationList";
 import * as S from "./AccommodationSearchResult.styled";
 
 const DEFAULT_IMAGE =
@@ -29,7 +30,7 @@ const AccommodationSearchResult = () => {
     searchedBy: string;
   }>();
 
-  const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>();
+  const [selectedRegion, setSelectedRegion] = useState<AccommodationRegion>("ALL");
 
   const {
     data: accommodationList,
@@ -56,13 +57,15 @@ const AccommodationSearchResult = () => {
     }
   );
 
-  const handleRegionSelect: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    const { value } = event.target;
-
+  const handleRegionSelect = (value: string) => {
     setSelectedRegion(value as AccommodationRegion);
   };
 
   const stack = useStack();
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useDetectOutsideClick(ref, () => setIsOpen(false));
 
   if (isLoading || stack.globalTransitionState === "loading") {
     return (
@@ -84,14 +87,11 @@ const AccommodationSearchResult = () => {
       appBar={{
         title: (
           <S.RegionSelectorWrap>
-            <S.RegionSelector onChange={handleRegionSelect}>
-              {ACCOMMODATION_REGIONS.map((region) => (
-                <option key={region} selected={region === selectedRegion} value={region}>
-                  {AccommodationRegions_TEXT[region]}
-                </option>
-              ))}
+            <S.RegionSelector ref={ref} onClick={() => setIsOpen((prev) => !prev)}>
+              {AccommodationRegions_TEXT[selectedRegion]}
             </S.RegionSelector>
-            <S.RegionSelectorArr></S.RegionSelectorArr>
+            <S.RegionSelectorArr isOpen={isOpen}></S.RegionSelectorArr>
+            <DropDown isOpen={isOpen} handleClick={handleRegionSelect} region={selectedRegion} />
           </S.RegionSelectorWrap>
         ),
       }}

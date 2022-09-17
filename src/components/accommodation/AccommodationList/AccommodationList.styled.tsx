@@ -235,7 +235,7 @@ export const RegionSelectorWrap = styled.div`
   z-index: ${Z_INDEX.HIGH};
 `;
 
-export const RegionSelector = styled.select`
+export const RegionSelector = styled.div`
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
@@ -246,12 +246,65 @@ export const RegionSelector = styled.select`
   background: ${theme.colors.white};
 `;
 
-export const RegionSelectorArr = styled.span`
+type StyledRegionSelectorArrProps = {
+  isOpen: boolean;
+};
+
+export const RegionSelectorArr = styled.span<StyledRegionSelectorArrProps>`
   display: inline-flex;
   width: 0px;
   height: 0px;
   border-right: 6px solid ${theme.colors.black};
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  transform: rotate(-90deg);
+
+  ${({ isOpen }) =>
+    isOpen
+      ? `
+        transform: rotate(90deg);
+        transition: all 0.1s ease-in;
+        `
+      : `
+        transform: rotate(-90deg);
+        transition: all 0.1s ease-in;
+      `}
+`;
+
+interface StyledMenuProps {
+  isOpen: boolean;
+  isSelected?: boolean;
+}
+
+export const MenuBox = styled.div<StyledMenuProps>`
+  position: absolute;
+  top: 24px;
+  background: ${theme.colors.white};
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  min-width: 164px;
+  z-index: ${Z_INDEX.MIDDLE};
+
+  ${({ isOpen }) =>
+    isOpen
+      ? `
+        opacity: 1;
+        transition: all 0.2s ease-in;`
+      : `
+        opacity: 0;
+        transition: all 0.2s ease-in;
+        visibility: hidden;
+  `}
+`;
+
+export const MenuList = styled.button`
+  ${theme.fonts.Medium02};
+  color: ${theme.colors.black};
+  display: block;
+  width: calc(100% - 6px);
+  padding: 12px;
+  text-align: left;
+  transition: all 0.2s;
+  transition: color 0s;
+  margin: 3px;
+  border-radius: 10px;
 `;

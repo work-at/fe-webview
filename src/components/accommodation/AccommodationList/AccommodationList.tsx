@@ -1,19 +1,41 @@
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
-import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import { PATH } from "@/constants";
 import { useAccommodationListQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_REGIONS } from "@/domains/accommodation/accommodation.constant";
 import { AccommodationRegion } from "@/domains/accommodation/accommodation.dto";
 import { AccommodationRegions_TEXT } from "@/domains/accommodation/accommodation.text";
+import { useDetectOutsideClick } from "@/hooks";
 import { Badge } from "@/pages/AccommodationPage/AccommodationPage";
 import { useFlow } from "@/stack";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams, useStack } from "@stackflow/react";
+import { useRef, useState } from "react";
 import * as S from "./AccommodationList.styled";
 
 const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
+
+export type DropDownProps = {
+  region: string;
+  handleClick: (value: string) => void;
+  isOpen: boolean;
+};
+
+export const DropDown = ({ region, handleClick, isOpen }: DropDownProps) => {
+  return (
+    <S.MenuBox isOpen={isOpen}>
+      {ACCOMMODATION_REGIONS.map(
+        (currentRegion) =>
+          region !== currentRegion && (
+            <S.MenuList onClick={() => handleClick(currentRegion)} key={currentRegion}>
+              {AccommodationRegions_TEXT[currentRegion]}
+            </S.MenuList>
+          )
+      )}
+    </S.MenuBox>
+  );
+};
 
 const AccommodationList = () => {
   const { push, replace } = useFlow();
@@ -33,13 +55,15 @@ const AccommodationList = () => {
     {}
   );
 
-  const handleRegionSelect: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-    const { value } = event.target;
-
+  const handleRegionSelect = (value: string) => {
     replace(PATH.ACCOMMODATION.ACCOMMODATION_LIST.stack, { region: value }, { animate: false });
   };
 
   const stack = useStack();
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useDetectOutsideClick(ref, () => setIsOpen(false));
 
   if (isLoading || stack.globalTransitionState === "loading") {
     return (
@@ -58,14 +82,11 @@ const AccommodationList = () => {
       appBar={{
         title: (
           <S.RegionSelectorWrap>
-            <S.RegionSelector onChange={handleRegionSelect}>
-              {ACCOMMODATION_REGIONS.map((currentRegion) => (
-                <option key={currentRegion} selected={currentRegion === region} value={currentRegion}>
-                  {AccommodationRegions_TEXT[currentRegion]}
-                </option>
-              ))}
+            <S.RegionSelector ref={ref} onClick={() => setIsOpen((prev) => !prev)}>
+              {AccommodationRegions_TEXT[region]}
             </S.RegionSelector>
-            <S.RegionSelectorArr></S.RegionSelectorArr>
+            <S.RegionSelectorArr isOpen={isOpen}></S.RegionSelectorArr>
+            <DropDown isOpen={isOpen} handleClick={handleRegionSelect} region={region} />
           </S.RegionSelectorWrap>
         ),
       }}
