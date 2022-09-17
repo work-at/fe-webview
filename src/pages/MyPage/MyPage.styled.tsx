@@ -44,7 +44,7 @@ export const BtnCamera = styled.input`
   height: 40px;
 `;
 
-export const CameraLabel = styled.span`
+export const CameraLabel = styled.label`
   position: absolute;
   right: 0;
   bottom: 0;

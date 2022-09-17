@@ -11,6 +11,7 @@ import { useCallback } from "react";
 import { PATH } from "@/constants";
 import { useDinerDetailQuery } from "@/domains/diner";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import useErrorImageReplace from "@/hooks/useErrorImageReplace";
 
 const DEFAULT_DINER_IMAGE =
   "https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fGNvb2tpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60";
@@ -36,6 +37,8 @@ const DinerDetailPage = () => {
       suspense: false,
     }
   );
+
+  const { imageRef } = useErrorImageReplace(dinerDetail?.imageUrl, DEFAULT_DINER_IMAGE);
 
   const handleReviewButtonClick = useCallback(() => {
     push(PATH.DINER.DINER_REVIEW.stack, { dinerId });
@@ -74,6 +77,7 @@ const DinerDetailPage = () => {
       <S.DinerDetailWrap>
         <S.VisualWrap>
           <img
+            ref={imageRef}
             src={dinerDetail.imageUrl === "" || !dinerDetail.imageUrl ? DEFAULT_DINER_IMAGE : dinerDetail.imageUrl}
             alt="음식점 이미지"
           />

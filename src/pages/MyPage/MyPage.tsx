@@ -82,9 +82,15 @@ const MyPage = () => {
                 onInput={handleImageChange}
               />
             </S.UserThumb>
-            <S.CameraLabel>
+            <S.CameraLabel htmlFor="profile-image-upload-button">
               <Icon icon="IconCamera" />
-              <S.BtnCamera type="file" accept="image/*" />
+              <S.BtnCamera
+                type="file"
+                id="profile-image-upload-button"
+                accept=".jpg, .png, .jpeg, tiff"
+                style={{ display: "none" }}
+                onInput={handleImageChange}
+              />
             </S.CameraLabel>
           </S.UserPicture>
           <S.UserName>{userInfo?.nickname}</S.UserName>

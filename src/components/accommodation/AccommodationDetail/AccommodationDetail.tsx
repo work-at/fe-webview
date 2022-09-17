@@ -7,6 +7,7 @@ import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
 import { ACCOMMODATION_INFO_TAGS } from "@/domains/common.constant";
 import { useUserAddressQuery } from "@/domains/user";
+import useErrorImageReplace from "@/hooks/useErrorImageReplace";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useFlow } from "@/stack";
 import { getPathFindingURL } from "@/utils/kakao";
@@ -14,6 +15,9 @@ import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
 import { useCallback } from "react";
 import * as S from "./AccommodationDetail.styled";
+
+const DEFAULT_ACCOMMODATION_IMAGE =
+  "https://images.unsplash.com/photo-1564273795917-fe399b763988?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFjY29tbW9kYXRpb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60";
 
 const AccommodationDetail = () => {
   const { accommodationId } = useActivityParams<{ accommodationId: string; userAddress: string }>();
@@ -39,6 +43,8 @@ const AccommodationDetail = () => {
     },
     {}
   );
+
+  const { imageRef } = useErrorImageReplace(data?.data.accommodationDetail.imgUrl, DEFAULT_ACCOMMODATION_IMAGE);
 
   const handleReviewButtonClick = useCallback(() => {
     push(PATH.ACCOMMODATION.ACCOMMODATION_REVIEW.stack, { accommodationId });
@@ -80,7 +86,7 @@ const AccommodationDetail = () => {
       <Header useBack />
       <S.AccommodationDetailWrap>
         <S.VisualWrap>
-          <img src={accommodationDetail?.imgUrl} alt="까페 이미지" />
+          <img ref={imageRef} src={accommodationDetail?.imgUrl} alt="숙소 이미지" />
         </S.VisualWrap>
         <S.InfoWrap>
           <S.Tit>{accommodationDetail?.name}</S.Tit>

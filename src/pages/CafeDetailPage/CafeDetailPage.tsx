@@ -12,6 +12,7 @@ import Icon from "@/assets/Icon";
 import Tag from "@/components/@shared/Tag/Tag";
 import { getPathFindingURL } from "@/utils/kakao";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import useErrorImageReplace from "@/hooks/useErrorImageReplace";
 
 const DEFAULT_CAFE_IMAGE =
   "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FmZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60";
@@ -37,6 +38,8 @@ const CafeDetailPage = () => {
       suspense: false,
     }
   );
+
+  const { imageRef } = useErrorImageReplace(cafeDetail?.imageUrl, DEFAULT_CAFE_IMAGE);
 
   const handleReviewButtonClick = useCallback(() => {
     push(PATH.CAFE.CAFE_REVIEW.stack, { cafeId });
@@ -75,6 +78,7 @@ const CafeDetailPage = () => {
       <S.CafeDetailWrap>
         <S.VisualWrap>
           <img
+            ref={imageRef}
             src={cafeDetail.imageUrl === "" || !cafeDetail.imageUrl ? DEFAULT_CAFE_IMAGE : cafeDetail.imageUrl}
             alt="까페 이미지"
           />
