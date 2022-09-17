@@ -1,6 +1,5 @@
 import * as S from "./AccommDetail.styled";
 import Tag from "@/components/@shared/Tag/Tag";
-import Header from "@/components/@shared/Header/Header";
 import Icon from "@/assets/Icon";
 import VisualImg from "@/assets/images/BgCafe1.png";
 
@@ -19,7 +18,7 @@ const AccommDetail = () => {
           <S.TopInfo>
             <S.Info>
               <S.List>
-                <Icon icon={"Price"} size={18} />
+                <Icon icon={"PriceIcon"} size={18} />
                 1박 평균 45,000원~
               </S.List>
               <S.List>

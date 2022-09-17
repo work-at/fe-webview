@@ -87,7 +87,7 @@ const AccommodationDetail = () => {
           <S.TopInfo>
             <S.Info>
               <S.List>
-                <Icon icon={"Price"} size={18} />
+                <Icon icon={"PriceIcon"} size={18} />
                 1박 평균 {decimalFormatter(Math.round(accommodationDetail?.price / 7))}원~
               </S.List>
               <S.List>
