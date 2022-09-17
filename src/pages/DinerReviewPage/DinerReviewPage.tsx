@@ -19,13 +19,13 @@ const DinerReviewPage = () => {
 
   const reviewList = useMemo(
     () =>
-      data?.data?.response.map((item) => ({
+      data?.data?.tags.map((item) => ({
         id: item.name,
         label: item.content,
         isIcon: true,
         iconType: item.name + "_B",
       })),
-    [data?.data?.response]
+    [data?.data?.tags]
   );
 
   const handlePostReview = async () => {

@@ -68,8 +68,6 @@ const DinerDetailPage = () => {
     return <div>정보를 불러올 수 없습니다.</div>;
   }
 
-  const totalReviewCount = dinerDetail.reviewPoints.reduce((acc, point) => acc + point.reviewCount, 0);
-
   return (
     <StackLayout isHide>
       <Header useBack />
@@ -105,7 +103,7 @@ const DinerDetailPage = () => {
             </S.BtnMapWrap>
           </S.TopInfo>
           <S.WalkTit>
-            <S.Num>{totalReviewCount}</S.Num>명의 워케이셔너가
+            <S.Num>{dinerDetail.userCount}</S.Num>명의 워케이셔너가
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>

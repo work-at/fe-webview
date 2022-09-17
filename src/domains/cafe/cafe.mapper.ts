@@ -37,6 +37,7 @@ export const d2aMapper_GetCafeDetailResponse_CafeDetailInfo = (
       reviewCount: review.count,
     })),
     isReviewed: response.data.locationReview.userReviewed,
+    userCount: response.data.locationReview.userCount,
   };
 };
 

@@ -71,6 +71,7 @@ export type GetCafeDetailResponse = AxiosResponse<{
   };
   locationReview: {
     reviews: Review[];
+    userCount: number;
     userReviewed: boolean;
   };
 }>;
@@ -81,7 +82,7 @@ type ReviewTypeItem = {
   content2: string;
 };
 
-export type GetCafeReviewTypeResponse = AxiosResponse<{ response: ReviewTypeItem[] }>;
+export type GetCafeReviewTypeResponse = AxiosResponse<{ tags: ReviewTypeItem[] }>;
 
 export type PostCafeReviewRequest = {
   reviewTypeNames: CafeReviewKey[];
