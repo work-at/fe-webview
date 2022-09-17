@@ -30,6 +30,11 @@ type Worker = {
     name: string;
     content: string;
   };
+  activities: {
+    name: string;
+    content: string;
+  }[];
+  workchats: number;
 };
 
 export type GetWorkersResponse = AxiosResponse<{ response: Worker[] }>;
@@ -53,7 +58,10 @@ type WorkerDetail = {
   };
   company: string;
   workchats: number;
-  activities: typeof DESIRED_ACTIVITIES;
+  activities: {
+    name: string;
+    content: string;
+  }[];
 };
 
 export type GetWorkerDetailResponse = AxiosResponse<WorkerDetail>;

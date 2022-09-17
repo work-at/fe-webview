@@ -52,6 +52,7 @@ export const d2aMapper_GetWorkersResponse_WorkersInfo = (response: DTO.GetWorker
     job: worker.position.content,
     name: worker.nickname,
     yearOfService: worker.workingYear.content,
-    tags: [],
+    workchats: worker.workchats,
+    tags: worker.activities.map((review) => review.content),
   }));
 };

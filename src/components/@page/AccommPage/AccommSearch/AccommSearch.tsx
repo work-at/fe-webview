@@ -14,7 +14,7 @@ const AccommSearch = () => {
             <S.InfoList>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo1" />
+                  <Icon icon="WORKSPACE" />
                 </S.BtnInfo>
                 <S.InfoTxt>
                   숙소 내 <br />
@@ -23,19 +23,19 @@ const AccommSearch = () => {
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo2" />
+                  <Icon icon="NEAR_FOREST" />
                 </S.BtnInfo>
                 <S.InfoTxt>숲 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo3" />
+                  <Icon icon="NEAR_SEA" />
                 </S.BtnInfo>
                 <S.InfoTxt>바다 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo4" />
+                  <Icon icon="NEAR_ATTRACTION" />
                 </S.BtnInfo>
                 <S.InfoTxt>
                   관광지
@@ -45,13 +45,13 @@ const AccommSearch = () => {
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo5" />
+                  <Icon icon="NEAR_CITY" />
                 </S.BtnInfo>
                 <S.InfoTxt>도시 인근</S.InfoTxt>
               </S.InfoListItem>
               <S.InfoListItem>
                 <S.BtnInfo>
-                  <Icon icon="IconAccommInfo6" />
+                  <Icon icon="SHARED_WORKSPACE" />
                 </S.BtnInfo>
                 <S.InfoTxt>
                   공용업무

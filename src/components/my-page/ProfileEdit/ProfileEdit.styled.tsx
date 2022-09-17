@@ -68,6 +68,10 @@ export const TxtWrap = styled.textarea`
 
 export const Txt = styled.span``;
 
+export const Margin = styled.span`
+  margin: 0 10px;
+`;
+
 export const ChekBoxWrap = styled.div`
   margin-top: 18px;
 `;

@@ -1,3 +1,4 @@
+import ModalContainerPortal from "@/components/@layout/ModalContainer/ModalContainer";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
 import { REPORTS } from "@/domains/common.constant";
@@ -43,9 +44,10 @@ const ContactUs = () => {
     setEmail(value);
   }, []);
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean | string>(false);
   const handleSendUserReport = async () => {
     if (!reportType) {
-      alert("문의 유형을 선택해주세요");
+      setIsModalOpen("문의 유형을 선택해주세요");
       return;
     }
 
@@ -56,16 +58,22 @@ const ContactUs = () => {
         type: reportType,
       });
 
-      alert("문의사항이 전송되었습니다! 기입하신 이메일로 빠른 시일 내로 답변드리겠습니다.");
+      setIsModalOpen("문의사항이 전송되었습니다!\n기입하신 이메일로 \n빠른 시일 내로 답변드리겠습니다.");
 
-      pop();
-    } catch (error) {
-      alert("문의사항 전송에 실패하였습니다.");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        pop();
+      }, 3000);
+    } catch (error: any) {
+      setIsModalOpen("문의사항 전송에 실패하였습니다." + `\n${error.response.data.email}`);
     }
   };
 
   return (
     <StackLayout>
+      <ModalContainerPortal isOpen={!!isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div style={{ whiteSpace: "pre-line" }}>{isModalOpen}</div>
+      </ModalContainerPortal>
       <S.MyContactUsWrap>
         <S.Input type="text" placeholder="이메일 입력" onChange={handleEmailChange} />
         <S.SelectWrap>
@@ -89,7 +97,7 @@ const ContactUs = () => {
           value={content}
         />
       </S.MyContactUsWrap>
-      <Button size="lg" bgColor="black" disabled={!reportType} onClick={handleSendUserReport}>
+      <Button size="lg" bgColor="black" disabled={!reportType || !email} onClick={handleSendUserReport}>
         보내기
       </Button>
     </StackLayout>

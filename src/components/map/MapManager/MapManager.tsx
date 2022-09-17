@@ -204,6 +204,7 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
             job: worker.job,
             year: worker.yearOfService,
             tags: worker.tags,
+            workchats: worker.workchats,
             onClick: () => navigateToWorkerDetail(worker.id),
           };
         }
@@ -253,7 +254,7 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
               type: "diner" as const,
               title: diner.name,
               imageUrl: diner.imageUrl,
-              reviewNum: 12,
+              reviewNum: diner.reviewCount,
               addr: diner.address,
               tags: diner.tags,
             })),
@@ -273,11 +274,11 @@ const MapManager = ({ userCoordinates, userAddress }: MapManagerProps) => {
               type: "worker" as const,
               title: worker.name,
               imageUrl: worker.imageUrl ?? DefaultProfileSquare,
-              reviewNum: 12,
               addr: worker.job,
               job: worker.job,
               year: worker.yearOfService,
               tags: worker.tags,
+              workchats: worker.workchats,
             })),
             onClick: (id: number) => {
               navigateToWorkerDetail(id);

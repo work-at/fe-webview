@@ -1,9 +1,11 @@
-import Icon from "@/assets/Icon";
+import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
+import Tag from "@/components/@shared/Tag/Tag";
 import { PATH } from "@/constants";
 import { useAccommodationDetailQuery } from "@/domains/accommodation/accommodation.api";
+import { ACCOMMODATION_INFO_TAGS } from "@/domains/common.constant";
 import { useUserAddressQuery } from "@/domains/user";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useFlow } from "@/stack";
@@ -62,7 +64,7 @@ const AccommodationDetail = () => {
 
   const { accommodationDetail, accommodationReview } = data.data;
 
-  const handleOpenKaKaoLink = () => {
+  const handleOpenLink = () => {
     window.open(accommodationDetail?.relatedUrl);
   };
 
@@ -100,28 +102,43 @@ const AccommodationDetail = () => {
               </S.List>
             </S.Info>
             <S.BtnMapWrap>
-              <S.BtnMap onClick={handleOpenKaKaoPathFindingLink}>
-                <Icon icon={"BtnDirecion"} size={43} />
+              <S.BtnMap onClick={handleOpenLink}>
+                <Icon icon={"BtnUrl"} size={43} />
               </S.BtnMap>
-              <S.BtnMap onClick={handleOpenKaKaoLink}>
+              <S.BtnMap onClick={handleOpenKaKaoPathFindingLink}>
                 <Icon icon={"BtnLocation"} size={43} />
               </S.BtnMap>
             </S.BtnMapWrap>
           </S.TopInfo>
+          <S.InfoTit>숙소 정보</S.InfoTit>
+          <S.ScrollWrap>
+            <S.ScrollInner>
+              <S.InfoList>
+                {accommodationDetail.infoTags.map((each) => (
+                  <S.InfoListItem key={each.name}>
+                    <Icon icon={each.name as IconType} />
+                    <S.InfoTxt>
+                      {ACCOMMODATION_INFO_TAGS.filter((item) => item.name === each.name)[0].content}
+                    </S.InfoTxt>
+                  </S.InfoListItem>
+                ))}
+              </S.InfoList>
+            </S.ScrollInner>
+          </S.ScrollWrap>
           <S.WalkTit>
             <S.Num>{accommodationReview?.userCount}</S.Num>명의 워케이셔너가
             <br />
             리뷰를 남겼어요!
           </S.WalkTit>
-          {/* <S.ReviewWrap>
+          <S.ReviewWrap>
             {accommodationReview?.reviews.map((review) => (
               <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
                 {review.tag.content}
               </Tag>
             ))}
-          </S.ReviewWrap> */}
+          </S.ReviewWrap>
         </S.InfoWrap>
-        {!accommodationReview.userReviewed && (
+        {!accommodationReview?.userReviewed && (
           <S.BtnReview onClick={handleReviewButtonClick}>
             <Icon icon={"BtnReview"} size={73} />
           </S.BtnReview>

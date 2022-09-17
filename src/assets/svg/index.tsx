@@ -51,6 +51,20 @@ export { default as QUIET_B } from "../images/icons/QUIET_B.svg";
 export { default as SNACK_B } from "../images/icons/SNACK_B.svg";
 
 // 숙소 Tag
+export { default as PRICE } from "../images/icons/COST.svg";
+export { default as DESK } from "../images/icons/SEAT.svg";
+export { default as BED } from "../images/icons/BED.svg";
+export { default as CLEAN } from "../images/icons/CLEAN.svg";
+export { default as BREAKFAST } from "../images/icons/BREAKFAST.svg";
+export { default as LOCATION } from "../images/icons/LOCATION.svg";
+export { default as PRICE_B } from "../images/icons/COST_B.svg";
+export { default as DESK_B } from "../images/icons/SEAT_B.svg";
+export { default as BED_B } from "../images/icons/BED_B.svg";
+export { default as CLEAN_B } from "../images/icons/CLEAN_B.svg";
+export { default as BREAKFAST_B } from "../images/icons/BREAKFAST_B.svg";
+export { default as LOCATION_B } from "../images/icons/LOCATION_B.svg";
+
+// 숙소 Tag
 export { default as BerthReview1 } from "../images/icons/BerthReview1.svg";
 export { default as BerthReview2 } from "../images/icons/BerthReview2.svg";
 export { default as BerthReview3 } from "../images/icons/BerthReview3.svg";
@@ -120,12 +134,12 @@ export { default as POPULAR } from "../images/icons/POPULAR.svg";
 export { default as IconJeju } from "../images/icons/IconJeju.svg";
 export { default as IconSeoul } from "../images/icons/IconSeoul.svg";
 export { default as IconGangWon } from "../images/icons/IconGangWon.svg";
-export { default as IconAccommInfo1 } from "../images/icons/IconAccommInfo1.svg";
-export { default as IconAccommInfo2 } from "../images/icons/IconAccommInfo2.svg";
-export { default as IconAccommInfo3 } from "../images/icons/IconAccommInfo3.svg";
-export { default as IconAccommInfo4 } from "../images/icons/IconAccommInfo4.svg";
-export { default as IconAccommInfo5 } from "../images/icons/IconAccommInfo5.svg";
-export { default as IconAccommInfo6 } from "../images/icons/IconAccommInfo6.svg";
+export { default as WORKSPACE } from "../images/icons/WORKSPACE.svg";
+export { default as NEAR_FOREST } from "../images/icons/NEAR_FOREST.svg";
+export { default as NEAR_SEA } from "../images/icons/NEAR_SEA.svg";
+export { default as NEAR_ATTRACTION } from "../images/icons/NEAR_ATTRACTION.svg";
+export { default as NEAR_CITY } from "../images/icons/NEAR_CITY.svg";
+export { default as SHARED_WORKSPACE } from "../images/icons/SHARED_WORKSPACE.svg";
 export { default as IconNoData } from "../images/icons/IconNoData.svg";
 
 // 그 외 아이콘

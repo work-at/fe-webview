@@ -1,4 +1,5 @@
 import { IconType } from "@/assets/Icon";
+import { DESIRED_ACTIVITIES } from "../common.constant";
 import { PinItem } from "../map.type";
 
 export type WorkerPin = PinItem;
@@ -10,6 +11,7 @@ export type Worker = {
   job: string;
   yearOfService: string;
   tags: string[];
+  workchats: number;
 };
 
 type DesiredActivity = {

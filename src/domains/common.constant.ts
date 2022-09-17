@@ -213,64 +213,64 @@ export const ACCOMMODATION_INFO_TAGS = [
   {
     name: "WORKSPACE",
     content: "숙소 내\n업무 공간",
-    icon: "IconAccommInfo1",
+    icon: "WORKSPACE",
   },
   {
     name: "NEAR_FOREST",
     content: "숲 인근",
-    icon: "IconAccommInfo2",
+    icon: "NEAR_FOREST",
   },
   {
     name: "NEAR_SEA",
     content: "바다 인근",
-    icon: "IconAccommInfo3",
+    icon: "NEAR_SEA",
   },
   {
     name: "NEAR_ATTRACTION",
     content: "관광지\n인근",
-    icon: "IconAccommInfo4",
+    icon: "NEAR_ATTRACTION",
   },
   {
     name: "NEAR_CITY",
     content: "도시 인근",
-    icon: "IconAccommInfo5",
+    icon: "NEAR_CITY",
   },
   {
     name: "SHARED_WORKSPACE",
     content: "공용업무\n공간",
-    icon: "IconAccommInfo6",
+    icon: "SHARED_WORKSPACE",
   },
 ] as const;
 
 export const ACCOMMODATION_REVIEW_TAGS = [
   {
     name: "WIFI",
-    content: "와이파이가빵빵해요",
+    content: "와이파이빵빵해요",
     preContent: "와이파이가\n빵빵해요",
   },
   {
     name: "POWER",
-    content: "콘센트자리많아요",
+    content: "콘센트많아요",
     preContent: "콘센트자리\n많아요",
   },
   {
     name: "SEAT",
-    content: "좌석이업무하기좋아요",
+    content: "좌석이편해요",
     preContent: "좌석이업무하기\n좋아요",
   },
   {
     name: "QUIET",
-    content: "조용한 공간이 있어요",
+    content: "조용한공간있어요",
     preContent: "조용한 공간이\n있어요",
   },
   {
     name: "FOCUS",
-    content: "집중이잘돼요",
+    content: "집중잘돼요",
     preContent: "집중이\n잘돼요",
   },
   {
     name: "SERVE_MEAL",
-    content: "식사메뉴가있어요",
+    content: "식사가능해요",
     preContent: "식사메뉴가\n있어요",
   },
 ] as const;

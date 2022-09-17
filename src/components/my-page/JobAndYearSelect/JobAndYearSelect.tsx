@@ -54,7 +54,7 @@ const JobAndYearSelect = () => {
         </S.ChekBoxWrap>
       </S.SignUpWrap>
       <Button onClick={handleJobAndYearSelectComplete} size="lg" bgColor="black">
-        다음
+        확인
       </Button>
     </StackLayout>
   );

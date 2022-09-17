@@ -8,8 +8,6 @@ export const AccommodationDetailWrap = styled.div`
 export const VisualWrap = styled.div`
   position: relative;
   top: -97px;
-  min-height: 200px;
-  background: ${theme.colors.gray05};
   > img {
     display: block;
     width: 100%;
@@ -23,7 +21,7 @@ export const InfoWrap = styled.div`
   right: 0;
   margin-top: -34%;
   background: ${theme.colors.white};
-  padding: 40px 7.4667vw 120px;
+  padding: 40px 0 120px;
   border-radius: 27px 27px 0 0;
   z-index: 1;
 `;
@@ -31,6 +29,7 @@ export const InfoWrap = styled.div`
 export const Tit = styled.h2`
   ${theme.fonts.Bold00};
   color: ${theme.colors.black};
+  padding: 0 7.4667vw;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -42,6 +41,7 @@ export const TopInfo = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
+  padding: 0 7.4667vw;
 `;
 
 export const Info = styled.ul`
@@ -59,7 +59,7 @@ export const List = styled.li`
   }
   > svg {
     position: absolute;
-    top: 2px;
+    top: 1px;
     left: 0;
   }
 `;
@@ -80,7 +80,7 @@ export const BtnMap = styled.button`
 `;
 
 export const WalkTit = styled.h3`
-  padding-top: 58px;
+  padding: 55px 7.4667vw 0;
   color: ${theme.colors.gray01};
   ${theme.fonts.SemiBold01};
 `;
@@ -91,6 +91,10 @@ export const Num = styled.strong`
 
 export const ReviewWrap = styled.div`
   margin-top: 26px;
+  padding: 0 7.4667vw;
+  > div > div {
+    width: calc(100% - 50px);
+  }
   > div:nth-child(1) > div {
     width: 100%;
   }
@@ -106,4 +110,50 @@ export const BtnReview = styled.button`
   border-radius: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25), 0px 0px 5px rgba(166, 166, 166, 0.03);
   z-index: 99;
+`;
+
+export const InfoTit = styled.h3`
+  ${theme.fonts.SemiBold01};
+  color: ${theme.colors.black};
+  padding: 40px 7.4667vw 0;
+`;
+
+export const ScrollWrap = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+export const ScrollInner = styled.div`
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const InfoList = styled.ul`
+  padding: 17px 0 0 7.4667vw;
+  white-space: nowrap;
+`;
+
+export const InfoListItem = styled.li`
+  display: inline-flex;
+  position: relative;
+  margin-right: 15px;
+  overflow: hidden;
+  justify-items: center;
+  align-items: center;
+  &:last-child {
+    margin-right: 7.4667vw;
+  }
+  flex-direction: column;
+`;
+
+export const InfoTxt = styled.p`
+  ${theme.fonts.Medium05};
+  color: ${theme.colors.gray02};
+  padding-top: 10px;
+  text-align: center;
+  white-space: pre-line;
 `;

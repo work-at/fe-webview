@@ -233,7 +233,7 @@ export const RegionSelectorWrap = styled.div`
   z-index: ${Z_INDEX.HIGH};
 `;
 
-export const RegionSelector = styled.select`
+export const RegionSelector = styled.div`
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
@@ -244,14 +244,28 @@ export const RegionSelector = styled.select`
   background: ${theme.colors.white};
 `;
 
-export const RegionSelectorArr = styled.span`
+type StyledRegionSelectorArrProps = {
+  isOpen: boolean;
+};
+
+export const RegionSelectorArr = styled.span<StyledRegionSelectorArrProps>`
   display: inline-flex;
   width: 0px;
   height: 0px;
   border-right: 6px solid ${theme.colors.black};
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  transform: rotate(-90deg);
+
+  ${({ isOpen }) =>
+    isOpen
+      ? `
+        transform: rotate(90deg);
+        transition: all 0.1s ease-in;
+        `
+      : `
+        transform: rotate(-90deg);
+        transition: all 0.1s ease-in;
+      `}
 `;
 
 export const AccommNoDataWrap = styled.div`

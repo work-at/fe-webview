@@ -15,6 +15,7 @@ export const API_URL = {
   UPDATE_USER_PROFILE_IMAGE: "/user/image",
   GET_CAFE_REVIEW_LIST: "/cafe/review-type",
   GET_DINER_REVIEW_LIST: "/food/review-type",
+  GET_ACCOMMODATION_REVIEW_LIST: "/tags/accommodationReview",
   POST_CAFE_REVIEW: (locationId: string) => `/map/cafes/${locationId}/reviews`,
   POST_DINER_REVIEW: (locationId: string) => `/map/restaurants/${locationId}/reviews`,
   VERIFY_EMAIL: "/user/verify",

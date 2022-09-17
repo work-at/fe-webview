@@ -7,6 +7,7 @@ import { useMultiselect } from "@/components/@shared/CheckBox/Hooks";
 import { DinerReviewKey, useDinerReviewListQuery, usePostDinerReview } from "@/domains/diner";
 import { useActivityParams } from "@stackflow/react";
 import { useFlow } from "@/stack";
+import { useMemo } from "react";
 
 const DinerReviewPage = () => {
   const { dinerId } = useActivityParams<{ dinerId: string }>();
@@ -16,12 +17,16 @@ const DinerReviewPage = () => {
 
   const { selected, onChange } = useMultiselect([]);
 
-  const reviewList = data?.data?.response.map((item) => ({
-    id: item.name,
-    label: item.content,
-    isIcon: true,
-    iconType: item.name,
-  }));
+  const reviewList = useMemo(
+    () =>
+      data?.data?.response.map((item) => ({
+        id: item.name,
+        label: item.content,
+        isIcon: true,
+        iconType: item.name + "_B",
+      })),
+    [data?.data?.response]
+  );
 
   const handlePostReview = async () => {
     try {

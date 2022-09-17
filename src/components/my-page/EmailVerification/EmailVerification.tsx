@@ -1,10 +1,12 @@
+import ModalContainerPortal from "@/components/@layout/ModalContainer/ModalContainer";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Button from "@/components/@shared/Button/Button";
 import EmailInput from "@/components/@shared/EmailInput";
+import Lottie from "@/components/@shared/Lottie/Lottie.component";
 import { QUERY_NAME } from "@/constants";
 import { useEmailVerificationCountRemainQuery, useVerifyEmailMutation } from "@/domains/auth/auth.api";
 import { useFlow } from "@/stack";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "react-query";
 import * as S from "./EmailVerification.styled";
@@ -36,7 +38,7 @@ const EmailVerification = () => {
     mode: "onChange",
   });
   const queryClient = useQueryClient();
-  const { mutateAsync: verifyEmail, isSuccess } = useVerifyEmailMutation();
+  const { mutateAsync: verifyEmail, isSuccess, isLoading } = useVerifyEmailMutation();
   const { data, refetch: renewEmailVerificationRemain } = useEmailVerificationCountRemainQuery();
   const { pop } = useFlow();
 
@@ -66,8 +68,31 @@ const EmailVerification = () => {
     pop();
   }, [queryClient, pop]);
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  useEffect(() => {
+    if (isSuccess) {
+      setIsModalOpen(true);
+
+      setTimeout(() => {
+        setIsModalOpen(false);
+        pop();
+      }, 3000);
+    }
+  }, [isSuccess, pop]);
+
+  if (isLoading) {
+    return (
+      <StackLayout isHide>
+        <Lottie source={require("@/assets/loading.json")} speed={2} />
+      </StackLayout>
+    );
+  }
+
   return (
     <StackLayout>
+      <ModalContainerPortal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        메일을 확인해주세요!
+      </ModalContainerPortal>
       <S.SignUpWrap onSubmit={handleFormSubmit}>
         <S.SignUpTit>
           회사 이메일을
@@ -98,8 +123,8 @@ const EmailVerification = () => {
         {isSuccess && <S.SuccessTxt>{SUCCESS_TEXT.EMAIL_SEND}</S.SuccessTxt>}
       </S.SignUpWrap>
       {!focused && (
-        <Button type="button" onClick={handleConfirmButtonClick} size="lg" bgColor="black">
-          확인
+        <Button type="button" disabled={isSuccess} onClick={handleConfirmButtonClick} size="lg" bgColor="black">
+          {isSuccess ? "메일 전송 완료" : "확인"}
         </Button>
       )}
     </StackLayout>
