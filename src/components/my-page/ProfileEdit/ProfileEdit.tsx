@@ -10,7 +10,7 @@ import { useFlow } from "@/stack";
 import { handleRefInjection } from "@/utils/react";
 import { useActivityParams } from "@stackflow/react";
 import { atom, useAtom } from "jotai";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as S from "./ProfileEdit.styled";
 
@@ -119,7 +119,13 @@ const ProfileEdit = () => {
     }
   }, [userInfo, job, year, setYear, setJob]);
 
-  const [focused, setFocused] = useState(false);
+  // TODO: 어쩔 수 없이 버튼이 노출되지 않아 처리한 부분 추후 리팩토링
+  const [focused, setFocused] = useState(true);
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setFocused(false);
+    }, 100);
+  }, []);
 
   const handleSetFocus = useCallback(() => {
     setFocused(true);
