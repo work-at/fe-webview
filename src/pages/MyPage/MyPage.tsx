@@ -55,7 +55,6 @@ const MyPage = () => {
     refetch();
   };
 
-  console.log(imageUrl);
   useEffect(() => {
     setIsUserLocationBlocked(userInfo?.trackingOff ?? false);
   }, [userInfo, setIsUserLocationBlocked]);
