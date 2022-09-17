@@ -132,8 +132,8 @@ const AccommodationDetail = () => {
           </S.WalkTit>
           <S.ReviewWrap>
             {accommodationReview?.reviews.map((review) => (
-              <Tag key={review.reviewType.name} reviews={review.count} iconType={review.reviewType.name as IconType}>
-                {review.reviewType.content}
+              <Tag key={review.tag.name} reviews={review.count} iconType={review.tag.name as IconType}>
+                {review.tag.content}
               </Tag>
             ))}
           </S.ReviewWrap>
