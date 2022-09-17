@@ -2,6 +2,7 @@ import Icon from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { Button } from "@/components/@shared/Button/Button.styled";
 import CheckBox from "@/components/@shared/CheckBox";
+import { POSITION, PositionType, WorkingYearType, WORKING_YEAR } from "@/domains/auth/auth.text";
 import { DESIRED_ACTIVITIES } from "@/domains/common.constant";
 import { DesiredActivity } from "@/domains/common.type";
 import { useUpdateUserProfileMutation } from "@/domains/user";
@@ -168,6 +169,9 @@ const ProfileEdit = () => {
         <S.MyInfoItem>
           <S.ItemHead>직무 및 경력</S.ItemHead>
           <S.ItemBody>
+            <S.Txt>{POSITION[job as PositionType]}</S.Txt>
+            <S.Margin>|</S.Margin>
+            <S.Txt>{WORKING_YEAR[year as WorkingYearType]}</S.Txt>
             <S.BtnEdit type="button" onClick={handleJobAndYearRoute}>
               <Icon icon="BtnEdit" />
             </S.BtnEdit>
