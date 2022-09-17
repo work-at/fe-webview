@@ -17,7 +17,7 @@ const useWorkerMap = ({ isReloaded, isSelected }: useWorkerMapProps) => {
   });
 
   const { data: workers, isLoading: isWorkersLoading } = useWorkersQuery({
-    enabled: isSelected,
+    enabled: isSelected && isReloaded,
     keepPreviousData: true,
     suspense: false,
   });

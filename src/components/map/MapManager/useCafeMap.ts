@@ -30,7 +30,7 @@ const useCafeMap = ({ userCoordinates, isReloaded, isSelected }: useCafeMapProps
       lng: userCoordinates ? userCoordinates.lng : 0,
     },
     {
-      enabled: isSelected,
+      enabled: isSelected && isReloaded,
       keepPreviousData: true,
       suspense: false,
     }
