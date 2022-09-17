@@ -51,6 +51,18 @@ export { default as QUIET_B } from "../images/icons/QUIET_B.svg";
 export { default as SNACK_B } from "../images/icons/SNACK_B.svg";
 
 // 숙소 Tag
+export { default as PRICE } from "../images/icons/COST.svg";
+export { default as BED } from "../images/icons/BED.svg";
+export { default as CLEAN } from "../images/icons/CLEAN.svg";
+export { default as BREAKFAST } from "../images/icons/BREAKFAST.svg";
+export { default as LOCATION } from "../images/icons/LOCATION.svg";
+export { default as PRICE_B } from "../images/icons/COST_B.svg";
+export { default as BED_B } from "../images/icons/BED_B.svg";
+export { default as CLEAN_B } from "../images/icons/CLEAN_B.svg";
+export { default as BREAKFAST_B } from "../images/icons/BREAKFAST_B.svg";
+export { default as LOCATION_B } from "../images/icons/LOCATION_B.svg";
+
+// 숙소 Tag
 export { default as BerthReview1 } from "../images/icons/BerthReview1.svg";
 export { default as BerthReview2 } from "../images/icons/BerthReview2.svg";
 export { default as BerthReview3 } from "../images/icons/BerthReview3.svg";
