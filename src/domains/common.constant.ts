@@ -276,3 +276,6 @@ export const ACCOMMODATION_REVIEW_TAGS = [
 ] as const;
 
 export const REPORTS = ["INQUERY", "SERVICE_OFFER", "ERROR_REPORT", "OTHERS"] as const;
+
+export const DEFAULT_IMAGE =
+  "https://images.unsplash.com/photo-1483648969698-5e7dcaa3444f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FmZSUyMGRpbmVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60";

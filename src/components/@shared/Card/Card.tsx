@@ -1,3 +1,6 @@
+import { DEFAULT_IMAGE } from "@/domains/common.constant";
+import useErrorImageReplace from "@/hooks/useErrorImageReplace";
+import { useEffect, useRef, useState } from "react";
 import * as S from "./Card.styled";
 
 export type CardItem = {
@@ -18,9 +21,6 @@ type CardProps = CardItem & {
   onClick?: () => void;
 };
 
-const DEFAULT_IMAGE =
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
-
 const Card = ({
   type,
   title,
@@ -34,11 +34,13 @@ const Card = ({
   workchats,
   onClick,
 }: CardProps) => {
+  const { imageRef } = useErrorImageReplace(imageUrl, DEFAULT_IMAGE);
+
   return (
     <S.CardWrap className={className} isClickable={!!onClick} onClick={onClick}>
       <S.CardTop>
         <S.CardThumb>
-          <img src={imageUrl === "" || !imageUrl ? DEFAULT_IMAGE : imageUrl} alt={`${title} 이미지`} />
+          <img ref={imageRef} src={imageUrl === "" || !imageUrl ? DEFAULT_IMAGE : imageUrl} alt={`${title} 이미지`} />
         </S.CardThumb>
         <S.DetailInfo>
           <S.Title>{title}</S.Title>
