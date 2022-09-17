@@ -2,10 +2,11 @@ import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import { PATH } from "@/constants";
-import { AccommodationInfoTag, AccommodationReviewTag } from "@/domains/accommodation/accommodation.dto";
-import { ACCOMMODATION_INFO_TAGS, ACCOMMODATION_REVIEW_TAGS } from "@/domains/common.constant";
+import { useAccommodationListByNameQuery } from "@/domains/accommodation/accommodation.api";
+import { AccommodationInfoTag } from "@/domains/accommodation/accommodation.dto";
+import { ACCOMMODATION_INFO_TAGS } from "@/domains/common.constant";
 import { useFlow } from "@/stack";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import * as S from "./AccommodationSearch.styled";
 
@@ -25,6 +26,33 @@ const AccommodationSearch = () => {
     [push]
   );
 
+  const [isTrigger, setIsTrigger] = useState(false);
+  const [isNoData, setIsNoData] = useState(false);
+
+  const { data } = useAccommodationListByNameQuery(
+    {
+      accommodationName: searchKeywordRef.current,
+    },
+    {
+      enabled: isTrigger,
+    }
+  );
+
+  useEffect(() => {
+    if (isTrigger && data && data?.length > 0) {
+      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+        searchKeyword: searchKeywordRef.current,
+        searchedBy: searchKeywordRef.current,
+      });
+    }
+
+    if (data && data.length === 0) {
+      setIsNoData(true);
+    }
+
+    setIsTrigger(false);
+  }, [data, isTrigger, push]);
+
   // const handleReviewTagSelect = useCallback(
   //   (tag: AccommodationReviewTag) => {
   //     const selectedTag = ACCOMMODATION_REVIEW_TAGS.find((reviewTag) => reviewTag.name === tag);
@@ -38,16 +66,14 @@ const AccommodationSearch = () => {
   // );
 
   const handleSearchKeywordChange: React.ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
+    setIsNoData(false);
     const { value } = event.target;
     searchKeywordRef.current = value;
   }, []);
 
   const handleSearchButtonClick = useCallback(() => {
-    push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
-      searchKeyword: searchKeywordRef.current,
-      searchedBy: searchKeywordRef.current,
-    });
-  }, [push]);
+    setIsTrigger(true);
+  }, []);
 
   return (
     <StackLayout isHide>
@@ -59,21 +85,35 @@ const AccommodationSearch = () => {
           onSearchKeywordChange={handleSearchKeywordChange}
           onSearchButtonClick={handleSearchButtonClick}
         />
-        <S.SearhchTit>숙소 정보 키워드</S.SearhchTit>
-        <S.ScrollWrap>
-          <S.ScrollInner>
-            <S.InfoList>
-              {ACCOMMODATION_INFO_TAGS.map((tag) => (
-                <S.InfoListItem key={tag.name} onClick={() => handleInfoTagSelect(tag.name)}>
-                  <S.BtnInfo>
-                    <Icon icon={tag.icon as IconType} />
-                  </S.BtnInfo>
-                  <S.InfoTxt>{tag.content}</S.InfoTxt>
-                </S.InfoListItem>
-              ))}
-            </S.InfoList>
-          </S.ScrollInner>
-        </S.ScrollWrap>
+        {!isNoData ? (
+          <>
+            <S.SearhchTit>숙소 정보 키워드</S.SearhchTit>
+            <S.ScrollWrap>
+              <S.ScrollInner>
+                <S.InfoList>
+                  {ACCOMMODATION_INFO_TAGS.map((tag) => (
+                    <S.InfoListItem key={tag.name} onClick={() => handleInfoTagSelect(tag.name)}>
+                      <S.BtnInfo>
+                        <Icon icon={tag.icon as IconType} />
+                      </S.BtnInfo>
+                      <S.InfoTxt>{tag.content}</S.InfoTxt>
+                    </S.InfoListItem>
+                  ))}
+                </S.InfoList>
+              </S.ScrollInner>
+            </S.ScrollWrap>
+          </>
+        ) : (
+          <S.AccommNoDataWrap>
+            <S.AccommNoData>
+              <Icon icon="IconNoData" />
+              <S.NoDataTxt>
+                앗, 검색 결과가 없어요! <br />
+                다른 키워드를 입력해보세요.
+              </S.NoDataTxt>
+            </S.AccommNoData>
+          </S.AccommNoDataWrap>
+        )}
 
         {/* <S.SearhchTit>리뷰 추천 키워드</S.SearhchTit>
         <S.ReviewList>

@@ -79,3 +79,20 @@ export const BtnReview = styled.button`
   border-radius: 19px;
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
 `;
+
+export const AccommNoDataWrap = styled.div`
+  height: calc(100vh - 97px - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const AccommNoData = styled.div`
+  text-align: center;
+`;
+
+export const NoDataTxt = styled.p`
+  ${theme.fonts.Regular03};
+  color: ${theme.colors.black};
+  padding-top: 13px;
+`;
