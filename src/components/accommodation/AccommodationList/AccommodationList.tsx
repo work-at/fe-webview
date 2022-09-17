@@ -28,6 +28,7 @@ const AccommodationList = () => {
   } = useAccommodationListQuery(
     {
       region: region === "ALL" ? undefined : region,
+      pageSize: 100,
     },
     {}
   );
