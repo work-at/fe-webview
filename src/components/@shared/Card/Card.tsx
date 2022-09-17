@@ -10,6 +10,7 @@ export type CardItem = {
   job?: string;
   year?: string;
   tags: string[];
+  workchats?: number;
 };
 
 type CardProps = CardItem & {
@@ -20,7 +21,19 @@ type CardProps = CardItem & {
 const DEFAULT_IMAGE =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 
-const Card = ({ type, title, reviewNum, addr, job, year, tags, imageUrl, className, onClick }: CardProps) => {
+const Card = ({
+  type,
+  title,
+  reviewNum,
+  addr,
+  job,
+  year,
+  tags,
+  imageUrl,
+  className,
+  workchats,
+  onClick,
+}: CardProps) => {
   return (
     <S.CardWrap className={className} isClickable={!!onClick} onClick={onClick}>
       <S.CardTop>
@@ -31,7 +44,7 @@ const Card = ({ type, title, reviewNum, addr, job, year, tags, imageUrl, classNa
           <S.Title>{title}</S.Title>
           {type === "worker" && (
             <S.WalkChat>
-              워크챗 <S.ChatNum>5</S.ChatNum>
+              워크챗 <S.ChatNum>{workchats}</S.ChatNum>
             </S.WalkChat>
           )}
           {type === "worker" ? (
@@ -48,7 +61,7 @@ const Card = ({ type, title, reviewNum, addr, job, year, tags, imageUrl, classNa
         </S.DetailInfo>
       </S.CardTop>
       <S.CardBottom>
-        {tags.map((tag, index) => (
+        {tags?.map((tag, index) => (
           <S.TagList key={index}>{tag}</S.TagList>
         ))}
       </S.CardBottom>
