@@ -263,7 +263,8 @@ const AccommodationPage = () => {
                       <S.Accomminfo>
                         {item.region === "SEOUL" && <S.AccommSeoulFlag>서울</S.AccommSeoulFlag>}
                         {item.region === "JEJU" && <S.AccommJejuFlag>제주도</S.AccommJejuFlag>}
-                        {item.region === "GANGWON" && <S.AccommGangWonFlag>강원도</S.AccommGangWonFlag>}
+                        {item.region === "GANGNEUNG" && <S.AccommGangWonFlag>강릉</S.AccommGangWonFlag>}
+                        {item.region === "SOKCHO" && <S.AccommGangWonFlag>속초</S.AccommGangWonFlag>}
                         <S.AccommName>{item.name}</S.AccommName>
                       </S.Accomminfo>
                     </S.LinkDetail>
