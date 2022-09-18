@@ -4,7 +4,7 @@ import { useUploadUserProfileImageMutation, useUserInfo } from "@/domains/user";
 import { useFlow } from "@/stack";
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as S from "./MyPage.styled";
 import DefaultProfile from "@/assets/images/DefaultProfile.png";
 import Lottie from "@/components/@shared/Lottie/Lottie.component";
@@ -24,6 +24,7 @@ const MyPage = () => {
   const { data: userInfo, refetch } = useUserInfo();
   const { mutateAsync: uploadProfileImage, isLoading } = useUploadUserProfileImageMutation();
 
+  const ref = useRef<HTMLImageElement>(null);
   const imageUrl = imageFile ? URL.createObjectURL(imageFile) : undefined;
 
   const handleProfileEditRoute = useCallback(() => {
@@ -59,6 +60,10 @@ const MyPage = () => {
     setIsUserLocationBlocked(userInfo?.trackingOff ?? false);
   }, [userInfo, setIsUserLocationBlocked]);
 
+  useEffect(() => {
+    ref.current!.attributes[0].value += "?a=" + Math.random();
+  }, [userInfo?.imageUrl]);
+
   if (isLoading) {
     return (
       <StackLayout appBar={{ title: "마이페이지" }} navigationPath="my-page" isHide>
@@ -73,7 +78,7 @@ const MyPage = () => {
         <S.TopInfo>
           <S.UserPicture>
             <S.UserThumb htmlFor="profile-image">
-              <img src={imageUrl ?? userInfo?.imageUrl ?? DefaultProfile} alt="유저 이미지" />
+              <img ref={ref} src={imageUrl ?? userInfo?.imageUrl ?? DefaultProfile} alt="유저 이미지" />
               <input
                 type="file"
                 id="profile-image"
