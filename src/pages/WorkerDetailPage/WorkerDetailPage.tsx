@@ -2,7 +2,7 @@ import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import { useWorkerDetailQuery } from "@/domains/worker";
 import { useActivityParams } from "@stackflow/react";
 import { useFlow } from "@/stack";
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { PATH } from "@/constants";
 
 import Tag from "@/components/@shared/Tag/Tag";
@@ -72,6 +72,13 @@ const WorkerDetailPage = () => {
     }
   };
 
+  const [trigger, setTrigger] = useState(false);
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setTrigger(true);
+    }, 100);
+  }, []);
+
   if (isLoading) {
     return (
       <StackLayout isHide>
@@ -117,9 +124,11 @@ const WorkerDetailPage = () => {
             ))}
           </S.HopeTag>
         </S.DetailInfo>
-        <Button size="lg" bgColor="black" onClick={handleReviewButtonClick}>
-          워크챗 신청
-        </Button>
+        {trigger && (
+          <Button size="lg" bgColor="black" onClick={handleReviewButtonClick}>
+            워크챗 신청
+          </Button>
+        )}
       </S.WorkerDetailWrap>
     </StackLayout>
   );
