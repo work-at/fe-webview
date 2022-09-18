@@ -10,7 +10,6 @@ import { useUserAddressQuery } from "@/domains/user";
 import useErrorImageReplace from "@/hooks/useErrorImageReplace";
 import useCoordinates from "@/services/useCoordinates/useCoordinates";
 import { useFlow } from "@/stack";
-import { getPathFindingURL } from "@/utils/kakao";
 import { decimalFormatter } from "@/utils/stringUtil";
 import { useActivityParams } from "@stackflow/react";
 import { useCallback } from "react";
@@ -70,15 +69,12 @@ const AccommodationDetail = () => {
 
   const { accommodationDetail, accommodationReview } = data.data;
 
-  const handleOpenLink = () => {
-    window.open(accommodationDetail?.relatedUrl);
+  const handleOpenKaKaoLink = () => {
+    window.open(accommodationDetail?.placeUrl);
   };
 
-  const handleOpenKaKaoPathFindingLink = () => {
-    const kakaoLinkFragments = accommodationDetail.placeUrl.split("/");
-    const placeId = kakaoLinkFragments[kakaoLinkFragments.length - 1];
-
-    userAddress && window.open(getPathFindingURL(userAddress, accommodationDetail.name, placeId));
+  const handleOpenLink = () => {
+    window.open(accommodationDetail?.relatedUrl);
   };
 
   return (
@@ -111,7 +107,7 @@ const AccommodationDetail = () => {
               <S.BtnMap onClick={handleOpenLink}>
                 <Icon icon={"BtnUrl"} size={43} />
               </S.BtnMap>
-              <S.BtnMap onClick={handleOpenKaKaoPathFindingLink}>
+              <S.BtnMap onClick={handleOpenKaKaoLink}>
                 <Icon icon={"BtnLocation"} size={43} />
               </S.BtnMap>
             </S.BtnMapWrap>
