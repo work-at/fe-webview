@@ -51,8 +51,8 @@ export const Copyright = () => {
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
-const TESTER_3_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjgsImlhdCI6MTY2MzE5OTU5NCwiZXhwIjoxNjYzNTU5NTk0fQ.nZoZ08BoZyE8AO0Oh1ywbkD_ByLsODEWe_pFTPNkC4w";
+const TESTER_4_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MzgsImlhdCI6MTY2MzU3MTk1MCwiZXhwIjoxNjYzOTMxOTUwfQ.0QX6es9ikBDascrLn6uSnVI2I0fkjeyN0muPrhYir78";
 
 let isLogin = false;
 let isDirty = false;
@@ -71,7 +71,7 @@ const checkAuthStatus = async (dispatchEvent: DispatchEvent) => {
   }
 
   if (inIframe()) {
-    localStorage.setItem(ACCESS_TOKEN, TESTER_3_TOKEN);
+    localStorage.setItem(ACCESS_TOKEN, TESTER_4_TOKEN);
   }
 
   const TOKEN = localStorage.getItem(ACCESS_TOKEN);
