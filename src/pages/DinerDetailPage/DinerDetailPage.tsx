@@ -99,7 +99,7 @@ const DinerDetailPage = () => {
             </S.Info>
             <S.BtnMapWrap>
               <S.BtnMap onClick={handleOpenKaKaoPathFindingLink}>
-                <Icon icon={"BtnDirecion"} size={43} />
+                <Icon icon={"BtnUrl"} size={43} />
               </S.BtnMap>
               <S.BtnMap onClick={handleOpenKaKaoLink}>
                 <Icon icon={"BtnLocation"} size={43} />
