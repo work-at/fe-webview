@@ -166,7 +166,7 @@ const SignUpPage = () => {
           <br />
           이제 워케이션을 떠나볼까요?
         </S.FinishTxt>
-        <Button size="lg" bgColor="black" onClick={() => replace(PATH.MAP.stack, {})}>
+        <Button size="lg" bgColor="black" onClick={() => replace(PATH.ACCOMMODATION.stack, {})}>
           시작하기
         </Button>
       </S.SignUpFinish>
