@@ -120,7 +120,7 @@ const AccommodationSearchResult = () => {
 
                       <S.AccommPriceInfo>
                         <S.ConsecutivePriceTxt>
-                          <S.StandardTxt region={selectedRegion ?? "ALL"}>평일 5일</S.StandardTxt>
+                          <S.StandardTxt region={selectedRegion ?? "ALL"}>평일 5박</S.StandardTxt>
                           <S.PriceBox>
                             <S.PriceTxt>{decimalFormatter(item.price)}</S.PriceTxt>
                             <S.WonTxt>원</S.WonTxt>

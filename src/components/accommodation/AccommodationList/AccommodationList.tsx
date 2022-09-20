@@ -112,7 +112,7 @@ const AccommodationList = () => {
 
                   <S.AccommPriceInfo>
                     <S.ConsecutivePriceTxt>
-                      <S.StandardTxt region={region}>평일 5일</S.StandardTxt>
+                      <S.StandardTxt region={region}>평일 5박</S.StandardTxt>
                       <S.PriceBox>
                         <S.PriceTxt>{decimalFormatter(item.price)}</S.PriceTxt>
                         <S.WonTxt>원</S.WonTxt>
