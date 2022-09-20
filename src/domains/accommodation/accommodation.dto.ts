@@ -17,6 +17,7 @@ export type Accommodation = {
   imgUrl: string;
   infoTags: InfoTagItem[];
   topReviewTags: ReviewTagItem[];
+  region: AccommodationRegion;
 };
 
 export type GetAccommodationListRequest = {
