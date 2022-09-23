@@ -2,8 +2,11 @@ import Icon, { IconType } from "@/assets/Icon";
 import StackLayout from "@/components/@layout/StackLayout/StackLayout";
 import Header from "@/components/@shared/Header";
 import { PATH } from "@/constants";
-import { useAccommodationListByNameQuery } from "@/domains/accommodation/accommodation.api";
-import { AccommodationInfoTag } from "@/domains/accommodation/accommodation.dto";
+import {
+  useAccommodationListByNameQuery,
+  useAccommodationReviewListQuery,
+} from "@/domains/accommodation/accommodation.api";
+import { AccommodationInfoTag, AccommodationReviewTag } from "@/domains/accommodation/accommodation.dto";
 import { ACCOMMODATION_INFO_TAGS } from "@/domains/common.constant";
 import { useFlow } from "@/stack";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -13,6 +16,7 @@ import * as S from "./AccommodationSearch.styled";
 const AccommodationSearch = () => {
   const { push } = useFlow();
   const searchKeywordRef = useRef("");
+  const { data: accommodationReviewData } = useAccommodationReviewListQuery();
 
   const handleInfoTagSelect = useCallback(
     (tag: AccommodationInfoTag) => {
@@ -53,17 +57,17 @@ const AccommodationSearch = () => {
     setIsTrigger(false);
   }, [data, isTrigger, push]);
 
-  // const handleReviewTagSelect = useCallback(
-  //   (tag: AccommodationReviewTag) => {
-  //     const selectedTag = ACCOMMODATION_REVIEW_TAGS.find((reviewTag) => reviewTag.name === tag);
+  const handleReviewTagSelect = useCallback(
+    (tag: AccommodationReviewTag) => {
+      const selectedTag = accommodationReviewData?.data.tags.find((reviewTag) => reviewTag.name === tag);
 
-  //     push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
-  //       reviewTag: tag,
-  //       searchedBy: selectedTag?.content,
-  //     });
-  //   },
-  //   [push]
-  // );
+      push(PATH.ACCOMMODATION.ACCOMMODATION_SEARCH_RESULT.stack, {
+        reviewTag: tag,
+        searchedBy: selectedTag?.content,
+      });
+    },
+    [accommodationReviewData?.data.tags, push]
+  );
 
   const handleSearchKeywordChange: React.ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
     setIsNoData(false);
@@ -114,15 +118,14 @@ const AccommodationSearch = () => {
             </S.AccommNoData>
           </S.AccommNoDataWrap>
         )}
-
-        {/* <S.SearhchTit>리뷰 추천 키워드</S.SearhchTit>
+        <S.SearhchTit>리뷰 추천 키워드</S.SearhchTit>
         <S.ReviewList>
-          {ACCOMMODATION_REVIEW_TAGS.map((tag) => (
+          {accommodationReviewData?.data.tags.map((tag) => (
             <S.ReviewListItem key={tag.name} onClick={() => handleReviewTagSelect(tag.name)}>
-              <S.BtnReview>{tag.content}</S.BtnReview>
+              <S.BtnReview>{tag.content3}</S.BtnReview>
             </S.ReviewListItem>
           ))}
-        </S.ReviewList> */}
+        </S.ReviewList>
       </S.AccommSearchWrap>
     </StackLayout>
   );
