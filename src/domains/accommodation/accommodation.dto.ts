@@ -106,9 +106,10 @@ export type AccommodationCurationResponse = {
 };
 
 type ReviewTypeItem = {
-  name: string;
+  name: AccommodationReviewTag;
   content: string;
   content2: string;
+  content3: string;
 };
 
 export type GetAccommodationReviewTypeResponse = AxiosResponse<{ tags: ReviewTypeItem[] }>;
