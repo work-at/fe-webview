@@ -28,6 +28,13 @@
       localStorage.removeItem('ACCESS_TOKEN');
     }
   });
+
+  setTimeout(() => {
+    if (document.getElementById("ifr").contentWindow.location.href.includes('/login')) {
+      window.location.href = "/login";
+      localStorage.removeItem('ACCESS_TOKEN');
+    }
+  }, 1000)
 </script>
 <style>
   @media (max-width: 1024px) {
