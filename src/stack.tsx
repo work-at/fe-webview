@@ -66,21 +66,20 @@ const inIframe = () => {
 };
 
 const checkAuthStatus = async (dispatchEvent: DispatchEvent) => {
-  if (window.location.pathname.includes("copyright")) {
-    return;
-  }
-
-  if (inIframe()) {
-    localStorage.setItem(ACCESS_TOKEN, TESTER_4_TOKEN);
-  }
-
-  const TOKEN = localStorage.getItem(ACCESS_TOKEN);
-
-  if ((TOKEN && isLogin) || isDirty) {
-    return;
-  }
-
   try {
+    if (window.location.pathname.includes("copyright")) {
+      return;
+    }
+    if (inIframe()) {
+      localStorage.setItem(ACCESS_TOKEN, TESTER_4_TOKEN);
+    }
+
+    const TOKEN = localStorage.getItem(ACCESS_TOKEN);
+
+    if ((TOKEN && isLogin) || isDirty) {
+      return;
+    }
+
     await requestGetUserInfoBase();
     isLogin = true;
   } catch {
