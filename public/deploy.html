@@ -21,6 +21,14 @@
   <meta name="title" content="work at_">
   <meta name="description" content="당신이 꿈꾸던 완벽한 워케이션 워크앳, work at_">
 </head>
+<script>
+  window.addEventListener('resize', function () {
+    if (window.innerWidth <= 1024) {
+      window.location.href = "/login";
+      localStorage.removeItem('ACCESS_TOKEN');
+    }
+  });
+</script>
 <style>
   @media (max-width: 1024px) {
     #side_info {
