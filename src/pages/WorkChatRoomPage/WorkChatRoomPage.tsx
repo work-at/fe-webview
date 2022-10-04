@@ -245,7 +245,7 @@ const WorkChatRoomPage = () => {
     }
   }, [chatMessages, roomId]);
 
-  useInterval({ callback: handlePullUpCallback, delay: 1000 });
+  useInterval({ callback: handlePullUpCallback, delay: 3000 });
 
   useEffect(() => {
     if (chatMessages.length !== 0 && (chatInfo.lastMessageId ?? Infinity) <= chatMessages[chatMessages.length - 1].id) {
