@@ -52,7 +52,7 @@ export const Copyright = () => {
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const TESTER_4_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTEsImlhdCI6MTY2NDM3MzIzNSwiZXhwIjoxNjY0NzMzMjM1fQ.e0e8i4YQp5f-qc2liCBv5jbykaWSDL7AdQJRhpcuHqs";
+  "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywiaWF0IjoxNjY0ODg5NjI2LCJleHAiOjE2NjUyNDk2MjZ9.AtxUgY3_rhJApJbWPDpKRSop-4UfBEeZoZbrs-j4Gqs";
 
 let isLogin = false;
 let isDirty = false;
