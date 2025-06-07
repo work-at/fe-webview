@@ -4,7 +4,7 @@ import * as S from "./AccommodationPage.styled";
 import Icon from "@/assets/Icon";
 import MainVisualJeju from "@/assets/images/MainVisualJeju.png";
 import MainVisualSeoul from "@/assets/images/MainVisualSeoul.png";
-import MainVisualGangwon from "@/assets/images/MainVisualGangwon.png";
+import MainVisualGangwon from "@/assets/images/MainVisualGangWon.png";
 import MainVisualEvent1 from "@/assets/images/MainVisualEvent1.png";
 import MainVisualEvent2 from "@/assets/images/MainVisualEvent2.png";
 import AreaAllImg from "@/assets/images/btn-search-all.png";

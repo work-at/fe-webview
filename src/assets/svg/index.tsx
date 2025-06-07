@@ -5,7 +5,7 @@ export { default as NaviMap } from "../images/icons/Navi_Map.svg";
 export { default as NaviMypage } from "../images/icons/Navi_Mypage.svg";
 
 // Header
-export { default as Logo } from "../images/icons/Logo.svg";
+export { default as Logo } from "../images/icons/logo.svg";
 export { default as MagazinJejuLogo } from "../images/icons/MagazinJejuLogo.svg";
 export { default as MagazinSeoulLogo } from "../images/icons/MagazinSeoulLogo.svg";
 export { default as MagazinGangWonLogo } from "../images/icons/MagazinGangWonLogo.svg";
@@ -51,7 +51,7 @@ export { default as QUIET_B } from "../images/icons/QUIET_B.svg";
 export { default as SNACK_B } from "../images/icons/SNACK_B.svg";
 
 // 숙소 Tag
-export { default as PRICE } from "../images/icons/PRICE.svg";
+export { default as PRICE } from "../images/icons/Price.svg";
 export { default as DESK } from "../images/icons/DESK.svg";
 export { default as BED } from "../images/icons/BED.svg";
 export { default as CLEAN } from "../images/icons/CLEAN.svg";
