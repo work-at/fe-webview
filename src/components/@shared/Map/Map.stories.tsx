@@ -1,8 +1,8 @@
 import Map from "./Map";
 import { Z_INDEX } from "@/constants/zIndex";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import CAFE_DINER_PIN_PNG from "@/assets/images/cafe-diner-pin.png";
-import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-diner-pin.png";
+import CAFE_DINER_PIN_PNG from "@/assets/images/selected-diner-pin.png";
+import SELECTED_CAFE_DINER_PIN_PNG from "@/assets/images/selected-cafe-pin.png";
 
 export default {
   title: "Components/Shared/Map",
