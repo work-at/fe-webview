@@ -11,5 +11,5 @@ const Template: ComponentStory<typeof Lottie> = (args) => <Lottie {...args} />;
 
 export const Test = Template.bind({});
 Test.args = {
-  source: require("~/assets/loading.json"),
+  source: require("@/assets/loading.json"),
 };
